@@ -186,18 +186,25 @@
 	</ul>
 
 	<!-- Modal Login -->
-	<div id="modal-login" class="modal">
+	<div id="modal-login" class="modal grey lighten-4">
 		<!-- Modal main -->
 		<div class="modal-content">
 			<!-- Container -->
 			<div class="container">
 				<!-- Row -->
-				<!-- Bem-vindo e Título -->
+				<!-- Fechar -->
 				<div class="row">
 					<!-- Botão fechar modal -->
 					<a href="#"
 						class="right modal-action modal-close waves-effect waves-brown"><i
 						class="material-icons grey-text text-grey ">close</i></a>
+				</div>
+
+				<!-- Row -->
+				<!-- Título -->
+				<div class="row">
+					<p class="center-align" style="font-size: 18px;">Login do
+						usuário</p>
 				</div>
 
 				<!-- Form -->
@@ -214,9 +221,9 @@
 					</div>
 
 					<!-- Row -->
-					<!-- Col -->
-					<!-- Senha -->
 					<div class="row ">
+						<!-- Col -->
+						<!-- Senha -->
 						<div class="input-field col s12 m12 l12">
 							<input id="password" type="password" class="validate" required>
 							<label for="password">Senha</label>
@@ -224,9 +231,9 @@
 					</div>
 
 					<!-- Row -->
-					<!-- Col -->
-					<!-- Botão entrar -->
 					<div class="row">
+						<!-- Col -->
+						<!-- Botão entrar -->
 						<div class="center col s12 m12 l12">
 							<a class="waves-effect waves-light btn brown lighten-2 truncate"><i
 								class="material-icons right">call_made</i>Entrar</a>
@@ -234,13 +241,13 @@
 					</div>
 
 					<!-- Row -->
-					<!-- Col -->
-					<!-- Registrar -->
 					<div class="row">
+						<!-- Col -->
+						<!-- Registrar -->
 						<div class="col s12 m12 l12">
 							<p style="font-size: 12px;" class="center-align">
 								Não possui uma conta? <a href="formularioCliente"
-									class="brown-text text-brown"><b>Registre-se já</b></a>, ou
+									class="brown-text text-lighten-3"><b>Registre-se já</b></a>, ou
 								continue com
 							</p>
 						</div>
@@ -264,13 +271,22 @@
 			<!-- /.container -->
 
 			<!-- Modal footer -->
-			<div class="modal-footer">
-				<!-- Footer -->
-				<p style="font-size: 10px;" class="center-align">*Você pode se
-					cadastrar e se logar através da conta do Facebook ou Google.</p>
+			<div class="modal-footer grey lighten-4">
+				<!-- Section -->
+				<div class="section">
+					<!-- Recuperar a senha -->
+					<p class="center" style="font-size: 12px;">
+						<a href="">Esqueceu a senha?</a> | <a href=""
+							class="black-text text-black">Sobre nós</a>
+					</p>
 
-				<!-- Divider -->
-				<div class="divider"></div>
+					<!-- Divider -->
+					<div class="divider"></div>
+
+					<!-- Descrição de login com facebook ou google -->
+					<p style="font-size: 8px;" class="center-align">© 2017, PETSHOP
+						BIGDOG. TODOS OS DIREITOS RESERVADOS.</p>
+				</div>
 			</div>
 			<!-- /.modal-footer -->
 		</div>
