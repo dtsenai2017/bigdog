@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+/* Modal Login */
+#modal-login {
+	width: 35%;
+	height: 100%;
+}
+
+/* Botão do Facebook */
+#btn-facebook {
+	background: #3b5998;
+}
+
+/* Botão do Google */
+#btn-google {
+	background: #3cba54;
+}
