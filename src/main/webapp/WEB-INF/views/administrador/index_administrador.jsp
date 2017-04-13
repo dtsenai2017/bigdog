@@ -10,7 +10,7 @@
 
 </head>
 <body>
-	<!--  Importar Navbar -->
+	<!--  import navbar -->
 	<c:import url="../component/navbar.jsp" />
 
 </body>
