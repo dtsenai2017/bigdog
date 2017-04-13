@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.bigdog.value.Especie;
 import br.com.bigdog.value.Sexo;
 
 @Entity
@@ -26,7 +27,7 @@ public class Pet {
 	@Column(nullable = false)
 	private String nome;
 	@Column(nullable = false)
-	private String especie;
+	private Especie especie;
 	@Column(length = 100)
 	private String raca;
 	@Enumerated(EnumType.STRING)
@@ -68,11 +69,11 @@ public class Pet {
 		this.nome = nome;
 	}
 
-	public String getEspecie() {
+	public Especie getEspecie() {
 		return especie;
 	}
 
-	public void setEspecie(String especie) {
+	public void setEspecie(Especie especie) {
 		this.especie = especie;
 	}
 
