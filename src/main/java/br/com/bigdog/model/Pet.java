@@ -26,12 +26,13 @@ public class Pet {
 	private Long idPet;
 	@Column(nullable = false)
 	private String nome;
-	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	@Column(columnDefinition = "enum ('Cachorro','Gato','Ave','Roedor')", nullable = false)
 	private Especie especie;
 	@Column(length = 100)
 	private String raca;
 	@Enumerated(EnumType.STRING)
-	@Column(name = "sexo", columnDefinition = "enum ('Macho','Fêmea')", nullable = false)
+	@Column(columnDefinition = "enum ('Macho','Fêmea')", nullable = false)
 	private Sexo sexo;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_nascimento")

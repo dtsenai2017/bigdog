@@ -2,8 +2,7 @@
 
 /* Modal Login */
 #modal-login {
-	width: 35%;
-	height: auto;
+	width: 90%;
 }
 
 /* Botão do Facebook */
@@ -11,7 +10,12 @@
 	background: #3b5998;
 }
 
+/* Espaçador dos botões */
+#espacador-btn {
+	height: 10px;
+}
+
 /* Botão do Google */
 #btn-google {
-	background: #3cba54;
+	background: #db3236;
 }

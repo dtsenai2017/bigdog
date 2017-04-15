@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,10 +18,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.bigdog.util.CriptografiaMD5;
 import br.com.bigdog.value.Genero;
 
+@JsonIgnoreProperties({ "enderecos", "contato", "pets", "produtosCarrinho" })
 @Entity
 public class Cliente {
 	// Atributos
@@ -54,7 +55,7 @@ public class Cliente {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_cliente", nullable = false)
 	private List<Pet> pets;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_cliente", nullable = false)
 	private List<ProdutoCarrinho> produtosCarrinho;
 

@@ -6,7 +6,7 @@
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- CSS Dedicado -->
+<!-- CSS dedicado -->
 <link rel="stylesheet" href="resources/dedicated/css/navbar.css">
 
 <!--Import Google Icon Font-->
@@ -16,14 +16,6 @@
 <!-- Materialize CSS min. -->
 <link rel="stylesheet"
 	href="resources/materialize/css/materialize.min.css">
-
-<!-- JQuery min.-->
-<script type="text/javascript"
-	src="resources/jquery/jquery-3.2.1.min.js"></script>
-
-<!-- Materialize JS min. -->
-<script type="text/javascript"
-	src="resources/materialize/js/materialize.min.js"></script>
 </head>
 <body>
 	<!-- Navbar -->
@@ -44,7 +36,8 @@
 			<div class="right col m5 l5">
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<!-- Início -->
-					<li class="waves-effect"><a href="index">Início</a></li>
+					<li class="waves-effect"><a href="index"><i
+							class="material-icons center">home</i></a></li>
 
 					<!-- Login -->
 					<li><a class="dropdown-button waves-effect"
@@ -76,13 +69,13 @@
 		</div>
 		<!-- /.row -->
 	</div>
-	</nav>
+	<!-- /.nav-wrapper --></nav>
 
 	<!-- Sidenav mobile -->
 	<ul id="menu-mobile" class="side-nav">
 		<!-- Início -->
 		<li><a href="" class="waves-effect"><i
-				class="material-icons left brown-text text-brown">domain</i>Início</a></li>
+				class="material-icons left">home</i>Início</a></li>
 
 		<!-- Divider -->
 		<li class="container"><div class="divider"></div></li>
@@ -143,6 +136,7 @@
 				</nav>
 			</div></li>
 	</ul>
+	<!-- /.side-nav (mobile) -->
 
 	<!-- Dropdown Login -->
 	<ul id="dropdown-login" class="dropdown-content">
@@ -163,12 +157,13 @@
 				class="material-icons left red-text text-red">priority_high</i>Esqueceu
 				a senha?</a></li>
 	</ul>
+	<!-- /.dropdown-content -->
 
 	<!-- Dropdown Empresa -->
 	<ul id="dropdown-empresa" class="dropdown-content">
 		<!-- Loja -->
 		<li><a href=""><i
-				class="material-icons left deep-orange-text text-deep-orange">call</i>Loja</a></li>
+				class="material-icons left deep-orange-text text-deep-orange">shopping_cart</i>Loja</a></li>
 
 		<!-- Agenda -->
 		<li><a href="#"><i
@@ -184,6 +179,7 @@
 		<!-- Contato -->
 		<li><a href=""><i class="material-icons left">call</i>Contato</a></li>
 	</ul>
+	<!-- /.dropdown-content -->
 
 	<!-- Modal Login -->
 	<div id="modal-login" class="modal grey lighten-4">
@@ -191,12 +187,10 @@
 		<div class="modal-content">
 			<!-- Container -->
 			<div class="container">
-				<!-- Row -->
 				<!-- Fechar -->
 				<div class="row">
 					<!-- Botão fechar modal -->
-					<a href="#"
-						class="right modal-action modal-close waves-effect waves-brown"><i
+					<a href="#" class="right modal-action modal-close waves-effect"><i
 						class="material-icons grey-text text-grey ">close</i></a>
 				</div>
 
@@ -211,7 +205,6 @@
 				<form action="logar" method="post">
 					<!-- Row -->
 					<div class="row">
-						<!-- Col -->
 						<!-- Email -->
 						<div class="input-field col s12 m12 l12">
 							<input id="email" type="email" class="validate" required>
@@ -221,8 +214,7 @@
 					</div>
 
 					<!-- Row -->
-					<div class="row ">
-						<!-- Col -->
+					<div class="row">
 						<!-- Senha -->
 						<div class="input-field col s12 m12 l12">
 							<input id="password" type="password" class="validate" required>
@@ -232,7 +224,6 @@
 
 					<!-- Row -->
 					<div class="row">
-						<!-- Col -->
 						<!-- Botão entrar -->
 						<div class="center col s12 m12 l12">
 							<a class="waves-effect waves-light btn brown lighten-2 truncate"><i
@@ -242,7 +233,6 @@
 
 					<!-- Row -->
 					<div class="row">
-						<!-- Col -->
 						<!-- Registrar -->
 						<div class="col s12 m12 l12">
 							<p style="font-size: 12px;" class="center-align">
@@ -255,38 +245,51 @@
 
 					<!-- Row -->
 					<div class="row">
-						<!-- Col -->
 						<!-- Botão Facebook -->
 						<a id="btn-facebook"
 							class="col s12 m5 l5 left waves-effect waves-light truncate btn">Facebook</a>
 
-						<!-- Col -->
+						<!-- Espaçador para mobile -->
+						<div id="espacador-btn" class="col s12 hide-on-med-and-up"></div>
+
 						<!-- Botão Google -->
 						<a id="btn-google"
-							class="col s12 m5 l5 right waves-effect waves-light truncate btn">Google</a>
+							class="col s12 m5 l5 push s12 right waves-effect waves-light truncate btn">Google</a>
 					</div>
-					<!-- /.row -->
 				</form>
+				<!-- /.form -->
 			</div>
 			<!-- /.container -->
 
 			<!-- Modal footer -->
 			<div class="modal-footer grey lighten-4">
-				<!-- Section -->
-				<div class="section">
-					<!-- Recuperar a senha -->
-					<p class="center" style="font-size: 12px;">
-						<a href="">Esqueceu a senha?</a> | <a href=""
-							class="black-text text-black">Sobre nós</a>
-					</p>
+				<!-- Container -->
+				<div class="container">
+					<!-- Row -->
+					<div class="row">
+						<!-- Col -->
+						<div class="col s12 m12 l12">
+							<!-- Section -->
+							<div class="section">
+								<!-- Recuperar a senha -->
+								<p class="center" style="font-size: 12px;">
+									<a href="">Esqueceu a senha?</a> | <a href=""
+										class="black-text text-black">Sobre nós</a>
+								</p>
 
-					<!-- Divider -->
-					<div class="divider"></div>
+								<!-- Divider -->
+								<div class="divider"></div>
 
-					<!-- Descrição de login com facebook ou google -->
-					<p style="font-size: 8px;" class="center-align">© 2017, PETSHOP
-						BIGDOG. TODOS OS DIREITOS RESERVADOS.</p>
+								<!-- Descrição de login com facebook ou google -->
+								<p style="font-size: 8px;" class="center-align">© 2017,
+									PETSHOP BIGDOG. TODOS OS DIREITOS RESERVADOS.</p>
+							</div>
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
 				</div>
+				<!-- /.container -->
 			</div>
 			<!-- /.modal-footer -->
 		</div>
@@ -294,15 +297,16 @@
 	</div>
 	<!-- /.modal -->
 
-	<!-- SCRIPT para Collapse e Modal -->
-	<script>
-		// Initialize collapse button
-		$(".button-collapse").sideNav();
+	<!-- Import's JS -->
+	<!-- JQuery min.-->
+	<script type="text/javascript"
+		src="resources/jquery/jquery-3.2.1.min.js"></script>
 
-		// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-		$('.modal').modal();
-		$('#modal-login').modal('open');
-		$('#modal-login').modal('close');
-	</script>
+	<!-- Materialize JS min. -->
+	<script type="text/javascript"
+		src="resources/materialize/js/materialize.min.js"></script>
+
+	<!-- JS dedicado -->
+	<script type="text/javascript" src="resources/dedicated/js/navbar.js"></script>
 </body>
 </html>
