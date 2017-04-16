@@ -1,0 +1,14 @@
+@CHARSET "ISO-8859-1";
+
+/* Swipe's (Dashboard, Gerenciar e Agenda) */
+swipe-dashboard {
+	height: 1000px;
+}
+
+#swipe-gerenciar {
+	display: none;
+}
+
+#swipe-agenda {
+	display: none;
+}

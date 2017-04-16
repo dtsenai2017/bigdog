@@ -16,6 +16,14 @@
 <!-- Materialize CSS min. -->
 <link rel="stylesheet"
 	href="resources/materialize/css/materialize.min.css">
+
+<!-- Import's JS -->
+<!-- JQuery -->
+<script src="resources/jquery/jquery-3.2.1.js" defer></script>
+
+<!-- Materialize JS min. -->
+<script type="text/javascript"
+	src="resources/materialize/js/materialize.min.js" defer></script>
 </head>
 <body>
 	<!-- Navbar -->
@@ -90,7 +98,8 @@
 				já!</a></li>
 
 		<!-- Esqueceu a senha -->
-		<li><a href="" class="red-text text-lighten-2 waves-effect"><i
+		<li><a href="recuperarSenha"
+			class="red-text text-lighten-2 waves-effect"><i
 				class="material-icons left red-text text-red ">priority_high</i>Esqueceu
 				a senha?</a></li>
 
@@ -98,23 +107,23 @@
 		<li class="container"><div class="divider"></div></li>
 
 		<!-- Loja -->
-		<li><a href="" class="waves-effect"><i
+		<li><a href="indexLoja" class="waves-effect"><i
 				class="material-icons left deep-orange-text text-deep-orange">shopping_cart</i>Loja</a></li>
 
 		<!-- Agenda -->
-		<li><a href="" class="waves-effect"><i
+		<li><a href="indexAgenda" class="waves-effect"><i
 				class="material-icons left cyan-text text-cyan ">event_note</i>Agenda</a></li>
 
 		<!-- Divider -->
 		<li class="container"><div class="divider"></div></li>
 
 		<!-- Sobre Nós -->
-		<li><a href="" class="waves-effect"><i
+		<li><a href="sobreNos" class="waves-effect"><i
 				class="material-icons left light-blue-text text-light-blue">info</i>Sobre
 				Nós</a></li>
 
 		<!-- Contato -->
-		<li><a href="" class="waves-effect"><i
+		<li><a href="contato" class="waves-effect"><i
 				class="material-icons left">call</i>Contato</a></li>
 
 		<!-- Divider -->
@@ -162,27 +171,27 @@
 	<!-- Dropdown Empresa -->
 	<ul id="dropdown-empresa" class="dropdown-content">
 		<!-- Loja -->
-		<li><a href=""><i
+		<li><a href="indexLoja"><i
 				class="material-icons left deep-orange-text text-deep-orange">shopping_cart</i>Loja</a></li>
 
 		<!-- Agenda -->
-		<li><a href="#"><i
+		<li><a href="indexAgenda"><i
 				class="material-icons left cyan-text text-cyan">event_note</i>Agenda</a></li>
 
 		<!-- Divider -->
 		<li class="divider"></li>
 
 		<!-- Sobre -->
-		<li><a href=""><i
+		<li><a href="sobreNos"><i
 				class="material-icons left light-blue-text text-light-blue">info</i>Sobre</a></li>
 
 		<!-- Contato -->
-		<li><a href=""><i class="material-icons left">call</i>Contato</a></li>
+		<li><a href="contato"><i class="material-icons left">call</i>Contato</a></li>
 	</ul>
 	<!-- /.dropdown-content -->
 
 	<!-- Modal Login -->
-	<div id="modal-login" class="modal grey lighten-4">
+	<div id="modal-login" class="modal">
 		<!-- Modal main -->
 		<div class="modal-content">
 			<!-- Container -->
@@ -254,7 +263,7 @@
 
 						<!-- Botão Google -->
 						<a id="btn-google"
-							class="col s12 m5 l5 push s12 right waves-effect waves-light truncate btn">Google</a>
+							class="col s12 m5 l5 right waves-effect waves-light truncate btn">Google</a>
 					</div>
 				</form>
 				<!-- /.form -->
@@ -262,7 +271,7 @@
 			<!-- /.container -->
 
 			<!-- Modal footer -->
-			<div class="modal-footer grey lighten-4">
+			<div class="modal-footer">
 				<!-- Container -->
 				<div class="container">
 					<!-- Row -->
@@ -297,16 +306,9 @@
 	</div>
 	<!-- /.modal -->
 
-	<!-- Import's JS -->
-	<!-- JQuery min.-->
-	<script type="text/javascript"
-		src="resources/jquery/jquery-3.2.1.min.js"></script>
-
-	<!-- Materialize JS min. -->
-	<script type="text/javascript"
-		src="resources/materialize/js/materialize.min.js"></script>
-
+	<!-- Script's dedicado -->
 	<!-- JS dedicado -->
-	<script type="text/javascript" src="resources/dedicated/js/navbar.js"></script>
+	<script type="text/javascript" src="resources/dedicated/js/navbar.js"
+		defer></script>
 </body>
 </html>

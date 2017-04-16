@@ -6,11 +6,10 @@
 <html>
 <head>
 <!-- Título -->
-<title>Big Dog | Área do Administrador</title>
+<title>Big Dog | Index Administrador</title>
 
 <!-- CSS dedicado -->
-<link rel="stylesheet"
-	href="resources/dedicated/css/index-administrador.css">
+<link rel="stylesheet" href="resources/dedicated/css/administrador.css">
 </head>
 <body>
 	<!--  import navbar -->
@@ -24,10 +23,10 @@
 			<!-- Section -->
 			<div class="section">
 				<!-- Título -->
-				<h5 class="center-align">Área do Administrador</h5>
+				<h5 class="center-align">Administrador</h5>
 
 				<!-- Subtítulo -->
-				<p class="center-align grey-text text lighten-2">Consulte,
+				<p class="center-align grey-text text lighten-1">Consulte,
 					Gerencie e Agende com facilidade.</p>
 
 				<!-- Divider -->
@@ -45,19 +44,19 @@
 					<!-- Dashboarb -->
 					<li class="tab col s4 m4 l4"
 						onclick="Materialize.fadeInImage('#swipe-dashboard')"><a
-						href="#swipe-dashboard" class="active waves-effect"><i
+						href="#swipe-dashboard"><i
 							class="material-icons center blue-text text-blue">trending_up</i>Dashboard</a></li>
 
 					<!-- Gerenciar -->
 					<li class="tab col s4 m4 l4"
 						onclick="Materialize.fadeInImage('#swipe-gerenciar')"><a
-						href="#swipe-gerenciar" class="waves-effect"><i
+						href="#swipe-gerenciar"><i
 							class="material-icons center grey-text text-grey">build</i>Gerenciar</a></li>
 
 					<!-- Agenda -->
 					<li class="tab col s4 m4 l4"
 						onclick="Materialize.fadeInImage('#swipe-agenda')"><a
-						href="#swipe-agenda" class="waves-effect"><i
+						href="#swipe-agenda"><i
 							class="material-icons center cyan-text text-cyan">event_note</i>Agenda</a></li>
 				</ul>
 			</div>
@@ -67,75 +66,88 @@
 		<!-- Swipe's -->
 		<div class="row">
 			<!-- Dashboard -->
-			<div id="swipe-dashboard" class="col s12 m12 l12 blue">Dashboard</div>
+			<div id="swipe-dashboard" class="col s12 m12 l12">Dashboard</div>
 			<!-- /.swipe-dashboard -->
 
 			<!-- Gerenciar -->
 			<div id="swipe-gerenciar" class="col s12 m12 l12">
-				<!-- Row -->
-				<div class="row">
-					<!-- Painel lateral -->
-					<div class="col s12 m3 l3 left">
-						<!-- Lista de links -->
-						<div class="collection with-header">
-							<div class="collection-header">
-								<h5 class="truncate">
-									<i class="material-icons left">build</i>Gerenciar
-								</h5>
+				<!-- Painéis de gerenciamento -->
+				<!-- Cliente -->
+				<div id="#painel-cliente" class="col s6 m4 l4">
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<div class="card hoverable">
+								<div class="card-image">
+									<img
+										src="resources/dedicated/img/administrador/gerenciar-cliente.png">
+									<span class="card-title">Cliente</span> <a
+										href="gerenciarCliente"
+										class="btn-floating halfway-fab waves-effect waves-light red"><i
+										class="material-icons">recent_actors</i></a>
+								</div>
+								<div class="card-content">
+									<p class="truncate">Gerencie clientes cadastrados.</p>
+								</div>
 							</div>
-
-							<!-- Clientes -->
-							<a
-								onclick="Materialize.fadeInImage('#painel-clientes'); listarClientes();"
-								class="collection-item waves-effect">Clientes<i
-								class="material-icons grey-text text-grey secondary-content">people</i></a>
-
-							<!-- Loja -->
-							<a onclick="listarProdutos();" class="collection-item">Loja<i
-								class="material-icons grey-text text-grey secondary-content">store</i></a>
-
-							<!-- Agenda -->
-							<a href="#" onclick="listarAgendamentos();"
-								class="collection-item">Agenda<i
-								class="material-icons grey-text text-grey secondary-content">event_note</i></a>
 						</div>
 					</div>
-
-					<!-- Painel principal -->
-					<!-- Lista de Clientes -->
-					<div id="painel-clientes" class="col s12 m9 l9 cyan">
-						<!-- Tabela de clientes -->
-						<table id="tbl-clientes" class="responsive-table highlight">
-						</table>
-					</div>
-
-					<!-- Lista de Produtos -->
-					<div id="painel-produtos" class="col s12 m9 l9 red"
-						style="display: none;">Lista de Produtos</div>
-
-					<!-- Lista de Agendamentos -->
-					<div id="painel-agendamentos" class="col s12 m9 l9 blue"
-						style="display: none">Lista de Agendamentos</div>
 				</div>
-				<!-- /.row -->
+
+				<!-- Loja -->
+				<div id="#painel-loja" class="col s6 m4 l4">
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<div class="card hoverable">
+								<div class="card-image">
+									<img
+										src="resources/dedicated/img/administrador/gerenciar-loja.png">
+									<span class="card-title">Loja</span> <a href="gerenciarLoja"
+										class="btn-floating halfway-fab waves-effect waves-light red"><i
+										class="material-icons">store</i></a>
+								</div>
+								<div class="card-content">
+									<p class="truncate">Gerencie produtos e fornecedores.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Agenda -->
+				<div id="#painel-agenda" class="col s6 m4 l4">
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<div class="card hoverable">
+								<div class="card-image">
+									<img
+										src="resources/dedicated/img/administrador/gerenciar-agenda.png">
+									<span class="card-title">Agenda</span> <a
+										href="gerenciarAgenda"
+										class="btn-floating halfway-fab waves-effect waves-light red"><i
+										class="material-icons">event_note</i></a>
+								</div>
+								<div class="card-content">
+									<p class="truncate">Gerencie agendamentos realizados.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</div>
 			<!-- /.swipe-gerenciar -->
 
 			<!-- Agenda -->
-			<div id="swipe-agenda" class="col s12 m12 l12 hide">Agenda</div>
+			<div id="swipe-agenda" class="col s12 m12 l12 red">Agenda</div>
 			<!-- /.swipe-agenda -->
 		</div>
 		<!-- /.row -->
 	</div>
 	<!-- /.container -->
 
-	<!-- Imports JS -->
-	<!-- AJAX dedicado -->
+	<!-- Script's dedicado -->
+	<!-- JS com AJAX dedicado -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/ajax-administrador.js"></script>
-
-	<!-- JS dedicado -->
-	<script type="text/javascript"
-		src="resources/dedicated/js/administrador.js"></script>
+		src="resources/dedicated/js/administrador.js" defer></script>
 </body>
 </html>
