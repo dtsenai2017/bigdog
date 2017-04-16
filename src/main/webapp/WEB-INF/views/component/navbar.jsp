@@ -27,17 +27,32 @@
 </head>
 <body>
 	<!-- Navbar -->
-	<nav class="brown lighten-1 z-depth-0">
+	<header> <nav class="brown lighten-1 z-depth-0">
 	<div class="container nav-wrapper">
 		<!-- Row -->
 		<div class="row">
 			<!-- Logo -->
-			<div class="col m4 l4">
-				<a href="#" class="brand-logo waves-effect"><span
-					class="brown-text text-lighten-4">Petshop</span> <b><span
-						style="font-size: 36px;">Bigdog</span></b></a> <a href=""
+			<div class="col m3 l3">
+				<a href="#" class="brand-logo waves-effect"><b><span
+						style="font-size: 40px;">Bigdog</span></b></a> <a href=""
 					data-activates="menu-mobile" class="button-collapse"><i
 					class="material-icons">menu</i></a>
+			</div>
+
+			<!-- Pesquisar -->
+			<div class="center col m4 hide-on-med-and-down">
+				<nav class="brown lighten-1 z-depth-0">
+				<div class="nav-wrapper">
+					<form>
+						<div class="input-field">
+							<input id="search" type="search" class="truncate"
+								placeholder="O que procura?" required> <label
+								class="label-icon" for="search"><i
+								class="material-icons">search</i></label> <i class="material-icons">close</i>
+						</div>
+					</form>
+				</div>
+				</nav>
 			</div>
 
 			<!-- Links -->
@@ -58,28 +73,10 @@
 						data-beloworigin="true"><i class="material-icons right">arrow_drop_down</i>Empresa</a></li>
 				</ul>
 			</div>
-
-			<!-- Pesquisar -->
-			<div class="center col m3 hide-on-med-and-down">
-				<nav class="brown lighten-1 z-depth-0">
-				<div class="nav-wrapper">
-					<form>
-						<div class="input-field">
-							<input id="search" type="search" class="truncate"
-								placeholder="O que procura?" required> <label
-								class="label-icon" for="search"><i
-								class="material-icons">search</i></label> <i class="material-icons">close</i>
-						</div>
-					</form>
-				</div>
-				</nav>
-			</div>
 		</div>
 		<!-- /.row -->
 	</div>
-	<!-- /.nav-wrapper --></nav>
-
-	<!-- Sidenav mobile -->
+	<!-- /.nav-wrapper --></nav> <!-- Sidenav mobile -->
 	<ul id="menu-mobile" class="side-nav">
 		<!-- Início -->
 		<li><a href="" class="waves-effect"><i
@@ -145,9 +142,7 @@
 				</nav>
 			</div></li>
 	</ul>
-	<!-- /.side-nav (mobile) -->
-
-	<!-- Dropdown Login -->
+	<!-- /.side-nav (mobile) --> <!-- Dropdown Login -->
 	<ul id="dropdown-login" class="dropdown-content">
 		<!-- Entrar -->
 		<li><a href="#modal-login"><i
@@ -166,9 +161,7 @@
 				class="material-icons left red-text text-red">priority_high</i>Esqueceu
 				a senha?</a></li>
 	</ul>
-	<!-- /.dropdown-content -->
-
-	<!-- Dropdown Empresa -->
+	<!-- /.dropdown-content --> <!-- Dropdown Empresa -->
 	<ul id="dropdown-empresa" class="dropdown-content">
 		<!-- Loja -->
 		<li><a href="indexLoja"><i
@@ -188,9 +181,7 @@
 		<!-- Contato -->
 		<li><a href="contato"><i class="material-icons left">call</i>Contato</a></li>
 	</ul>
-	<!-- /.dropdown-content -->
-
-	<!-- Modal Login -->
+	<!-- /.dropdown-content --> <!-- Modal Login -->
 	<div id="modal-login" class="modal">
 		<!-- Modal main -->
 		<div class="modal-content">
@@ -304,7 +295,7 @@
 		</div>
 		<!-- /.modal-content -->
 	</div>
-	<!-- /.modal -->
+	<!-- /.modal --> </header>
 
 	<!-- Script's dedicado -->
 	<!-- JS dedicado -->

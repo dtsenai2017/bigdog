@@ -16,6 +16,7 @@
 	<c:import url="../component/navbar.jsp" />
 
 	<!-- Container principal -->
+	<main>
 	<div class="container">
 		<!-- Row -->
 		<!-- Título e descrição -->
@@ -79,9 +80,9 @@
 							<div class="card hoverable">
 								<div class="card-image">
 									<img
-										src="resources/dedicated/img/administrador/gerenciar-cliente.png">
-									<span class="card-title">Cliente</span> <a
-										href="gerenciarCliente"
+										src="resources/dedicated/img/administrador/gerenciar-cliente.png"
+										class="responsive-img"> <span class="card-title">Cliente</span>
+									<a href="gerenciarCliente"
 										class="btn-floating halfway-fab waves-effect waves-light red"><i
 										class="material-icons">recent_actors</i></a>
 								</div>
@@ -100,8 +101,9 @@
 							<div class="card hoverable">
 								<div class="card-image">
 									<img
-										src="resources/dedicated/img/administrador/gerenciar-loja.png">
-									<span class="card-title">Loja</span> <a href="gerenciarLoja"
+										src="resources/dedicated/img/administrador/gerenciar-loja.png"
+										class="responsive-img"> <span class="card-title">Loja</span>
+									<a href="gerenciarLoja"
 										class="btn-floating halfway-fab waves-effect waves-light red"><i
 										class="material-icons">store</i></a>
 								</div>
@@ -120,9 +122,9 @@
 							<div class="card hoverable">
 								<div class="card-image">
 									<img
-										src="resources/dedicated/img/administrador/gerenciar-agenda.png">
-									<span class="card-title">Agenda</span> <a
-										href="gerenciarAgenda"
+										src="resources/dedicated/img/administrador/gerenciar-agenda.png"
+										class="responsive-img"> <span class="card-title">Agenda</span>
+									<a href="gerenciarAgenda"
 										class="btn-floating halfway-fab waves-effect waves-light red"><i
 										class="material-icons">event_note</i></a>
 								</div>
@@ -143,7 +145,10 @@
 		</div>
 		<!-- /.row -->
 	</div>
-	<!-- /.container -->
+	<!-- /.container --> </main>
+
+	<!-- import footer -->
+	<c:import url="../component/footer.jsp" />
 
 	<!-- Script's dedicado -->
 	<!-- JS com AJAX dedicado -->

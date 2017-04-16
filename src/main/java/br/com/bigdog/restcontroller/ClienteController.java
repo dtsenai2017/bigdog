@@ -1,5 +1,7 @@
 package br.com.bigdog.restcontroller;
 
+import java.util.List;
+
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,6 @@ public class ClienteController {
 	@RequestMapping(value = "/cliente", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Cliente> inserir(@RequestBody Cliente cliente) {
 		try {
-			// Inserindo novo cliente
 			clienteDAO.inserir(cliente);
 			return ResponseEntity.ok().build();
 		} catch (ConstraintViolationException e) {
@@ -56,6 +57,12 @@ public class ClienteController {
 	// return ResponseEntity.created(URI.create("/cliente/" +
 	// cliente.getIdCliente())).body(cliente);
 	// }
+
+	// Listar
+	@RequestMapping(value = "/cliente", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Cliente> listar() {
+		return clienteDAO.listar();
+	}
 
 	// Listar (id)
 	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

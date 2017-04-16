@@ -12,6 +12,11 @@ public class ViewsController {
 	public String navbar() {
 		return "component/navbar";
 	}
+	
+	@RequestMapping("/footer")
+	public String footer() {
+		return "component/footer";
+	}
 
 	// Index Administrador
 	@RequestMapping("/indexAdministrador")

@@ -9,5 +9,15 @@
 <title>Administrador | Gerenciar Cliente</title>
 </head>
 <body>
+	<!--  import navbar -->
+	<c:import url="../component/navbar.jsp" />
+
+	<!-- Listando clientes -->
+	<ul>
+		<c:forEach items="${clientes }" var="cliente">
+			<li>${cliente.nome }</li>
+		</c:forEach>
+	</ul>
+
 </body>
 </html>
