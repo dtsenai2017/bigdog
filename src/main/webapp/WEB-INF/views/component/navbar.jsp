@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- CSS dedicado -->
-<link rel="stylesheet" href="resources/dedicated/css/navbar.css">
+<link rel="stylesheet" href="resources/dedicated/css/util/navbar.css">
 
 <!--Import Google Icon Font-->
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
@@ -21,6 +21,10 @@
 <!-- JQuery -->
 <script src="resources/jquery/jquery-3.2.1.js" defer></script>
 
+<!-- JQuery HideSeek min -->
+<script type="text/javascript"
+	src="resources/jquery/jquery.hideseek.min.js" defer></script>
+
 <!-- Materialize JS min. -->
 <script type="text/javascript"
 	src="resources/materialize/js/materialize.min.js" defer></script>
@@ -29,7 +33,6 @@
 	<!-- Navbar -->
 	<header> <nav class="brown lighten-1 z-depth-0">
 	<div class="container nav-wrapper">
-		<!-- Row -->
 		<div class="row">
 			<!-- Logo -->
 			<div class="col m3 l3">
@@ -183,29 +186,26 @@
 	</ul>
 	<!-- /.dropdown-content --> <!-- Modal Login -->
 	<div id="modal-login" class="modal">
-		<!-- Modal main -->
+		<!-- Modal content -->
 		<div class="modal-content">
-			<!-- Container -->
 			<div class="container">
-				<!-- Fechar -->
+				<!-- Ícone fechar -->
 				<div class="row">
 					<!-- Botão fechar modal -->
 					<a href="#" class="right modal-action modal-close waves-effect"><i
 						class="material-icons grey-text text-grey ">close</i></a>
 				</div>
 
-				<!-- Row -->
 				<!-- Título -->
 				<div class="row">
 					<p class="center-align" style="font-size: 18px;">Login do
 						usuário</p>
 				</div>
 
-				<!-- Form -->
-				<form action="logar" method="post">
-					<!-- Row -->
+				<!-- Formulário de login -->
+				<form action="login" method="post">
+					<!-- Email -->
 					<div class="row">
-						<!-- Email -->
 						<div class="input-field col s12 m12 l12">
 							<input id="email" type="email" class="validate" required>
 							<label data-error="Email inválido" data-success="Email válido"
@@ -213,27 +213,24 @@
 						</div>
 					</div>
 
-					<!-- Row -->
+					<!-- Senha -->
 					<div class="row">
-						<!-- Senha -->
 						<div class="input-field col s12 m12 l12">
 							<input id="password" type="password" class="validate" required>
 							<label for="password">Senha</label>
 						</div>
 					</div>
 
-					<!-- Row -->
+					<!-- Botão entrar -->
 					<div class="row">
-						<!-- Botão entrar -->
 						<div class="center col s12 m12 l12">
 							<a class="waves-effect waves-light btn brown lighten-2 truncate"><i
 								class="material-icons right">call_made</i>Entrar</a>
 						</div>
 					</div>
 
-					<!-- Row -->
+					<!-- Registrar -->
 					<div class="row">
-						<!-- Registrar -->
 						<div class="col s12 m12 l12">
 							<p style="font-size: 12px;" class="center-align">
 								Não possui uma conta? <a href="formularioCliente"
@@ -243,7 +240,7 @@
 						</div>
 					</div>
 
-					<!-- Row -->
+					<!-- Botões de login com facebook e google -->
 					<div class="row">
 						<!-- Botão Facebook -->
 						<a id="btn-facebook"
@@ -263,13 +260,9 @@
 
 			<!-- Modal footer -->
 			<div class="modal-footer">
-				<!-- Container -->
 				<div class="container">
-					<!-- Row -->
 					<div class="row">
-						<!-- Col -->
 						<div class="col s12 m12 l12">
-							<!-- Section -->
 							<div class="section">
 								<!-- Recuperar a senha -->
 								<p class="center" style="font-size: 12px;">
@@ -285,11 +278,8 @@
 									PETSHOP BIGDOG. TODOS OS DIREITOS RESERVADOS.</p>
 							</div>
 						</div>
-						<!-- /.col -->
 					</div>
-					<!-- /.row -->
 				</div>
-				<!-- /.container -->
 			</div>
 			<!-- /.modal-footer -->
 		</div>
@@ -299,7 +289,11 @@
 
 	<!-- Script's dedicado -->
 	<!-- JS dedicado -->
-	<script type="text/javascript" src="resources/dedicated/js/navbar.js"
-		defer></script>
+	<script type="text/javascript"
+		src="resources/dedicated/js/util/navbar.js" defer></script>
+
+	<!-- JS para busca -->
+	<script type="text/javascript"
+		src="resources/dedicated/js/util/buscar.js" defer></script>
 </body>
 </html>

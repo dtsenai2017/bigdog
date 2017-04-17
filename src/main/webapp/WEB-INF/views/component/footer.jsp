@@ -4,7 +4,7 @@
 <html>
 <head>
 <!-- CSS dedicado -->
-<link rel="stylesheet" href="resources/dedicated/css/footer.css">
+<link rel="stylesheet" href="resources/dedicated/css/util/footer.css">
 </head>
 <body>
 	<!-- Footer... -->
@@ -13,9 +13,12 @@
 		<div class="row">
 			<!-- Descrição de footer -->
 			<div class="col s12 m5 l5">
+				<!-- Título de descrição do footer -->
 				<h5 class="white-text">
 					Bem-vindo ao PetShop <b>BigDog</b>
 				</h5>
+
+				<!-- Descrição -->
 				<p class="grey-text text-lighten-4">No PetShop BigDog você
 					encontra uma imensa variedade de produtos e acessórios que garantem
 					o bem-estar de seu Pet.</p>
@@ -30,8 +33,13 @@
 
 			<!-- Links Cliente -->
 			<div class="col s6 m3 l3 offset-m1 l1">
+				<!-- Título de links -->
 				<h5 class="white-text">Cliente</h5>
+
+				<!-- Divider -->
 				<div class="divider"></div>
+
+				<!-- Links -->
 				<ul>
 					<li><a class="grey-text text-lighten-3" href="#!">Entrar</a></li>
 					<li><a class="grey-text text-lighten-3" href="#!">Registre-se
@@ -43,8 +51,13 @@
 
 			<!-- Links Empresa -->
 			<div class="col s6 m3 l3 ">
+				<!-- Título de links -->
 				<h5 class="white-text">Empresa</h5>
+
+				<!-- Divider -->
 				<div class="divider"></div>
+
+				<!-- Links -->
 				<ul>
 					<li><a class="grey-text text-lighten-3" href="#!">Loja</a></li>
 					<li><a class="grey-text text-lighten-3" href="#!">Agenda</a></li>
@@ -57,7 +70,7 @@
 		</div>
 		<!-- /.row -->
 	</div>
-	<!-- /.container --> <!-- Footer on Footer -->
+	<!-- /.container --> <!-- Footer in Footer -->
 	<div class="footer-copyright brown">
 		<div class="container center-align">
 			<span>© 2017 Copyright PetShop BigDog. All rights reserved.</span>

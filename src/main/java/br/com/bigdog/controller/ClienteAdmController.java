@@ -9,19 +9,19 @@ import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Cliente;
 
 @Controller
-public class AdmClienteController {
+public class ClienteAdmController {
 	// Atributos
 	private GenericDAO<Cliente> clienteDAO;
 
 	// Construtor
 	@Autowired
-	public AdmClienteController(GenericDAO<Cliente> clienteDAO) {
+	public ClienteAdmController(GenericDAO<Cliente> clienteDAO) {
 		this.clienteDAO = clienteDAO;
 	}
 
 	// REQUISIÇÔES
-	// Gerenciar Cliente
-	@RequestMapping("gerenciarCliente")
+	// Abrir Gerenciar Cliente
+	@RequestMapping(value = "gerenciarCliente")
 	public String gerenciarCliente(Model model) {
 		// Adicionando lista
 		model.addAttribute("clientes", clienteDAO.listar());

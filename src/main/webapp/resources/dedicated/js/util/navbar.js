@@ -7,4 +7,3 @@ $(".button-collapse").sideNav();
 $('.modal').modal();
 $('#modal-login').modal('open');
 $('#modal-login').modal('close');
-
