@@ -90,7 +90,7 @@
 
 		<!-- Entrar -->
 		<li><a href="#modal-login" class="waves-effect"><i
-				class="material-icons left blue-text text-green">person</i>Entrar</a></li>
+				class="material-icons left blue-text text-blue">person</i>Entrar</a></li>
 
 		<!-- Registre-se -->
 		<li><a href="formularioCliente" class="waves-effect"><i

@@ -1,12 +1,15 @@
 package br.com.bigdog.controller;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Cliente;
+import br.com.bigdog.model.EnderecoCliente;
 
 @Controller
 public class ClienteAdmController {
@@ -28,5 +31,19 @@ public class ClienteAdmController {
 
 		// Retornando
 		return "administrador/gerenciar_cliente";
+	}
+
+	// Visualizar cliente
+	@RequestMapping(value = "visualizarCliente")
+	public Cliente visualizarCliente(Long idCliente) {
+		// Buscando cliente
+		Cliente cliente = clienteDAO.listar(idCliente);
+
+		// Inicializando objetos(listas) de cliente
+		Hibernate.initialize(cliente.getEnderecos());
+		Hibernate.initialize(cliente.getPets());
+
+		// Retornando
+		return cliente;
 	}
 }

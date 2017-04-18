@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.ConstraintViolationException;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -67,7 +68,17 @@ public class ClienteController {
 	// Listar (id)
 	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Cliente listar(@PathVariable("id") Long id) {
-		return clienteDAO.listar(id);
+		System.out.println("ID");
+
+		// Buscando cliente
+		Cliente cliente = clienteDAO.listar(id);
+
+		// Inicializando objetos(listas) de cliente
+		Hibernate.initialize(cliente.getEnderecos());
+		Hibernate.initialize(cliente.getPets());
+
+		// Retornando
+		return cliente;
 	}
 
 	// Excluir

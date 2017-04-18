@@ -9,7 +9,8 @@
 <title>Big Dog | Index Administrador</title>
 
 <!-- CSS dedicado -->
-<link rel="stylesheet" href="resources/dedicated/css/administrador/administrador.css">
+<link rel="stylesheet"
+	href="resources/dedicated/css/administrador/administrador.css">
 </head>
 <body>
 	<!--  import navbar -->

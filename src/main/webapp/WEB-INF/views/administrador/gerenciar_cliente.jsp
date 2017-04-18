@@ -30,7 +30,7 @@
 				<h5 class="left-align">Gerenciar Clientes</h5>
 
 				<!-- Subtítulo -->
-				<p class="left-align grey-text text lighten-1">Pesquise e o
+				<p class="left-align grey-text text lighten-1">Pesquise o
 					cliente desejado para consultar, alterar ou excluir.</p>
 
 				<!-- Divider -->
@@ -42,15 +42,15 @@
 		<div class="row">
 			<!-- Barra de Pesquisa -->
 			<div class="col s12 m12 l12">
-				<nav class="red lighten-1">
+				<nav class="red lighten-1 hoverable">
 				<div class="nav-wrapper">
 					<form>
 						<div class="input-field">
 							<input id="search-cliente" type="search" class="truncate"
 								data-list=".lista-cliente" onkeyup="buscar(this.id)"
-								autocomplete="off" placeholder="Buscar cliente"> <label
-								class="label-icon" for="search-cliente"><i
-								class="material-icons">search</i></label> <i class="material-icons">close</i>
+								placeholder="Buscar cliente"> <label class="label-icon"
+								for="search-cliente"><i class="material-icons">search</i></label>
+							<i class="material-icons">close</i>
 						</div>
 					</form>
 				</div>
@@ -62,18 +62,19 @@
 		<div class="row">
 			<!-- Lista de cliente -->
 			<div id="lista-clientes" class="col s12 m12 l12">
-				<ul class="collection lista-cliente" style="list-style: upper-alpha">
+				<ul class="collection lista-cliente">
 					<!-- Foreach -->
 					<c:forEach items="${clientes }" var="cliente">
 						<!-- Linha do cliente -->
 						<li class="collection-item avatar"><img
-							alt="${cliente.nome }"
+							title="${cliente.nome }"
 							src="${cliente.genero == Genero.Masculino ? 'resources/dedicated/img/cliente/genero_masculino.png' : 'resources/dedicated/img/cliente/genero_feminino.png' }"
-							class="circle"> <span class="title truncate">${cliente.nome }</span>
+							class="circle"> <span class="title truncate"><b>${cliente.nome }</b></span>
 							<p class="truncate">${cliente.email }
 								<br> ${cliente.contato.celular }
-							</p> <a onClick="listarClienteAdm" href="#modal-cliente-info"
-							class="secondary-content"><i class="material-icons">visibility</i></a></li>
+							</p> <a onclick="buscarCliente(${cliente.idCliente})"
+							href="#modal-cliente-info" class="secondary-content"><i
+								class="material-icons">visibility</i></a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -83,13 +84,18 @@
 		<div class="row">
 			<div class="col s12 m6 l6 right">
 				<div id="modal-cliente-info" class="modal">
+					<!-- Modal content -->
 					<div class="modal-content">
-						<h4>Modal Header</h4>
-						<p>A bunch of text</p>
+						<h4>Dados do Cliente</h4>
+
+
+
 					</div>
+
+					<!-- Modal footer -->
 					<div class="modal-footer">
 						<a href="#!"
-							class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+							class="modal-action modal-close waves-effect waves-green btn-flat">Voltar</a>
 					</div>
 				</div>
 			</div>

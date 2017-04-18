@@ -2,5 +2,6 @@
 function buscar(tipo) {
 	$('#' + tipo).hideseek({
 		nodata : 'Nenhum resultado encontrado!',
+		highlight_mode : true
 	});
 }
