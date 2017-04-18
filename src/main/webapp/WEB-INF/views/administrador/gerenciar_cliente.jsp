@@ -87,9 +87,41 @@
 					<!-- Modal content -->
 					<div class="modal-content">
 						<h4>Dados do Cliente</h4>
+						<div class="col s12 m8 l8">
+							<ul class="collapsible" data-collapsible="accordion">
+								<!-- Endereços -->
+								<li>
+									<div class="collapsible-header">
+										<i class="material-icons">filter_drama</i>Endereços
+									</div>
+									<div id="lista-endereco" class="collapsible-body"></div>
+								</li>
 
+								<!-- Pets -->
+								<li>
+									<div class="collapsible-header">
+										<i class="material-icons">place</i>Pets
+									</div>
+									<div id="lista-pet" class="collapsible-body"></div>
+								</li>
 
+								<!-- Compras -->
+								<li>
+									<div class="collapsible-header">
+										<i class="material-icons">whatshot</i>Compras
+									</div>
+									<div id="lista-compra" class="collapsible-body"></div>
+								</li>
 
+								<!-- Agendamentos -->
+								<li>
+									<div class="collapsible-header">
+										<i class="material-icons">whatshot</i>Agendamentos
+									</div>
+									<div id="lista-agendamento" class="collapsible-body"></div>
+								</li>
+							</ul>
+						</div>
 					</div>
 
 					<!-- Modal footer -->

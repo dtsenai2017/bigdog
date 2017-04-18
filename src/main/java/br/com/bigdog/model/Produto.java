@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,7 +43,8 @@ public class Produto {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_vigencia", nullable = false)
 	private Date dataVigencia;
-	@Column(columnDefinition = "mediumblob")
+	@Column(length = 10000000, nullable = false)
+	@Lob
 	private byte[] foto;
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_categoria")

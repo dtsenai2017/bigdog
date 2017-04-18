@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import br.com.bigdog.util.CriptografiaMD5;
 import br.com.bigdog.value.Genero;
 
-@JsonIgnoreProperties({ "enderecos", "contato", "pets", "produtosCarrinho" })
+@JsonIgnoreProperties({"contato", "produtosCarrinho" })
 @Entity
 public class Cliente {
 	// Atributos

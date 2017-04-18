@@ -38,7 +38,7 @@ public class TestController {
 	}
 
 	// INSERÇÂO DE DADOS : Cliente, Endereço de Cliente, Pet e Contato
-	@RequestMapping(value = "/dataInsertCliente", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/dataTestCliente", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> dataTestCliente(@RequestBody List<Cliente> clientes) {
 		try {
 			// Inserindo lista de dados
@@ -56,7 +56,7 @@ public class TestController {
 	}
 
 	// INSERÇÃO DE DADOS : Categoria e Subcategoria
-	@RequestMapping(value = "/dataInsertCategoria", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/dataTestCategoria", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> dataTestCategoria(@RequestBody List<Categoria> categorias) {
 		try {
 			// Inserindo lista de dados
@@ -74,8 +74,8 @@ public class TestController {
 	}
 
 	// INSERÇÃO DE DADOS : Fornecedor, Endereço de Fornecedor e Contato
-	@RequestMapping(value = "/dataInsertFornecedor", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Void> dataInsertFornecedor(@RequestBody List<Fornecedor> fornecedores) {
+	@RequestMapping(value = "/dataTestFornecedor", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Void> dataTestFornecedor(@RequestBody List<Fornecedor> fornecedores) {
 		try {
 			// Inserindo lista de dados
 			for (Fornecedor fornecedor : fornecedores) {
