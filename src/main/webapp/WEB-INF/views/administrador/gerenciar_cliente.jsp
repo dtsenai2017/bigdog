@@ -82,56 +82,116 @@
 
 		<!-- Modal Cliente Informações -->
 		<div class="row">
-			<div class="col s12 m6 l6 right">
-				<div id="modal-cliente-info" class="modal">
-					<!-- Modal content -->
-					<div class="modal-content">
-						<h4>Dados do Cliente</h4>
-						<div class="col s12 m8 l8">
-							<ul class="collapsible" data-collapsible="accordion">
-								<!-- Endereços -->
-								<li>
-									<div class="collapsible-header">
-										<i class="material-icons">filter_drama</i>Endereços
-									</div>
-									<div id="lista-endereco" class="collapsible-body"></div>
-								</li>
+			<div id="modal-cliente-info" class="modal">
+				<!-- Modal content -->
+				<div class="modal-content">
+					<!-- Nome -->
+					<h5></h5>
 
-								<!-- Pets -->
-								<li>
-									<div class="collapsible-header">
-										<i class="material-icons">place</i>Pets
-									</div>
-									<div id="lista-pet" class="collapsible-body"></div>
-								</li>
+					<!-- Divider -->
+					<div class="divider"></div>
 
-								<!-- Compras -->
-								<li>
-									<div class="collapsible-header">
-										<i class="material-icons">whatshot</i>Compras
-									</div>
-									<div id="lista-compra" class="collapsible-body"></div>
-								</li>
+					<!-- Lista de dados(Endereço, Pets, Compras e Agendamentos realizados -->
+					<div class="col s12 m12 l12">
+						<ul class="collapsible" data-collapsible="accordion">
+							<!-- Endereços -->
+							<li>
+								<div class="collapsible-header">
+									<i class="material-icons">room</i>Endereços
+								</div>
+								<div id="lista-endereco" class="collapsible-body"></div>
+							</li>
 
-								<!-- Agendamentos -->
-								<li>
-									<div class="collapsible-header">
-										<i class="material-icons">whatshot</i>Agendamentos
-									</div>
-									<div id="lista-agendamento" class="collapsible-body"></div>
-								</li>
-							</ul>
-						</div>
+							<!-- Pets -->
+							<li>
+								<div class="collapsible-header">
+									<i class="material-icons">pets</i>Pets
+								</div>
+								<div id="lista-pet" class="collapsible-body"></div>
+							</li>
+
+							<!-- Compras -->
+							<li>
+								<div class="collapsible-header">
+									<i class="material-icons">shopping_cart</i>Compras
+								</div>
+								<div id="lista-compra" class="collapsible-body"></div>
+							</li>
+
+							<!-- Agendamentos -->
+							<li>
+								<div class="collapsible-header">
+									<i class="material-icons">event</i>Agendamentos
+								</div>
+								<div id="lista-agendamento" class="collapsible-body"></div>
+							</li>
+						</ul>
 					</div>
+				</div>
 
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<a href="#!"
-							class="modal-action modal-close waves-effect waves-green btn-flat">Voltar</a>
-					</div>
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<a href="#!"
+						class="modal-action modal-close waves-effect btn-flat rigth">Voltar</a>
+				</div>
+			</div>
+
+			<!-- Modal editar Cliente -->
+			<div id="modal-editar-cliente" class="modal">
+				<!-- Model content -->
+				<div class="modal-content">
+					<!-- Título -->
+					<h6>Escolha uma opção</h6>
+
+					<!-- Divider -->
+					<div class="divider"></div>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<a href="#!"
+						class="modal-action modal-close waves-effect waves-green btn-flat">Voltar</a>
+				</div>
+			</div>
+
+			<!-- EDITAR CLIENTE -->
+			<!-- Modal editar endereco -->
+			<div id="modal-editar-endereco" class="modal">
+				<!-- Model content -->
+				<div class="modal-content">
+					<!-- Título -->
+					<h6>Editar Endereço</h6>
+					${endereco.logradouro }
+
+					<!-- Divider -->
+					<div class="divider"></div>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<a href="#!"
+						class="modal-action modal-close waves-effect waves-green btn-flat">Voltar</a>
+				</div>
+			</div>
+
+			<!-- Modal editar pet -->
+			<div id="modal-editar-pet" class="modal">
+				<!-- Model content -->
+				<div class="modal-content">
+					<!-- Título -->
+					<h6>Editar Pet</h6>
+
+					<!-- Divider -->
+					<div class="divider"></div>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<a href="#!" class="modal-action modal-close waves-effect btn-flat">Voltar</a>
 				</div>
 			</div>
 		</div>
+		<!-- /.row -->
 	</div>
 	<!-- /.container --> </main>
 
@@ -140,6 +200,7 @@
 
 	<!-- Script's dedicado -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/administrador/gerenciar-cliente.js" defer></script>
+		src="resources/dedicated/js/administrador/gerenciar-cliente.js"
+		charset="utf-8" defer></script>
 </body>
 </html>

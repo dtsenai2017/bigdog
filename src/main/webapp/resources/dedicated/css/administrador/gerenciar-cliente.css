@@ -1,1 +1,6 @@
 @CHARSET "ISO-8859-1";
+
+/* Modal editar cliente */
+#modal-editar-cliente {
+	width: 20%;
+}
