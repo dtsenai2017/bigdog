@@ -1,15 +1,18 @@
-// Requisições Ajax
+// BUSCAR CLIENTE COMPLETO
 function buscarCliente(idCliente) {
 	// Limpando listas de endereco, pet, compra e agendamento...
 	limparListas();
 
 	// Limpar listas
 	function limparListas() {
-		$("#modal-cliente-info h5").empty();
-		$("#lista-endereco").empty();
-		$("#lista-pet").empty();
-		$("#lista-compra").empty();
-		$("#lista-agendamento").empty();
+		$('#modal-cliente-info h5').empty();
+		$('#dados-cliente').empty();
+		$('#dados-cliente').removeClass('blue lighten-1');
+		$('#dados-cliente').removeClass('pink lighten-1');
+		$('#lista-endereco').empty();
+		$('#lista-pet').empty();
+		$('#lista-compra').empty();
+		$('#lista-agendamento').empty();
 	}
 
 	// Listar (id)
@@ -19,6 +22,25 @@ function buscarCliente(idCliente) {
 		success : function(cliente) {
 			// Setando cliente para modal
 			$("#modal-cliente-info h5").append(cliente.nome);
+
+			// Dados do cliente
+			var clienteDados = "<span><b>Nome Completo: </b>" + cliente.nome
+					+ "</span><br>" + "<span><b>CPF: </b>" + cliente.cpf
+					+ "</span><br>" + "<span><b>Data de Nascimento: </b>"
+					+ cliente.dataNascimento + "</span><br>"
+					+ "<span><b>Email de Acesso: </b>" + cliente.email
+					+ "</span><br>" + "<span><b>Gênero: </b>" + cliente.genero
+			"</span><br>";
+
+			// Define cor de fundo dos dados do CLIENTE de acordo com gênero
+			if (cliente.genero == 'Masculino') {
+				$('#dados-cliente').addClass('blue lighten-1');
+			} else {
+				$('#dados-cliente').addClass('pink lighten-1');
+			}
+
+			// Adicionando dados para view
+			$('#dados-cliente').append(clienteDados);
 
 			// FOREACH Endereços
 			$.each(cliente.enderecos, function(index, endereco) {
@@ -34,19 +56,35 @@ function buscarCliente(idCliente) {
 						+ "</div><br>";
 
 				// Adicionando para lista de endereços
-				$("#lista-endereco").append(enderecoList);
+				$('#lista-endereco').append(enderecoList);
 			});
 
 			// FOREACH Pets
 			$.each(cliente.pets, function(index, pet) {
 				// Atributo castrado
 				var castrado;
+				var peso;
+				var observacao;
 
-				// Valor para boolean castrado
+				// Valor para exibição de castrado
 				if (pet.castrado == true) {
 					castrado = 'Sim.';
 				} else {
 					castrado = 'Não.';
+				}
+
+				// Valor de exibição para peso null
+				if (pet.peso == null) {
+					peso = "Não há informação!";
+				} else {
+					peso = pet.peso;
+				}
+
+				// Valor para exibição de observações
+				if (pet.observacoes.length == 0) {
+					observacoes = "Não há informação!";
+				} else {
+					observacoes = pet.observacoes;
 				}
 
 				// Objeto de lista
@@ -61,15 +99,15 @@ function buscarCliente(idCliente) {
 						+ pet.dataNascimento + "</span><br>"
 						+ "<span><b>Pelagem:</b> " + pet.pelagem
 						+ "</span><br><span><b>Castrado:</b> " + castrado
-						+ "</span><br>" + "<span><b>Peso:</b> " + pet.peso
+						+ "</span><br>" + "<span><b>Peso:</b> " + peso
 						+ "</span><br>" + "<span><b>Observações:</b> "
-						+ pet.observacoes + "</span><br>"
+						+ observacoes + "</span><br>"
 						+ "<a href='#modal-editar-pet' onclick='visualizarPet("
 						+ pet.idPet + ");'" + " class='right'>" + "Editar"
 						+ "</a><br>" + "<div class='divider'>" + "</div><br>";
 
 				// Adicionando para lista de endereços
-				$("#lista-pet").append(petList);
+				$('#lista-pet').append(petList);
 			});
 
 			// FOREACH Compras

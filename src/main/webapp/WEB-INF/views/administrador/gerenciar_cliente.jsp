@@ -96,12 +96,23 @@
 						<!-- Lista de dados(Endereço, Pets, Compras e Agendamentos realizados -->
 						<div class="col s12 m12 l12">
 							<ul class="collapsible" data-collapsible="accordion">
+								<!-- Cliente -->
+								<li>
+									<div class="collapsible-header">
+										<i class="material-icons blue-text text-blue">person_pin</i>Dados
+										do cliente
+									</div>
+									<div id="dados-cliente"
+										class="collapsible-body white-text text-white"></div>
+								</li>
+
 								<!-- Endereços -->
 								<li>
 									<div class="collapsible-header">
-										<i class="material-icons red-text text-lighten-2">room</i>Endereços
+										<i class="material-icons deep-orange-text text-lighten-2">room</i>Endereços
 									</div>
-									<div id="lista-endereco" class="collapsible-body"></div>
+									<div id="lista-endereco"
+										class="collapsible-body deep-orange lighten-1 white-text text-white"></div>
 								</li>
 
 								<!-- Pets -->
@@ -109,7 +120,8 @@
 									<div class="collapsible-header">
 										<i class="material-icons green-text text-green">pets</i>Pets
 									</div>
-									<div id="lista-pet" class="collapsible-body"></div>
+									<div id="lista-pet"
+										class="collapsible-body green lighten-1 white-text text-white"></div>
 								</li>
 
 								<!-- Compras -->
@@ -117,7 +129,8 @@
 									<div class="collapsible-header">
 										<i class="material-icons red-text text-red">shopping_cart</i>Compras
 									</div>
-									<div id="lista-compra" class="collapsible-body"></div>
+									<div id="lista-compra"
+										class="collapsible-body red lighten-1 white-text text-white"></div>
 								</li>
 
 								<!-- Agendamentos -->
@@ -125,7 +138,8 @@
 									<div class="collapsible-header">
 										<i class="material-icons cyan-text text-cyan ">event</i>Agendamentos
 									</div>
-									<div id="lista-agendamento" class="collapsible-body"></div>
+									<div id="lista-agendamento"
+										class="collapsible-body cyan lighten-1 white-text text-white"></div>
 								</li>
 							</ul>
 						</div>
@@ -173,7 +187,7 @@
 						<div class="divider"></div>
 
 						<!-- Formulário de alteração do pet -->
-						<form action="alterarPet();" method="post">
+						<form>
 							<!-- ID do pet -->
 							<input type="hidden" id="idPet" value="PUT">
 
@@ -193,8 +207,9 @@
 							<!-- Peso -->
 							<div class="col s12 m12 l12">
 								<div class="input-field col s6 m3 l3">
-									<input id="peso" type="text" class="validate" value="PUT">
-									<label for="peso" id="labelPeso">Peso (kg)</label>
+									<input id="peso" type="text" class="validate" value="PUT"
+										step="0.01"> <label for="peso" id="labelPeso"
+										pattern="[0-9]+(\.[0-9]{0,2})?%?">Peso (kg)</label>
 								</div>
 							</div>
 
@@ -211,9 +226,8 @@
 							<div class="modal-footer">
 								<div class="row">
 									<!-- Botões alterar ou voltar -->
-									<a onclick="alterarPet();"
-										class="modal-action waves-effect btn-flat left">Alterar</a> <a
-										href="#!"
+									<a href="#!" class="waves-effect btn-flat left" type="submit"
+										onclick="alterarPet();">Alterar</a> <a href="#!"
 										class="modal-action modal-close waves-effect btn-flat right">Voltar</a>
 								</div>
 							</div>
@@ -225,7 +239,6 @@
 				<!-- /.container -->
 			</div>
 			<!-- /#modal-editar-pet -->
-
 		</div>
 		<!-- /.row -->
 	</div>
@@ -238,5 +251,9 @@
 	<script type="text/javascript"
 		src="resources/dedicated/js/administrador/gerenciar-cliente.js"
 		charset="utf-8" defer></script>
+
+	<!-- Mascaras Jquery -->
+	<script type="text/javascript"
+		src="resources/dedicated/js/util/mascara.js" charset="utf-8" defer></script>
 </body>
 </html>

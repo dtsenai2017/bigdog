@@ -92,8 +92,8 @@ public class TestController {
 	}
 
 	// INSERÇÃO DE DADOS : Produto
-	@RequestMapping(value = "/dataInsertProduto", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Void> dataInsertProduto(@RequestBody List<Produto> produtos) {
+	@RequestMapping(value = "/dataTestProduto", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Void> dataTestProduto(@RequestBody List<Produto> produtos) {
 		try {
 			// Inserindo lista de dados
 			for (Produto produto : produtos) {

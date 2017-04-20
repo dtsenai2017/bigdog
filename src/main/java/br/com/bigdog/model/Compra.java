@@ -24,6 +24,8 @@ public class Compra {
 	@Column(name = "data_compra", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCompra;
+	@Column(length = 50)
+	private String status;
 	@Column(columnDefinition = "decimal(5,2) unsigned", nullable = false)
 	private Double valor;
 	@Column(columnDefinition = "decimal(5,2) unsigned default 0", nullable = false)
@@ -47,6 +49,14 @@ public class Compra {
 
 	public void setDataCompra(Date dataCompra) {
 		this.dataCompra = dataCompra;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Double getValor() {
@@ -75,7 +85,7 @@ public class Compra {
 
 	@Override
 	public String toString() {
-		return "Compra [idCompra=" + idCompra + ", dataCompra=" + dataCompra + ", valor=" + valor + ", frete=" + frete
-				+ ", compraProdutos=" + compraProdutos + "]";
+		return "Compra [idCompra=" + idCompra + ", dataCompra=" + dataCompra + ", status=" + status + ", valor=" + valor
+				+ ", frete=" + frete + ", compraProdutos=" + compraProdutos + "]";
 	}
 }

@@ -27,16 +27,17 @@
 <!-- JQuery -->
 <script src="resources/jquery/jquery-3.2.1.js" defer></script>
 
-<!-- JQuery HideSeek min -->
+<!-- JQuery HideSeek min (buscar) -->
 <script type="text/javascript"
 	src="resources/jquery/jquery.hideseek.min.js" defer></script>
 
-<!-- JQuery Confirm -->
+<!-- JQuery Confirm (dialog, alert...) -->
 <script type="text/javascript" src="resources/jquery/jquery-confirm.js"
 	defer></script>
 
-<!-- JQuery UI  -->
-<script type="text/javascript" src="resources/jquery/jquery-ui.js" defer></script>
+<!-- JQuery Mask  -->
+<script type="text/javascript" src="resources/jquery/jquery.mask.js"
+	defer></script>
 
 <!-- Materialize JS min. -->
 <script type="text/javascript"
