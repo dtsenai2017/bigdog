@@ -17,6 +17,12 @@
 <link rel="stylesheet"
 	href="resources/materialize/css/materialize.min.css">
 
+<!-- JQuery Confirm CSS  -->
+<link rel="stylesheet" href="resources/jquery/css/jquery-confirm.css">
+
+<!-- JQuery ui css -->
+<link rel="stylesheet" href="resources/jquery/css/jquery-ui.css" />
+
 <!-- Import's JS -->
 <!-- JQuery -->
 <script src="resources/jquery/jquery-3.2.1.js" defer></script>
@@ -24,6 +30,13 @@
 <!-- JQuery HideSeek min -->
 <script type="text/javascript"
 	src="resources/jquery/jquery.hideseek.min.js" defer></script>
+
+<!-- JQuery Confirm -->
+<script type="text/javascript" src="resources/jquery/jquery-confirm.js"
+	defer></script>
+
+<!-- JQuery UI  -->
+<script type="text/javascript" src="resources/jquery/jquery-ui.js" defer></script>
 
 <!-- Materialize JS min. -->
 <script type="text/javascript"

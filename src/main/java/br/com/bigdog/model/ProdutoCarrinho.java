@@ -2,7 +2,6 @@ package br.com.bigdog.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +17,7 @@ public class ProdutoCarrinho {
 	private Long idProdutoCarrinho;
 	@Column(nullable = false, columnDefinition = "bigint unsigned")
 	private Long quantidade;
-	@OneToOne(orphanRemoval = false, fetch = FetchType.EAGER)
+	@OneToOne(orphanRemoval = false)
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
 

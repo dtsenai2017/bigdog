@@ -1,6 +1,13 @@
 @CHARSET "ISO-8859-1";
 
+/* Div para lista de clientes */
+#lista-clientes {
+	overflow: scroll;
+	height: 450px;
+}
+
 /* Modal editar cliente */
 #modal-editar-cliente {
 	width: 20%;
 }
+

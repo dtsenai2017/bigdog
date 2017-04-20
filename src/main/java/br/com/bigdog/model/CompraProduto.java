@@ -13,11 +13,11 @@ public class CompraProduto {
 	// Atributos
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_compra_produto")
+	@Column(name = "id_compra_produto", columnDefinition = "bigint unsigned", nullable = false)
 	private Long idCompraProduto;
-	@Column(nullable = false)
+	@Column(columnDefinition = "bigint unsigned", nullable = false)
 	private Long quantidade;
-	@OneToOne
+	@OneToOne(orphanRemoval = false)
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
 
@@ -44,5 +44,11 @@ public class CompraProduto {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	@Override
+	public String toString() {
+		return "CompraProduto [idCompraProduto=" + idCompraProduto + ", quantidade=" + quantidade + ", produto="
+				+ produto + "]";
 	}
 }

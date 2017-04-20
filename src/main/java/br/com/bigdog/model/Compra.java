@@ -3,6 +3,7 @@ package br.com.bigdog.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,11 +24,13 @@ public class Compra {
 	@Column(name = "data_compra", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCompra;
-	@Column(nullable = false, columnDefinition = "decimal(5,2)")
+	@Column(columnDefinition = "decimal(5,2) unsigned", nullable = false)
 	private Double valor;
-	@OneToMany
+	@Column(columnDefinition = "decimal(5,2) unsigned default 0", nullable = false)
+	private Double frete;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_compra", nullable = false)
-	private List<CompraProduto> compraProduto;
+	private List<CompraProduto> compraProdutos;
 
 	// Getters e Setters
 	public Long getIdCompra() {
@@ -54,17 +57,25 @@ public class Compra {
 		this.valor = valor;
 	}
 
-	public List<CompraProduto> getCompraProduto() {
-		return compraProduto;
+	public Double getFrete() {
+		return frete;
 	}
 
-	public void setCompraProduto(List<CompraProduto> compraProduto) {
-		this.compraProduto = compraProduto;
+	public void setFrete(Double frete) {
+		this.frete = frete;
+	}
+
+	public List<CompraProduto> getCompraProdutos() {
+		return compraProdutos;
+	}
+
+	public void setCompraProdutos(List<CompraProduto> compraProdutos) {
+		this.compraProdutos = compraProdutos;
 	}
 
 	@Override
 	public String toString() {
-		return "Compra [idCompra=" + idCompra + ", dataCompra=" + dataCompra + ", valor=" + valor + ", compraProduto="
-				+ compraProduto + "]";
+		return "Compra [idCompra=" + idCompra + ", dataCompra=" + dataCompra + ", valor=" + valor + ", frete=" + frete
+				+ ", compraProdutos=" + compraProdutos + "]";
 	}
 }

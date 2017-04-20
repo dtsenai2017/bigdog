@@ -68,8 +68,6 @@ public class ClienteController {
 	// Listar (id)
 	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Cliente listar(@PathVariable("id") Long id) {
-		System.out.println("ID");
-
 		// Buscando cliente
 		Cliente cliente = clienteDAO.listar(id);
 

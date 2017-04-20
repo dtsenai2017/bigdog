@@ -68,7 +68,6 @@
 
 		<!-- Gerenciar -->
 		<div id="swipe-gerenciar" class="col s12 m12 l12">
-			<!-- Painéis de gerenciamento -->
 			<!-- Cliente -->
 			<div id="#painel-cliente" class="col s6 m4 l4">
 				<div class="row">

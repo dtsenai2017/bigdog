@@ -48,9 +48,9 @@
 						<div class="input-field">
 							<input id="search-cliente" type="search" class="truncate"
 								data-list=".lista-cliente" onkeyup="buscar(this.id)"
-								placeholder="Buscar cliente"> <label class="label-icon"
-								for="search-cliente"><i class="material-icons">search</i></label>
-							<i class="material-icons">close</i>
+								placeholder="Nome, CPF, Email ou Celular."> <label
+								class="label-icon" for="search-cliente"><i
+								class="material-icons">search</i></label> <i class="material-icons">close</i>
 						</div>
 					</form>
 				</div>
@@ -70,7 +70,7 @@
 							title="${cliente.nome }"
 							src="${cliente.genero == Genero.Masculino ? 'resources/dedicated/img/cliente/genero_masculino.png' : 'resources/dedicated/img/cliente/genero_feminino.png' }"
 							class="circle"> <span class="title truncate"><b>${cliente.nome }</b></span>
-							<p class="truncate">${cliente.email }
+							<p class="truncate">${cliente.cpf }<br>${cliente.email }
 								<br> ${cliente.contato.celular }
 							</p> <a onclick="buscarCliente(${cliente.idCliente})"
 							href="#modal-cliente-info" class="secondary-content"><i
@@ -83,68 +83,73 @@
 		<!-- Modal Cliente Informações -->
 		<div class="row">
 			<div id="modal-cliente-info" class="modal">
-				<!-- Modal content -->
-				<div class="modal-content">
-					<!-- Nome -->
-					<h5></h5>
+				<!-- Container -->
+				<div class="container">
+					<!-- Modal content -->
+					<div class="modal-content">
+						<!-- Nome -->
+						<h5></h5>
 
-					<!-- Divider -->
-					<div class="divider"></div>
+						<!-- Divider -->
+						<div class="divider"></div>
 
-					<!-- Lista de dados(Endereço, Pets, Compras e Agendamentos realizados -->
-					<div class="col s12 m12 l12">
-						<ul class="collapsible" data-collapsible="accordion">
-							<!-- Endereços -->
-							<li>
-								<div class="collapsible-header">
-									<i class="material-icons">room</i>Endereços
-								</div>
-								<div id="lista-endereco" class="collapsible-body"></div>
-							</li>
+						<!-- Lista de dados(Endereço, Pets, Compras e Agendamentos realizados -->
+						<div class="col s12 m12 l12">
+							<ul class="collapsible" data-collapsible="accordion">
+								<!-- Endereços -->
+								<li>
+									<div class="collapsible-header">
+										<i class="material-icons red-text text-lighten-2">room</i>Endereços
+									</div>
+									<div id="lista-endereco" class="collapsible-body"></div>
+								</li>
 
-							<!-- Pets -->
-							<li>
-								<div class="collapsible-header">
-									<i class="material-icons">pets</i>Pets
-								</div>
-								<div id="lista-pet" class="collapsible-body"></div>
-							</li>
+								<!-- Pets -->
+								<li>
+									<div class="collapsible-header">
+										<i class="material-icons green-text text-green">pets</i>Pets
+									</div>
+									<div id="lista-pet" class="collapsible-body"></div>
+								</li>
 
-							<!-- Compras -->
-							<li>
-								<div class="collapsible-header">
-									<i class="material-icons">shopping_cart</i>Compras
-								</div>
-								<div id="lista-compra" class="collapsible-body"></div>
-							</li>
+								<!-- Compras -->
+								<li>
+									<div class="collapsible-header">
+										<i class="material-icons red-text text-red">shopping_cart</i>Compras
+									</div>
+									<div id="lista-compra" class="collapsible-body"></div>
+								</li>
 
-							<!-- Agendamentos -->
-							<li>
-								<div class="collapsible-header">
-									<i class="material-icons">event</i>Agendamentos
-								</div>
-								<div id="lista-agendamento" class="collapsible-body"></div>
-							</li>
-						</ul>
+								<!-- Agendamentos -->
+								<li>
+									<div class="collapsible-header">
+										<i class="material-icons cyan-text text-cyan ">event</i>Agendamentos
+									</div>
+									<div id="lista-agendamento" class="collapsible-body"></div>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+					<!-- /.modal-content -->
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<a href="#!"
+							class="modal-action modal-close waves-effect btn-flat rigth">Voltar</a>
 					</div>
 				</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<a href="#!"
-						class="modal-action modal-close waves-effect btn-flat rigth">Voltar</a>
-				</div>
+				<!-- /.container -->
 			</div>
+			<!-- /#modal-info-cliente -->
 
 			<!-- Modal editar Cliente -->
 			<div id="modal-editar-cliente" class="modal">
 				<!-- Model content -->
 				<div class="modal-content">
 					<!-- Título -->
-					<h6>Escolha uma opção</h6>
+					<h6>Editar cliente</h6>
 
-					<!-- Divider -->
-					<div class="divider"></div>
 				</div>
 
 				<!-- Modal footer -->
@@ -153,43 +158,74 @@
 						class="modal-action modal-close waves-effect waves-green btn-flat">Voltar</a>
 				</div>
 			</div>
-
-			<!-- EDITAR CLIENTE -->
-			<!-- Modal editar endereco -->
-			<div id="modal-editar-endereco" class="modal">
-				<!-- Model content -->
-				<div class="modal-content">
-					<!-- Título -->
-					<h6>Editar Endereço</h6>
-					${endereco.logradouro }
-
-					<!-- Divider -->
-					<div class="divider"></div>
-				</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<a href="#!"
-						class="modal-action modal-close waves-effect waves-green btn-flat">Voltar</a>
-				</div>
-			</div>
+			<!-- /#modal-editar-cliente -->
 
 			<!-- Modal editar pet -->
 			<div id="modal-editar-pet" class="modal">
-				<!-- Model content -->
-				<div class="modal-content">
-					<!-- Título -->
-					<h6>Editar Pet</h6>
+				<!-- Container -->
+				<div class="container">
+					<!-- Model content -->
+					<div class="modal-content">
+						<!-- Título -->
+						<h5 class="center-align">Editar</h5>
 
-					<!-- Divider -->
-					<div class="divider"></div>
-				</div>
+						<!-- Divider -->
+						<div class="divider"></div>
 
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<a href="#!" class="modal-action modal-close waves-effect btn-flat">Voltar</a>
+						<!-- Formulário de alteração do pet -->
+						<form action="alterarPet();" method="post">
+							<!-- ID do pet -->
+							<input type="hidden" id="idPet" value="PUT">
+
+							<!-- Castrado ? -->
+							<div class="col s12 m12 l12 center">
+								<!-- Descrição -->
+								<h6>Castrado ?</h6>
+
+								<!-- Switch -->
+								<div class="switch">
+									<label> Não <input id="castrado" type="checkbox"
+										value="PUT"> <span class="lever"></span> Sim
+									</label>
+								</div>
+							</div>
+
+							<!-- Peso -->
+							<div class="col s12 m12 l12">
+								<div class="input-field col s6 m3 l3">
+									<input id="peso" type="text" class="validate" value="PUT">
+									<label for="peso" id="labelPeso">Peso (kg)</label>
+								</div>
+							</div>
+
+							<!-- Observações -->
+							<div class="col s12 m12 l12">
+								<div class="input-field col s12">
+									<textarea id="observacoes" class="materialize-textarea"
+										value="PUT"></textarea>
+									<label for="observacoes" id="labelObservacoes">Observações</label>
+								</div>
+							</div>
+
+							<!-- Modal footer -->
+							<div class="modal-footer">
+								<div class="row">
+									<!-- Botões alterar ou voltar -->
+									<a onclick="alterarPet();"
+										class="modal-action waves-effect btn-flat left">Alterar</a> <a
+										href="#!"
+										class="modal-action modal-close waves-effect btn-flat right">Voltar</a>
+								</div>
+							</div>
+						</form>
+						<!-- /.form -->
+					</div>
+					<!-- /.modal-content -->
 				</div>
+				<!-- /.container -->
 			</div>
+			<!-- /#modal-editar-pet -->
+
 		</div>
 		<!-- /.row -->
 	</div>
