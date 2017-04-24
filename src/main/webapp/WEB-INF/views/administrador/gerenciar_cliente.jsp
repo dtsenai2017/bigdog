@@ -19,7 +19,7 @@
 	<!--  import navbar -->
 	<c:import url="../component/navbar.jsp" />
 
-	<!-- Main - container principal -->
+	<!-- main - container principal -->
 	<main>
 	<div class="container">
 		<!-- Descrição -->
@@ -42,7 +42,7 @@
 		<div class="row">
 			<!-- Barra de Pesquisa -->
 			<div class="col s12 m12 l12">
-				<nav class="red lighten-1 hoverable">
+				<nav class="red lighten-2 hoverable">
 				<div class="nav-wrapper">
 					<form>
 						<div class="input-field">
@@ -62,7 +62,7 @@
 		<div class="row">
 			<!-- Lista de cliente -->
 			<div id="lista-clientes" class="col s12 m12 l12">
-				<ul class="collection lista-cliente">
+				<ul class="collection lista-cliente" data-collapsible="accordion">
 					<!-- Foreach -->
 					<c:forEach items="${clientes }" var="cliente">
 						<!-- Linha do cliente -->
@@ -95,7 +95,7 @@
 
 						<!-- Lista de dados(Endereço, Pets, Compras e Agendamentos realizados -->
 						<div class="col s12 m12 l12">
-							<ul class="collapsible" data-collapsible="accordion">
+							<ul class="collapsible hoverable" data-collapsible="accordion">
 								<!-- Cliente -->
 								<li>
 									<div class="collapsible-header">
@@ -244,15 +244,13 @@
 	</div>
 	<!-- /.container --> </main>
 
-	<!--  import footer	 -->
-	<c:import url="../component/footer.jsp" />
-
 	<!-- Script's dedicado -->
+	<!-- JS dedicado -->
 	<script type="text/javascript"
 		src="resources/dedicated/js/administrador/gerenciar-cliente.js"
 		charset="utf-8" defer></script>
 
-	<!-- Mascaras Jquery -->
+	<!-- Mascaras -->
 	<script type="text/javascript"
 		src="resources/dedicated/js/util/mascara.js" charset="utf-8" defer></script>
 </body>

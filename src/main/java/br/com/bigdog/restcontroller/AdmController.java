@@ -1,5 +1,7 @@
 package br.com.bigdog.restcontroller;
 
+import java.util.List;
+
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.bigdog.dao.GenericDAO;
+import br.com.bigdog.model.Categoria;
 import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.Pet;
 
@@ -20,16 +23,18 @@ public class AdmController {
 	// Atributos
 	private GenericDAO<Cliente> clienteDAO;
 	private GenericDAO<Pet> petDAO;
+	private GenericDAO<Categoria> categoriaDAO;
 
 	// Construtor
 	@Autowired
-	public AdmController(GenericDAO<Cliente> clienteDAO, GenericDAO<Pet> petDAO) {
+	public AdmController(GenericDAO<Cliente> clienteDAO, GenericDAO<Pet> petDAO, GenericDAO<Categoria> categoriaDAO) {
 		this.clienteDAO = clienteDAO;
 		this.petDAO = petDAO;
+		this.categoriaDAO = categoriaDAO;
 	}
 
-	// Abrir Gerenciar Cliente
-	@RequestMapping(value = "/gerenciarCliente", method = RequestMethod.GET)
+	// Gerenciar Cliente
+	@RequestMapping(value = "gerenciarCliente", method = RequestMethod.GET)
 	public ModelAndView gerenciarCliente(ModelAndView mav) {
 		// Adicionando view
 		mav.setViewName("administrador/gerenciar_cliente");
@@ -57,7 +62,6 @@ public class AdmController {
 		return cliente;
 	}
 
-	// Alterações do administrador
 	// Alterar Cliente (Nome, CPF, Email, Genero, Nascimento)
 	// ...
 
@@ -84,4 +88,30 @@ public class AdmController {
 
 	// Agendamento
 	// ...
+
+	// -------------------- Gerenciar Cliente
+
+	// Gerenciar Loja
+	@RequestMapping(value = "gerenciarLoja", method = RequestMethod.GET)
+	public ModelAndView gerenciarLoja(ModelAndView mav) {
+		// Adicionando view
+		mav.setViewName("administrador/gerenciar_loja");
+
+		// Retornando
+		return mav;
+	}
+
+	// Listar Categorias e Subcategorias para formulário
+	@RequestMapping(value = "categoria", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Categoria> listarCategorias() {
+		// Retornando
+		return categoriaDAO.listar();
+	}
+
+	// -------------------- Gerenciar Loja
+
+	// Gerenciar Agendamentos
+	// ...
+	// -------------------- Gerenciar Agendamentos
+
 }

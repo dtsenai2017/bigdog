@@ -22,11 +22,8 @@
 		<!-- Section -->
 		<div class="section">
 			<!-- Título -->
-			<h5 class="center-align">Administrador</h5>
-
-			<!-- Subtítulo -->
-			<p class="center-align grey-text text lighten-1">Consulte,
-				Gerencie e Agende com facilidade.</p>
+			<h5 class="center-align">Consulte, Gerencie e Agende com
+				facilidade</h5>
 
 			<!-- Divider -->
 			<div class="divider"></div>
@@ -49,7 +46,7 @@
 				<li class="tab col s4 m4 l4"
 					onclick="Materialize.fadeInImage('#swipe-gerenciar')"><a
 					href="#swipe-gerenciar"><i
-						class="material-icons center grey-text text-grey">build</i>Gerenciar</a></li>
+						class="material-icons center grey-text text-grey">settings</i>Gerenciar</a></li>
 
 				<!-- Agenda -->
 				<li class="tab col s4 m4 l4"
@@ -63,7 +60,7 @@
 	<!-- Row --> <!-- Swipe's -->
 	<div class="row">
 		<!-- Dashboard -->
-		<div id="swipe-dashboard" class="col s12 m12 l12">Dashboard</div>
+		<div id="swipe-dashboard" class="col s12 m12 l12">Dashboard aquii</div>
 		<!-- /.swipe-dashboard -->
 
 		<!-- Gerenciar -->
@@ -139,9 +136,6 @@
 		<!-- /.swipe-agenda -->
 	</div>
 	<!-- /.row --> <!-- /.container --> </main>
-
-	<!-- import footer -->
-	<c:import url="../component/footer.jsp" />
 
 	<!-- Script's dedicado -->
 	<!-- JS com AJAX dedicado -->

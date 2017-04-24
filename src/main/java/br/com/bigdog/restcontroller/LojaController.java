@@ -15,7 +15,6 @@ import br.com.bigdog.dao.ProdutoCarrinhoDAO;
 import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.ProdutoCarrinho;
 
-@SuppressWarnings("unused")
 @RestController
 public class LojaController {
 	// Atributos
