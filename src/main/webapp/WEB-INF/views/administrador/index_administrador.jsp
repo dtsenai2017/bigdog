@@ -14,7 +14,7 @@
 </head>
 <body>
 	<!--  import navbar -->
-	<c:import url="../component/navbar.jsp" />
+	<c:import url="component/navbar.jsp" />
 
 	<!-- Main - container principal -->
 	<main class="container"> <!-- Row --> <!-- Título e descrição -->

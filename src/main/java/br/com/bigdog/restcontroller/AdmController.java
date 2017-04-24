@@ -47,7 +47,7 @@ public class AdmController {
 	}
 
 	// Visualizar cliente (Endereço, Pets, Compras e Agendamentos)
-	@RequestMapping(value = "/visualizarCliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "visualizarCliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Cliente visualizarCliente(@PathVariable("id") Long id) {
 		// Buscando cliente
 		Cliente cliente = clienteDAO.listar(id);
@@ -66,7 +66,7 @@ public class AdmController {
 	// ...
 
 	// Alterar Pet (Castrado, Peso e Observações)
-	@RequestMapping(value = "/admPet/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "admPet/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> alterarPet(@PathVariable("id") Long id, @RequestBody Pet pet) {
 		// Pet atual
 		Pet petAtual = petDAO.listar(id);
@@ -101,11 +101,24 @@ public class AdmController {
 		return mav;
 	}
 
-	// Listar Categorias e Subcategorias para formulário
+	// Listar Categorias para formulário
 	@RequestMapping(value = "categoria", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Categoria> listarCategorias() {
 		// Retornando
 		return categoriaDAO.listar();
+	}
+
+	// Listar subcategorias de categoria selecionada para formulário
+	@RequestMapping(value = "categoria/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Categoria listarCategoria(@PathVariable("id") Long idCategoria) {
+		// Listando categoria
+		Categoria categoria = categoriaDAO.listar(idCategoria);
+
+		// Buscando subcategorias pelo hibernate
+		Hibernate.initialize(categoria.getSubCategorias());
+
+		// Retornando
+		return categoria;
 	}
 
 	// -------------------- Gerenciar Loja

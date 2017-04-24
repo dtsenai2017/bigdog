@@ -62,12 +62,6 @@
 					<li class="waves-effect"><a href="indexAdministrador"><i
 							class="material-icons center">home</i></a></li>
 
-					<!-- Dashboard -->
-					<li><a href="dashboard" class="waves-effect">Dashboard</a></li>
-
-					<!-- Agenda -->
-					<li><a href="agendaAdministrador" class="waves-effect">Agenda</a></li>
-
 					<!-- Gerenciar -->
 					<li><a class="dropdown-button waves-effect"
 						data-activates="dropdown-gerenciar" data-constrainwidth="false"

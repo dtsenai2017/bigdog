@@ -10,7 +10,7 @@
 </head>
 <body>
 	<!--  import navbar -->
-	<c:import url="../component/navbar.jsp" />
+	<c:import url="component/navbar.jsp" />
 
 	<!-- main - container principal -->
 	<div class="container">
@@ -119,13 +119,13 @@
 							<!-- Categoria -->
 							<div class="row">
 								<div class="input-field col s12 m6 l6">
-									<select name="categoria" id="select-categoria" required>
+									<select id="select-categoria" name="categoria" required>
 									</select> <label>Categoria</label>
 								</div>
 
 								<!-- Subcategoria -->
 								<div class="input-field col s12 m6 l6">
-									<select name="subcategoria" id="select-subcategoria">
+									<select id="select-subcategoria" name="subcategoria">
 									</select> <label>* Subcategoria:</label>
 								</div>
 							</div>
