@@ -26,6 +26,9 @@ $('.datepicker')
 
 // Input Text Área com contador de caracter
 $('input#input_text, textarea#textarea1').characterCounter();
+
+// Chips
+$('.chips').material_chip();
 // Inicializadores/
 
 // Escondendo janelas...
@@ -106,7 +109,74 @@ $('#select-categoria').change(
 
 // Carregar categorias e subcategorias para modal
 function abrirCategorias() {
-	alert("Carreguei...");
+	// Limpando dados de modal
+	limpar();
+
+	// Limpar formulário
+	function limpar() {
+		$('#lista-categorias .collection-item').remove();
+		$('#categoria').val('');
+		$('#subcategorias').empty();
+	}
+
+	// Carregar categorias
+	$.getJSON({
+		url : "categoria",
+		type : "GET",
+		success : function(categorias) {
+			// Populando Lista
+			$.each(categorias, function(index, categoria) {
+				// Adicionando para collections
+				$('#lista-categorias').append(
+						'<li class="collection-item">' + '<div>'
+								+ categoria.categoria
+								+ '<a href="#" onclick="listarSubcategorias('
+								+ categoria.idCategoria
+								+ ');" class="secondary-content ">'
+								+ '<i class="material-icons">mode_edit</i>'
+								+ '</a></div></li>');
+			});
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
+}
+
+// Listar categoria para formulário de alteração
+function listarSubcategorias(idCategoria) {
+	// Limpar subcategorias
+	limparSubcategorias();
+
+	// Limpar input de subcategorias
+	function limparSubcategorias() {
+		$('#lista-subcategorias').empty();
+	}
+
+	// Buscando dados
+	$.getJSON({
+		url : "categoria/" + idCategoria,
+		type : "GET",
+		success : function(categoria) {
+			// Ativando labels de inputs
+			$('#label-categoria').addClass("active");
+
+			// Atribuindo valor para input de categoria
+			$('#categoria').val(categoria.categoria);
+
+			// Populando chips de subcategoria
+			$.each(categoria.subCategorias, function(index, subcategoria) {
+				var inputSubCategoria = '<input class="input red-text'
+						+ ' text-lighten-2"' + 'value="'
+						+ subcategoria.subCategoria + '"></input>';
+
+				$('#lista-subcategorias').append(inputSubCategoria);
+			});
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
 }
 
 // Consultar produtos

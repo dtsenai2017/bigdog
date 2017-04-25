@@ -7,6 +7,10 @@
 <head>
 <!-- Título -->
 <title>Administrador | Gerenciar Loja</title>
+
+<!-- CSS dedicado -->
+<link rel="stylesheet"
+	href="resources/dedicated/css/administrador/gerenciar-loja.css">
 </head>
 <body>
 	<!--  import navbar -->
@@ -129,8 +133,8 @@
 								</div>
 
 								<div class="col s12 m2 l2 center">
-									<a href="#modal-add-categoria" onclick="abrirCategorias();"
-										class="waves-effect"><i class="material-icons left-align">add</i>Adicionar</a>
+									<a href="#modal-editar-categoria" onclick="abrirCategorias();"><i
+										class="material-icons left-align">add</i>Adicionar</a>
 								</div>
 							</div>
 
@@ -222,15 +226,15 @@
 			<!-- /janela-novo-produto -->
 
 			<!-- Modal para adicionar categoria e subcategorias -->
-			<div id="modal-add-categoria" class="modal">
+			<div id="modal-editar-categoria" class="modal">
 				<!-- Modal content -->
 				<div class="modal-content">
 					<!-- Título de modal -->
 					<h4 class="center-align">Adicionar categoria e subcategoria</h4>
 
 					<!-- Subtítulo -->
-					<h6 class="center-align">Adicione ou altere a categoria
-						desejada.</h6>
+					<h6 class="center-align">Adicione, altere ou exclua a
+						categoria desejada.</h6>
 
 					<!-- Divider -->
 					<div class="divider"></div>
@@ -239,19 +243,45 @@
 					<!-- Lista de categorias -->
 					<div class="row">
 						<div class="col s12 m5 l5">
-							<ul class="collection with-header hoverable">
-								<li class="collection-header"><h4>Categoria:</h4></li>
-								<li class="collection-item"><div>
-										Alvin<a href="#!" class="secondary-content"><i
-											class="material-icons">send</i></a>
-									</div></li>
+							<ul id="lista-categorias"
+								class="collection with-header hoverable">
+								<!-- Heade da collection -->
+								<li class="collection-header"><h5 align="center">Categorias</h5></li>
 							</ul>
 						</div>
 
-						<!-- Formulário para alteração -->
-						<div class="col s12 m7 l7 green"></div>
+						<!-- Formulário para alteração de categoria -->
+						<div class="col s12 m7 l7">
+							<div class="container">
+								<!-- Input categoria -->
+								<div class="row">
+									<div class="input-field col s12 m12 l12">
+										<input id="categoria" name="categoria" type="text"
+											class="validate red-text" maxlength="100" required> <label
+											id="label-categoria" for="categoria">Categoria</label>
+									</div>
+								</div>
+
+								<!-- Descrição de subcategorias -->
+								<div class="row">
+									<div class="col s12 m12 l12 center">
+										<p>Subcategorias:</p>
+										<div class="divider"></div>
+									</div>
+								</div>
+
+								<!-- Lista de Subcategorias -->
+								<div class="row">
+									<div id="lista-subcategorias" class="col s12 m12 l12"></div>
+								</div>
+							</div>
+							<!-- /.container -->
+						</div>
+						<!-- /.col -->
 					</div>
+					<!-- /.row -->
 				</div>
+				<!-- /.modal-content -->
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
