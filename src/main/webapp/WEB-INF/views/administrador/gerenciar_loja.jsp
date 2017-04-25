@@ -116,17 +116,21 @@
 								</div>
 							</div>
 
-							<!-- Categoria -->
+							<!-- Categoria, Subcategoria e adicionar categoria -->
 							<div class="row">
-								<div class="input-field col s12 m6 l6">
+								<div class="input-field col s12 m5 l5">
 									<select id="select-categoria" name="categoria" required>
 									</select> <label>Categoria</label>
 								</div>
 
-								<!-- Subcategoria -->
-								<div class="input-field col s12 m6 l6">
+								<div class="input-field col s12 m5 l5">
 									<select id="select-subcategoria" name="subcategoria">
 									</select> <label>* Subcategoria:</label>
+								</div>
+
+								<div class="col s12 m2 l2 center">
+									<a href="#modal-add-categoria" onclick="abrirCategorias();"
+										class="waves-effect"><i class="material-icons left-align">add</i>Adicionar</a>
 								</div>
 							</div>
 
@@ -203,7 +207,7 @@
 							<!-- Botão Cadastrar -->
 							<div class="row">
 								<div class="col s12 m12 l12">
-									<button class="btn waves-effect waves-light right green"
+									<button class="btn waves-effect waves-light right red"
 										type="submit" name="action">
 										Cadastrar <i class="material-icons right">add</i>
 									</button>
@@ -211,6 +215,47 @@
 							</div>
 						</form>
 					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.container -->
+			</div>
+			<!-- /janela-novo-produto -->
+
+			<!-- Modal para adicionar categoria e subcategorias -->
+			<div id="modal-add-categoria" class="modal">
+				<!-- Modal content -->
+				<div class="modal-content">
+					<!-- Título de modal -->
+					<h4 class="center-align">Adicionar categoria e subcategoria</h4>
+
+					<!-- Subtítulo -->
+					<h6 class="center-align">Adicione ou altere a categoria
+						desejada.</h6>
+
+					<!-- Divider -->
+					<div class="divider"></div>
+
+					<!-- Conteúdo principal do modal -->
+					<!-- Lista de categorias -->
+					<div class="row">
+						<div class="col s12 m5 l5">
+							<ul class="collection with-header hoverable">
+								<li class="collection-header"><h4>Categoria:</h4></li>
+								<li class="collection-item"><div>
+										Alvin<a href="#!" class="secondary-content"><i
+											class="material-icons">send</i></a>
+									</div></li>
+							</ul>
+						</div>
+
+						<!-- Formulário para alteração -->
+						<div class="col s12 m7 l7 green"></div>
+					</div>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<a class="modal-action modal-close waves-effect btn-flat">Voltar</a>
 				</div>
 			</div>
 

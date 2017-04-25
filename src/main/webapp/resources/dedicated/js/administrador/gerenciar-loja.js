@@ -69,7 +69,7 @@ $("#btn-novo-produto").click(
 			});
 		});
 
-// Abrir subcategorias de categoria selecionada
+// Abrir subcategorias de categoria selecionada no formulário
 $('#select-categoria').change(
 		function() {
 			// Atributos
@@ -103,6 +103,11 @@ $('#select-categoria').change(
 				}
 			});
 		});
+
+// Carregar categorias e subcategorias para modal
+function abrirCategorias() {
+	alert("Carreguei...");
+}
 
 // Consultar produtos
 $("#btn-consultar-produtos").click(function() {

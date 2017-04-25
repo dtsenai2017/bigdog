@@ -45,7 +45,7 @@
 </head>
 <body>
 	<!-- Navbar -->
-	<header> <nav class="red lighten-1 z-depth-0">
+	<header> <nav class="red darken-3 z-depth-0">
 	<div class="container nav-wrapper">
 		<div class="row">
 			<!-- Logo -->
@@ -75,7 +75,7 @@
 	<ul id="dropdown-gerenciar" class="dropdown-content">
 		<!-- Cliente -->
 		<li><a href="gerenciarCliente"><i
-				class="material-icons left blue-text text-deep-blue">people</i>Cliente</a></li>
+				class="material-icons left blue-text text-blue">people</i>Cliente</a></li>
 
 		<!-- Loja -->
 		<li><a href="gerenciarLoja"><i
@@ -95,17 +95,6 @@
 		<!-- Divider -->
 		<li class="container"><div class="divider"></div></li>
 
-		<!-- Dashboard -->
-		<li><a href="dashboard" class="waves-effect"><i
-				class="material-icons left blue-text text-blue">trending_up</i>Dashboard</a></li>
-
-		<!-- Agenda -->
-		<li><a href="indexLoja" class="waves-effect"><i
-				class="material-icons left cyan-text text-cyan">event_note</i>Agenda</a></li>
-
-		<!-- Divider -->
-		<li class="container"><div class="divider"></div></li>
-
 		<!-- Gerenciar -->
 		<li><h6 align="center" class="grey-text text-grey">
 				<b>Gerenciar</b>
@@ -113,15 +102,15 @@
 
 		<!-- Cliente -->
 		<li><a href="gerenciarCliente" class="waves-effect"><i
-				class="material-icons ">people</i>Cliente</a></li>
+				class="material-icons blue-text text-blue">people</i>Cliente</a></li>
 
 		<!-- Loja -->
 		<li><a href="gerenciarLoja" class="waves-effect"><i
-				class="material-icons left ">shopping_cart</i>Loja</a></li>
+				class="material-icons left red-text text-red">shopping_cart</i>Loja</a></li>
 
 		<!-- Agenda -->
 		<li><a href="gerenciarAgenda" class="waves-effect"><i
-				class="material-icons left ">event_note</i>Agenda</a></li>
+				class="material-icons left cyan-text text-cyan">event_note</i>Agenda</a></li>
 	</ul>
 	</header>
 
