@@ -106,7 +106,7 @@
 
 		<!-- Loja -->
 		<li><a href="gerenciarLoja" class="waves-effect"><i
-				class="material-icons left red-text text-red">shopping_cart</i>Loja</a></li>
+				class="material-icons left red-text text-red">store</i>Loja</a></li>
 
 		<!-- Agenda -->
 		<li><a href="gerenciarAgenda" class="waves-effect"><i

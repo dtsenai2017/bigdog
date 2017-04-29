@@ -18,8 +18,8 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_categoria", nullable = false, columnDefinition = "bigint unsigned")
 	private Long idCategoria;
-	@Column(length = 100, nullable = false)
-	private String categoria;
+	@Column(length = 100, nullable = false, unique = true)
+	private String nome;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_categoria", nullable = false)
 	private List<SubCategoria> subCategorias;
@@ -33,12 +33,12 @@ public class Categoria {
 		this.idCategoria = idCategoria;
 	}
 
-	public String getCategoria() {
-		return categoria;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public List<SubCategoria> getSubCategorias() {
@@ -51,7 +51,6 @@ public class Categoria {
 
 	@Override
 	public String toString() {
-		return "Categoria [idCategoria=" + idCategoria + ", categoria=" + categoria + ", subCategorias=" + subCategorias
-				+ "]";
+		return "Categoria [idCategoria=" + idCategoria + ", nome=" + nome + ", subCategorias=" + subCategorias + "]";
 	}
 }

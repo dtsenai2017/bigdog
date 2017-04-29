@@ -1,6 +1,32 @@
 @CHARSET "ISO-8859-1";
 
+/* Main Produto */
+#main-produto {
+	display: none;
+}
+
+/* Tab Principal Produto */
+#principal-produto {
+	display: none;
+}
+
+/* Main Fornecedor */
+#main-fornecedor {
+	display: none;
+}
+
+/* Tab Principal Fornecedor */
+#principal-fornecedor {
+	display: none;
+}
+
 /* Modal editar categoria */
 #modal-editar-categoria {
-	overflow: scroll;
+	height: 90% !important;
+	max-height: 100% !important;
+}
+
+/* Lista de categorias */
+#lista-categoria li {
+	display: none;
 }

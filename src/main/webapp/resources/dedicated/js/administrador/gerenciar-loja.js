@@ -24,41 +24,67 @@ $('.datepicker')
 					selectYears : 15
 				});
 
-// Input Text Área com contador de caracter
+// Input Textarea com contador de caracter
 $('input#input_text, textarea#textarea1').characterCounter();
 
-// Chips
-$('.chips').material_chip();
-// Inicializadores/
+// Escondendo janelas e botões...
+$('#btn-esconder-categorias').hide();
 
-// Escondendo janelas...
-$('#janela-novo-produto').hide();
-$('#descricao-consulta').hide();
-$('#janela-consultar-produtos').hide();
+// Selecionar janela (Produto ou Fornecedor)
+// Mostrar janela de Produto
+$("#btn-produto").click(function() {
+	// Mostrando janela
+	$('#main-produto').fadeIn(1500);
+	$('#main-fornecedor').hide();
+});
 
-// Selecionar janela pelos btn (Novo produto ou Consultar)
-// Novo produto
-$("#btn-novo-produto").click(
-		function() {
-			$('#janela-novo-produto').fadeIn(1500);
-			$('#janela-consultar-produtos').hide();
-			$('#descricao-consulta').hide();
+// Modal fixo no footer para gerenciar categoria
+$('#modal-editar-categoria').modal({
+	dismissible : true,
+	// modal
+	ready : function(modal, trigger) { // Callback for Modal open. Modal and
+		// alert("Ready");
+	},
+	complete : function() {
+		// alert('Closed');
+	} // Callback for Modal close
+});
 
-			// Limpando lista de categoria e *subcategoria
-			$('#select-categoria').empty().html(' ');
-			$('#select-subcategoria').empty().html(' ');
+// Mostrar lista completa de categoria no modal
+function mostrarListaCategoria() {
+	$('#lista-categoria li').fadeIn(500);
+	$('#btn-esconder-categorias').fadeIn(800);
+	$('#btn-mostrar-categorias').hide();
+}
 
-			// Listando categorias para formulário
-			$.getJSON({
+// Esconder lista completa de categoria no modal
+function esconderListaCategoria() {
+	$('#btn-mostrar-categorias').fadeIn(500);
+	$('#lista-categoria li').fadeOut(300);
+	$('#btn-esconder-categorias').hide();
+	$('#search-categoria').val('');
+}
+
+// Abrir formulário de produto
+function abrirFormProduto() {
+	$('#janela-novo-produto').fadeIn(1500);
+
+	// Limpando lista de categoria e *subcategoria
+	$('#select-categoria').empty().html(' ');
+	$('#select-subcategoria').empty().html(' ');
+
+	// Listando categorias para formulário
+	$
+			.getJSON({
 				url : "categoria",
 				type : "GET",
 				success : function(categorias) {
 					// Populando Lista
 					$.each(categorias, function(index, categoria) {
 						$('#select-categoria').append(
-								$('<option ></option>').attr('value',
+								$('<option></option>').attr('value',
 										categoria.idCategoria).text(
-										categoria.categoria));
+										categoria.nome));
 					});
 
 					// Inicializar, atualizar e limpar o cursor de SELECT BOX
@@ -70,16 +96,21 @@ $("#btn-novo-produto").click(
 					console.log("ERROR: ", e);
 				}
 			});
-		});
+}
 
-// Abrir subcategorias de categoria selecionada no formulário
+// Abrir subcategorias de categoria 'selecionada' no select do formulário
 $('#select-categoria').change(
 		function() {
 			// Atributos
 			var idCategoria = $(this).val();
 
 			// Limpando lista de subcategoria
-			$('#select-subcategoria').empty().html(' ');
+			$('#select-subcategoria').empty().html('');
+
+			// Inserindo opção de valor default para subcategoria
+			$('#select-subcategoria').append(
+					$('<option></option>').attr('value', '').text(
+							'Selecione uma opção'));
 
 			// Listando categorias para formulário
 			$.getJSON({
@@ -92,9 +123,11 @@ $('#select-categoria').change(
 						$('#select-subcategoria').append(
 								$('<option></option>').attr('value',
 										subcategoria.idSubCategoria).text(
-										subcategoria.subCategoria));
+										subcategoria.nome));
 
-						// Inicializar, atualizar e limpar o cursor de SELECT
+						// Inicializar,
+						// atualizar e limpar o
+						// cursor de SELECT
 						// BOX
 						$("select").material_select('update');
 						$("select").closest('.input-field').children(
@@ -108,16 +141,23 @@ $('#select-categoria').change(
 		});
 
 // Carregar categorias e subcategorias para modal
-function abrirCategorias() {
+function abrirModalCategorias() {
 	// Limpando dados de modal
-	limpar();
+	refreshModal();
 
 	// Limpar formulário
-	function limpar() {
-		$('#lista-categorias .collection-item').remove();
-		$('#categoria').val('');
-		$('#subcategorias').empty();
+	function refreshModal() {
+		$('#label-categoria').removeClass('active');
+		$('#lista-categoria').empty();
+		$('#nomeCategoria').val('');
+		$('#btn-mostrar-categorias').fadeIn(100);
+		$('#btn-esconder-categorias').hide();
 	}
+
+	// Subindo para top de modal
+	$('#modal-editar-categoria').animate({
+		scrollTop : 0
+	}, 1000);
 
 	// Carregar categorias
 	$.getJSON({
@@ -126,15 +166,18 @@ function abrirCategorias() {
 		success : function(categorias) {
 			// Populando Lista
 			$.each(categorias, function(index, categoria) {
-				// Adicionando para collections
-				$('#lista-categorias').append(
-						'<li class="collection-item">' + '<div>'
-								+ categoria.categoria
-								+ '<a href="#" onclick="listarSubcategorias('
-								+ categoria.idCategoria
-								+ ');" class="secondary-content ">'
-								+ '<i class="material-icons">mode_edit</i>'
-								+ '</a></div></li>');
+				var liCategoria = '<li class="collection-item">'
+						+ '<div class="truncate">' + categoria.nome
+						+ '<a href="#modal-categoria"'
+						+ 'onclick="gerenciarCategoria('
+						+ categoria.idCategoria + ')"'
+						+ 'class="secondary-content">'
+						+ '<i class="material-icons'
+						+ ' red-text text-lighten-2">' + 'open_in_new</i>'
+						+ '</a></div></li>';
+
+				// Adicionando na lista
+				$('#lista-categoria').append(liCategoria);
 			});
 		},
 		error : function(e) {
@@ -143,45 +186,65 @@ function abrirCategorias() {
 	});
 }
 
-// Listar categoria para formulário de alteração
-function listarSubcategorias(idCategoria) {
-	// Limpar subcategorias
-	limparSubcategorias();
+// 
 
-	// Limpar input de subcategorias
-	function limparSubcategorias() {
-		$('#lista-subcategorias').empty();
+// Verifica input de busca de categoria para mudança de ícone de listagem
+function verificarValor() {
+	// Verifica se campo é vazio para alteração de botões de lista
+	if ($('#search-categoria').val() == '') {
+		$('#btn-mostrar-categorias').fadeIn(600);
+		$('#btn-esconder-categorias').hide();
+	} else {
+		$('#btn-mostrar-categorias').hide();
+		$('#btn-esconder-categorias').fadeIn(600);
+	}
+}
+
+// Cadastrar uma nova categoria
+$("#form-categoria").submit(function(e) {
+	// Cancela qualquer ação padrão do elemento
+	e.preventDefault();
+
+	// Atributos
+	var mensagem;
+
+	// Objeto categoria
+	var categoria = {
+		nome : $('#nomeCategoria').val()
 	}
 
-	// Buscando dados
-	$.getJSON({
-		url : "categoria/" + idCategoria,
-		type : "GET",
-		success : function(categoria) {
-			// Ativando labels de inputs
-			$('#label-categoria').addClass("active");
-
-			// Atribuindo valor para input de categoria
-			$('#categoria').val(categoria.categoria);
-
-			// Populando chips de subcategoria
-			$.each(categoria.subCategorias, function(index, subcategoria) {
-				var inputSubCategoria = '<input class="input red-text'
-						+ ' text-lighten-2"' + 'value="'
-						+ subcategoria.subCategoria + '"></input>';
-
-				$('#lista-subcategorias').append(inputSubCategoria);
-			});
+	// Cadastrando nova categoria
+	$.ajax({
+		type : "POST",
+		url : "categoria",
+		data : JSON.stringify(categoria),
+		contentType : "application/json; charset=utf-8",
+		success : function(s) {
+			// Mensagem para toast
+			mensagem = 'Inserida com sucesso!';
 		},
 		error : function(e) {
-			console.log("ERROR: ", e);
+			// Verifica erro
+			if (e.status == 500) {
+				// Mensagem para toast
+				mensagem = 'Ops, categoria já existe!';
+			} else {
+				// Mensagem para toast
+				mensagem = 'Ops, houve um problema!';
+			}
+		},
+		complete : function() {
+			Materialize.toast(mensagem, 2800);
+
+			// Refresh modal
+			abrirModalCategorias();
 		}
 	});
-}
+});
 
-// Consultar produtos
-$("#btn-consultar-produtos").click(function() {
-	$('#janela-consultar-produtos').fadeIn(1500);
-	$('#descricao-consulta').fadeIn(1500);
-	$('#janela-novo-produto').hide();
+// Main fornecedor
+$("#btn-fornecedor").click(function() {
+	// Mostrando janela
+	$('#main-fornecedor').fadeIn(1500);
+	$('#main-produto').hide();
 });

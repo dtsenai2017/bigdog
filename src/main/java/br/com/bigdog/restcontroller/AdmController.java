@@ -2,8 +2,11 @@ package br.com.bigdog.restcontroller;
 
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
+
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -119,6 +122,29 @@ public class AdmController {
 
 		// Retornando
 		return categoria;
+	}
+
+	// Inserir ou alterar categoria
+	@RequestMapping(value = "categoria", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Void> inserirCategoria(@RequestBody Categoria categoria) {
+		// Verifica se é inserção ou alteração da categoria
+		if (categoria.getIdCategoria() == null) {
+			// Inserir nova categoria
+			try {
+				categoriaDAO.inserir(categoria);
+				return ResponseEntity.ok().build();
+			} catch (ConstraintViolationException e) {
+				e.printStackTrace();
+				return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} else {
+			// Alterar uma categoria
+			// ...
+			return ResponseEntity.ok().build();
+		}
 	}
 
 	// -------------------- Gerenciar Loja

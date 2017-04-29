@@ -14,7 +14,7 @@ public class SubCategoria {
 	@Column(name = "id_sub_categoria", nullable = false, columnDefinition = "bigint unsigned")
 	private Long idSubCategoria;
 	@Column(length = 100, name = "sub_categoria", nullable = false)
-	private String subCategoria;
+	private String nome;
 
 	// Getters e Setters
 	public Long getIdSubCategoria() {
@@ -25,16 +25,16 @@ public class SubCategoria {
 		this.idSubCategoria = idSubCategoria;
 	}
 
-	public String getSubCategoria() {
-		return subCategoria;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setSubCategoria(String subCategoria) {
-		this.subCategoria = subCategoria;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	@Override
 	public String toString() {
-		return "SubCategoria [idSubCategoria=" + idSubCategoria + ", subCategoria=" + subCategoria + "]";
+		return "SubCategoria [idSubCategoria=" + idSubCategoria + ", nome=" + nome + "]";
 	}
 }
