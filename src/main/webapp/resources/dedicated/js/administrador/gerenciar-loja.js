@@ -169,7 +169,7 @@ function abrirModalCategorias() {
 				var liCategoria = '<li class="collection-item">'
 						+ '<div class="truncate">' + categoria.nome
 						+ '<a href="#modal-categoria"'
-						+ 'onclick="gerenciarCategoria('
+						+ 'onclick="abrirEditarCategoria('
 						+ categoria.idCategoria + ')"'
 						+ 'class="secondary-content">'
 						+ '<i class="material-icons'
@@ -240,6 +240,39 @@ $("#form-categoria").submit(function(e) {
 			abrirModalCategorias();
 		}
 	});
+});
+
+// Abrir modal para editar a categoria selecionada com dados relacionados
+function abrirEditarCategoria(idCategoria) {
+	// Cadastrando nova categoria
+	$.ajax({
+		type : "GET",
+		url : "categoria/" + idCategoria,
+		contentType : "application/json; charset=utf-8",
+		success : function(categoria) {
+			// Populando lista de subcategorias
+
+			// Atribuindo id para input de exclusão
+			$('#cx-idCategoria').val(categoria.idCategoria);
+		},
+		error : function(e) {
+			// Verifica erro
+			mensagem = 'Ops, houve um problema!';
+		},
+	});
+}
+
+// Modal para editar categoria
+$('#modal-categoria').modal({
+	dismissible : true, // Modal can be dismissed by clicking outside of the
+	complete : function() {
+		abrirModalCategorias();
+	} // Callback for Modal close
+});
+
+// Excluir categoria
+$("#btn-excluir-categoria").click(function() {
+	alert("excluir..." + $('#cx-idCategoria').val());
 });
 
 // Main fornecedor

@@ -1,4 +1,4 @@
-package br.com.bigdog.restcontroller;
+package br.com.bigdog.clientecontroller;
 
 import java.util.List;
 
@@ -19,20 +19,20 @@ import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.EnderecoCliente;
 
 @RestController
-public class EnderecoController {
+public class EnderecoClienteController {
 	// Atributos
 	private GenericDAO<Cliente> clienteDAO;
 	private GenericDAO<EnderecoCliente> enderecoDAO;
 
 	// Construtor
 	@Autowired
-	public EnderecoController(GenericDAO<Cliente> clienteDAO, GenericDAO<EnderecoCliente> enderecoDAO) {
+	public EnderecoClienteController(GenericDAO<Cliente> clienteDAO, GenericDAO<EnderecoCliente> enderecoDAO) {
 		this.clienteDAO = clienteDAO;
 		this.enderecoDAO = enderecoDAO;
 	}
 
 	// Inserir
-	@RequestMapping(value = "/endereco/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/enderecoCliente/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> inserir(@PathVariable("id") Long id, @RequestBody EnderecoCliente endereco) {
 		try {
 			// Resgatando cliente
@@ -60,14 +60,14 @@ public class EnderecoController {
 	}
 
 	// Listar (id)
-	@RequestMapping(value = "/endereco/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/enderecoCliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public EnderecoCliente listar(@PathVariable("id") Long id) {
 		// Listando endereço e retornando...
 		return enderecoDAO.listar(id);
 	}
 
 	// Alterar
-	@RequestMapping(value = "/endereco/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/enderecoCliente/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> alterar(@PathVariable("id") Long id, @RequestBody EnderecoCliente endereco) {
 		// Endereço atual
 		EnderecoCliente enderecoAtual = enderecoDAO.listar(id);
@@ -92,7 +92,7 @@ public class EnderecoController {
 	}
 
 	// Excluir
-	@RequestMapping(value = "/endereco/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/enderecoCliente/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> excluir(@PathVariable("id") Long id) {
 		// Excluindo...
 		enderecoDAO.excluir(id);

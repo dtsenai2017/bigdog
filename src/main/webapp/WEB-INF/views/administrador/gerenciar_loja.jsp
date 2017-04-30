@@ -344,22 +344,29 @@
 			<!-- /.modal-editar-categoria -->
 
 			<!-- Modal para gerenciamento da categoria selecionada -->
-			<div id="modal-categoria" class="modal">
+			<!-- Modal Structure -->
+			<div id="modal-categoria" class="modal modal-fixed-footer">
+				<!-- Modal content -->
 				<div class="modal-content">
 					<!-- Botão fechar -->
 					<div class="row">
 						<div class="col s12 m12 l12">
-							<a class="modal-action modal-close right"><i
+							<a class="modal-action modal-close right"
+								onclick="abrirModalCategorias();"><i
 								class="material-icons grey-text">close</i></a>
 						</div>
 					</div>
 
-					<h4>Modal Header</h4>
-					<p>A bunch of text</p>
+
+					<h5 align="center">Editar categoria</h5>
 				</div>
+
+				<!-- Modal footer -->
 				<div class="modal-footer">
-					<a href="#!"
-						class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+					<input id="cx-idCategoria" type="hidden"> <a
+						id="btn-excluir-categoria" href="#!"
+						class="modal-action waves-effect waves-red btn-flat left"><i
+						class="material-icons left red-text">delete</i>Excluir Categoria</a>
 				</div>
 			</div>
 

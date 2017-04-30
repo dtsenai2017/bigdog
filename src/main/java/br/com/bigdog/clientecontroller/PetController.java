@@ -1,4 +1,4 @@
-package br.com.bigdog.restcontroller;
+package br.com.bigdog.clientecontroller;
 
 import javax.validation.ConstraintViolationException;
 
@@ -27,7 +27,7 @@ public class PetController {
 	}
 
 	// Inserir
-	@RequestMapping(value = "/pet", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "pet", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> inserir(@RequestBody Pet pet) {
 		try {
 			// Inserindo novo pet
@@ -43,7 +43,7 @@ public class PetController {
 	}
 
 	// Listar (id)
-	@RequestMapping(value = "/pet/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "pet/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Pet listar(@PathVariable("id") Long id) {
 		try {
 			return petDAO.listar(id);
@@ -53,7 +53,7 @@ public class PetController {
 	}
 
 	// Alterar
-	@RequestMapping(value = "/pet/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "pet/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> alterar(@PathVariable("id") Long id, Pet pet) {
 		// ???
 		return ResponseEntity.ok().build();

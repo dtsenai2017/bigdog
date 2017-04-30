@@ -1,4 +1,4 @@
-package br.com.bigdog.restcontroller;
+package br.com.bigdog.clientecontroller;
 
 import java.util.List;
 
@@ -19,6 +19,7 @@ import br.com.bigdog.model.ProdutoCarrinho;
 public class LojaController {
 	// Atributos
 	private GenericDAO<Cliente> clienteDAO;
+	@SuppressWarnings("unused")
 	private ProdutoCarrinhoDAO produtoCarrinhoDAO;
 
 	// Construtor

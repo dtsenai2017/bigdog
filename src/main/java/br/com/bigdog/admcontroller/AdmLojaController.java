@@ -1,22 +1,20 @@
-package br.com.bigdog.controller;
+package br.com.bigdog.admcontroller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Produto;
 
-@Controller
-public class LojaAdmController {
+public class AdmLojaController {
 	// Atributos
 	private GenericDAO<Produto> produtoDAO;
 
 	// Construtor
 	@Autowired
-	public LojaAdmController(GenericDAO<Produto> produtoDAO) {
+	public AdmLojaController(GenericDAO<Produto> produtoDAO) {
 		this.produtoDAO = produtoDAO;
 	}
 
@@ -37,19 +35,19 @@ public class LojaAdmController {
 	}
 
 	// Listar
-	@RequestMapping(value = "/listarProdutos")
+	@RequestMapping(value = "admlistarProdutos")
 	public List<Produto> listar() {
 		return produtoDAO.listar();
 	}
 
 	// Listar (id)
-	@RequestMapping(value = "/listarProduto/")
+	@RequestMapping(value = "admlistarProduto/")
 	public Produto listar(Long id) {
 		return produtoDAO.listar(id);
 	}
 
 	// Excluir
-	@RequestMapping(value = "/excluirProduto")
+	@RequestMapping(value = "excluirProduto")
 	public void excluir(Long id) {
 		produtoDAO.excluir(id);
 	}

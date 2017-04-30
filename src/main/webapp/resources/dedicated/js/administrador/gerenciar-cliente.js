@@ -206,7 +206,7 @@ function visualizarPet(idPet) {
 
 	// Listando e atribuindo valores para formulário de alteração
 	$.getJSON({
-		url : "pet/" + idPet,
+		url : "admPet/" + idPet,
 		type : "GET",
 		success : function(pet) {
 			// Ativando labels de inputs

@@ -30,3 +30,9 @@
 #lista-categoria li {
 	display: none;
 }
+
+/* Modal para edição da categoria selecionada */
+#modal-categoria {
+	width: 70% !important;
+	max-width: 100% !important;
+}
