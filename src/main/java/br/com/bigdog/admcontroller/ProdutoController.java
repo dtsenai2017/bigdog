@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Produto;
 
-public class AdmLojaController {
+public class ProdutoController {
 	// Atributos
 	private GenericDAO<Produto> produtoDAO;
 
 	// Construtor
 	@Autowired
-	public AdmLojaController(GenericDAO<Produto> produtoDAO) {
+	public ProdutoController(GenericDAO<Produto> produtoDAO) {
 		this.produtoDAO = produtoDAO;
 	}
 
