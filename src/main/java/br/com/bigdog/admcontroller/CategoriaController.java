@@ -1,5 +1,6 @@
 package br.com.bigdog.admcontroller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.ConstraintViolationException;
@@ -16,15 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Categoria;
+import br.com.bigdog.model.SubCategoria;
 
 @RestController
 public class CategoriaController {
 	// Atributos
 	private GenericDAO<Categoria> categoriaDAO;
+	private GenericDAO<SubCategoria> subCategoriaDAO;
 
 	// Construtor
-	public CategoriaController(GenericDAO<Categoria> categoriaDAO) {
+	public CategoriaController(GenericDAO<Categoria> categoriaDAO, GenericDAO<SubCategoria> subCategoriaDAO) {
 		this.categoriaDAO = categoriaDAO;
+		this.subCategoriaDAO = subCategoriaDAO;
 	}
 
 	// Requisições
@@ -48,26 +52,79 @@ public class CategoriaController {
 		return categoria;
 	}
 
-	// Inserir ou alterar categoria
+	// Inserir categoria
 	@RequestMapping(value = "categoria", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> inserirCategoria(@RequestBody Categoria categoria) {
-		// Verifica se é inserção ou alteração da categoria
-		if (categoria.getIdCategoria() == null) {
-			// Inserir nova categoria
-			try {
-				categoriaDAO.inserir(categoria);
-				return ResponseEntity.ok().build();
-			} catch (ConstraintViolationException e) {
-				e.printStackTrace();
-				return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
-			}
-		} else {
-			// Alterar uma categoria
-			// ...
+		// Inserir nova categoria
+		try {
+			categoriaDAO.inserir(categoria);
 			return ResponseEntity.ok().build();
+		} catch (ConstraintViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	// Inserir subcategoria
+	@RequestMapping(value = "subcategoria/{idCategoria}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Void> inserirSubCategoria(@PathVariable("idCategoria") Long idCategoria,
+			@RequestBody SubCategoria subCategoria) {
+		// Categoria
+		Categoria categoria = categoriaDAO.listar(idCategoria);
+		Hibernate.initialize(categoria.getSubCategorias());
+
+		// Lista
+		List<SubCategoria> subCategorias = new ArrayList<SubCategoria>();
+
+		// Valor da lista da categoria
+		subCategorias = categoria.getSubCategorias();
+
+		// Adicionando lista de requisição
+		subCategorias.add(subCategoria);
+
+		// Adicionando valor em lista de categoria
+		categoria.setSubCategorias(subCategorias);
+
+		// Inserindo
+		try {
+			categoriaDAO.alterar(categoria);
+			return ResponseEntity.ok().build();
+		} catch (ConstraintViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	// Excluir categoria (Se categoria estiver vinculada em algum produto, não é
+	// possível uma exclusão)
+	@RequestMapping(value = "categoria/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> excluir(@PathVariable("id") Long idCategoria) {
+		// Excluindo
+		try {
+			categoriaDAO.excluir(idCategoria);
+			return ResponseEntity.ok().build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	// Excluir subcategoria
+	@RequestMapping(value = "subcategoria/{idSubCategoria}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> excluirSubcategoria(@PathVariable("idSubCategoria") Long idSubCategoria) {
+		// Excluindo
+		try {
+			subCategoriaDAO.excluir(idSubCategoria);
+			return ResponseEntity.ok().build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

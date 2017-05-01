@@ -31,8 +31,15 @@
 	display: none;
 }
 
+/* Hover na lista de categorias */
+#lista-categoria li:hover {
+	transition: 0.4s;
+	color: white;
+	background-color: #BEBEBE;
+}
+
 /* Modal para edição da categoria selecionada */
 #modal-categoria {
-	width: 70% !important;
+	width: 90% !important;
 	max-width: 100% !important;
 }

@@ -265,15 +265,15 @@
 						</div>
 					</div>
 
-					<!-- Input de id e nome de categoria, botão submit e barra de pesquisa -->
+					<!-- Input de nome de categoria, botão submit e barra de pesquisa -->
 					<div class="row">
 						<!-- Input para id e nome de categoria -->
 						<div class="input-field col s12 m6 l6">
 							<form id="form-categoria">
 								<input id="nomeCategoria" name="nome" type="text"
-									class="validate col s12 m9 l9 truncate" maxlength="100"
-									required> <label id="label-categoria" for="categoria">Nome
-									da Categoria</label>
+									class="col s12 m9 l9 truncate" maxlength="100" required>
+								<label id="label-categoria" for="nomeCategoria">Nome da
+									Categoria</label>
 								<div class="col s12 m3 l3 center">
 									<button class="btn waves-effect waves-light green"
 										type="submit" name="action">
@@ -331,7 +331,7 @@
 					<div class="row">
 						<div id="cx-lista-categoria" class="col s12 m12 l12">
 							<ul id="lista-categoria" class="collection">
-
+								<!-- ... -->
 							</ul>
 						</div>
 					</div>
@@ -351,20 +351,53 @@
 					<!-- Botão fechar -->
 					<div class="row">
 						<div class="col s12 m12 l12">
-							<a class="modal-action modal-close right"
-								onclick="abrirModalCategorias();"><i
+							<a class="modal-action modal-close right"><i
 								class="material-icons grey-text">close</i></a>
 						</div>
 					</div>
 
+					<!-- Titulo de modal -->
+					<h5 id="titulo-modal-categoria" align="center"></h5>
+					<div class="divider"></div>
 
-					<h5 align="center">Editar categoria</h5>
+					<!-- Main -->
+					<div class="row">
+						<!-- Input para nome de subcategoria -->
+						<div class="input-field col s12 m6 l6">
+							<form id="form-subcategoria">
+								<input id="idCategoria" type="hidden"> <input
+									id="nomeSubcategoria" name="nome" type="text"
+									class="col s12 m9 l9 truncate" maxlength="100" required>
+								<label id="label-subcategoria" for="nomeSubcategoria">Nome
+									da SubCategoria</label>
+								<div class="col s12 m3 l3 center">
+									<button class="btn waves-effect waves-light green"
+										type="submit" name="action">
+										<i class="material-icons right-align white-text">add</i>
+									</button>
+								</div>
+							</form>
+
+							<!-- Espaçador mobile -->
+							<div id="espacador-btn" class="col s12 hide-on-med-and-up"></div>
+						</div>
+
+						<!-- Lista de subcategorias -->
+						<div class="col s12 m6 l6">
+							<!-- Descrição de lista -->
+							<h6 align="center">Subcategorias</h6>
+
+							<!-- Lista de subcategorias -->
+							<ul id="lista-subcategoria" class="collection">
+								<!-- ... -->
+							</ul>
+						</div>
+					</div>
 				</div>
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<input id="cx-idCategoria" type="hidden"> <a
-						id="btn-excluir-categoria" href="#!"
+					<a id="btn-excluir-categoria" href="#!"
 						class="modal-action waves-effect waves-red btn-flat left"><i
 						class="material-icons left red-text">delete</i>Excluir Categoria</a>
 				</div>

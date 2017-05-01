@@ -147,17 +147,14 @@ function abrirModalCategorias() {
 
 	// Limpar formulário
 	function refreshModal() {
-		$('#label-categoria').removeClass('active');
 		$('#lista-categoria').empty();
 		$('#nomeCategoria').val('');
 		$('#btn-mostrar-categorias').fadeIn(100);
 		$('#btn-esconder-categorias').hide();
 	}
 
-	// Subindo para top de modal
-	$('#modal-editar-categoria').animate({
-		scrollTop : 0
-	}, 1000);
+	// Focus no input
+	$('#nomeCategoria').focus();
 
 	// Carregar categorias
 	$.getJSON({
@@ -166,6 +163,7 @@ function abrirModalCategorias() {
 		success : function(categorias) {
 			// Populando Lista
 			$.each(categorias, function(index, categoria) {
+				// Atributos
 				var liCategoria = '<li class="collection-item">'
 						+ '<div class="truncate">' + categoria.nome
 						+ '<a href="#modal-categoria"'
@@ -234,46 +232,218 @@ $("#form-categoria").submit(function(e) {
 			}
 		},
 		complete : function() {
+			// Toast
 			Materialize.toast(mensagem, 2800);
 
-			// Refresh modal
+			// Reload na modal
 			abrirModalCategorias();
 		}
 	});
 });
 
-// Abrir modal para editar a categoria selecionada com dados relacionados
+// Modal para editar categoria
+$('#modal-editar-categoria').modal({
+	dismissible : true, // Modal can be dismissed by clicking outside of the
+	complete : function() {
+		// Quando modal for fechado, recarrega lista de categorias
+		abrirFormProduto();
+	} // Callback for Modal close
+});
+
+// Abrir modal para editar a categoria selecionada
 function abrirEditarCategoria(idCategoria) {
-	// Cadastrando nova categoria
+	// Limpar lista de subcategoria
+	limparListaSubcategoria();
+
+	// Limpando modal
+	function limparListaSubcategoria() {
+		$('#lista-subcategoria').empty();
+		$('#nomeSubcategoria').val('');
+	}
+
+	// Focus no input
+	$('#nomeSubcategoria').focus();
+
+	// Buscando categoria selecionada
 	$.ajax({
 		type : "GET",
 		url : "categoria/" + idCategoria,
 		contentType : "application/json; charset=utf-8",
 		success : function(categoria) {
-			// Populando lista de subcategorias
+			// Atribuindo valor de id para input
+			$('#idCategoria').val(categoria.idCategoria);
 
-			// Atribuindo id para input de exclusão
-			$('#cx-idCategoria').val(categoria.idCategoria);
+			// Atribuindo nome para titulo de modal
+			$('#titulo-modal-categoria').text(categoria.nome);
+
+			// Populando Lista de subcategoria
+			$.each(categoria.subCategorias, function(index, subcategoria) {
+				// Atributo
+				var liSubcategoria = '<li class="collection-item"><div'
+						+ 'class="truncate">' + subcategoria.nome
+						+ '<a href="#!" onclick="excluirSubcategoria('
+						+ subcategoria.idSubCategoria + ')"'
+						+ 'class="secondary-content">'
+						+ '<i class="material-icons">' + 'delete'
+						+ '</i></a></div></li>';
+
+				// Populando lista
+				$('#lista-subcategoria').append(liSubcategoria);
+			});
 		},
 		error : function(e) {
 			// Verifica erro
-			mensagem = 'Ops, houve um problema!';
+			console.log(e);
 		},
 	});
 }
 
-// Modal para editar categoria
-$('#modal-categoria').modal({
-	dismissible : true, // Modal can be dismissed by clicking outside of the
-	complete : function() {
-		abrirModalCategorias();
-	} // Callback for Modal close
+// Cadastrar uma nova subcategoria
+$("#form-subcategoria").submit(function(e) {
+	// Cancela qualquer ação padrão do elemento
+	e.preventDefault();
+
+	// Atributos
+	var mensagem;
+
+	// Id Categoria que receberá subcategoria
+	var idCategoria = $('#idCategoria').val();
+
+	// Objeto categoria
+	var subcategoria = {
+		nome : $('#nomeSubcategoria').val()
+	}
+
+	// Cadastrando nova categoria
+	$.ajax({
+		type : "POST",
+		url : "subcategoria/ " + idCategoria,
+		data : JSON.stringify(subcategoria),
+		contentType : "application/json; charset=utf-8",
+		success : function(s) {
+			// Mensagem para toast
+			mensagem = 'Inserida com sucesso!';
+
+			// Reload na modal
+			abrirEditarCategoria(idCategoria);
+		},
+		error : function(e) {
+			// Mensagem para toast
+			mensagem = 'Ops, houve um problema!';
+		},
+		complete : function() {
+			// Toast
+			Materialize.toast(mensagem, 2800);
+		}
+	});
 });
 
 // Excluir categoria
 $("#btn-excluir-categoria").click(function() {
-	alert("excluir..." + $('#cx-idCategoria').val());
+	// Atributo
+	var mensagem;
+	var idCategoria = $('#idCategoria').val();
+
+	// Confirmar exclusão
+	$.confirm({
+		title : 'Exclusão!',
+		animation : 'top',
+		useBootstrap : false,
+		theme : 'material',
+		boxWidth : '50%',
+		content : 'Deseja excluir categoria?',
+		buttons : {
+			// CONFIRMAR
+			confirm : {
+				text : 'Excluir',
+				btnClass : 'btn-red',
+				action : function() {
+					// Excluindo
+					$.ajax({
+						url : 'categoria/' + idCategoria,
+						type : 'DELETE',
+						success : function(result) {
+							// Atribundo valor para mensagem de toast
+							mensagem = "Categoria excluída com sucesso!";
+
+							// Toast
+							Materialize.toast(mensagem, 2800);
+
+							// Fechando modal
+							$('#modal-categoria').modal('close');
+
+							// Modal categorias
+							abrirModalCategorias();
+						},
+						error : function(e) {
+							// Atribundo valor para mensagem de toast
+							Materialize.toast("Ops, houve um problema!");
+						}
+					});
+				}
+			},
+			cancel : {
+				// CANCELAR
+				text : 'Cancelar',
+				action : function() {
+				}
+			}
+		}
+	});
 });
+
+// Excluir subcategoria por id de subcategoria
+function excluirSubcategoria(idSubCategoria) {
+	// Atributos
+	var mensagem;
+	var idCategoria = $('#idCategoria').val();
+
+	// Excluindo
+	// Confirmar exclusão
+	$.confirm({
+		title : 'Exclusão!',
+		animation : 'top',
+		useBootstrap : false,
+		theme : 'material',
+		boxWidth : '50%',
+		content : 'Deseja excluir subcategoria?',
+		buttons : {
+			// CONFIRMAR
+			confirm : {
+				text : 'Excluir',
+				btnClass : 'btn-red',
+				action : function() {
+					// Excluindo
+					$.ajax({
+						url : 'subcategoria/' + idSubCategoria,
+						type : 'DELETE',
+						success : function(result) {
+							// Atribundo valor para mensagem de toast
+							mensagem = "Subcategoria excluída com sucesso!";
+
+							// Reload na modal
+							abrirEditarCategoria(idCategoria);
+						},
+						error : function(e) {
+							// Atribundo valor para mensagem de toast
+							mensagem = "Ops, houve um problema!";
+						},
+						complete : function() {
+							// Toast
+							Materialize.toast(mensagem, 2800);
+						}
+					});
+				}
+			},
+			cancel : {
+				// CANCELAR
+				text : 'Cancelar',
+				action : function() {
+				}
+			}
+		}
+	});
+}
 
 // Main fornecedor
 $("#btn-fornecedor").click(function() {
