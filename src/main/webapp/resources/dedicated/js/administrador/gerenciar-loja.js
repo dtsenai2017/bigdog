@@ -27,6 +27,22 @@ $('.datepicker')
 // Input Textarea com contador de caracter
 $('input#input_text, textarea#textarea1').characterCounter();
 
+// SELECT initialize
+$('select').material_select();
+
+// Máscaras
+// CNPJ
+$("#cnpj").mask("00.000.000/0000-00");
+
+// Celular
+$("#celular").unmask();
+
+// Telefone
+$('#telefone').mask('(00) 0000-0000');
+
+// Cep
+$('#cep').mask('00000-000');
+
 // Escondendo janelas e botões...
 $('#btn-esconder-categorias').hide();
 
@@ -38,6 +54,7 @@ $("#btn-produto").click(function() {
 	$('#main-fornecedor').hide();
 });
 
+// PRODUTO
 // Modal fixo no footer para gerenciar categoria
 $('#modal-editar-categoria').modal({
 	dismissible : true,
@@ -67,6 +84,7 @@ function esconderListaCategoria() {
 
 // Abrir formulário de produto
 function abrirFormProduto() {
+	// Abrindo janela para cadastro de produto
 	$('#janela-novo-produto').fadeIn(1500);
 
 	// Limpando lista de categoria e *subcategoria
@@ -445,9 +463,14 @@ function excluirSubcategoria(idSubCategoria) {
 	});
 }
 
-// Main fornecedor
+// FORNECEDOR
 $("#btn-fornecedor").click(function() {
 	// Mostrando janela
 	$('#main-fornecedor').fadeIn(1500);
 	$('#main-produto').hide();
 });
+
+// Abrir modal para adicionar endereço
+function abrirModalEnderecoFornecedor() {
+
+}

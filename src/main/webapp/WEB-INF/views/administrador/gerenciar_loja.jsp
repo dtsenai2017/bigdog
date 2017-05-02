@@ -18,7 +18,6 @@
 
 	<!-- main - container principal -->
 	<div class="container">
-
 		<!-- Descrição -->
 		<div class="row">
 			<!-- Section -->
@@ -51,8 +50,7 @@
 				<!-- Botão produto -->
 				<a id="btn-produto"
 					class="waves-effect btn col s12 m12 l12 white grey-text text-grey truncate"><i
-					class="material-icons left red-text text-lighten-2"
-					onclick="janelaProduto();">store</i>Produto</a>
+					class="material-icons left red-text text-lighten-2">store</i>Produto</a>
 
 				<!-- Espaçador -->
 				<div id="espacador-btn" class="col s12 m12 l12"></div>
@@ -60,8 +58,7 @@
 				<!-- Botão fornecedor -->
 				<a id="btn-fornecedor"
 					class="waves-effect btn col s12 m12 l12 white grey-text text-grey truncate"><i
-					class="material-icons left brown-text text-lighten-2"
-					onclick="janelaFornecedor();">local_shipping</i>Fornecedor</a>
+					class="material-icons left brown-text text-lighten-2">local_shipping</i>Fornecedor</a>
 			</div>
 
 			<!-- Janela produto -->
@@ -87,10 +84,11 @@
 				</ul>
 
 				<!-- Janela principal de produto -->
-				<div id="principal-produto" class="col s12 blue">Test 1</div>
+				<div id="principal-produto" class="col s12 m12 l12 blue">Test
+					1</div>
 
 				<!-- Janela de cadastro de produto -->
-				<div id="novo-produto" class="col s12">
+				<div id="novo-produto" class="col s12 m12 l12">
 					<!-- br -->
 					<br>
 
@@ -109,26 +107,22 @@
 						<!-- Formulário de cadastro -->
 						<div class="container">
 							<div class="row">
-								<!-- Formulário -->
+								<!-- Formulário de cadastro de produto -->
 								<form action="inserirProduto" class="col s12 m12 l12"
 									method="post">
 									<!-- Nome do produto -->
 									<div class="row">
 										<div class="input-field col s12">
-											<input placeholder="Digite o nome do produto" id="nome"
-												name="nome" type="text" class="validate" maxlength="100"
+											<input id="nome" name="nome" type="text" maxlength="100"
 												required> <label for="nome">Nome do produto</label>
 										</div>
 									</div>
 
 									<!-- Marca -->
 									<div class="row">
-										<div class="col s12 m12 l12">
-											<div class="input-field">
-												<input placeholder="Digite a marca do produto" id="marca"
-													name="marca" type="text" class="validate truncate"
-													maxlength="100" required> <label for="marca">Marca</label>
-											</div>
+										<div class="input-field col s12 m12 l12">
+											<input id="marca" name="marca" type="text" class="truncate"
+												maxlength="100" required> <label for="marca">Marca</label>
 										</div>
 									</div>
 
@@ -136,7 +130,7 @@
 									<div class="row">
 										<div class="input-field col s12 m5 l5">
 											<select id="select-categoria" name="categoria" required>
-											</select> <label>Categoria</label>
+											</select> <label>Categoria:</label>
 										</div>
 
 										<div class="input-field col s12 m5 l5">
@@ -147,7 +141,15 @@
 										<div class="col s12 m2 l2 center">
 											<a href="#modal-editar-categoria"
 												onclick="abrirModalCategorias();"><i
-												class="material-icons left-align">add</i>Categoria</a>
+												class="material-icons left-align">list</i>Categoria</a>
+										</div>
+									</div>
+
+									<!-- Fornecedor -->
+									<div class="row">
+										<div class="input-field col s12 m12 l12">
+											<select id="select-fornecedor" name="fornecedor" required>
+											</select> <label>Fornecedor:</label>
 										</div>
 									</div>
 
@@ -167,9 +169,8 @@
 
 										<div class="col s6 m3 l3">
 											<div class="input-field">
-												<input placeholder="Digite a cor" id="cor" name="cor"
-													type="text" class="truncate" maxlength="100"> <label
-													for="cor">* Cor</label>
+												<input id="cor" name="cor" type="text" class="truncate"
+													maxlength="100"> <label for="cor">* Cor</label>
 											</div>
 										</div>
 									</div>
@@ -177,36 +178,34 @@
 									<!-- Tamanho e Quantidade -->
 									<div class="row">
 										<div class="input-field  col s3 l3 m3">
-											<input placeholder="Tamanho" id="tamanho" name="tamanho"
-												type="text" class="truncate" maxlength="100"> <label
+											<input id="tamanho" name="tamanho" type="text"
+												class="truncate" maxlength="100"> <label
 												for="tamanho">* Tamanho</label>
 										</div>
 
 										<div class="input-field  col s9 l9 m9">
-											<input placeholder="Digite a quantide do produto"
-												id="quantidade" name="quantidade" type="text"
-												class="validate truncate" maxlength="100" required>
-											<label for="quantidade">Quantidade do produto</label>
+											<input id="quantidade" name="quantidade" type="text"
+												class="truncate" maxlength="100" required> <label
+												for="quantidade">Quantidade do produto</label>
 										</div>
 									</div>
 
 									<!-- Valor, Quantidade de estoque e Data de Vigência-->
 									<div class="row">
 										<div class="input-field  col s4 l4 m4">
-											<input placeholder="Digite o valor" id="valor" name="valor"
-												type="text" class="truncate"
+											<input id="valor" name="valor" type="text" class="truncate"
 												pattern="[0-9]+(\.[0-9]{0,2})?%?" step="0.01"> <label
-												for="valor">Valor do produto (R$)</label>
+												for="valor">Valor (R$)</label>
 										</div>
 
-										<div class="input-field  col s3 l3 m3 ">
-											<input placeholder="Quantidade" id="qtdEstoque"
-												name="qtdEstoque" pattern="[0-9.]+" type="number"> <label
-												for="qtdEstoque">Qtd. em estoque</label>
+										<div class="input-field  col s4 l4 m4 ">
+											<input id="qtdEstoque" name="qtdEstoque" pattern="[0-9.]+"
+												type="number"> <label for="qtdEstoque">Qtd.
+												Estoque</label>
 										</div>
 
-										<div class="col s5 m5 l5">
-											<label for="dataVigencia">Data de vigência</label> <input
+										<div class="input-field col s4 m4 l4">
+											<label for="dataVigencia">Data vigência</label> <input
 												type="date" class="datepicker" id="dataVigencia"
 												name="dataVigencia">
 										</div>
@@ -430,12 +429,185 @@
 				<div id="principal-fornecedor" class="col s12 blue">Test 1</div>
 
 				<!-- Janela de cadastro de fornecedor -->
-				<div id="novo-fornecedor" class="col s12 red"></div>
+				<div id="novo-fornecedor" class="col s12 m12 l12">
+					<!-- br -->
+					<br>
+
+					<!-- Título de janela -->
+					<h5 align="center" class="grey-text text-grey">Cadastrar um
+						novo fornecedor</h5>
+
+					<!-- divider -->
+					<div class="divider"></div>
+
+					<!-- br -->
+					<br>
+
+					<!-- Formulário -->
+					<div class="container">
+						<form action="inserirFornecedor" class="col s12 m12 l12"
+							method="post">
+							<!-- Descrição de fornecedor -->
+							<div class="row">
+								<!-- Título -->
+								<div class="col s12 m12 l12">
+									<h6 align="left">
+										<b>Fornecedor</b>
+									</h6>
+									<!-- divider -->
+									<div class="divider"></div>
+								</div>
+							</div>
+
+							<!-- Nome fantasia -->
+							<div class="row">
+								<div class="input-field col s12 m12 l12">
+									<input id="nome" name="nomeFantasia" type="text"
+										maxlength="255" required> <label for="nomeFantasia">Nome
+										Fantasia</label>
+								</div>
+							</div>
+
+							<!-- Razão Social -->
+							<div class="row">
+								<div class="input-field col s12 m12 l12">
+									<input id="razaoSocial" name="razaoSocial" type="text"
+										maxlength="255" required> <label for="razaoSocial">Razão
+										Social</label>
+								</div>
+							</div>
+
+							<!-- CNPJ e Email -->
+							<div class="row">
+								<div class="input-field col s12 m5 l5">
+									<input id="cnpj" name="cnpj" type="text" maxlength="20"
+										required> <label for="cnpj">CNPJ</label>
+								</div>
+
+								<div class="input-field col s12 m7 l7">
+									<input id="email" type="email" class="validate" required>
+									<label for="email" data-error="email inválido"
+										data-success="ok">Email</label>
+								</div>
+							</div>
+
+							<!-- Celular e Telefone -->
+							<div class="row">
+								<div class="input-field col s6 m6 l6">
+									<i class="material-icons prefix">stay_current_portrait</i> <input
+										id="celular" name="celular" type="tel" required> <label
+										for="celular">Celular</label>
+								</div>
+
+								<div class="input-field col s6 m6 l6">
+									<i class="material-icons prefix">phone</i> <input id="telefone"
+										name="telefone" type="tel"> <label for="telefone">Telefone</label>
+								</div>
+							</div>
+
+							<!-- Descrição de endereço -->
+							<div class="row">
+								<!-- Título -->
+								<div class="col s12 m12 l12">
+									<h6 align="left">
+										<b>Endereço</b>
+									</h6>
+									<!-- divider -->
+									<div class="divider"></div>
+								</div>
+							</div>
+
+							<!-- CEP e Logradouro -->
+							<div class="row">
+								<div class="input-field col s12 m4 l4">
+									<input id="cep" name="cep" type="text" maxlength="10">
+									<label for="cep">CEP</label>
+								</div>
+
+								<div class="input-field col s12 m8 l8">
+									<input id="logradouro" name="logradouro" type="text"
+										maxlength="255"> <label for="logradouro">Logradouro</label>
+								</div>
+							</div>
+
+							<!-- Número, Complemento e Bairro -->
+							<div class="row">
+								<div class="input-field col s2 m2 l2">
+									<input id="numero" name="numero" type="number" maxlength="255"
+										step="10" required> <label for="numero">Nº</label>
+								</div>
+
+								<div class="input-field col s4 m4 l4">
+									<input id="complemento" name="complemento" type="text"
+										maxlength="255"> <label for="complemento">*Complemento</label>
+								</div>
+
+								<div class="input-field col s6 m6 l6">
+									<input id="bairro" name="bairro" type="text" maxlength="255"
+										required> <label for="bairro">Bairro</label>
+								</div>
+							</div>
+
+							<!-- Cidade e UF -->
+							<div class="row">
+								<div class="input-field col s7 m9 l9">
+									<input id="cidade" name="cidade" type="text" maxlength="255"
+										required> <label for="cidade">Cidade</label>
+								</div>
+
+								<div class="input-field col s5 m3 l3">
+									<select id="select-uf" name="uf" required>
+										<option value="AC">AC</option>
+										<option value="AL">AL</option>
+										<option value="AP">AP</option>
+										<option value="AM">AM</option>
+										<option value="BA">BA</option>
+										<option value="CE">CE</option>
+										<option value="DF">DF</option>
+										<option value="ES">ES</option>
+										<option value="GO">GO</option>
+										<option value="MA">MA</option>
+										<option value="MT">MT</option>
+										<option value="MS">MS</option>
+										<option value="MG">MG</option>
+										<option value="PA">PA</option>
+										<option value="PB">PB</option>
+										<option value="PR">PR</option>
+										<option value="PE">PE</option>
+										<option value="PI">PI</option>
+										<option value="RJ">RJ</option>
+										<option value="RN">RN</option>
+										<option value="RS">RS</option>
+										<option value="RO">RO</option>
+										<option value="RR">RR</option>
+										<option value="SC">SC</option>
+										<option value="SP">SP</option>
+										<option value="SE">SE</option>
+										<option value="TO">TO</option>
+									</select> <label>UF</label>
+								</div>
+							</div>
+
+							<!-- Botão Submit -->
+							<div class="row">
+								<div class="col s12 m12 l12">
+									<button class="btn waves-effect waves-light right red"
+										type="submit" name="action">
+										Cadastrar<i class="material-icons right">add</i>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<!-- /.container -->
+				</div>
+				<!-- /#novo-fornecedor -->
 			</div>
-
-
+			<!-- /#main-fornecedor -->
 		</div>
+		<!-- /.row (Conteúdo main) -->
 	</div>
+	<!-- /.container (Main) -->
 
 	<!-- Script's dedicado -->
 	<!-- JS dedicado -->
