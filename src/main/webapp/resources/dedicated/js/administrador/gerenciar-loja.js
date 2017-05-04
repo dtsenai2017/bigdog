@@ -1,4 +1,4 @@
-// Inicializadores Materialize ~
+// Inicializadores Materialize
 // Input Date materialize
 $('.datepicker')
 		.pickadate(
@@ -21,7 +21,8 @@ $('.datepicker')
 					labelMonthSelect : 'Selecione um mês',
 					labelYearSelect : 'Selecione um ano',
 					selectMonths : true,
-					selectYears : 15
+					selectYears : 15,
+					format : 'yyyy-mm-dd'
 				});
 
 // Input Textarea com contador de caracter
@@ -30,24 +31,11 @@ $('input#input_text, textarea#textarea1').characterCounter();
 // SELECT initialize
 $('select').material_select();
 
-// Máscaras
-// CNPJ
-$("#cnpj").mask("00.000.000/0000-00");
-
-// Celular
-$("#celular").unmask();
-
-// Telefone
-$('#telefone').mask('(00) 0000-0000');
-
-// Cep
-$('#cep').mask('00000-000');
-
-// Escondendo janelas e botões...
+// Escondendo link para lista de categorias
 $('#btn-esconder-categorias').hide();
 
 // Selecionar janela (Produto ou Fornecedor)
-// Mostrar janela de Produto
+// Mostrar Produto
 $("#btn-produto").click(function() {
 	// Mostrando janela
 	$('#main-produto').fadeIn(1500);
@@ -63,7 +51,7 @@ $('#modal-editar-categoria').modal({
 		// alert("Ready");
 	},
 	complete : function() {
-		// alert('Closed');
+		abrirFormProduto();
 	} // Callback for Modal close
 });
 
@@ -87,14 +75,17 @@ function abrirFormProduto() {
 	// Abrindo janela para cadastro de produto
 	$('#janela-novo-produto').fadeIn(1500);
 
+	// console.log($('#select-fornecedor option').length);
+
 	// Limpando lista de categoria e *subcategoria
 	$('#select-categoria').empty().html(' ');
+	$('#select-fornecedor').empty().html(' ');
 	$('#select-subcategoria').empty().html(' ');
 
 	// Listando categorias para formulário
 	$
 			.getJSON({
-				url : "categoria",
+				url : "adm/categoria",
 				type : "GET",
 				success : function(categorias) {
 					// Populando Lista
@@ -114,7 +105,82 @@ function abrirFormProduto() {
 					console.log("ERROR: ", e);
 				}
 			});
+
+	// Listando fornecedores para formulário
+	$
+			.getJSON({
+				url : "adm/fornecedor",
+				type : "GET",
+				success : function(fornecedores) {
+					// Populando Lista
+					$.each(fornecedores, function(index, fornecedor) {
+						$('#select-fornecedor').append(
+								$('<option></option>').attr('value',
+										fornecedor.idFornecedor).text(
+										fornecedor.nomeFantasia));
+					});
+
+					// Inicializar, atualizar e limpar o cursor de SELECT BOX
+					$("select").material_select('update');
+					$("select").closest('.input-field').children('span.caret')
+							.remove();
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
+				}
+			});
 }
+
+// Inserir produto
+$("#form-produto").submit(function(e) {
+	// Cancela qualquer ação padrão do elemento
+	event.preventDefault();
+
+	// Atributo que será inserido
+	var produto = {
+		nome : $('#nome').val(),
+		descricao : $('#descricao').val(),
+		qtdEstoque : $('#qtdEstoque').val(),
+		valor : $('#valor').val(),
+		marca : $('#marca').val(),
+		tamanho : $('#tamanho').val(),
+		cor : $('#cor').val(),
+		quantidade : $('#quantidade').val(),
+		dataVigencia : $('#dataVigencia').val(),
+		foto : btoa($('#foto').val()),
+		categoria : {
+			idCategoria : $('#select-categoria').val()
+		},
+		subCategoria : {
+			idSubCategoria : $('#select-subcategoria').val()
+		},
+		fornecedor : {
+			idFornecedor : $('#select-fornecedor').val()
+		}
+	}
+
+	// Cadastrando produto
+	$.ajax({
+		type : "POST",
+		url : "adm/produto",
+		data : JSON.stringify(produto),
+		contentType : "application/json; charset=utf-8",
+		success : function(s) {
+			// Mensagem para toast
+			mensagem = 'Produto inserido com sucesso!';
+		},
+		error : function(e) {
+			// Mensagem para toast
+			mensagem = 'Ops, houve um problema!';
+		},
+		complete : function() {
+			// Toast
+			Materialize.toast(mensagem, 2800);
+		}
+	});
+
+	console.log(produto);
+});
 
 // Abrir subcategorias de categoria 'selecionada' no select do formulário
 $('#select-categoria').change(
@@ -132,7 +198,7 @@ $('#select-categoria').change(
 
 			// Listando categorias para formulário
 			$.getJSON({
-				url : "categoria/" + idCategoria,
+				url : "adm/categoria/" + idCategoria,
 				type : "GET",
 				success : function(categoria) {
 					// Populando Lista
@@ -142,15 +208,10 @@ $('#select-categoria').change(
 								$('<option></option>').attr('value',
 										subcategoria.idSubCategoria).text(
 										subcategoria.nome));
-
-						// Inicializar,
-						// atualizar e limpar o
-						// cursor de SELECT
-						// BOX
-						$("select").material_select('update');
-						$("select").closest('.input-field').children(
-								'span.caret').remove();
 					});
+
+					// Inicializar, atualizar e limpar o cursor de SELECT BOX
+					$("#select-subcategoria").material_select('update');
 				},
 				error : function(e) {
 					console.log("ERROR: ", e);
@@ -176,7 +237,7 @@ function abrirModalCategorias() {
 
 	// Carregar categorias
 	$.getJSON({
-		url : "categoria",
+		url : "adm/categoria",
 		type : "GET",
 		success : function(categorias) {
 			// Populando Lista
@@ -232,7 +293,7 @@ $("#form-categoria").submit(function(e) {
 	// Cadastrando nova categoria
 	$.ajax({
 		type : "POST",
-		url : "categoria",
+		url : "adm/categoria",
 		data : JSON.stringify(categoria),
 		contentType : "application/json; charset=utf-8",
 		success : function(s) {
@@ -285,7 +346,7 @@ function abrirEditarCategoria(idCategoria) {
 	// Buscando categoria selecionada
 	$.ajax({
 		type : "GET",
-		url : "categoria/" + idCategoria,
+		url : "adm/categoria/" + idCategoria,
 		contentType : "application/json; charset=utf-8",
 		success : function(categoria) {
 			// Atribuindo valor de id para input
@@ -335,7 +396,7 @@ $("#form-subcategoria").submit(function(e) {
 	// Cadastrando nova categoria
 	$.ajax({
 		type : "POST",
-		url : "subcategoria/ " + idCategoria,
+		url : "adm/subcategoria/ " + idCategoria,
 		data : JSON.stringify(subcategoria),
 		contentType : "application/json; charset=utf-8",
 		success : function(s) {
@@ -378,7 +439,7 @@ $("#btn-excluir-categoria").click(function() {
 				action : function() {
 					// Excluindo
 					$.ajax({
-						url : 'categoria/' + idCategoria,
+						url : 'adm/categoria/' + idCategoria,
 						type : 'DELETE',
 						success : function(result) {
 							// Atribundo valor para mensagem de toast
@@ -433,7 +494,7 @@ function excluirSubcategoria(idSubCategoria) {
 				action : function() {
 					// Excluindo
 					$.ajax({
-						url : 'subcategoria/' + idSubCategoria,
+						url : 'adm/subcategoria/' + idSubCategoria,
 						type : 'DELETE',
 						success : function(result) {
 							// Atribundo valor para mensagem de toast
@@ -470,7 +531,97 @@ $("#btn-fornecedor").click(function() {
 	$('#main-produto').hide();
 });
 
-// Abrir modal para adicionar endereço
-function abrirModalEnderecoFornecedor() {
+// Inserir novo fornecedor
+// Cadastrar uma nova subcategoria
+$("#form-fornecedor")
+		.submit(
+				function(e) {
+					// Cancela qualquer ação padrão do elemento
+					e.preventDefault();
 
+					// Atributos
+					var mensagem;
+
+					// Atributo que será inserido (Fornecedor, Contato e UM
+					// endereço)
+					var fornecedor = {
+						nomeFantasia : $('#form-fornecedor').find(
+								'input[name="nomeFantasia"]').val(),
+						razaoSocial : $('#form-fornecedor').find(
+								'input[name="razaoSocial"]').val(),
+						cnpj : $('#form-fornecedor').find('input[name="cnpj"]')
+								.val(),
+						contato : {
+							email : $('#form-fornecedor').find(
+									'input[name="email"]').val(),
+							telefone : $('#form-fornecedor').find(
+									'input[name="telefone"]').val(),
+							celular : $('#form-fornecedor').find(
+									'input[name="celular"]').val()
+						},
+						enderecos : [ {
+							cep : $('#form-fornecedor').find(
+									'input[name="cep"]').val(),
+							logradouro : $('#form-fornecedor').find(
+									'input[name="logradouro"]').val(),
+							numero : $('#form-fornecedor').find(
+									'input[name="numero"]').val(),
+							complemento : $('#form-fornecedor').find(
+									'input[name="complemento"]').val(),
+							bairro : $('#form-fornecedor').find(
+									'input[name="bairro"]').val(),
+							cidade : $('#form-fornecedor').find(
+									'input[name="cidade"]').val(),
+							uf : $('#form-fornecedor')
+									.find('select[name="uf"]').val()
+						} ]
+					}
+
+					console.log(fornecedor);
+
+					// alert($("#form-fornecedor :input[name='cidade']").val());
+
+					// alert($('#form-fornecedor').find(
+					// 'input[name="nomeFantasia"]').val());
+
+					// Cadastrando novo fornecedor
+					$.ajax({
+						type : "POST",
+						url : "adm/inserirFornecedor",
+						data : JSON.stringify(fornecedor),
+						contentType : "application/json; charset=utf-8",
+						success : function(s) {
+							// Mensagem para toast
+							mensagem = 'Fornecedor cadastrado com sucesso!';
+
+							// Limpar Formulario
+							limparFormFornecedor();
+						},
+						error : function(e) {
+							// Mensagem para toast
+							mensagem = 'Ops, houve um problema!';
+						},
+						complete : function() {
+							// Toast
+							Materialize.toast(mensagem, 2800);
+						}
+					});
+				});
+
+// Limpar campos de formulário
+function limparFormFornecedor() {
+	// Limpando campos
+	$('#nomeFantasia').val('');
+	$('#razaoSocial').val('');
+	$('#cnpj').val('');
+	$('#email').val('');
+	$('#telefone').val('');
+	$('#celular').val('');
+	$('#cep').val('');
+	$('#logradouro').val('');
+	$('#numero').val('');
+	$('#complemento').val('');
+	$('#bairro').val('');
+	$('#cidade').val('');
+	$('#uf').val('AC').attr('select', true);
 }

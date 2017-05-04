@@ -6,9 +6,6 @@
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- CSS dedicado -->
-<link rel="stylesheet" href="resources/dedicated/css/util/navbar.css">
-
 <!--Import Google Icon Font-->
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
@@ -117,9 +114,10 @@
 	<!-- Script's dedicado -->
 	<!-- JS dedicado -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/util/navbar.js" defer></script>
+		src="resources/dedicated/js/administrador/navbar.js" defer></script>
+
 	<!-- JS para busca -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/util/buscar.js" defer></script>
+		src="resources/dedicated/js/administrador/buscar.js" defer></script>
 </body>
 </html>

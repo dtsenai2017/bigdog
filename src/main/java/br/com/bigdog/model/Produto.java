@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Produto {
@@ -39,11 +39,11 @@ public class Produto {
 	private String tamanho;
 	@Column(length = 100, nullable = false)
 	private String quantidade;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_vigencia", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "pt-BR", timezone = "America/Sao_Paulo")
 	private Date dataVigencia;
-	@Column(length = 10000000, nullable = false)
+	@Column(nullable = false)
 	@Lob
 	private byte[] foto;
 	@ManyToOne(optional = false)

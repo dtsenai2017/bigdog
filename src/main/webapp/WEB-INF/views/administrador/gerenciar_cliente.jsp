@@ -252,6 +252,7 @@
 
 	<!-- Mascaras -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/util/mascara.js" charset="utf-8" defer></script>
+		src="resources/dedicated/js/administrador/mascara-cliente.js"
+		charset="utf-8" defer></script>
 </body>
 </html>

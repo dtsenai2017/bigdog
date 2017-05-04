@@ -60,7 +60,8 @@
 	<!-- Row --> <!-- Swipe's -->
 	<div class="row">
 		<!-- Dashboard -->
-		<div id="swipe-dashboard" class="col s12 m12 l12">Dashboard aquii</div>
+		<div id="swipe-dashboard" class="col s12 m12 l12">Dashboard
+			aquii</div>
 		<!-- /.swipe-dashboard -->
 
 		<!-- Gerenciar -->
@@ -140,6 +141,7 @@
 	<!-- Script's dedicado -->
 	<!-- JS com AJAX dedicado -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/administrador/administrador.js" defer></script>
+		src="resources/dedicated/js/administrador/index-administrador.js"
+		defer></script>
 </body>
 </html>

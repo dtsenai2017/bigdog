@@ -53,7 +53,7 @@
 					class="material-icons left red-text text-lighten-2">store</i>Produto</a>
 
 				<!-- Espaçador -->
-				<div id="espacador-btn" class="col s12 m12 l12"></div>
+				<div class="col s12 m12 l12"></div>
 
 				<!-- Botão fornecedor -->
 				<a id="btn-fornecedor"
@@ -108,8 +108,7 @@
 						<div class="container">
 							<div class="row">
 								<!-- Formulário de cadastro de produto -->
-								<form action="inserirProduto" class="col s12 m12 l12"
-									method="post">
+								<form id="form-produto" class="col s12 m12 l12">
 									<!-- Nome do produto -->
 									<div class="row">
 										<div class="input-field col s12">
@@ -158,7 +157,7 @@
 										<div class="col s6 m9 l9">
 											<div class="file-field input-field">
 												<div class="btn cyan">
-													<span>Foto</span> <input type="file">
+													<span>Foto</span> <input id="foto" type="file">
 												</div>
 												<div class="file-path-wrapper">
 													<input class="file-path validate truncate" type="text"
@@ -193,9 +192,8 @@
 									<!-- Valor, Quantidade de estoque e Data de Vigência-->
 									<div class="row">
 										<div class="input-field  col s4 l4 m4">
-											<input id="valor" name="valor" type="text" class="truncate"
-												pattern="[0-9]+(\.[0-9]{0,2})?%?" step="0.01"> <label
-												for="valor">Valor (R$)</label>
+											<input id="valor" name="valor" type="text" class="truncate">
+											<label for="valor">Valor (R$)</label>
 										</div>
 
 										<div class="input-field  col s4 l4 m4 ">
@@ -206,7 +204,7 @@
 
 										<div class="input-field col s4 m4 l4">
 											<label for="dataVigencia">Data vigência</label> <input
-												type="date" class="datepicker" id="dataVigencia"
+												id="dataVigencia" type="date" class="datepicker"
 												name="dataVigencia">
 										</div>
 									</div>
@@ -416,8 +414,7 @@
 				<!-- Tabs de fornecedor -->
 				<ul id="tabs-swipe-demo" class="tabs">
 					<li class="tab col s6"><a href="#principal-fornecedor"
-						onclick="Materialize.fadeInImage('#principal-fornecedor')"
-						class="active"><i
+						onclick="Materialize.fadeInImage('#principal-fornecedor')"><i
 							class="material-icons brown-text text-lighten-2">local_shipping</i>Principal</a></li>
 					<li class="tab col s6"><a href="#novo-fornecedor"
 						onclick="Materialize.fadeInImage('#novo-fornecedor')"><i
@@ -445,8 +442,7 @@
 
 					<!-- Formulário -->
 					<div class="container">
-						<form action="inserirFornecedor" class="col s12 m12 l12"
-							method="post">
+						<form id="form-fornecedor" class="col s12 m12 l12">
 							<!-- Descrição de fornecedor -->
 							<div class="row">
 								<!-- Título -->
@@ -462,7 +458,7 @@
 							<!-- Nome fantasia -->
 							<div class="row">
 								<div class="input-field col s12 m12 l12">
-									<input id="nome" name="nomeFantasia" type="text"
+									<input id="nomeFantasia" name="nomeFantasia" type="text"
 										maxlength="255" required> <label for="nomeFantasia">Nome
 										Fantasia</label>
 								</div>
@@ -480,14 +476,13 @@
 							<!-- CNPJ e Email -->
 							<div class="row">
 								<div class="input-field col s12 m5 l5">
-									<input id="cnpj" name="cnpj" type="text" maxlength="20"
-										required> <label for="cnpj">CNPJ</label>
+									<input id="cnpj" name="cnpj" minlength="14" type="text"
+										maxlength="18" required> <label for="cnpj">CNPJ</label>
 								</div>
 
 								<div class="input-field col s12 m7 l7">
-									<input id="email" type="email" class="validate" required>
-									<label for="email" data-error="email inválido"
-										data-success="ok">Email</label>
+									<input id="email" name="email" type="email" class="validate"
+										required> <label id="label-email" for="email">Email</label>
 								</div>
 							</div>
 
@@ -501,7 +496,8 @@
 
 								<div class="input-field col s6 m6 l6">
 									<i class="material-icons prefix">phone</i> <input id="telefone"
-										name="telefone" type="tel"> <label for="telefone">Telefone</label>
+										name="telefone" type="tel"> <label for="telefone">*
+										Telefone</label>
 								</div>
 							</div>
 
@@ -532,18 +528,18 @@
 
 							<!-- Número, Complemento e Bairro -->
 							<div class="row">
-								<div class="input-field col s2 m2 l2">
-									<input id="numero" name="numero" type="number" maxlength="255"
-										step="10" required> <label for="numero">Nº</label>
+								<div class="input-field col s5 m3 l3">
+									<input id="numero" name="numero" type="number" maxlength="10"
+										step="1" required> <label for="numero">Nº</label>
 								</div>
 
-								<div class="input-field col s4 m4 l4">
+								<div class="input-field col s7 m4 l4">
 									<input id="complemento" name="complemento" type="text"
-										maxlength="255"> <label for="complemento">*Complemento</label>
+										maxlength="50"> <label for="complemento">*Complemento</label>
 								</div>
 
-								<div class="input-field col s6 m6 l6">
-									<input id="bairro" name="bairro" type="text" maxlength="255"
+								<div class="input-field col s12 m5 l5">
+									<input id="bairro" name="bairro" type="text" maxlength="100"
 										required> <label for="bairro">Bairro</label>
 								</div>
 							</div>
@@ -551,7 +547,7 @@
 							<!-- Cidade e UF -->
 							<div class="row">
 								<div class="input-field col s7 m9 l9">
-									<input id="cidade" name="cidade" type="text" maxlength="255"
+									<input id="cidade" name="cidade" type="text" maxlength="100"
 										required> <label for="cidade">Cidade</label>
 								</div>
 
@@ -617,6 +613,7 @@
 
 	<!-- Mascaras -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/util/mascara.js" charset="utf-8" defer></script>
+		src="resources/dedicated/js/administrador/mascara-loja.js"
+		charset="utf-8" defer></script>
 </body>
 </html>
