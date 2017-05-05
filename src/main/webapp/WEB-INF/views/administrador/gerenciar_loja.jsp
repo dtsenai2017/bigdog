@@ -111,10 +111,10 @@
 						<div class="container">
 							<div class="row">
 								<!-- Formulário de cadastro de produto -->
-								<form id="form-produto" class="col s12 m12 l12">
+								<form id="form-produto" class="col s12 m12 l12" method="post">
 									<!-- Visualização da foto do produto -->
 									<div class="row">
-										<div class="col s12 m12 l12">
+										<div class="col s12 m12 l12" align="center">
 											<img id="imagem-produto" class="responsive-img materialboxed">
 										</div>
 									</div>
@@ -123,10 +123,9 @@
 									<div class="row">
 										<div class="col s12 m12 l12">
 											<div class="file-field input-field">
-												<div class="btn cyan">
+												<div id="btn-foto" class="btn cyan">
 													<span><i class="material-icons center white-text">add_a_photo</i></span>
-													<input id="foto" type="file" accept="image/*"
-														onChange="escolherFoto(this)">
+													<input id="foto" type="file" accept="image/*">
 												</div>
 												<div class="file-path-wrapper">
 													<input class="file-path validate truncate" type="text"
@@ -188,16 +187,16 @@
 
 									<!-- Tamanho e Quantidade -->
 									<div class="row">
-										<div class="input-field  col s3 l3 m3">
+										<div class="input-field  col s5 l5 m5">
 											<input id="tamanho" name="tamanho" type="text"
 												class="truncate" maxlength="100"> <label
-												for="tamanho">* Tamanho</label>
+												for="tamanho">* Tam.</label>
 										</div>
 
-										<div class="input-field  col s9 l9 m9">
+										<div class="input-field  col s7 l7 m7">
 											<input id="quantidade" name="quantidade" type="text"
 												class="truncate" maxlength="100" required> <label
-												for="quantidade">Quantidade do produto</label>
+												for="quantidade">Qtde. do produto</label>
 										</div>
 									</div>
 
@@ -215,7 +214,7 @@
 										</div>
 
 										<div class="input-field col s4 m4 l4">
-											<label for="dataVigencia">Data vigência</label> <input
+											<label for="dataVigencia">Dt. vigência</label> <input
 												id="dataVigencia" type="date" class="datepicker"
 												name="dataVigencia">
 										</div>
@@ -233,7 +232,8 @@
 									<!-- Botão Cadastrar -->
 									<div class="row">
 										<div class="col s12 m12 l12">
-											<button class="btn waves-effect waves-light right red"
+											<button
+												class="btn waves-effect waves-light right red lighten-2"
 												type="submit" name="action">
 												Cadastrar <i class="material-icons right">add</i>
 											</button>
@@ -278,7 +278,7 @@
 					<div class="row">
 						<!-- Input para id e nome de categoria -->
 						<div class="input-field col s12 m6 l6">
-							<form id="form-categoria">
+							<form id="form-categoria" method="post">
 								<input id="nomeCategoria" name="nome" type="text"
 									class="col s12 m9 l9 truncate" maxlength="100" required>
 								<label id="label-categoria" for="nomeCategoria">Nome da
@@ -373,7 +373,7 @@
 					<div class="row">
 						<!-- Input para nome de subcategoria -->
 						<div class="input-field col s12 m6 l6">
-							<form id="form-subcategoria">
+							<form id="form-subcategoria" method="post">
 								<input id="idCategoria" type="hidden"> <input
 									id="nomeSubcategoria" name="nome" type="text"
 									class="col s12 m9 l9 truncate" maxlength="100" required>

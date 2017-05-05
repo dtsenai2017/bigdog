@@ -31,13 +31,13 @@ public class ProdutoController {
 		System.out.println(produto.toString());
 
 		// Verifica se produto ja é existente
-		// if (produto.getIdProduto() == null) {
-		// // Insere novo produto
-		// produtoDAO.inserir(produto);
-		// } else {
-		// // Altera produto existente
-		// produtoDAO.alterar(produto);
-		// }
+		if (produto.getIdProduto() == null) {
+			// Insere novo produto
+			produtoDAO.inserir(produto);
+		} else {
+			// Altera produto existente
+			produtoDAO.alterar(produto);
+		}
 	}
 
 	// Listar

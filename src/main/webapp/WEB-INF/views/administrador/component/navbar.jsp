@@ -12,7 +12,7 @@
 
 <!-- Materialize CSS min. -->
 <link rel="stylesheet"
-	href="resources/materialize/css/materialize.min.css">
+	href="resources/materialize/css/materialize.css">
 
 <!-- JQuery Confirm CSS  -->
 <link rel="stylesheet" href="resources/jquery/css/jquery-confirm.css">

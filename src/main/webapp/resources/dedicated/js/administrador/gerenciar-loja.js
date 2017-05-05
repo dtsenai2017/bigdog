@@ -163,10 +163,64 @@ function abrirFormProduto() {
 			});
 }
 
+// Verifica se imagem foi selecionada
+$("#foto").bind("change", function() {
+	var selected_file_name = $(this).val();
+
+	// Verifica imagem selecionada
+	if (selected_file_name.length > 0) {
+		// Alterando cor de botão
+		$('#btn-foto').addClass('green');
+
+		// Método para alterar foto
+		escolherFoto();
+	} else {
+		// Retirando vizualização
+		$('#imagem-produto').attr("src", '');
+
+		// Toast
+		Materialize.toast("Imagem não selecionada", 2500);
+
+		// Alterando cor de botão
+		$('#btn-foto').removeClass('green');
+		$('#btn-foto').removeClass('cyan');
+		$('#btn-foto').addClass('red');
+	}
+
+	// Escolhendo foto do produto, caso seja selecionada
+	function escolherFoto() {
+		// Atributos
+		var file = $('#foto')[0].files[0];
+		var foto = lerFoto(file);
+
+		// Função para leitura de foto em bin
+		function lerFoto(file) {
+			// Atributo
+			var reader = new FileReader();
+			var resultArray = new Uint8Array(1024 * 1024 * 50);
+
+			// Valor de callback
+			reader.onload = function(e) {
+				resultArray = e.target.result;
+
+				// Atribuindo imagem selecionada para tag de visualização
+				$('#imagem-produto').attr("src", e.target.result);
+				$('#imagem-produto').fadeIn(2400);
+			}
+			// Ler file
+			reader.readAsDataURL(file);
+		}
+	}
+});
+
 // Inserir produto
 $("#form-produto").submit(function(e) {
 	// Cancela qualquer ação padrão do elemento
-	event.preventDefault();
+	e.preventDefault();
+
+	// Atributos para leitura de file
+	var file = $('#foto')[0].files[0];
+	var reader = new FileReader();
 
 	// Atributo que será inserido
 	var produto = {
@@ -177,9 +231,9 @@ $("#form-produto").submit(function(e) {
 		marca : $('#marca').val(),
 		tamanho : $('#tamanho').val(),
 		cor : $('#cor').val(),
+		foto,
 		quantidade : $('#quantidade').val(),
 		dataVigencia : $('#dataVigencia').val(),
-		foto : imgData,
 		categoria : {
 			idCategoria : $('#select-categoria').val()
 		},
@@ -191,56 +245,39 @@ $("#form-produto").submit(function(e) {
 		}
 	}
 
-	// Cadastrando produto
-	$.ajax({
-		type : "POST",
-		url : "adm/produto",
-		data : JSON.stringify(produto),
-		contentType : "application/json; charset=utf-8",
-		success : function(s) {
-			// Mensagem para toast
-			mensagem = 'Produto inserido com sucesso!';
-		},
-		error : function(e) {
-			// Mensagem para toast
-			mensagem = 'Ops, houve um problema!';
-		},
-		complete : function() {
-			// Toast
-			Materialize.toast(mensagem, 2800);
-		}
-	});
+	// Retornando valor de conversão e fazendo requisição
+	reader.onload = function(e) {
+		// Atributo para foto em BLOB (byteArray[])
+		var fotoByte = btoa(e.target.result);
 
-	// Console test
-	console.log(produto);
-});
-
-// Escolhendo foto do produto
-function escolherFoto(evt) {
-	// Atributos
-	var file = evt.files[0];
-	var foto = lerFoto(file);
-
-	// Função para leitura de foto em bin
-	function lerFoto(file) {
-		// Atributo
-		var reader = new FileReader();
-		var resultArray = new Uint8Array(1024 * 1024 * 50);
-
-		// Valor de callback
-		reader.onload = function(e) {
-			resultArray = e.target.result;
-
-			// Atribuindo imagem selecionada para tag de visualização
-			$('#imagem-produto').attr("src", e.target.result);
-			$('#imagem-produto').fadeIn(2400);
-		}
-		// Ler file
-		reader.readAsDataURL(file);
-
-		return resultArray;
+		// Atribuindo valor de foto para produto
+		produto.foto = fotoByte; 
+		
+		// Cadastrando produto
+		$.ajax({
+			type : "POST",
+			url : "adm/produto",
+			data : JSON.stringify(produto),
+			contentType : "application/json; charset=utf-8",
+			success : function(s) {
+				// Mensagem para toast
+				mensagem = 'Produto inserido com sucesso!';
+			},
+			error : function(e) {
+				// Mensagem para toast
+				mensagem = 'Ops, houve um problema!';
+				console.log(e);
+			},
+			complete : function() {
+				// Toast
+				Materialize.toast(mensagem, 2800);
+			}
+		});
 	}
-}
+
+	// Conversão de file para blob
+	reader.readAsDataURL(file);
+});
 
 // Abrir subcategorias de categoria 'selecionada' no select do formulário
 $('#select-categoria').change(
