@@ -20,6 +20,7 @@ import br.com.bigdog.model.Categoria;
 import br.com.bigdog.model.SubCategoria;
 
 @RestController
+@RequestMapping("adm/")
 public class CategoriaController {
 	// Atributos
 	private GenericDAO<Categoria> categoriaDAO;
@@ -33,7 +34,7 @@ public class CategoriaController {
 
 	// Requisições
 	// Inserir categoria
-	@RequestMapping(value = "adm/categoria", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "categoria", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> inserirCategoria(@RequestBody Categoria categoria) {
 		// Inserir nova categoria
 		try {
@@ -49,7 +50,7 @@ public class CategoriaController {
 	}
 
 	// Inserir subcategoria
-	@RequestMapping(value = "adm/subcategoria/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "subcategoria/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> inserirSubCategoria(@PathVariable("id") Long idCategoria,
 			@RequestBody SubCategoria subCategoria) {
 		// Categoria
@@ -82,14 +83,14 @@ public class CategoriaController {
 	}
 
 	// Listar Categorias para formulário
-	@RequestMapping(value = "adm/categoria", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "categoria", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Categoria> listarCategorias() {
 		// Retornando
 		return categoriaDAO.listar();
 	}
 
 	// Listar subcategorias de categoria selecionada para formulário
-	@RequestMapping(value = "adm/categoria/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "categoria/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Categoria listarCategoria(@PathVariable("id") Long idCategoria) {
 		// Listando categoria
 		Categoria categoria = categoriaDAO.listar(idCategoria);
@@ -103,7 +104,7 @@ public class CategoriaController {
 
 	// Excluir categoria (Se categoria estiver vinculada em algum produto, não é
 	// possível uma exclusão)
-	@RequestMapping(value = "adm/categoria/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "categoria/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> excluir(@PathVariable("id") Long idCategoria) {
 		// Excluindo
 		try {
@@ -116,7 +117,7 @@ public class CategoriaController {
 	}
 
 	// Excluir subcategoria
-	@RequestMapping(value = "adm/subcategoria/{idSubCategoria}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "subcategoria/{idSubCategoria}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> excluirSubcategoria(@PathVariable("idSubCategoria") Long idSubCategoria) {
 		// Excluindo
 		try {

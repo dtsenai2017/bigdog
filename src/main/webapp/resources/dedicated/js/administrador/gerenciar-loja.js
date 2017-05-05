@@ -70,6 +70,38 @@ function esconderListaCategoria() {
 	$('#search-categoria').val('');
 }
 
+// Abrir tab principal de produtos
+function abrirPrincipalProduto() {
+	// Populando lista de produtos
+	// Listando produtos
+	$.getJSON({
+		url : "adm/produto",
+		type : "GET",
+		success : function(produtos) {
+			// Populando Lista
+			$.each(produtos, function(index, produto) {
+				console.log(atob(produto.foto));
+
+				// Linha de lista
+				var liProduto = '<li class="collection-item avatar">'
+						+ '<img src="' + atob(produto.foto)
+						+ '" class="circle">' + '<span class="title">'
+						+ produto.nome + '</span>' + '<p>' + produto.marca
+						+ '<br>' + produto.valor + '</p>'
+						+ '<a href="#" class="secondary-content">'
+						+ '<i class="material-icons">' + 'mode_edit'
+						+ '</i></a></li>';
+
+				// Populando lista
+				$('#lista-produtos').append(liProduto);
+			});
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
+}
+
 // Abrir formulário de produto
 function abrirFormProduto() {
 	// Abrindo janela para cadastro de produto
@@ -147,7 +179,7 @@ $("#form-produto").submit(function(e) {
 		cor : $('#cor').val(),
 		quantidade : $('#quantidade').val(),
 		dataVigencia : $('#dataVigencia').val(),
-		foto : btoa($('#foto').val()),
+		foto : imgData,
 		categoria : {
 			idCategoria : $('#select-categoria').val()
 		},
@@ -179,8 +211,36 @@ $("#form-produto").submit(function(e) {
 		}
 	});
 
+	// Console test
 	console.log(produto);
 });
+
+// Escolhendo foto do produto
+function escolherFoto(evt) {
+	// Atributos
+	var file = evt.files[0];
+	var foto = lerFoto(file);
+
+	// Função para leitura de foto em bin
+	function lerFoto(file) {
+		// Atributo
+		var reader = new FileReader();
+		var resultArray = new Uint8Array(1024 * 1024 * 50);
+
+		// Valor de callback
+		reader.onload = function(e) {
+			resultArray = e.target.result;
+
+			// Atribuindo imagem selecionada para tag de visualização
+			$('#imagem-produto').attr("src", e.target.result);
+			$('#imagem-produto').fadeIn(2400);
+		}
+		// Ler file
+		reader.readAsDataURL(file);
+
+		return resultArray;
+	}
+}
 
 // Abrir subcategorias de categoria 'selecionada' no select do formulário
 $('#select-categoria').change(
@@ -587,7 +647,7 @@ $("#form-fornecedor")
 					// Cadastrando novo fornecedor
 					$.ajax({
 						type : "POST",
-						url : "adm/inserirFornecedor",
+						url : "adm/fornecedor",
 						data : JSON.stringify(fornecedor),
 						contentType : "application/json; charset=utf-8",
 						success : function(s) {

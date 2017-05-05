@@ -17,6 +17,7 @@ import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Fornecedor;
 
 @RestController
+@RequestMapping("adm/")
 public class FornecedorController {
 	// Atributos
 	private GenericDAO<Fornecedor> fornecedorDAO;
@@ -29,7 +30,7 @@ public class FornecedorController {
 
 	// Requisições
 	// Inserir fornecedor (Fornecedor, Contato e UM endereço)
-	@RequestMapping(value = "adm/inserirFornecedor", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "fornecedor", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> inserirFornecedor(@RequestBody Fornecedor fornecedor) {
 		// Inserir novo fornecedor
 		System.out.println(fornecedor.toString());
@@ -46,7 +47,7 @@ public class FornecedorController {
 	}
 
 	// Listar
-	@RequestMapping(value = "adm/fornecedor", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "fornecedor", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Fornecedor> listarFornecedor() {
 		// Retornando lista
 		return fornecedorDAO.listar();

@@ -75,7 +75,7 @@
 				<!-- Tabs de produto -->
 				<ul class="tabs">
 					<li class="tab col s6"><a href="#principal-produto"
-						onclick="Materialize.fadeInImage('#principal-produto')"><i
+						onclick="abrirPrincipalProduto();  Materialize.fadeInImage('#principal-produto')"><i
 							class="material-icons red-text text-lighten-2">store</i>Principal</a></li>
 					<li class="tab col s6"><a href="#novo-produto"
 						onclick="abrirFormProduto(); Materialize.fadeInImage('#novo-produto')"><i
@@ -84,8 +84,11 @@
 				</ul>
 
 				<!-- Janela principal de produto -->
-				<div id="principal-produto" class="col s12 m12 l12 blue">Test
-					1</div>
+				<div id="principal-produto" class="col s12 m12 l12 blue">
+					<!-- Lista de produtos -->
+					<ul id="lista-produtos" class="collection">
+					</ul>
+				</div>
 
 				<!-- Janela de cadastro de produto -->
 				<div id="novo-produto" class="col s12 m12 l12">
@@ -109,6 +112,30 @@
 							<div class="row">
 								<!-- Formulário de cadastro de produto -->
 								<form id="form-produto" class="col s12 m12 l12">
+									<!-- Visualização da foto do produto -->
+									<div class="row">
+										<div class="col s12 m12 l12">
+											<img id="imagem-produto" class="responsive-img materialboxed">
+										</div>
+									</div>
+
+									<!-- Foto -->
+									<div class="row">
+										<div class="col s12 m12 l12">
+											<div class="file-field input-field">
+												<div class="btn cyan">
+													<span><i class="material-icons center white-text">add_a_photo</i></span>
+													<input id="foto" type="file" accept="image/*"
+														onChange="escolherFoto(this)">
+												</div>
+												<div class="file-path-wrapper">
+													<input class="file-path validate truncate" type="text"
+														placeholder="Escolha uma foto" required>
+												</div>
+											</div>
+										</div>
+									</div>
+
 									<!-- Nome do produto -->
 									<div class="row">
 										<div class="input-field col s12">
@@ -144,29 +171,14 @@
 										</div>
 									</div>
 
-									<!-- Fornecedor -->
+									<!-- Fornecedor e Cor -->
 									<div class="row">
-										<div class="input-field col s12 m12 l12">
+										<div class="input-field col s12 m9 l9">
 											<select id="select-fornecedor" name="fornecedor" required>
 											</select> <label>Fornecedor:</label>
 										</div>
-									</div>
 
-									<!-- Foto do produto e Cor -->
-									<div class="row">
-										<div class="col s6 m9 l9">
-											<div class="file-field input-field">
-												<div class="btn cyan">
-													<span>Foto</span> <input id="foto" type="file">
-												</div>
-												<div class="file-path-wrapper">
-													<input class="file-path validate truncate" type="text"
-														placeholder="Escolha uma foto" required>
-												</div>
-											</div>
-										</div>
-
-										<div class="col s6 m3 l3">
+										<div class="col s12 m3 l3">
 											<div class="input-field">
 												<input id="cor" name="cor" type="text" class="truncate"
 													maxlength="100"> <label for="cor">* Cor</label>
@@ -615,5 +627,8 @@
 	<script type="text/javascript"
 		src="resources/dedicated/js/administrador/mascara-loja.js"
 		charset="utf-8" defer></script>
+
+	<!-- Blob converter -->
+	<script src="//wzrd.in/standalone/blob-util@latest" defer></script>
 </body>
 </html>
