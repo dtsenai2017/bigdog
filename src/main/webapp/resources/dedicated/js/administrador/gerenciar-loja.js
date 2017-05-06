@@ -109,11 +109,21 @@ function abrirFormProduto() {
 
 	// console.log($('#select-fornecedor option').length);
 
-	// Limpando lista de categoria e *subcategoria
+	// Limpando lista de categoria e *subcategoria, fornecedor e componentes
+	// relacionados à 'foto'
 	$('#select-categoria').empty().html(' ');
 	$('#select-fornecedor').empty().html(' ');
 	$('#select-subcategoria').empty().html(' ');
-
+	$('#imagem-produto').attr('src','');
+	$('#foto').val('');
+	$('#pacote-foto').val('');
+	$('#pacote-foto').removeClass('validate');
+	$('#btn-foto').addClass('validate');
+	$('#btn-foto').removeClass('green');
+	$('#btn-foto').removeClass('red');
+	$('#btn-foto').removeClass('cyan');
+	$('#btn-foto').addClass('cyan');
+	
 	// Listando categorias para formulário
 	$
 			.getJSON({
@@ -165,15 +175,55 @@ function abrirFormProduto() {
 
 // Verifica se imagem foi selecionada
 $("#foto").bind("change", function() {
-	var selected_file_name = $(this).val();
-
+	// Atributos
+	var selectFile = $(this).val();
+	
 	// Verifica imagem selecionada
-	if (selected_file_name.length > 0) {
-		// Alterando cor de botão
-		$('#btn-foto').addClass('green');
+	if (selectFile.length > 0) {
+		// Atributos
+		var maxSizeFile = 5242880;
+		var sizeFileMB = parseInt(Math.floor(Math.log($(this)[0].files[0].size) / Math.log(1024)));
+		
+		// Verifica tamanho da foto (max:5mb-5242880ytes)
+		if($(this)[0].files[0].size < maxSizeFile ){
+			// Alterando cor de botão
+			$('#btn-foto').addClass('green');
+			
+			// Atribuindo valor para exibição de tamanho
+			$('#tamanho-foto').text(sizeFileMB + ' MB.');
 
-		// Método para alterar foto
-		escolherFoto();
+			// Método para alterar foto
+			escolherFoto();
+			
+			// Escolhendo foto do produto, caso seja selecionada
+			function escolherFoto() {
+				// Atributos
+				var file = $('#foto')[0].files[0];
+				var foto = lerFoto(file);
+
+				// Função para leitura de foto em bin
+				function lerFoto(file) {
+					// Atributo
+					var reader = new FileReader();
+
+					// Valor de callback
+					reader.onload = function(e) {
+						// Atribuindo imagem selecionada para tag de
+						// visualização
+						$('#imagem-produto').attr("src", e.target.result);
+						$('#imagem-produto').fadeIn(2400);
+					}
+					// Ler file
+					reader.readAsDataURL(file);
+				}
+			}
+		} else {
+			// Toast
+			Materialize.toast("Foto muito grande!", 2500);
+			
+			// Refresh em modal
+			abrirFormProduto();
+		}
 	} else {
 		// Retirando vizualização
 		$('#imagem-produto').attr("src", '');
@@ -185,31 +235,9 @@ $("#foto").bind("change", function() {
 		$('#btn-foto').removeClass('green');
 		$('#btn-foto').removeClass('cyan');
 		$('#btn-foto').addClass('red');
-	}
-
-	// Escolhendo foto do produto, caso seja selecionada
-	function escolherFoto() {
-		// Atributos
-		var file = $('#foto')[0].files[0];
-		var foto = lerFoto(file);
-
-		// Função para leitura de foto em bin
-		function lerFoto(file) {
-			// Atributo
-			var reader = new FileReader();
-			var resultArray = new Uint8Array(1024 * 1024 * 50);
-
-			// Valor de callback
-			reader.onload = function(e) {
-				resultArray = e.target.result;
-
-				// Atribuindo imagem selecionada para tag de visualização
-				$('#imagem-produto').attr("src", e.target.result);
-				$('#imagem-produto').fadeIn(2400);
-			}
-			// Ler file
-			reader.readAsDataURL(file);
-		}
+		
+		// Retirando valor de tamanho da foto
+		$('#tamanho-foto').text('');
 	}
 });
 
@@ -262,6 +290,9 @@ $("#form-produto").submit(function(e) {
 			success : function(s) {
 				// Mensagem para toast
 				mensagem = 'Produto inserido com sucesso!';
+				
+				// Refresh no formulário
+				abrirFormProduto();
 			},
 			error : function(e) {
 				// Mensagem para toast

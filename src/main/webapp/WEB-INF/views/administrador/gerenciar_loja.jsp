@@ -128,8 +128,16 @@
 													<input id="foto" type="file" accept="image/*">
 												</div>
 												<div class="file-path-wrapper">
-													<input class="file-path validate truncate" type="text"
-														placeholder="Escolha uma foto" required>
+													<input id="pacote-foto" class="file-path validate truncate"
+														type="text" placeholder="Escolha uma foto" required>
+												</div>
+												<div class="right-align truncate">
+													<span class="grey-text text-lighten-1"
+														style="font-size: 10px;"><i
+														class="material-icons grey-text text-lighten-1 tiny">error</i>
+														Tamanho máximo da foto: <b>5mb</b> </span> <br> <span
+														id="tamanho-foto" class="green-text text-lighten-2"
+														style="font-size: 11px;"></span>
 												</div>
 											</div>
 										</div>

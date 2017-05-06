@@ -43,8 +43,8 @@ public class Produto {
 	@Column(name = "data_vigencia", nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "pt-BR", timezone = "America/Sao_Paulo")
 	private Date dataVigencia;
-	@Column(nullable = false)
 	@Lob
+	@Column(nullable = false, length = 5242880)
 	private byte[] foto;
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_categoria")
