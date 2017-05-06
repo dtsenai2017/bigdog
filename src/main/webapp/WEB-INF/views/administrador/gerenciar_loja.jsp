@@ -84,10 +84,80 @@
 				</ul>
 
 				<!-- Janela principal de produto -->
-				<div id="principal-produto" class="col s12 m12 l12 blue">
+				<div id="principal-produto" class="col s12 m12 l12">
+					<!-- Linha espaçadora -->
+					<div class="row">
+						<div class="col s12 m12 l12"></div>
+					</div>
+
+					<!-- Barra de pesquisa de produto -->
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<nav class="cyan lighten-1 hoverable">
+							<div class="nav-wrapper">
+								<form>
+									<div class="input-field">
+										<input id="search-produto" type="search" class="truncate"
+											data-list="#lista-produto" onkeyup="buscar(this.id);"
+											placeholder="Nome, Marca ou Categoria."> <label
+											class="label-icon" for="search-produto"><i
+											class="material-icons">search</i></label><i class="material-icons">close</i>
+									</div>
+								</form>
+							</div>
+							</nav>
+						</div>
+					</div>
+
 					<!-- Lista de produtos -->
-					<ul id="lista-produtos" class="collection">
-					</ul>
+					<div class="row">
+						<div id="cx-lista-produtos" class="col s12 m12 l12">
+							<ul id="lista-produto" class="collection">
+							</ul>
+						</div>
+					</div>
+
+					<!-- Modal Produto -->
+					<div id="modal-produto" class="modal modal-fixed-footer">
+						<!-- Modal content -->
+						<div class="modal-content">
+							<!-- Botão fechar -->
+							<div class="row">
+								<div class="col s12 m12 l12">
+									<a class="modal-action modal-close right"><i
+										class="material-icons grey-text">close</i></a>
+								</div>
+							</div>
+
+							<!-- Imagem e Informações do produto -->
+							<div class="row">
+								<div class="col s12 m4 l4" align="center">
+									<img id="imagem-produto-selecionado"
+										class="responsive-img materialboxed">
+								</div>
+
+								<div class="col s12 m8 l8">
+									<!-- Título de informações do produto -->
+									<h5>Informações do Produto</h5>
+
+									<!-- divider -->
+									<div class="divider"></div>
+
+									<!-- Informações -->
+									<!-- ID do produto -->
+									<input id="idProduto" type="hidden">
+
+								</div>
+							</div>
+						</div>
+
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<a id="btn-excluir-produto" href="#!"
+								class="modal-action waves-effect waves-red btn-flat left"><i
+								class="material-icons left red-text">delete</i>Excluir Produto</a>
+						</div>
+					</div>
 				</div>
 
 				<!-- Janela de cadastro de produto -->
@@ -323,7 +393,7 @@
 					</div>
 					<!-- /.row -->
 
-					<!-- Lista de clientes -->
+					<!-- ícones para esconder ou mostrar lista de categorias -->
 					<div class="row">
 						<!-- Espaçador -->
 						<div id="espacador-btn" class="col s12 m12 l12"></div>

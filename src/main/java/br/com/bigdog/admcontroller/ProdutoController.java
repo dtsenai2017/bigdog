@@ -28,8 +28,6 @@ public class ProdutoController {
 	// Inserir ou alterar produto
 	@RequestMapping(value = "produto", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public void inserir(@RequestBody Produto produto) {
-		System.out.println(produto.toString());
-
 		// Verifica se produto ja é existente
 		if (produto.getIdProduto() == null) {
 			// Insere novo produto

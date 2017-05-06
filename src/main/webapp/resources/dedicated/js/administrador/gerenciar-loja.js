@@ -72,6 +72,14 @@ function esconderListaCategoria() {
 
 // Abrir tab principal de produtos
 function abrirPrincipalProduto() {
+	// Refresh na lista
+	refreshListaProduto();
+	
+	// Função para refresh de lista
+	function refreshListaProduto(){
+		$('#lista-produto').empty();
+	}
+	
 	// Populando lista de produtos
 	// Listando produtos
 	$.getJSON({
@@ -80,21 +88,61 @@ function abrirPrincipalProduto() {
 		success : function(produtos) {
 			// Populando Lista
 			$.each(produtos, function(index, produto) {
-				console.log(atob(produto.foto));
+				// console.log(atob(produto.foto));
 
 				// Linha de lista
 				var liProduto = '<li class="collection-item avatar">'
 						+ '<img src="' + atob(produto.foto)
-						+ '" class="circle">' + '<span class="title">'
-						+ produto.nome + '</span>' + '<p>' + produto.marca
-						+ '<br>' + produto.valor + '</p>'
-						+ '<a href="#" class="secondary-content">'
-						+ '<i class="material-icons">' + 'mode_edit'
+						+ '" class="circle">' + '<span class="title"><b>'
+						+ produto.nome + '</b>' 
+						+ '</span>' + '<p>'+ produto.categoria.nome
+						+ '<br>'+ produto.marca
+						+ '<br>'+'R$ '+ produto.valor + ' </p>'
+						+ '<a href="#modal-produto" onclick="abrirModalProduto('
+						+ produto.idProduto + ');" class="secondary-content">'
+						+ '<i class="material-icons cyan-text">' + 'zoom_in'
 						+ '</i></a></li>';
 
 				// Populando lista
-				$('#lista-produtos').append(liProduto);
+				$('#lista-produto').append(liProduto);
 			});
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
+}
+
+// Modal para editar produto
+$('#modal-produto').modal({
+	dismissible : true, // Modal can be dismissed by clicking outside of the
+	complete : function() {
+		// Quando modal for fechado, recarrega lista de categorias
+		abrirPrincipalProduto();
+	} // Callback for Modal close
+});
+
+// Abrir modal para produto
+function abrirModalProduto(idProduto){
+	// Limpar campos de modal
+	refreshModalProduto();
+	
+	// Limpando campos de modal
+	function refreshModalProduto(){
+		$('#imagem-produto-selecionado').attr('src', '');
+	}
+	
+	// Obtendo informações do produto
+	// Listando produto (id)
+	$.getJSON({
+		url : "adm/produto/"+ idProduto,
+		type : "GET",
+		success : function(produto) {
+			// Atribuindo imagem
+			$('#imagem-produto-selecionado').attr('src', atob(produto.foto));
+			
+			// Atribuindo ID de produto
+			$('#idProduto').val(produto.idProduto);
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
@@ -123,6 +171,10 @@ function abrirFormProduto() {
 	$('#btn-foto').removeClass('red');
 	$('#btn-foto').removeClass('cyan');
 	$('#btn-foto').addClass('cyan');
+	$('#tamanho-foto').text('');
+	
+	// Limpando campos de formulário
+	$('#form-produto').find('input, textarea').val("");
 	
 	// Listando categorias para formulário
 	$
@@ -310,6 +362,63 @@ $("#form-produto").submit(function(e) {
 	reader.readAsDataURL(file);
 });
 
+// Excluir Produto
+$("#btn-excluir-produto").click(function() {
+	// Atributo
+	var mensagem;
+	var idProduto = $('#idProduto').val();
+
+	// Confirmar exclusão
+	$.confirm({
+		title : 'Exclusão!',
+		animation : 'top',
+		useBootstrap : false,
+		theme : 'material',
+		boxWidth : '50%',
+		content : 'Deseja excluir produto?',
+		buttons : {
+			// CONFIRMAR
+			confirm : {
+				text : 'Excluir',
+				btnClass : 'btn-red',
+				action : function() {
+					// Excluindo
+					$.ajax({
+						url : 'adm/produto/' + idProduto,
+						type : 'DELETE',
+						success : function(result) {
+							// Atribundo valor para mensagem de toast
+							mensagem = "Produto excluído com sucesso!";
+
+							// Toast
+							Materialize.toast(mensagem, 2800);
+
+							// Fechando modal
+							$('#modal-produto').modal('close');
+
+							// Ir para principal produto
+							abrirPrincipalProduto();
+						},
+						error : function(e) {
+							// Verifica erro
+							mensagem = "Ops, houve um problema!";
+
+							// Atribundo valor para mensagem de toast
+							Materialize.toast(mensagem, 2800);
+						}
+					});
+				}
+			},
+			cancel : {
+				// CANCELAR
+				text : 'Cancelar',
+				action : function() {
+				}
+			}
+		}
+	});
+});
+
 // Abrir subcategorias de categoria 'selecionada' no select do formulário
 $('#select-categoria').change(
 		function() {
@@ -359,9 +468,6 @@ function abrirModalCategorias() {
 		$('#btn-mostrar-categorias').fadeIn(100);
 		$('#btn-esconder-categorias').hide();
 	}
-
-	// Focus no input
-	$('#nomeCategoria').focus();
 
 	// Carregar categorias
 	$.getJSON({
@@ -583,8 +689,15 @@ $("#btn-excluir-categoria").click(function() {
 							abrirModalCategorias();
 						},
 						error : function(e) {
+							// Verifica erro
+							if(e.status == 500){
+								mensagem = "Não é possível excluir categoria pois há produto(s) vinculado(s) !";
+							} else {
+								mensagem = "Ops, houve um problema!";
+							}
+
 							// Atribundo valor para mensagem de toast
-							Materialize.toast("Ops, houve um problema!");
+							Materialize.toast(mensagem, 2800);
 						}
 					});
 				}
@@ -704,8 +817,6 @@ $("#form-fornecedor")
 									.find('select[name="uf"]').val()
 						} ]
 					}
-
-					console.log(fornecedor);
 
 					// alert($("#form-fornecedor :input[name='cidade']").val());
 

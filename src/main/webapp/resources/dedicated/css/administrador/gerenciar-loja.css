@@ -20,6 +20,26 @@
 	display: none;
 }
 
+/* Lista de produtos */
+#lista-produto li {
+	display: none;
+}
+
+/* Hover na lista de produtos */
+#lista-produto li:hover {
+	transition: 0.4s;
+	color: white;
+	background-color: #EE6363;
+}
+
+/* Modal para produto */
+#modal-produto {
+	width: 80% !important;
+	height: 80% !important;
+	max-width: 100% !important;
+	max-height: 100% !important;
+}
+
 /* Modal editar categoria */
 #modal-editar-categoria {
 	height: 90% !important;
