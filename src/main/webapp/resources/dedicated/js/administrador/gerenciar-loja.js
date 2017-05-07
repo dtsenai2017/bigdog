@@ -690,7 +690,7 @@ $("#btn-excluir-categoria").click(function() {
 						},
 						error : function(e) {
 							// Verifica erro
-							if(e.status == 500){
+							if(e.status == 403){
 								mensagem = "Não é possível excluir categoria pois há produto(s) vinculado(s) !";
 							} else {
 								mensagem = "Ops, houve um problema!";
@@ -745,8 +745,12 @@ function excluirSubcategoria(idSubCategoria) {
 							abrirEditarCategoria(idCategoria);
 						},
 						error : function(e) {
-							// Atribundo valor para mensagem de toast
-							mensagem = "Ops, houve um problema!";
+							// Verifica erro
+							if(e.status == 403){
+								mensagem = "Não é possível excluir sub-categoria pois há produto(s) vinculado(s) !";
+							} else {
+								mensagem = "Ops, houve um problema!";
+							}
 						},
 						complete : function() {
 							// Toast

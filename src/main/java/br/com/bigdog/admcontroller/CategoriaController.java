@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.ConstraintViolationException;
 
 import org.hibernate.Hibernate;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -110,6 +111,9 @@ public class CategoriaController {
 		try {
 			categoriaDAO.excluir(idCategoria);
 			return ResponseEntity.ok().build();
+		} catch (DataIntegrityViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -123,6 +127,9 @@ public class CategoriaController {
 		try {
 			subCategoriaDAO.excluir(idSubCategoria);
 			return ResponseEntity.ok().build();
+		} catch (DataIntegrityViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.FORBIDDEN);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);

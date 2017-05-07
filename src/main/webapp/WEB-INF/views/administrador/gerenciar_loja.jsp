@@ -93,7 +93,7 @@
 					<!-- Barra de pesquisa de produto -->
 					<div class="row">
 						<div class="col s12 m12 l12">
-							<nav class="cyan lighten-1 hoverable">
+							<nav class="brown lighten-2 hoverable">
 							<div class="nav-wrapper">
 								<form>
 									<div class="input-field">
@@ -118,7 +118,7 @@
 					</div>
 
 					<!-- Modal Produto -->
-					<div id="modal-produto" class="modal modal-fixed-footer">
+					<div id="modal-produto" class="modal modal-fixed-footer white">
 						<!-- Modal content -->
 						<div class="modal-content">
 							<!-- Botão fechar -->
@@ -152,7 +152,7 @@
 						</div>
 
 						<!-- Modal footer -->
-						<div class="modal-footer">
+						<div class="modal-footer white">
 							<a id="btn-excluir-produto" href="#!"
 								class="modal-action waves-effect waves-red btn-flat left"><i
 								class="material-icons left red-text">delete</i>Excluir Produto</a>
@@ -250,12 +250,12 @@
 
 									<!-- Fornecedor e Cor -->
 									<div class="row">
-										<div class="input-field col s12 m9 l9">
+										<div class="input-field col s12 m8 l8">
 											<select id="select-fornecedor" name="fornecedor" required>
 											</select> <label>Fornecedor:</label>
 										</div>
 
-										<div class="col s12 m3 l3">
+										<div class="col s12 m4 l4">
 											<div class="input-field">
 												<input id="cor" name="cor" type="text" class="truncate"
 													maxlength="100"> <label for="cor">* Cor</label>
@@ -310,8 +310,7 @@
 									<!-- Botão Cadastrar -->
 									<div class="row">
 										<div class="col s12 m12 l12">
-											<button
-												class="btn waves-effect waves-light right red lighten-2"
+											<button class="btn waves-effect waves-light right red"
 												type="submit" name="action">
 												Cadastrar <i class="material-icons right">add</i>
 											</button>
@@ -371,6 +370,8 @@
 
 							<!-- Espaçador mobile -->
 							<div id="espacador-btn" class="col s12 hide-on-med-and-up"></div>
+
+
 						</div>
 
 						<!-- Barra de pesquisa de categoria -->
@@ -393,11 +394,18 @@
 					</div>
 					<!-- /.row -->
 
+					<!-- Observação sobre exclusão de categoria -->
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<p>
+								Só é possível excluir categoria(s) ou sub-categoria(s) se a
+								mesma não estiver vinculada a <b>nenhum</b> produto.
+							</p>
+						</div>
+					</div>
+
 					<!-- ícones para esconder ou mostrar lista de categorias -->
 					<div class="row">
-						<!-- Espaçador -->
-						<div id="espacador-btn" class="col s12 m12 l12"></div>
-
 						<!-- Mostrar e esconder lista de categorias -->
 						<div class="col s12 m12 l12 right-align">
 							<!-- Mostrar todas categorias -->

@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,10 +49,10 @@ public class Produto {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "id_sub_categoria")
 	private SubCategoria subCategoria;
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_fornecedor")
 	private Fornecedor fornecedor;
 
