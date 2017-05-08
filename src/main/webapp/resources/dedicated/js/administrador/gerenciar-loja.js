@@ -118,19 +118,14 @@ $('#modal-produto').modal({
 	dismissible : true, // Modal can be dismissed by clicking outside of the
 	complete : function() {
 		// Quando modal for fechado, recarrega lista de categorias
-		abrirPrincipalProduto();
+// abrirPrincipalProduto();
 	} // Callback for Modal close
 });
 
 // Abrir modal para produto
 function abrirModalProduto(idProduto){
-	// Limpar campos de modal
-	refreshModalProduto();
-	
-	// Limpando campos de modal
-	function refreshModalProduto(){
-		$('#imagem-produto-selecionado').attr('src', '');
-	}
+	// Fechando card reveal
+	$('#titulo-card-reveal').click();
 	
 	// Obtendo informações do produto
 	// Listando produto (id)
@@ -138,11 +133,31 @@ function abrirModalProduto(idProduto){
 		url : "adm/produto/"+ idProduto,
 		type : "GET",
 		success : function(produto) {
-			// Atribuindo imagem
+			// Atribuindo valores...
+			// Imagem, id de produto, nome do produto e descrição do
+			// produto
 			$('#imagem-produto-selecionado').attr('src', atob(produto.foto));
-			
-			// Atribuindo ID de produto
 			$('#idProduto').val(produto.idProduto);
+			$('#nomeProduto').text(produto.nome);
+			$('#descricaoProduto').text(produto.descricao);
+			
+			// Atribuindo marca, categoria e subcategoria
+			$('#marcaProduto').text(produto.marca);
+			$('#categoriaProduto').text(produto.categoria.nome);
+			$('#subcategoriaProduto').text(produto.subCategoria.nome);
+			
+			// Cor e tamanho
+			$('#corProduto').text(produto.cor);
+			$('#tamanhoProduto').text(produto.tamanho);
+			
+			// Quantidade de produto, de estoque e o valor do produto
+			$('#quantidadeProduto').text(produto.quantidade);
+			$('#qtdEstoqueProduto').text(produto.qtdEstoque);
+			$('#valorProduto').text('R$ '+ produto.valor);
+			
+			// Fornecedor
+			$('#fornecedorProduto').text(produto.fornecedor.nomeFantasia);
+			$('#dataVigenciaProduto').text($.datepicker.formatDate('dd/mm/yy', new Date(produto.dataVigencia)));
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
@@ -150,12 +165,155 @@ function abrirModalProduto(idProduto){
 	});
 }
 
+// Refresh em Card Reveal
+function limparCardReveal(){
+	// Atribuindo valor de imagem
+	$('#imagem-produtoSelecionado').attr('src','');
+	$('#pacote-fotoProduto').val('');
+	$('#pacote-fotoProduto').removeClass('validate');
+	$('#pacote-fotoProduto').addClass('validate');
+	
+	// Alterando cor de botão
+	$('#btn-fotoProduto').removeClass('green');
+	$('#btn-fotoProduto').removeClass('red');
+	$('#btn-fotoProduto').addClass('cyan');
+	
+	// Retirando valor de tamanho da foto
+	$('#tamanho-fotoProduto').text('');
+	
+	// Escondendo botão de alteração
+	$('#btn-alterar-foto').hide();
+}
+
+// Visualizar foto de alteração
+// Verifica se imagem foi selecionada
+$("#fotoProduto").bind("change", function() {
+	// Atributos
+	var selectFile = $(this).val();
+	
+	// Verifica imagem selecionada
+	if (selectFile.length > 0) {
+		// Atributos
+		var maxSizeFile = 5242880;
+		var sizeFileMB = parseInt(Math.floor(Math.log($(this)[0].files[0].size) / Math.log(1024)));
+		
+		// Verifica tamanho da foto (max:5mb-5242880ytes)
+		if($(this)[0].files[0].size < maxSizeFile ){
+			// Alterando cor de botão
+			$('#btn-fotoProduto').addClass('green');
+			
+			// Atribuindo valor para exibição de tamanho
+			$('#tamanho-fotoProduto').text(sizeFileMB + ' MB.');
+
+			// Método para alterar foto
+			escolherFoto();
+			
+			// Escolhendo foto do produto, caso seja selecionada
+			function escolherFoto() {
+				// Atributos
+				var file = $('#fotoProduto')[0].files[0];
+				var foto = lerFoto(file);
+
+				// Função para leitura de foto em bin
+				function lerFoto(file) {
+					// Atributo
+					var reader = new FileReader();
+
+					// Valor de callback
+					reader.onload = function(e) {
+						// Atribuindo imagem selecionada para tag de
+						// visualização
+						$('#imagem-produtoSelecionado').attr("src", e.target.result);
+						$('#imagem-produtoSelecionado').fadeIn(2400);
+					}
+					// Ler file
+					reader.readAsDataURL(file);
+				}
+			}
+			
+			// Mostrando botão de alteração
+			$('#btn-alterar-foto').fadeIn(600);
+		} else {
+			// Toast
+			Materialize.toast("Foto muito grande!", 2500);
+		}
+	} else {
+		// Retirando vizualização
+		$('#imagem-produtoSelecionado').attr("src", '');
+
+		// Toast
+		Materialize.toast("Imagem não selecionada", 2500);
+
+		// Alterando cor de botão
+		$('#btn-fotoProduto').removeClass('green');
+		$('#btn-fotoProduto').removeClass('cyan');
+		$('#btn-fotoProduto').addClass('red');
+		
+		// Retirando valor de tamanho da foto
+		$('#tamanho-fotoProduto').text('');
+		
+		// Escondendo botão de alteração
+		$('#btn-alterar-foto').hide();
+	}
+});
+
+// Alterando foto
+$("#btn-alterar-foto").click(function() {
+	// Atributos para leitura de file
+	var file = $('#fotoProduto')[0].files[0];
+	var reader = new FileReader();
+	var mensagem;
+	
+	// Id e objeto que será alterado
+	var idProduto = $('#idProduto').val();
+	var produto = {
+			foto
+	}
+	
+	// Retornando valor de conversão e fazendo requisição
+	reader.onload = function(e) {
+		// Atributo para foto em BLOB (byteArray[])
+		var fotoByte = btoa(e.target.result);
+
+		// Atribuindo valor de foto para produto
+		produto.foto = fotoByte; 
+		
+		// Cadastrando produto
+		$.ajax({
+			type : "PUT",
+			url : "adm/produtoImagem/"+ idProduto,
+			data : JSON.stringify(produto),
+			contentType : "application/json; charset=utf-8",
+			success : function(s) {
+				// Mensagem para toast
+				mensagem ="Foto alterada!";
+				
+				// Fechando card reveal
+				$('#titulo-card-reveal').click();
+				
+				// Abrir modal de produto
+				abrirModalProduto(idProduto);
+			},
+			error : function(e) {
+				// Mensagem para toast
+				mensagem = 'Ops, houve um problema!';
+				console.log(e);
+			},
+			complete : function() {
+				// Toast
+				Materialize.toast(mensagem, 2800);
+			}
+		});
+	}
+
+	// Conversão de file para blob
+	reader.readAsDataURL(file);
+});
+
 // Abrir formulário de produto
 function abrirFormProduto() {
 	// Abrindo janela para cadastro de produto
-	$('#janela-novo-produto').fadeIn(1500);
-
-	// console.log($('#select-fornecedor option').length);
+	$('#novo-produto').fadeIn(1500);
 
 	// Limpando lista de categoria e *subcategoria, fornecedor e componentes
 	// relacionados à 'foto'
@@ -166,7 +324,7 @@ function abrirFormProduto() {
 	$('#foto').val('');
 	$('#pacote-foto').val('');
 	$('#pacote-foto').removeClass('validate');
-	$('#btn-foto').addClass('validate');
+	$('#pacote-foto').addClass('validate');
 	$('#btn-foto').removeClass('green');
 	$('#btn-foto').removeClass('red');
 	$('#btn-foto').removeClass('cyan');
@@ -597,7 +755,8 @@ function abrirEditarCategoria(idCategoria) {
 						+ '<a href="#!" onclick="excluirSubcategoria('
 						+ subcategoria.idSubCategoria + ')"'
 						+ 'class="secondary-content">'
-						+ '<i class="material-icons">' + 'delete'
+						+ '<i class="material-icons '
+						+ 'red-text text-lighten-2">' + 'delete'
 						+ '</i></a></div></li>';
 
 				// Populando lista

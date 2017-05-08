@@ -10,7 +10,7 @@
 
 <!-- CSS dedicado -->
 <link rel="stylesheet"
-	href="resources/dedicated/css/administrador/administrador.css">
+	href="resources/dedicated/css/administrador/index-administrador.css">
 </head>
 <body>
 	<!--  import navbar -->
@@ -137,6 +137,9 @@
 		<!-- /.swipe-agenda -->
 	</div>
 	<!-- /.row --> <!-- /.container --> </main>
+
+	<!-- import footer -->
+	<c:import url="component/footer.jsp" />
 
 	<!-- Script's dedicado -->
 	<!-- JS com AJAX dedicado -->

@@ -11,8 +11,7 @@
 	rel="stylesheet">
 
 <!-- Materialize CSS min. -->
-<link rel="stylesheet"
-	href="resources/materialize/css/materialize.css">
+<link rel="stylesheet" href="resources/materialize/css/materialize.css">
 
 <!-- JQuery Confirm CSS  -->
 <link rel="stylesheet" href="resources/jquery/css/jquery-confirm.css">
@@ -32,11 +31,14 @@
 <script type="text/javascript" src="resources/jquery/jquery-confirm.js"
 	defer></script>
 
+<!-- JQuery UI min -->
+<script src="resources/jquery/jquery-ui.min.js" defer></script>
+
 <!-- JQuery Mask  -->
 <script type="text/javascript" src="resources/jquery/jquery.mask.js"
 	defer></script>
 
-<!-- Materialize JS min. -->
+<!-- Materialize min. -->
 <script type="text/javascript"
 	src="resources/materialize/js/materialize.min.js" defer></script>
 </head>

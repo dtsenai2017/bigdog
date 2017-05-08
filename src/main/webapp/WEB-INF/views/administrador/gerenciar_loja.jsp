@@ -17,20 +17,23 @@
 	<c:import url="component/navbar.jsp" />
 
 	<!-- main - container principal -->
+	<main>
 	<div class="container">
 		<!-- Descrição -->
 		<div class="row">
-			<!-- Section -->
-			<div class="section">
-				<!-- Título -->
-				<h5 class="left-align">Gerenciar Loja</h5>
+			<div class="col s12 m12 l12">
+				<!-- Section -->
+				<div class="section">
+					<!-- Título -->
+					<h5 class="left-align">Gerenciar Loja</h5>
 
-				<!-- Subtítulo -->
-				<p class="left-align grey-text text lighten-1">Gerencie sua loja
-					com simplicidade e facilidade.</p>
+					<!-- Subtítulo -->
+					<p class="left-align grey-text text lighten-1">Gerencie sua
+						loja com simplicidade e facilidade.</p>
 
-				<!-- divider -->
-				<div class="divider"></div>
+					<!-- divider -->
+					<div class="divider"></div>
+				</div>
 			</div>
 		</div>
 
@@ -84,7 +87,7 @@
 				</ul>
 
 				<!-- Janela principal de produto -->
-				<div id="principal-produto" class="col s12 m12 l12">
+				<div id="principal-produto">
 					<!-- Linha espaçadora -->
 					<div class="row">
 						<div class="col s12 m12 l12"></div>
@@ -129,200 +132,405 @@
 								</div>
 							</div>
 
-							<!-- Imagem e Informações do produto -->
+							<!-- Imagem, nome e descrição em um card (Alteração dos mesmos também) -->
 							<div class="row">
 								<div class="col s12 m4 l4" align="center">
-									<img id="imagem-produto-selecionado"
-										class="responsive-img materialboxed">
+									<!-- Card -->
+									<div class="card medium hoverable">
+										<!-- Imagem -->
+										<div class="card-image">
+											<img id="imagem-produto-selecionado" class="materialboxed">
+										</div>
+
+										<!-- Content do Card com nome e descrição de produto -->
+										<div class="card-content">
+											<span id="nomeProduto" onclick="limparCardReveal();"
+												class="card-title activator truncate cyan-text"></span>
+
+											<p id="descricaoProduto" class="truncate"></p>
+										</div>
+
+										<!-- Action no card, para alteração de imagem. -->
+										<div class="card-reveal">
+											<!-- Título de alteração de foto -->
+											<span id="titulo-card-reveal"
+												class="card-title grey-text text-darken-4">Alterar
+												imagem<i class="material-icons right">close</i>
+											</span>
+
+											<!-- br -->
+											<br>
+
+											<!-- Visualização da foto do produto -->
+											<div class="row">
+												<div class="col s12 m12 l12" align="center">
+													<img id="imagem-produtoSelecionado"
+														class="responsive-img materialboxed">
+												</div>
+											</div>
+
+											<!-- Formulário para alteração de imagem -->
+											<!-- Foto -->
+											<div class="row">
+												<div class="col s12 m12 l12">
+													<div class="file-field input-field">
+														<div id="btn-fotoProduto" class="btn cyan">
+															<span><i class="material-icons center white-text">add_a_photo</i></span>
+															<input id="fotoProduto" type="file" accept="image/*">
+														</div>
+														<div class="file-path-wrapper">
+															<input id="pacote-fotoProduto"
+																class="file-path validate truncate" type="text"
+																placeholder="Escolha uma foto" required>
+														</div>
+														<div class="right-align truncate">
+															<span class="grey-text text-lighten-1"
+																style="font-size: 10px;"><i
+																class="material-icons grey-text text-lighten-1 tiny">error</i>
+																Tamanho máximo da foto: <b>5mb</b> </span> <br> <span
+																id="tamanho-fotoProduto"
+																class="green-text text-lighten-2"
+																style="font-size: 11px;"></span>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<!-- Botão alterar imagem -->
+											<div class="row">
+												<div class="col s12 m12 l12">
+													<a id="btn-alterar-foto" href="#!"
+														class="waves-effect btn-flat center">Alterar Foto</a>
+												</div>
+											</div>
+
+										</div>
+										<!-- /.card-reveal -->
+									</div>
+									<!-- /.card -->
 								</div>
+								<!-- /.col -->
 
+								<!-- Informações do produto -->
 								<div class="col s12 m8 l8">
-									<!-- Título de informações do produto -->
-									<h5>Informações do Produto</h5>
+									<!-- Título e botão para alteração de produto -->
+									<div class="row">
+										<div class="col s12 m12 l12">
+											<h5 align="left">Informações do produto</h5>
 
-									<!-- divider -->
-									<div class="divider"></div>
+											<!-- divider -->
+											<div class="divider"></div>
+										</div>
+									</div>
 
-									<!-- Informações -->
-									<!-- ID do produto -->
+									<!-- ID de produto -->
 									<input id="idProduto" type="hidden">
 
+									<!-- Marca, categoria e subcategoria -->
+									<div class="row">
+										<div class="col s12 m6 l6">
+											<h6>
+												<b>Marca</b>
+											</h6>
+
+											<p id="marcaProduto"></p>
+										</div>
+
+										<div class="col s12 m3 l3">
+											<h6>
+												<b>Categoria</b>
+											</h6>
+
+											<p id="categoriaProduto"></p>
+										</div>
+
+										<div class="col s12 m3 l3">
+											<h6>
+												<b>Subcategoria</b>
+											</h6>
+
+											<p id="subcategoriaProduto"></p>
+										</div>
+									</div>
+
+
+									<!-- Cor, Tamanho e Quantidade -->
+									<div class="row">
+										<div class="col s12 m6 l6">
+											<h6>
+												<b>Cor do produto</b>
+											</h6>
+
+											<p id="corProduto"></p>
+										</div>
+
+										<div class="col s12 m3 l3">
+											<h6>
+												<b>Tamanho</b>
+											</h6>
+
+											<p id="tamanhoProduto"></p>
+										</div>
+
+										<div class="col s12 m3 l3">
+											<h6>
+												<b>Qtd. do produto</b>
+											</h6>
+
+											<p id="quantidadeProduto"></p>
+										</div>
+									</div>
+
+									<!-- Quantidade de estoque, valor e data de vigência -->
+									<div class="row">
+										<div class="col s12 m6 l6">
+											<h6>
+												<b>Qtd. no estoque</b>
+											</h6>
+
+											<p id="qtdEstoqueProduto"></p>
+										</div>
+
+										<div class="col s12 m3 l3">
+											<h6>
+												<b>Valor</b>
+											</h6>
+
+											<p id="valorProduto"></p>
+										</div>
+
+										<div class="col s12 m3 l3">
+											<h6>
+												<b>Data de vigência</b>
+											</h6>
+
+											<p id="dataVigenciaProduto"></p>
+										</div>
+									</div>
+
+									<!-- Fornecedor e botão para alterar produto -->
+									<div class="row">
+										<div class="col s12 m7 l7 truncate">
+											<h6>
+												<b>Fornecedor</b>
+											</h6>
+
+											<p id="fornecedorProduto"></p>
+										</div>
+
+										<div class="col s12 m5 l5 center">
+											<div class="valign-wrapper">
+												<p>
+													<button id="btn-alterar-produto"
+														class="btn waves-effect waves-light cyan truncate">
+														<i class="material-icons green-text text-lighten-4 left">mode_edit</i>
+														Alterar
+													</button>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /.col -->
+							</div>
+							<!-- /.row -->
+
+							<!-- Observações -->
+							<div class="row">
+								<div class="col s12 m12 l12">
+									<!-- Título para observações -->
+									<h6>
+										<b>Observações</b>
+									</h6>
+
+									<!-- Descrição de card -->
+									<p align="left" class="grey-text text-darken-1">
+										Para alterar a imagem do produto, clique no <b>nome do
+											produto</b>. Para alterar outras informações, clique no <b>botão
+										</b> ALTERAR.
+									</p>
+
+									<!-- Descrição de alteração -->
+									<p align="left" class="grey-text text-darken-1">
+										Produtos alterados não afetam dados dos mesmos em compras <b>já
+											realizadas</b>.
+									</p>
 								</div>
 							</div>
 						</div>
+						<!-- /.modal-content -->
 
 						<!-- Modal footer -->
 						<div class="modal-footer white">
-							<a id="btn-excluir-produto" href="#!"
-								class="modal-action waves-effect waves-red btn-flat left"><i
-								class="material-icons left red-text">delete</i>Excluir Produto</a>
+							<!-- Botão para excluir produto -->
+							<button id="btn-excluir-produto"
+								class="btn-flat waves-effect waves-red left">
+								<i class="material-icons left red-text">delete</i> Excluir
+								Produto
+							</button>
 						</div>
 					</div>
 				</div>
 
 				<!-- Janela de cadastro de produto -->
-				<div id="novo-produto" class="col s12 m12 l12">
+				<div id="novo-produto">
 					<!-- br -->
 					<br>
 
-					<!-- Janela de cadastro de produto -->
-					<div id="janela-novo-produto" class="col s12 m12 l12">
-						<!-- Título de janela -->
-						<h5 align="center" class="grey-text text-grey">Cadastrar um
-							novo produto</h5>
+					<!-- Título de janela -->
+					<h5 align="center" class="grey-text text-grey">Cadastrar um
+						novo produto</h5>
 
-						<!-- divider -->
-						<div class="divider"></div>
+					<!-- divider -->
+					<div class="divider"></div>
 
-						<!-- br -->
-						<br>
+					<!-- br -->
+					<br>
 
-						<!-- Formulário de cadastro -->
-						<div class="container">
-							<div class="row">
-								<!-- Formulário de cadastro de produto -->
-								<form id="form-produto" class="col s12 m12 l12" method="post">
-									<!-- Visualização da foto do produto -->
-									<div class="row">
-										<div class="col s12 m12 l12" align="center">
-											<img id="imagem-produto" class="responsive-img materialboxed">
-										</div>
+					<!-- Formulário de cadastro -->
+					<div class="container">
+						<div class="row">
+							<!-- Formulário de cadastro de produto -->
+							<form id="form-produto" class="col s12 m12 l12" method="post">
+								<!-- Visualização da foto do produto -->
+								<div class="row">
+									<div class="col s12 m12 l12" align="center">
+										<img id="imagem-produto" class="responsive-img materialboxed">
 									</div>
+								</div>
 
-									<!-- Foto -->
-									<div class="row">
-										<div class="col s12 m12 l12">
-											<div class="file-field input-field">
-												<div id="btn-foto" class="btn cyan">
-													<span><i class="material-icons center white-text">add_a_photo</i></span>
-													<input id="foto" type="file" accept="image/*">
-												</div>
-												<div class="file-path-wrapper">
-													<input id="pacote-foto" class="file-path validate truncate"
-														type="text" placeholder="Escolha uma foto" required>
-												</div>
-												<div class="right-align truncate">
-													<span class="grey-text text-lighten-1"
-														style="font-size: 10px;"><i
-														class="material-icons grey-text text-lighten-1 tiny">error</i>
-														Tamanho máximo da foto: <b>5mb</b> </span> <br> <span
-														id="tamanho-foto" class="green-text text-lighten-2"
-														style="font-size: 11px;"></span>
-												</div>
+								<!-- Foto -->
+								<div class="row">
+									<div class="col s12 m12 l12">
+										<div class="file-field input-field">
+											<div id="btn-foto" class="btn cyan">
+												<span><i class="material-icons center white-text">add_a_photo</i></span>
+												<input id="foto" type="file" accept="image/*">
+											</div>
+											<div class="file-path-wrapper">
+												<input id="pacote-foto" class="file-path validate truncate"
+													type="text" placeholder="Escolha uma foto" required>
+											</div>
+											<div class="right-align truncate">
+												<span class="grey-text text-lighten-1"
+													style="font-size: 10px;"><i
+													class="material-icons grey-text text-lighten-1 tiny">error</i>
+													Tamanho máximo da foto: <b>5mb</b> </span> <br> <span
+													id="tamanho-foto" class="green-text text-lighten-2"
+													style="font-size: 11px;"></span>
 											</div>
 										</div>
 									</div>
+								</div>
 
-									<!-- Nome do produto -->
-									<div class="row">
-										<div class="input-field col s12">
-											<input id="nome" name="nome" type="text" maxlength="100"
-												required> <label for="nome">Nome do produto</label>
-										</div>
+								<!-- Nome do produto -->
+								<div class="row">
+									<div class="input-field col s12">
+										<input id="nome" name="nome" type="text" maxlength="100"
+											required> <label for="nome">Nome do produto</label>
+									</div>
+								</div>
+
+								<!-- Marca -->
+								<div class="row">
+									<div class="input-field col s12 m12 l12">
+										<input id="marca" name="marca" type="text" class="truncate"
+											maxlength="100" required> <label for="marca">Marca</label>
+									</div>
+								</div>
+
+								<!-- Categoria, Subcategoria e adicionar categoria -->
+								<div class="row">
+									<div class="input-field col s12 m5 l5">
+										<select id="select-categoria" name="categoria" required>
+										</select> <label>Categoria:</label>
 									</div>
 
-									<!-- Marca -->
-									<div class="row">
-										<div class="input-field col s12 m12 l12">
-											<input id="marca" name="marca" type="text" class="truncate"
-												maxlength="100" required> <label for="marca">Marca</label>
-										</div>
+									<div class="input-field col s12 m5 l5">
+										<select id="select-subcategoria" name="subcategoria">
+										</select> <label>* Subcategoria:</label>
 									</div>
 
-									<!-- Categoria, Subcategoria e adicionar categoria -->
-									<div class="row">
-										<div class="input-field col s12 m5 l5">
-											<select id="select-categoria" name="categoria" required>
-											</select> <label>Categoria:</label>
-										</div>
+									<div class="col s12 m2 l2 center">
+										<a href="#modal-editar-categoria"
+											onclick="abrirModalCategorias();"><i
+											class="material-icons left-align">list</i>Categoria</a>
+									</div>
+								</div>
 
-										<div class="input-field col s12 m5 l5">
-											<select id="select-subcategoria" name="subcategoria">
-											</select> <label>* Subcategoria:</label>
-										</div>
-
-										<div class="col s12 m2 l2 center">
-											<a href="#modal-editar-categoria"
-												onclick="abrirModalCategorias();"><i
-												class="material-icons left-align">list</i>Categoria</a>
-										</div>
+								<!-- Fornecedor e Cor -->
+								<div class="row">
+									<div class="input-field col s12 m8 l8">
+										<select id="select-fornecedor" name="fornecedor" required>
+										</select> <label>Fornecedor:</label>
 									</div>
 
-									<!-- Fornecedor e Cor -->
-									<div class="row">
-										<div class="input-field col s12 m8 l8">
-											<select id="select-fornecedor" name="fornecedor" required>
-											</select> <label>Fornecedor:</label>
-										</div>
-
-										<div class="col s12 m4 l4">
-											<div class="input-field">
-												<input id="cor" name="cor" type="text" class="truncate"
-													maxlength="100"> <label for="cor">* Cor</label>
-											</div>
+									<div class="col s12 m4 l4">
+										<div class="input-field">
+											<input id="cor" name="cor" type="text" class="truncate"
+												maxlength="100"> <label for="cor">* Cor</label>
 										</div>
 									</div>
+								</div>
 
-									<!-- Tamanho e Quantidade -->
-									<div class="row">
-										<div class="input-field  col s5 l5 m5">
-											<input id="tamanho" name="tamanho" type="text"
-												class="truncate" maxlength="100"> <label
-												for="tamanho">* Tam.</label>
-										</div>
-
-										<div class="input-field  col s7 l7 m7">
-											<input id="quantidade" name="quantidade" type="text"
-												class="truncate" maxlength="100" required> <label
-												for="quantidade">Qtde. do produto</label>
-										</div>
+								<!-- Tamanho e Quantidade -->
+								<div class="row">
+									<div class="input-field  col s5 l5 m5">
+										<input id="tamanho" name="tamanho" type="text"
+											class="truncate" maxlength="100"> <label
+											for="tamanho">* Tam.</label>
 									</div>
 
-									<!-- Valor, Quantidade de estoque e Data de Vigência-->
-									<div class="row">
-										<div class="input-field  col s4 l4 m4">
-											<input id="valor" name="valor" type="text" class="truncate">
-											<label for="valor">Valor (R$)</label>
-										</div>
+									<div class="input-field  col s7 l7 m7">
+										<input id="quantidade" name="quantidade" type="text"
+											class="truncate" maxlength="100" required> <label
+											for="quantidade">Qtde. do produto</label>
+									</div>
+								</div>
 
-										<div class="input-field  col s4 l4 m4 ">
-											<input id="qtdEstoque" name="qtdEstoque" pattern="[0-9.]+"
-												type="number"> <label for="qtdEstoque">Qtd.
-												Estoque</label>
-										</div>
-
-										<div class="input-field col s4 m4 l4">
-											<label for="dataVigencia">Dt. vigência</label> <input
-												id="dataVigencia" type="date" class="datepicker"
-												name="dataVigencia">
-										</div>
+								<!-- Valor, Quantidade de estoque e Data de Vigência-->
+								<div class="row">
+									<div class="input-field  col s4 l4 m4">
+										<input id="valor" name="valor" type="text" class="truncate">
+										<label for="valor">Valor (R$)</label>
 									</div>
 
-									<!-- Descrição -->
-									<div class="row">
-										<div class="input-field col s12">
-											<textarea id="descricao" class="materialize-textarea"
-												data-length="255" maxlength="255"></textarea>
-											<label for="textarea1">Descrição do produto</label>
-										</div>
+									<div class="input-field  col s4 l4 m4 ">
+										<input id="qtdEstoque" name="qtdEstoque" pattern="[0-9.]+"
+											type="number"> <label for="qtdEstoque">Qtd.
+											Estoque</label>
 									</div>
 
-									<!-- Botão Cadastrar -->
-									<div class="row">
-										<div class="col s12 m12 l12">
-											<button class="btn waves-effect waves-light right red"
-												type="submit" name="action">
-												Cadastrar <i class="material-icons right">add</i>
-											</button>
-										</div>
+									<div class="input-field col s4 m4 l4">
+										<label for="dataVigencia">Dt. vigência</label> <input
+											id="dataVigencia" type="date" class="datepicker"
+											name="dataVigencia">
 									</div>
-								</form>
-							</div>
-							<!-- /.row -->
+								</div>
+
+								<!-- Descrição -->
+								<div class="row">
+									<div class="input-field col s12">
+										<textarea id="descricao" class="materialize-textarea"
+											data-length="255" maxlength="255"></textarea>
+										<label for="textarea1">Descrição do produto</label>
+									</div>
+								</div>
+
+								<!-- Botão Cadastrar -->
+								<div class="row">
+									<div class="col s12 m12 l12">
+										<button class="btn waves-effect waves-light right green"
+											type="submit" name="action">
+											Cadastrar <i class="material-icons right">add</i>
+										</button>
+									</div>
+								</div>
+							</form>
 						</div>
-						<!-- /.container -->
+						<!-- /.row -->
 					</div>
-					<!-- /#janela-novo-produto -->
+					<!-- /.container -->
 				</div>
 				<!-- /#novo-produto -->
 			</div>
@@ -493,7 +701,7 @@
 				<!-- Modal footer -->
 				<div class="modal-footer">
 					<a id="btn-excluir-categoria" href="#!"
-						class="modal-action waves-effect waves-red btn-flat left"><i
+						class="waves-effect waves-red btn-flat left"><i
 						class="material-icons left red-text">delete</i>Excluir Categoria</a>
 				</div>
 			</div>
@@ -524,7 +732,7 @@
 				<div id="principal-fornecedor" class="col s12 blue">Test 1</div>
 
 				<!-- Janela de cadastro de fornecedor -->
-				<div id="novo-fornecedor" class="col s12 m12 l12">
+				<div id="novo-fornecedor">
 					<!-- br -->
 					<br>
 
@@ -701,7 +909,10 @@
 		</div>
 		<!-- /.row (Conteúdo main) -->
 	</div>
-	<!-- /.container (Main) -->
+	<!-- /.container (Main) --> </main>
+
+	<!-- import footer -->
+	<c:import url="component/footer.jsp" />
 
 	<!-- Script's dedicado -->
 	<!-- JS dedicado -->

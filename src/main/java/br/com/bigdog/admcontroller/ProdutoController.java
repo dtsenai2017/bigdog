@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,15 +28,28 @@ public class ProdutoController {
 
 	// Inserir ou alterar produto
 	@RequestMapping(value = "produto", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public void inserir(@RequestBody Produto produto) {
-		// Verifica se produto ja é existente
-		if (produto.getIdProduto() == null) {
-			// Insere novo produto
-			produtoDAO.inserir(produto);
-		} else {
-			// Altera produto existente
-			produtoDAO.alterar(produto);
-		}
+	public ResponseEntity<Void> inserir(@RequestBody Produto produto) {
+		// Insere novo produto
+		produtoDAO.inserir(produto);
+
+		// Retornando
+		return ResponseEntity.ok().build();
+	}
+
+	// Alterar foto de produto
+	@RequestMapping(value = "produtoImagem/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Void> alterarImagem(@PathVariable("id") Long idProduto, @RequestBody Produto produto) {
+		// Produto atual
+		Produto produtoAtual = produtoDAO.listar(idProduto);
+
+		// Setando imagem
+		produtoAtual.setFoto(produto.getFoto());
+
+		// Alterando
+		produtoDAO.alterar(produtoAtual);
+
+		// Retornando
+		return ResponseEntity.ok().build();
 	}
 
 	// Listar

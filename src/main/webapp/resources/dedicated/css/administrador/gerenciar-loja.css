@@ -1,5 +1,15 @@
 @CHARSET "ISO-8859-1";
 
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
 /* Main Produto */
 #main-produto {
 	display: none;
@@ -34,10 +44,15 @@
 
 /* Modal para produto */
 #modal-produto {
-	width: 80% !important;
-	height: 80% !important;
+	width: 94% !important;
+	height: 90% !important;
 	max-width: 100% !important;
-	max-height: 100% !important;
+	max-height: 90% !important;
+}
+
+/* Botão de alteção de foto */
+#btn-alterar-foto {
+	display: none;
 }
 
 /* Modal editar categoria */
