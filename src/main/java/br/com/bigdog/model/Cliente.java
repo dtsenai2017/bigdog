@@ -18,12 +18,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.bigdog.util.CriptografiaMD5;
 import br.com.bigdog.value.Genero;
 
-@JsonIgnoreProperties({ "produtosCarrinho" })
 @Entity
 public class Cliente {
 	// Atributos
