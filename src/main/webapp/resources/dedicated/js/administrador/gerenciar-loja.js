@@ -113,7 +113,7 @@ function abrirPrincipalProduto() {
 	});
 }
 
-// Modal para editar produto
+// Modal para visualizar dados do produto
 $('#modal-produto').modal({
 	dismissible : true, // Modal can be dismissed by clicking outside of the
 	complete : function() {
@@ -310,6 +310,131 @@ $("#btn-alterar-foto").click(function() {
 	reader.readAsDataURL(file);
 });
 
+/* Atribuindo valores de produto para formulário de alteração */
+$("#btn-alterar-produto").click(function(){
+    var idProduto = $('#idProduto').val();
+    
+    // Requisição para atribuição de valores do produto no formulário
+    $.getJSON({
+		url : "adm/produto/" + idProduto,
+		type : "GET",
+		success : function(produto) {
+			// Atribui dados para formulário de alteração
+			$('#label-nome-p-selecionado').addClass('active');
+			$('#nome-p-selecionado').val(produto.nome);
+			$('#label-marca-p-selecionado').addClass('active');
+			$('#marca-p-selecionado').val(produto.marca);
+			$('#label-cor-p-selecionado').addClass('active');
+			$('#select-categoria-p-selecionado').val('4').change();
+			
+			$('#cor-p-selecionado').val(produto.cor);
+			$('#label-tamanho-p-selecionado').addClass('active');
+			$('#tamanho-p-selecionado').val(produto.tamanho);
+			$('#label-qtd-p-selecionado').addClass('active');
+			$('#quantidade-p-selecionado').val(produto.quantidade);
+			$('#label-valor-p-selecionado').addClass('active');
+			$('#valor-p-selecionado').val(produto.valor);
+			$('#label-qtdEstoque-p-selecionado').addClass('active');
+			$('#qtdEstoque-p-selecionado').val(produto.qtdEstoque);
+			$('#label-dataVigencia-p-selecionado').addClass('active');
+			$('#dataVigencia-p-selecionado').val(produto.dataVigencia);
+			$('#label-descricao-p-selecionado').addClass('active');
+			$('#descricao-p-selecionado').val(produto.descricao);
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
+    
+    // Requisições para categoria, subcategoria e fornecedor
+    // Listando categorias para formulário
+	$.getJSON({
+		url : "adm/categoria",
+		type : "GET",
+		success : function(categorias) {
+			// Populando Lista
+			$.each(categorias, function(index, categoria) {
+				$('#select-categoria-p-selecionado').append(
+						$('<option></option>').attr('value',
+								categoria.idCategoria).text(
+								categoria.nome));
+			});
+
+			// Inicializar, atualizar e limpar o cursor de SELECT BOX
+			$("select").material_select('update');
+			$("select").closest('.input-field').children('span.caret')
+					.remove();
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
+
+	// Listando fornecedores para formulário
+	$.getJSON({
+		url : "adm/fornecedor",
+		type : "GET",
+		success : function(fornecedores) {
+			// Populando Lista
+			$.each(fornecedores, function(index, fornecedor) {
+				$('#select-fornecedor-p-selecionado').append(
+						$('<option></option>').attr('value',
+								fornecedor.idFornecedor).text(
+								fornecedor.nomeFantasia));
+			});
+
+			// Inicializar, atualizar e limpar o cursor de SELECT BOX
+			$("select").material_select('update');
+			$("select").closest('.input-field').children('span.caret')
+					.remove();
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
+});
+
+// Abrir subcategorias de categoria 'selecionada' no select do formulário de
+// alteração do produto
+$('#select-categoria-p-selecionado').change(
+	function() {
+		// Atributos
+		var idCategoria = $(this).val();
+		
+		// Limpando campos de formulário
+		$('#form-alterar-produto').find('input, textarea').val("");
+
+		// Limpando lista de subcategoria
+		$('#select-subcategoria-p-selecionado').empty().html('');
+
+		// Inserindo opção de valor default para subcategoria
+		$('#select-subcategoria-p-selecionado').append(
+				$('<option></option>').attr('value', '').text(
+						'Selecione uma opção'));
+
+		// Listando categorias para formulário
+		$.getJSON({
+			url : "adm/categoria/" + idCategoria,
+			type : "GET",
+			success : function(categoria) {
+				// Populando Lista
+				$.each(categoria.subCategorias, function(index,
+						subcategoria) {
+					$('#select-subcategoria-p-selecionado').append(
+							$('<option></option>').attr('value',
+									subcategoria.idSubCategoria).text(
+									subcategoria.nome));
+				});
+	
+				// Inicializar, atualizar e limpar o cursor de SELECT BOX
+				$("#select-subcategoria-p-selecionado").material_select('update');
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+			}
+		});
+});
+
 // Abrir formulário de produto
 function abrirFormProduto() {
 	// Abrindo janela para cadastro de produto
@@ -335,52 +460,50 @@ function abrirFormProduto() {
 	$('#form-produto').find('input, textarea').val("");
 	
 	// Listando categorias para formulário
-	$
-			.getJSON({
-				url : "adm/categoria",
-				type : "GET",
-				success : function(categorias) {
-					// Populando Lista
-					$.each(categorias, function(index, categoria) {
-						$('#select-categoria').append(
-								$('<option></option>').attr('value',
-										categoria.idCategoria).text(
-										categoria.nome));
-					});
-
-					// Inicializar, atualizar e limpar o cursor de SELECT BOX
-					$("select").material_select('update');
-					$("select").closest('.input-field').children('span.caret')
-							.remove();
-				},
-				error : function(e) {
-					console.log("ERROR: ", e);
-				}
+	$.getJSON({
+		url : "adm/categoria",
+		type : "GET",
+		success : function(categorias) {
+			// Populando Lista
+			$.each(categorias, function(index, categoria) {
+				$('#select-categoria').append(
+						$('<option></option>').attr('value',
+								categoria.idCategoria).text(
+								categoria.nome));
 			});
+
+			// Inicializar, atualizar e limpar o cursor de SELECT BOX
+			$("select").material_select('update');
+			$("select").closest('.input-field').children('span.caret')
+					.remove();
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
 
 	// Listando fornecedores para formulário
-	$
-			.getJSON({
-				url : "adm/fornecedor",
-				type : "GET",
-				success : function(fornecedores) {
-					// Populando Lista
-					$.each(fornecedores, function(index, fornecedor) {
-						$('#select-fornecedor').append(
-								$('<option></option>').attr('value',
-										fornecedor.idFornecedor).text(
-										fornecedor.nomeFantasia));
-					});
-
-					// Inicializar, atualizar e limpar o cursor de SELECT BOX
-					$("select").material_select('update');
-					$("select").closest('.input-field').children('span.caret')
-							.remove();
-				},
-				error : function(e) {
-					console.log("ERROR: ", e);
-				}
+	$.getJSON({
+		url : "adm/fornecedor",
+		type : "GET",
+		success : function(fornecedores) {
+			// Populando Lista
+			$.each(fornecedores, function(index, fornecedor) {
+				$('#select-fornecedor').append(
+						$('<option></option>').attr('value',
+								fornecedor.idFornecedor).text(
+								fornecedor.nomeFantasia));
 			});
+
+			// Inicializar, atualizar e limpar o cursor de SELECT BOX
+			$("select").material_select('update');
+			$("select").closest('.input-field').children('span.caret')
+					.remove();
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
 }
 
 // Verifica se imagem foi selecionada

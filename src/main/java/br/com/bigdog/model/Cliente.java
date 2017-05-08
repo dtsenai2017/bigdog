@@ -55,9 +55,6 @@ public class Cliente {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_cliente", nullable = false)
 	private List<Pet> pets;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "id_cliente", nullable = false)
-	private List<ProdutoCarrinho> produtosCarrinho;
 
 	// Getters e Setters
 	public Long getIdCliente() {
@@ -140,18 +137,10 @@ public class Cliente {
 		this.pets = pets;
 	}
 
-	public List<ProdutoCarrinho> getProdutosCarrinho() {
-		return produtosCarrinho;
-	}
-
-	public void setProdutosCarrinho(List<ProdutoCarrinho> produtosCarrinho) {
-		this.produtosCarrinho = produtosCarrinho;
-	}
-
 	@Override
 	public String toString() {
 		return "Cliente [idCliente=" + idCliente + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", cpf="
 				+ cpf + ", dataNascimento=" + dataNascimento + ", genero=" + genero + ", enderecos=" + enderecos
-				+ ", contato=" + contato + ", pets=" + pets + ", produtosCarrinho=" + produtosCarrinho + "]";
+				+ ", contato=" + contato + ", pets=" + pets + "]";
 	}
 }

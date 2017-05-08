@@ -55,6 +55,14 @@ main {
 	display: none;
 }
 
+/* Modal para editar produto */
+#modal-editar-produto {
+	width: 74% !important;
+	height: 90% !important;
+	max-width: 100% !important;
+	max-height: 100% !important;
+}
+
 /* Modal editar categoria */
 #modal-editar-categoria {
 	height: 90% !important;

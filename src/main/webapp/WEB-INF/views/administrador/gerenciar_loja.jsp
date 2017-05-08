@@ -322,6 +322,7 @@
 											<div class="valign-wrapper">
 												<p>
 													<button id="btn-alterar-produto"
+														data-target="modal-editar-produto"
 														class="btn waves-effect waves-light cyan truncate">
 														<i class="material-icons green-text text-lighten-4 left">mode_edit</i>
 														Alterar
@@ -369,6 +370,164 @@
 								Produto
 							</button>
 						</div>
+					</div>
+					<!-- /#modal-produto -->
+
+					<!-- Modal para edição de produto -->
+					<!-- Modal Structure -->
+					<div id="modal-editar-produto" class="modal">
+						<!-- Modal content -->
+						<div class="modal-content">
+							<div class="container">
+								<!-- Botão fechar -->
+								<div class="row">
+									<div class="col s12 m12 l12">
+										<a class="modal-action modal-close right"><i
+											class="material-icons grey-text">close</i></a>
+									</div>
+								</div>
+
+								<!-- Título de modal -->
+								<div class="row">
+									<h5>Alterar produto</h5>
+
+									<!-- divider -->
+									<div class="divider"></div>
+								</div>
+
+								<!-- Formulário de alteração -->
+								<div class="row">
+									<form id="form-alterar-produto">
+										<!-- Nome do produto -->
+										<div class="row">
+											<div class="input-field col s12">
+												<input id="nome-p-selecionado" name="nome" type="text"
+													maxlength="100" required> <label
+													id="label-nome-p-selecionado" for="nome-p-selecionado">Nome
+													do produto</label>
+											</div>
+										</div>
+
+										<!-- Marca -->
+										<div class="row">
+											<div class="input-field col s12 m12 l12">
+												<input id="marca-p-selecionado" name="marca" type="text"
+													class="truncate" maxlength="100" required> <label
+													id="label-marca-p-selecionado" for="marca-p-selecionado">Marca</label>
+											</div>
+										</div>
+
+										<!-- Categoria, Subcategoria e adicionar categoria -->
+										<div class="row">
+											<div class="input-field col s12 m5 l5">
+												<select id="select-categoria-p-selecionado" name="categoria"
+													required>
+												</select> <label>Categoria:</label>
+											</div>
+
+											<div class="input-field col s12 m5 l5">
+												<select id="select-subcategoria-p-selecionado"
+													name="subcategoria">
+												</select> <label>* Subcategoria:</label>
+											</div>
+
+											<div class="col s12 m2 l2 center">
+												<a href="#modal-editar-categoria"
+													onclick="abrirModalCategorias();"><i
+													class="material-icons left-align">list</i>Categoria</a>
+											</div>
+										</div>
+
+										<!-- Fornecedor e Cor -->
+										<div class="row">
+											<div class="input-field col s12 m8 l8">
+												<select id="select-fornecedor-p-selecionado"
+													name="fornecedor" required>
+												</select> <label>Fornecedor:</label>
+											</div>
+
+											<div class="col s12 m4 l4">
+												<div class="input-field">
+													<input id="cor-p-selecionado" name="cor" type="text"
+														class="truncate" maxlength="100"> <label
+														id="label-cor-p-selecionado" for="cor-p-selecionado">*
+														Cor</label>
+												</div>
+											</div>
+										</div>
+
+										<!-- Tamanho e Quantidade -->
+										<div class="row">
+											<div class="input-field  col s5 l5 m5">
+												<input id="tamanho-p-selecionado" name="tamanho" type="text"
+													class="truncate" maxlength="100"> <label
+													id="label-tamanho-p-selecionado"
+													for="tamanho-p-selecionado">* Tam.</label>
+											</div>
+
+											<div class="input-field  col s7 l7 m7">
+												<input id="quantidade-p-selecionado" name="quantidade"
+													type="text" class="truncate" maxlength="100" required>
+												<label id="label-qtd-p-selecionado"
+													for="quantidade-p-selecionado">Qtde. do produto</label>
+											</div>
+										</div>
+
+										<!-- Valor, Quantidade de estoque e Data de Vigência-->
+										<div class="row">
+											<div class="input-field  col s4 l4 m4">
+												<input id="valor-p-selecionado" name="valor" type="text"
+													class="truncate"> <label
+													id="label-valor-p-selecionado" for="valor-p-selecionado">Valor
+													(R$)</label>
+											</div>
+
+											<div class="input-field  col s4 l4 m4 ">
+												<input id="qtdEstoque-p-selecionado" name="qtdEstoque"
+													pattern="[0-9.]+" type="number"> <label
+													id="label-qtdEstoque-p-selecionado"
+													for="qtdEstoque-p-selecionado">Qtd. Estoque</label>
+											</div>
+
+											<div class="input-field col s4 m4 l4">
+												<label id="label-dataVigencia-p-selecionado"
+													for="dataVigencia-p-selecionado">Dt. vigência</label> <input
+													id="dataVigencia-p-selecionado" type="date"
+													class="datepicker" name="dataVigencia">
+											</div>
+										</div>
+
+										<!-- Descrição -->
+										<div class="row">
+											<div class="input-field col s12">
+												<textarea id="descricao-p-selecionado"
+													class="materialize-textarea" data-length="255"
+													maxlength="255"></textarea>
+												<label id="label-descricao-p-selecionado"
+													for="descricao-p-selecionado">Descrição do produto</label>
+											</div>
+										</div>
+
+										<!-- Botão Alterar -->
+										<div class="row">
+											<div class="col s12 m12 l12">
+												<button id="btn-alterar-produto"
+													class="btn waves-effect waves-light right green"
+													type="submit" name="action">
+													Alterar Produto <i class="material-icons right">add</i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+								<!-- /.row -->
+							</div>
+							<!-- /.container -->
+						</div>
+						<!-- /.modal-content -->
+
+						<!-- Modal footer -->
+						<div class="modal-footer"></div>
 					</div>
 				</div>
 
@@ -513,7 +672,7 @@
 									<div class="input-field col s12">
 										<textarea id="descricao" class="materialize-textarea"
 											data-length="255" maxlength="255"></textarea>
-										<label for="textarea1">Descrição do produto</label>
+										<label for="descricao">Descrição do produto</label>
 									</div>
 								</div>
 

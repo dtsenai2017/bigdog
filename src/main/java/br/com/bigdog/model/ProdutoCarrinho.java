@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity(name = "produto_carrinho")
@@ -20,6 +21,9 @@ public class ProdutoCarrinho {
 	@OneToOne(orphanRemoval = false)
 	@JoinColumn(name = "id_produto", nullable = false)
 	private Produto produto;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "id_cliente", nullable = false)
+	private Cliente cliente;
 
 	// Getters e Setters
 	public Long getIdProdutoCarrinho() {
@@ -49,6 +53,6 @@ public class ProdutoCarrinho {
 	@Override
 	public String toString() {
 		return "ProdutoCarrinho [idProdutoCarrinho=" + idProdutoCarrinho + ", quantidade=" + quantidade + ", produto="
-				+ produto + "]";
+				+ produto + ", cliente=" + cliente + "]";
 	}
 }

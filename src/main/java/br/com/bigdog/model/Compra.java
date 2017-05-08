@@ -32,7 +32,7 @@ public class Compra {
 	private Double frete;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_compra", nullable = false)
-	private List<CompraProduto> compraProdutos;
+	private List<ItemCompra> itensCompra;
 
 	// Getters e Setters
 	public Long getIdCompra() {
@@ -75,17 +75,17 @@ public class Compra {
 		this.frete = frete;
 	}
 
-	public List<CompraProduto> getCompraProdutos() {
-		return compraProdutos;
+	public List<ItemCompra> getItensCompra() {
+		return itensCompra;
 	}
 
-	public void setCompraProdutos(List<CompraProduto> compraProdutos) {
-		this.compraProdutos = compraProdutos;
+	public void setItensCompra(List<ItemCompra> itensCompra) {
+		this.itensCompra = itensCompra;
 	}
 
 	@Override
 	public String toString() {
 		return "Compra [idCompra=" + idCompra + ", dataCompra=" + dataCompra + ", status=" + status + ", valor=" + valor
-				+ ", frete=" + frete + ", compraProdutos=" + compraProdutos + "]";
+				+ ", frete=" + frete + ", itensCompra=" + itensCompra + "]";
 	}
 }
