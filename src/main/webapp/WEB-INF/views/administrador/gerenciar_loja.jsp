@@ -382,7 +382,7 @@
 								<!-- Botão fechar -->
 								<div class="row">
 									<div class="col s12 m12 l12">
-										<a class="modal-action modal-close right"><i
+										<a class="modal-close right"><i
 											class="material-icons grey-text">close</i></a>
 									</div>
 								</div>
@@ -417,36 +417,52 @@
 											</div>
 										</div>
 
-										<!-- Categoria, Subcategoria e adicionar categoria -->
+										<!-- Categoria, Subcategoria e edição -->
 										<div class="row">
-											<div class="input-field col s12 m5 l5">
-												<select id="select-categoria-p-selecionado" name="categoria"
-													required>
-												</select> <label>Categoria:</label>
+											<div class="input-field col s12 m6 l6">
+												<input id="idCategoria-p-selecionado" type="hidden">
+												<input disabled id="disabled-categoria" type="text">
+												<label id="label-disabled-categoria"
+													for="disabled-categoria">Categoria</label>
 											</div>
 
 											<div class="input-field col s12 m5 l5">
-												<select id="select-subcategoria-p-selecionado"
-													name="subcategoria">
-												</select> <label>* Subcategoria:</label>
+												<input id="idSubcategoria-p-selecionado" type="hidden">
+												<input disabled id="disabled-subcategoria" type="text">
+												<label id="label-disabled-subcategoria"
+													for="disabled-subcategoria">Subcategoria</label>
 											</div>
 
-											<div class="col s12 m2 l2 center">
-												<a href="#modal-editar-categoria"
-													onclick="abrirModalCategorias();"><i
-													class="material-icons left-align">list</i>Categoria</a>
+											<div class="col s12 m1 l1">
+												<p class="center">
+													<a href="#modal-editar-categoria-p-selecionado"
+														onclick="abrirModalAlterarCategoria();"><i
+														class="material-icons">mode_edit</i> Editar</a>
+												</p>
 											</div>
 										</div>
 
-										<!-- Fornecedor e Cor -->
+										<!-- Fornecedor e edição -->
 										<div class="row">
-											<div class="input-field col s12 m8 l8">
-												<select id="select-fornecedor-p-selecionado"
-													name="fornecedor" required>
-												</select> <label>Fornecedor:</label>
+											<div class="input-field col s12 m11 l11">
+												<input id="idFornecedor-p-selecionado" type="hidden">
+												<input disabled id="disabled-fornecedor" type="text">
+												<label id="label-disabled-fornecedor"
+													for="disabled-fornecedor">Fornecedor</label>
 											</div>
 
-											<div class="col s12 m4 l4">
+											<div class="col s12 m1 l1">
+												<p class="center">
+													<a href="#modal-editar-fornecedor-p-selecionado"
+														onclick="abrirModalAlterarFornecedor();"><i
+														class="material-icons">local_shipping</i> Editar</a>
+												</p>
+											</div>
+										</div>
+
+										<!-- Cor, Tamanho e Quantidade -->
+										<div class="row">
+											<div class="col s12 m5 l5">
 												<div class="input-field">
 													<input id="cor-p-selecionado" name="cor" type="text"
 														class="truncate" maxlength="100"> <label
@@ -454,18 +470,15 @@
 														Cor</label>
 												</div>
 											</div>
-										</div>
 
-										<!-- Tamanho e Quantidade -->
-										<div class="row">
-											<div class="input-field  col s5 l5 m5">
+											<div class="input-field  col s6 l4 m4">
 												<input id="tamanho-p-selecionado" name="tamanho" type="text"
 													class="truncate" maxlength="100"> <label
 													id="label-tamanho-p-selecionado"
 													for="tamanho-p-selecionado">* Tam.</label>
 											</div>
 
-											<div class="input-field  col s7 l7 m7">
+											<div class="input-field  col s6 l3 m3">
 												<input id="quantidade-p-selecionado" name="quantidade"
 													type="text" class="truncate" maxlength="100" required>
 												<label id="label-qtd-p-selecionado"
@@ -514,7 +527,7 @@
 												<button id="btn-alterar-produto"
 													class="btn waves-effect waves-light right green"
 													type="submit" name="action">
-													Alterar Produto <i class="material-icons right">add</i>
+													Alterar Produto <i class="material-icons right">mode_edit</i>
 												</button>
 											</div>
 										</div>
@@ -529,6 +542,110 @@
 						<!-- Modal footer -->
 						<div class="modal-footer"></div>
 					</div>
+				</div>
+
+				<!-- Modal para edição de categoria de produto cadastrado -->
+				<div id="modal-editar-categoria-p-selecionado" class="modal">
+					<!-- Modal content -->
+					<div class="modal-content">
+						<!-- Botão fechar -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<a class="modal-action modal-close right"><i
+									class="material-icons grey-text">close</i></a>
+							</div>
+						</div>
+
+						<!-- Título de modal -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<h5 align="center">Editar Categoria</h5>
+
+								<!-- divider -->
+								<div class="divider"></div>
+							</div>
+						</div>
+
+						<!-- Select de categoria e subcategoria -->
+						<form id="form-categoria-p-selecionado">
+							<div class="row">
+								<div class="input-field col s12 m6 l6">
+									<select id="select-categoria-p-selecionado" name="categoria"
+										required>
+									</select> <label>Categoria:</label>
+								</div>
+
+								<div class="input-field col s12 m6 l6">
+									<select id="select-subcategoria-p-selecionado"
+										name="subcategoria">
+									</select> <label>* Subcategoria:</label>
+								</div>
+							</div>
+
+							<!-- Botão alterar categoria e subcategoria -->
+							<div class="row">
+								<div class="col s12 m12 l12">
+									<button id="btn-alterar-categoria-p-selecionado"
+										class="btn waves-effect waves-light right cyan" type="submit"
+										name="action">
+										OK <i class="material-icons right">done_all</i>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer"></div>
+				</div>
+
+				<!-- Modal para edição de fornecedor de produto cadastrado -->
+				<div id="modal-editar-fornecedor-p-selecionado" class="modal">
+					<!-- Modal content -->
+					<div class="modal-content">
+						<!-- Botão fechar -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<a class="modal-action modal-close right"><i
+									class="material-icons grey-text">close</i></a>
+							</div>
+						</div>
+
+						<!-- Título de modal -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<h5 align="center">Editar Fornecedor</h5>
+
+								<!-- divider -->
+								<div class="divider"></div>
+							</div>
+						</div>
+
+						<!-- Select de categoria e subcategoria -->
+						<form id="form-fornecedor-p-selecionado">
+							<div class="row">
+								<div class="input-field col s12 m6 l6">
+									<select id="select-fornecedor-p-selecionado" name="categoria"
+										required>
+									</select> <label>fornecedor:</label>
+								</div>
+							</div>
+
+							<!-- Botão alterar fornedor -->
+							<div class="row">
+								<div class="col s12 m12 l12">
+									<button id="btn-alterar-fornecedor-p-selecionado"
+										class="btn waves-effect waves-light right cyan" type="submit"
+										name="action">
+										OK <i class="material-icons right">done_all</i>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer"></div>
 				</div>
 
 				<!-- Janela de cadastro de produto -->
@@ -695,7 +812,7 @@
 			</div>
 			<!-- /#main-produto -->
 
-			<!-- Modal Structure -->
+			<!-- Modal para gerenciar categoria -->
 			<div id="modal-editar-categoria" class="modal bottom-sheet">
 				<div class="modal-content">
 					<!-- Botão fechar -->
@@ -805,7 +922,7 @@
 			</div>
 			<!-- /.modal-editar-categoria -->
 
-			<!-- Modal para gerenciamento da categoria selecionada -->
+			<!-- Modal para gerenciamento da categoria SELECIONADA -->
 			<!-- Modal Structure -->
 			<div id="modal-categoria" class="modal modal-fixed-footer">
 				<!-- Modal content -->

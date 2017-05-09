@@ -63,6 +63,18 @@ main {
 	max-height: 100% !important;
 }
 
+/* Modal para edição de categoria de produtos cadastrados */
+#modal-editar-categoria-p-selecionado {
+	height: 90% !important;
+	max-height: 100% !important;
+}
+
+/* Modal para edição de fornecedor de produtos cadastrados */
+#modal-editar-fornecedor-p-selecionado {
+	height: 90% !important;
+	max-height: 100% !important;
+}
+
 /* Modal editar categoria */
 #modal-editar-categoria {
 	height: 90% !important;
