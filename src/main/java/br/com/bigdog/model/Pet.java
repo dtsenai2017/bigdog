@@ -29,7 +29,7 @@ public class Pet {
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition = "enum ('Cachorro','Gato','Ave','Roedor')", nullable = false)
 	private Especie especie;
-	@Column(columnDefinition = "varchar(50) default 'Não há.'")
+	@Column(length = 50)
 	private String raca;
 	@Enumerated(EnumType.STRING)
 	@Column(columnDefinition = "enum ('Macho','Fêmea')", nullable = false)
@@ -40,17 +40,17 @@ public class Pet {
 	private Date dataNascimento;
 	@Column(columnDefinition = "boolean", nullable = false)
 	private boolean castrado;
-	@Column(columnDefinition = "varchar(20) default 'Não há.'", unique = true)
+	@Column(length = 20, unique = true)
 	private String rga;
-	@Column(name = "carteira_vacina", columnDefinition = "varchar(20) default 'Não há.'", unique = true)
+	@Column(name = "carteira_vacina", length = 20, unique = true)
 	private String carteiraVacina;
-	@Column(columnDefinition = "varchar(50) default 'Não há.'")
+	@Column(length = 50)
 	private String pelagem;
-	@Column(columnDefinition = "varchar(20) default 'Não há.'", unique = true)
+	@Column(length = 20, unique = true)
 	private String pedigree;
 	@Column(columnDefinition = "decimal(5,2) default 0")
 	private Double peso;
-	@Column(columnDefinition = "varchar(255) default 'Não há.'")
+	@Column
 	private String observacoes;
 
 	// Getters e Setters

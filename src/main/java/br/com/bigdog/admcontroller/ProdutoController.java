@@ -32,7 +32,34 @@ public class ProdutoController {
 		// Insere novo produto
 		produtoDAO.inserir(produto);
 
-		// Retornando
+		// Retornando OK
+		return ResponseEntity.ok().build();
+	}
+
+	// Alterar produto
+	@RequestMapping(value = "produto/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Void> alterar(@PathVariable("id") Long idProduto, @RequestBody Produto produto) {
+		// Produto atual
+		Produto produtoAtual = produtoDAO.listar(idProduto);
+
+		// Atribuindo valores de produto alterado para produto atual
+		produtoAtual.setNome(produto.getNome());
+		produtoAtual.setDescricao(produto.getDescricao());
+		produtoAtual.setMarca(produto.getMarca());
+		produtoAtual.setCategoria(produto.getCategoria());
+		produtoAtual.setSubCategoria(produto.getSubCategoria());
+		produtoAtual.setValor(produto.getValor());
+		produtoAtual.setCor(produto.getCor());
+		produtoAtual.setDataVigencia(produto.getDataVigencia());
+		produtoAtual.setQtdEstoque(produto.getQtdEstoque());
+		produtoAtual.setQuantidade(produto.getQuantidade());
+		produtoAtual.setFornecedor(produto.getFornecedor());
+		produtoAtual.setTamanho(produto.getTamanho());
+
+		// Alterando
+		produtoDAO.alterar(produtoAtual);
+
+		// Retornando OK
 		return ResponseEntity.ok().build();
 	}
 

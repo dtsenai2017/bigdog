@@ -1,5 +1,10 @@
-// Input Valor de produto
+// Input Valor do formulário de cadastro de produto
 $('#valor').mask('0.000.000.00', {
+	reverse : true
+});
+
+// Input Valor do formulário de alteração de produto
+$('#valor-p-selecionado').mask('0.000.000.00', {
 	reverse : true
 });
 

@@ -1,29 +1,27 @@
 // Inicializadores Materialize
 // Input Date materialize
-$('.datepicker')
-		.pickadate(
-				{
-					monthsFull : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
-							'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
-							'Outubro', 'Novembro', 'Dezembro' ],
-					monthsShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-							'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
-					weekdaysFull : [ 'Domingo', 'Segunda', 'Terça', 'Quarta',
-							'Quinta', 'Sexta', 'Sabádo' ],
-					weekdaysShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
-							'Sab' ],
-					weekdaysLetter : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
-					today : 'Hoje',
-					clear : 'Limpar',
-					close : 'Pronto',
-					labelMonthNext : 'Próximo mês',
-					labelMonthPrev : 'Mês anterior',
-					labelMonthSelect : 'Selecione um mês',
-					labelYearSelect : 'Selecione um ano',
-					selectMonths : true,
-					selectYears : 15,
-					format : 'yyyy-mm-dd'
-				});
+$('.datepicker').pickadate(	{
+	monthsFull : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
+			'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+			'Outubro', 'Novembro', 'Dezembro' ],
+	monthsShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+			'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+	weekdaysFull : [ 'Domingo', 'Segunda', 'Terça', 'Quarta',
+			'Quinta', 'Sexta', 'Sabádo' ],
+	weekdaysShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
+			'Sab' ],
+	weekdaysLetter : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+	today : 'Hoje',
+	clear : 'Limpar',
+	close : 'Pronto',
+	labelMonthNext : 'Próximo mês',
+	labelMonthPrev : 'Mês anterior',
+	labelMonthSelect : 'Selecione um mês',
+	labelYearSelect : 'Selecione um ano',
+	selectMonths : true,
+	selectYears : 15,
+	format : 'yyyy-mm-dd'
+});
 
 // Input Textarea com contador de caracter
 $('input#input_text, textarea#textarea1').characterCounter();
@@ -40,19 +38,6 @@ $("#btn-produto").click(function() {
 	// Mostrando janela
 	$('#main-produto').fadeIn(1500);
 	$('#main-fornecedor').hide();
-});
-
-// PRODUTO
-// Modal fixo no footer para gerenciar categoria
-$('#modal-editar-categoria').modal({
-	dismissible : true,
-	// modal
-	ready : function(modal, trigger) { // Callback for Modal open. Modal and
-		// alert("Ready");
-	},
-	complete : function() {
-		abrirFormProduto();
-	} // Callback for Modal close
 });
 
 // Mostrar lista completa de categoria no modal
@@ -133,11 +118,15 @@ function abrirModalProduto(idProduto){
 		url : "adm/produto/"+ idProduto,
 		type : "GET",
 		success : function(produto) {
+			// Atributo para data
+			var dataVigencia = new Date(produto.dataVigencia);
+			dataVigencia.setDate(dataVigencia.getDate() + 1);
+			
 			// Atribuindo valores...
 			// Imagem, id de produto, nome do produto e descrição do
 			// produto
 			$('#imagem-produto-selecionado').attr('src', atob(produto.foto));
-			$('#idProduto').val(produto.idProduto);
+			$('#idProduto-p').val(produto.idProduto);
 			$('#nomeProduto').text(produto.nome);
 			$('#descricaoProduto').text(produto.descricao);
 			
@@ -157,7 +146,7 @@ function abrirModalProduto(idProduto){
 			
 			// Fornecedor
 			$('#fornecedorProduto').text(produto.fornecedor.nomeFantasia);
-			$('#dataVigenciaProduto').text($.datepicker.formatDate('dd/mm/yy', new Date(produto.dataVigencia)));
+			$('#dataVigenciaProduto').text($.datepicker.formatDate('dd/mm/yy', dataVigencia));
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
@@ -185,7 +174,7 @@ function limparCardReveal(){
 	$('#btn-alterar-foto').hide();
 }
 
-// Visualizar foto de alteração
+// Visualizar foto de ALTERAÇÂO
 // Verifica se imagem foi selecionada
 $("#fotoProduto").bind("change", function() {
 	// Atributos
@@ -265,7 +254,7 @@ $("#btn-alterar-foto").click(function() {
 	var mensagem;
 	
 	// Id e objeto que será alterado
-	var idProduto = $('#idProduto').val();
+	var idProduto = $('#idProduto-p').val();
 	var produto = {
 			foto
 	}
@@ -310,42 +299,79 @@ $("#btn-alterar-foto").click(function() {
 	reader.readAsDataURL(file);
 });
 
+// Habilitar ou desabilitar formulário de alteração de produto
+$("#checkbox-alterar-produto").change(function() {
+	// Verifica checkbox, para habilitar ou desabilitar formulário
+	if(this.checked) {
+		// Habilitando inputs para edição
+		$('#nome-p-selecionado').prop('disabled', false);
+		$('#marca-p-selecionado').prop('disabled', false);
+		$('#cor-p-selecionado').prop('disabled', false);
+		$('#tamanho-p-selecionado').prop('disabled', false);
+		$('#quantidade-p-selecionado').prop('disabled', false);
+		$('#valor-p-selecionado').prop('disabled', false);
+		$('#qtdEstoque-p-selecionado').prop('disabled', false);
+		$('#dataVigencia-p-selecionado').prop('disabled', false);
+		$('#descricao-p-selecionado').prop('disabled', false);
+	} else {
+		// Desabilitando inputs
+		$('#nome-p-selecionado').prop('disabled', true);
+		$('#marca-p-selecionado').prop('disabled', true);
+		$('#cor-p-selecionado').prop('disabled', true);
+		$('#tamanho-p-selecionado').prop('disabled', true);
+		$('#quantidade-p-selecionado').prop('disabled', true);
+		$('#valor-p-selecionado').prop('disabled', true);
+		$('#qtdEstoque-p-selecionado').prop('disabled', true);
+		$('#dataVigencia-p-selecionado').prop('disabled', true);
+		$('#descricao-p-selecionado').prop('disabled', true);
+	}
+});
+
 /* Atribuindo valores de produto para formulário de alteração */
 $("#btn-alterar-produto").click(function(){
-    var idProduto = $('#idProduto').val();
-    
+    // Atributo
+	var idProduto = $('#idProduto-p').val();
+	
+	// Atribuindo valor de select de edição
+	if($('#checkbox-alterar-produto').prop('checked')){
+		// Desabilita checkbox, clicando novamente
+		$('#checkbox-alterar-produto').trigger('click');
+	}
+	
     // Requisição para atribuição de valores do produto no formulário
     $.getJSON({
 		url : "adm/produto/" + idProduto,
 		type : "GET",
 		success : function(produto) {
-			// Atribui dados para formulário de alteração
+			// Ativando labels
 			$('#label-nome-p-selecionado').addClass('active');
-			$('#nome-p-selecionado').val(produto.nome);
 			$('#label-marca-p-selecionado').addClass('active');
-			$('#marca-p-selecionado').val(produto.marca);
 			$('#label-cor-p-selecionado').addClass('active');
+			$('#label-disabled-categoria').addClass('active');
+			$('#label-disabled-fornecedor').addClass('active');
+			$('#label-disabled-subcategoria').addClass('active');
+			$('#label-tamanho-p-selecionado').addClass('active');
+			$('#label-qtd-p-selecionado').addClass('active');
+			$('#label-valor-p-selecionado').addClass('active');
+			$('#label-qtdEstoque-p-selecionado').addClass('active');
+			$('#label-dataVigencia-p-selecionado').addClass('active');
+			$('#label-descricao-p-selecionado').addClass('active');
+			
+			// Atribui dados para formulário de alteração
+			$('#nome-p-selecionado').val(produto.nome);
+			$('#marca-p-selecionado').val(produto.marca);
 			$('#cor-p-selecionado').val(produto.cor);
 			$('#idCategoria-p-selecionado').val(produto.categoria.idCategoria);
-			$('#label-disabled-categoria').addClass('active');
 			$('#disabled-categoria').val(produto.categoria.nome);
 			$('#idSubcategoria-p-selecionado').val(produto.subCategoria.idSubCategoria);
-			$('#label-disabled-fornecedor').addClass('active');
 			$('#disabled-fornecedor').val(produto.fornecedor.nomeFantasia);
 			$('#idFornecedor-p-selecionado').val(produto.fornecedor.idFornecedor);
-			$('#label-disabled-subcategoria').addClass('active');
 			$('#disabled-subcategoria').val(produto.subCategoria.nome);
-			$('#label-tamanho-p-selecionado').addClass('active');
 			$('#tamanho-p-selecionado').val(produto.tamanho);
-			$('#label-qtd-p-selecionado').addClass('active');
 			$('#quantidade-p-selecionado').val(produto.quantidade);
-			$('#label-valor-p-selecionado').addClass('active');
 			$('#valor-p-selecionado').val(produto.valor);
-			$('#label-qtdEstoque-p-selecionado').addClass('active');
 			$('#qtdEstoque-p-selecionado').val(produto.qtdEstoque);
-			$('#label-dataVigencia-p-selecionado').addClass('active');
 			$('#dataVigencia-p-selecionado').val(produto.dataVigencia);
-			$('#label-descricao-p-selecionado').addClass('active');
 			$('#descricao-p-selecionado').val(produto.descricao);
 			
 			// re-initialize material-select
@@ -371,7 +397,7 @@ function abrirModalAlterarCategoria(){
 			// Populando Lista
 			$.each(categorias, function(index, categoria) {
 				$('#select-categoria-p-selecionado').append(
-						$('<option></option>').attr('value',categoria.idCategoria).text(
+						$('<option></option>').attr('value', categoria.idCategoria).text(
 								categoria.nome));
 			});
 				
@@ -385,7 +411,7 @@ function abrirModalAlterarCategoria(){
 	 });
 }
 
-// Abrir subcategorias de categoria 'selecionada' no select do formulário de
+// Abrir subcategorias de CATEGORIA SELECIONADA no select do formulário de
 // alteração do produto
 $('#select-categoria-p-selecionado').change(
 	function() {
@@ -421,7 +447,6 @@ $('#select-categoria-p-selecionado').change(
 				console.log("ERROR: ", e);
 			}
 		});
-		
 });
 
 // Alterar valores de categoria e subcategoria de produto selecionado
@@ -442,7 +467,7 @@ $( "#form-categoria-p-selecionado" ).submit(function( event ) {
 	}
 	
 	// Verifica se subcategoria foi selecionada
-	if(subCategoria.idSubCategoria == ''){
+	if(subCategoria.idSubCategoria == '' || $('#select-subcategoria-p-selecionado').has('option').length == 0 ) {
 		// Atribui valores de alteração para formulário de produto selecionado
 		$('#idCategoria-p-selecionado').val(categoria.idCategoria);
 		$('#disabled-categoria').val(categoria.nome);
@@ -464,6 +489,9 @@ $( "#form-categoria-p-selecionado" ).submit(function( event ) {
 	
 	// Exibindo mensagem
 	Materialize.toast(mensagem, 2000);
+	
+	// Fechando modal
+	$('#modal-editar-categoria-p-selecionado').modal('close');
 });
 
 // Abrir modal para edição de fornecedor de produto cadastrado.
@@ -505,8 +533,6 @@ $( "#form-fornecedor-p-selecionado" ).submit(function( event ) {
 		idFornecedor : $('#select-fornecedor-p-selecionado option:selected').val(),
 		nomeFantasia : $('#select-fornecedor-p-selecionado option:selected').text()
 	}
-	
-	console.log(fornecedor);
 
 	// Atribuindo valores para formulário de produto selecionado
 	$('#idFornecedor-p-selecionado').val(fornecedor.idFornecedor);
@@ -514,6 +540,9 @@ $( "#form-fornecedor-p-selecionado" ).submit(function( event ) {
 	
 	// Exibindo mensagem
 	Materialize.toast("Fornecedor selecionado!", 2000);
+	
+	// Fechando modal
+	$('#modal-editar-fornecedor-p-selecionado').modal('close');
 });
 
 // Formulário de ALTERAÇÃO de produto
@@ -521,7 +550,66 @@ $( "#form-alterar-produto" ).submit(function( event ) {
 	// Cancela qualquer ação padrão do elemento
 	event.preventDefault();
 	
-	$.dialog("Alterado");
+	// Verifica edição está habilitada
+	if(!$('#checkbox-alterar-produto').prop('checked')){
+		// Mensagem toast
+		Materialize.toast('Habilite alteração!', 2000);
+		return;
+	}
+	
+	// Objeto que receberá dados de alteração
+	 var produto = {
+		 idProduto : $('#idProduto-p').val(),
+		 nome : $('#nome-p-selecionado').val(),
+		 descricao : $('#descricao-p-selecionado').val(),
+		 qtdEstoque : $('#qtdEstoque-p-selecionado').val(),
+		 valor : $('#valor-p-selecionado').val(),
+		 marca : $('#marca-p-selecionado').val(),
+		 cor : $('#cor-p-selecionado').val(),
+		 tamanho : $('#tamanho-p-selecionado').val(),
+		 quantidade : $('#quantidade-p-selecionado').val(),
+		 dataVigencia : $('#dataVigencia-p-selecionado').val(),
+		 foto : null,
+		 categoria : {
+			 idCategoria : $('#idCategoria-p-selecionado').val()
+		 },
+		 subCategoria : {
+			 idSubCategoria : $('#idSubcategoria-p-selecionado').val()
+		 },
+		 fornecedor : {
+			 idFornecedor : $('#idFornecedor-p-selecionado').val()
+		 }
+	 }
+	 
+	// Cadastrando produto
+	$.ajax({
+		type : "PUT",
+		url : "adm/produto/"+ produto.idProduto,
+		data : JSON.stringify(produto),
+		contentType : "application/json; charset=utf-8",
+		success : function(s) {
+			// Mensagem para toast
+			mensagem = 'Produto alterado com sucesso!';
+			
+			// Fechando modal
+			$('#modal-editar-produto').modal('close');
+			
+			// Abrir modal de produto (Refresh)
+			abrirModalProduto(produto.idProduto);
+			
+			// Recarregando lista de produtos na aba 'principal'
+			abrirPrincipalProduto();
+		},
+		error : function(e) {
+			// Mensagem para toast
+			mensagem = 'Ops, houve um problema!';
+			console.log('ERROR : ' + e);
+		},
+		complete : function() {
+			// Toast
+			Materialize.toast(mensagem, 2800);
+		}
+	});
 });
 
 // Abrir formulário de produto
@@ -736,7 +824,7 @@ $("#form-produto").submit(function(e) {
 $("#btn-excluir-produto").click(function() {
 	// Atributo
 	var mensagem;
-	var idProduto = $('#idProduto').val();
+	var idProduto = $('#idProduto-p').val();
 
 	// Confirmar exclusão
 	$.confirm({
@@ -826,7 +914,7 @@ $('#select-categoria').change(
 			});
 		});
 
-// Carregar categorias e subcategorias para modal
+// Carregar categorias e subcategorias para modal de categoria
 function abrirModalCategorias() {
 	// Limpando dados de modal
 	refreshModal();
@@ -867,8 +955,6 @@ function abrirModalCategorias() {
 	});
 }
 
-// 
-
 // Verifica input de busca de categoria para mudança de ícone de listagem
 function verificarValor() {
 	// Verifica se campo é vazio para alteração de botões de lista
@@ -903,6 +989,9 @@ $("#form-categoria").submit(function(e) {
 		success : function(s) {
 			// Mensagem para toast
 			mensagem = 'Inserida com sucesso!';
+			
+			// Refresh em lista de categoria no formulário de cadastro
+			refreshFormListaCategoria();
 		},
 		error : function(e) {
 			// Verifica erro
@@ -924,14 +1013,65 @@ $("#form-categoria").submit(function(e) {
 	});
 });
 
-// Modal para editar categoria
-$('#modal-editar-categoria').modal({
-	dismissible : true, // Modal can be dismissed by clicking outside of the
-	complete : function() {
-		// Quando modal for fechado, recarrega lista de categorias
-		abrirFormProduto();
-	} // Callback for Modal close
-});
+// Refresh na lista de categoria do formulário de cadastro de produto
+function refreshFormListaCategoria() {
+	// Limpando select de formulário
+	$('#select-categoria').empty().html(' ');
+	
+	// Listando categorias para formulário de alteração
+	$.getJSON({
+		url : "adm/categoria",
+		type : "GET",
+		success : function(categorias) {
+			// Populando Lista
+			$.each(categorias, function(index, categoria) {
+				$('#select-categoria').append(
+						$('<option></option>').attr('value', categoria.idCategoria).text(
+								categoria.nome));
+			});
+				
+			// Inicializar, atualizar e limpar o cursor de SELECT BOX
+			$("select").material_select('update');
+			$("select").closest('.input-field').children('span.caret').remove();
+		},
+	 	error : function(e) {
+	 		console.log("ERROR: ", e);
+	 	}
+	 });
+}
+
+// Refresh na lista de subcategoria do formulário de cadastro de produto
+function refreshFormListaSubcategoria(idCategoria) {
+	// Limpando lista de subcategoria
+	$('#select-subcategoria').empty().html('');
+
+	// Inserindo opção de valor default para subcategoria
+	$('#select-subcategoria').append(
+			$('<option></option>').attr('value', '').text(
+					'Selecione uma opção'));
+
+	// Listando categorias para formulário
+	$.getJSON({
+		url : "adm/categoria/" + idCategoria,
+		type : "GET",
+		success : function(categoria) {
+			// Populando Lista
+			$.each(categoria.subCategorias, function(index,
+					subcategoria) {
+				$('#select-subcategoria').append(
+						$('<option></option>').attr('value',
+								subcategoria.idSubCategoria).text(
+								subcategoria.nome));
+			});
+
+			// Inicializar, atualizar e limpar o cursor de SELECT BOX
+			$("#select-subcategoria").material_select('update');
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
+}
 
 // Abrir modal para editar a categoria selecionada
 function abrirEditarCategoria(idCategoria) {
@@ -1007,9 +1147,15 @@ $("#form-subcategoria").submit(function(e) {
 		success : function(s) {
 			// Mensagem para toast
 			mensagem = 'Inserida com sucesso!';
+			
+			// Limpa select de subcategoria em formulário
+			$('#select-subcategoria').empty().html(' ');
 
-			// Reload na modal
+			// Reload na modal de edição de subcategoria
 			abrirEditarCategoria(idCategoria);
+			
+			// Refresh em select de subcategoria em formulário de produto
+			refreshFormListaSubcategoria(idCategoria);
 		},
 		error : function(e) {
 			// Mensagem para toast
@@ -1058,6 +1204,9 @@ $("#btn-excluir-categoria").click(function() {
 
 							// Modal categorias
 							abrirModalCategorias();
+							
+							// Alterando lista de formulário
+							refreshFormListaCategoria();
 						},
 						error : function(e) {
 							// Verifica erro
@@ -1114,6 +1263,13 @@ function excluirSubcategoria(idSubCategoria) {
 
 							// Reload na modal
 							abrirEditarCategoria(idCategoria);
+							
+							// Limpando select de formulário
+							$('#select-subcategoria').empty().html(' ');
+							
+							// Refresh em select de subcategoria em formulário
+							// de produto
+							refreshFormListaSubcategoria(idCategoria);
 						},
 						error : function(e) {
 							// Verifica erro

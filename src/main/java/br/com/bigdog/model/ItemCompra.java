@@ -13,26 +13,36 @@ public class ItemCompra {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_item_compra", columnDefinition = "bigint unsigned", nullable = false)
 	private Long idItemCompra;
+	@Column(nullable = false)
+	private String nome;
 	@Column(columnDefinition = "bigint unsigned", nullable = false)
 	private Long quantidade;
 	@Column(nullable = false, columnDefinition = "decimal(5,2) unsigned")
 	private Double valor;
 
 	// Getters e Setters
+	public Long getIdItemCompra() {
+		return idItemCompra;
+	}
+
 	public void setIdItemCompra(Long idItemCompra) {
 		this.idItemCompra = idItemCompra;
 	}
 
-	public void setQuantidade(Long quantidade) {
-		this.quantidade = quantidade;
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Long getQuantidade() {
 		return quantidade;
 	}
 
-	public Long getIdItemCompra() {
-		return idItemCompra;
+	public void setQuantidade(Long quantidade) {
+		this.quantidade = quantidade;
 	}
 
 	public Double getValor() {
@@ -45,6 +55,7 @@ public class ItemCompra {
 
 	@Override
 	public String toString() {
-		return "ItemCompra [idItemCompra=" + idItemCompra + ", quantidade=" + quantidade + ", valor=" + valor + "]";
+		return "ItemCompra [idItemCompra=" + idItemCompra + ", nome=" + nome + ", quantidade=" + quantidade + ", valor="
+				+ valor + "]";
 	}
 }

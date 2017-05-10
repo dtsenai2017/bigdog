@@ -19,6 +19,10 @@
 <!-- JQuery ui css -->
 <link rel="stylesheet" href="resources/jquery/css/jquery-ui.css" />
 
+<!-- CSS de footer -->
+<link rel="stylesheet"
+	href="resources/dedicated/css/administrador/component/footer.css">
+
 <!-- Import's JS -->
 <!-- JQuery -->
 <script src="resources/jquery/jquery-3.2.1.js" defer></script>
@@ -116,7 +120,7 @@
 	<!-- Script's dedicado -->
 	<!-- JS dedicado -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/administrador/navbar.js" defer></script>
+		src="resources/dedicated/js/administrador/component/navbar.js" defer></script>
 
 	<!-- JS para busca -->
 	<script type="text/javascript"

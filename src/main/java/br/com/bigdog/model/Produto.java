@@ -25,7 +25,7 @@ public class Produto {
 	private Long idProduto;
 	@Column(length = 100, nullable = false)
 	private String nome;
-	@Column(nullable = false, columnDefinition = "varchar(255) default 'Não há.'")
+	@Column
 	private String descricao;
 	@Column(name = "qtd_estoque", nullable = false, columnDefinition = "bigint unsigned")
 	private Long qtdEstoque;
@@ -50,7 +50,7 @@ public class Produto {
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
 	@ManyToOne(optional = true)
-	@JoinColumn(name = "id_sub_categoria")
+	@JoinColumn(name = "id_sub_categoria", nullable = true)
 	private SubCategoria subCategoria;
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_fornecedor")

@@ -224,7 +224,7 @@
 									</div>
 
 									<!-- ID de produto -->
-									<input id="idProduto" type="hidden">
+									<input id="idProduto-p" type="hidden">
 
 									<!-- Marca, categoria e subcategoria -->
 									<div class="row">
@@ -260,6 +260,7 @@
 											<h6>
 												<b>Cor do produto</b>
 											</h6>
+
 
 											<p id="corProduto"></p>
 										</div>
@@ -395,6 +396,27 @@
 									<div class="divider"></div>
 								</div>
 
+								<!-- Descrição de alteração -->
+								<div class="row">
+									<div class="col s12 m12 l12">
+										<span>Para alterar o produto, clique no botão abaixo
+											para <b>habilitar</b> alteração.
+										</span>
+									</div>
+								</div>
+
+								<!-- Switch para habilitar ou desabilitar formulário de alteração -->
+								<div class="row">
+									<div class="col s12 m12 l12">
+										<div class="switch center">
+											<label> Desabilitar <input
+												id="checkbox-alterar-produto" type="checkbox"> <span
+												class="lever"></span> Habilitar
+											</label>
+										</div>
+									</div>
+								</div>
+
 								<!-- Formulário de alteração -->
 								<div class="row">
 									<form id="form-alterar-produto">
@@ -402,7 +424,7 @@
 										<div class="row">
 											<div class="input-field col s12">
 												<input id="nome-p-selecionado" name="nome" type="text"
-													maxlength="100" required> <label
+													maxlength="100" disabled required> <label
 													id="label-nome-p-selecionado" for="nome-p-selecionado">Nome
 													do produto</label>
 											</div>
@@ -412,8 +434,9 @@
 										<div class="row">
 											<div class="input-field col s12 m12 l12">
 												<input id="marca-p-selecionado" name="marca" type="text"
-													class="truncate" maxlength="100" required> <label
-													id="label-marca-p-selecionado" for="marca-p-selecionado">Marca</label>
+													class="truncate" maxlength="100" disabled required>
+												<label id="label-marca-p-selecionado"
+													for="marca-p-selecionado">Marca</label>
 											</div>
 										</div>
 
@@ -465,7 +488,7 @@
 											<div class="col s12 m5 l5">
 												<div class="input-field">
 													<input id="cor-p-selecionado" name="cor" type="text"
-														class="truncate" maxlength="100"> <label
+														class="truncate" maxlength="100" disabled> <label
 														id="label-cor-p-selecionado" for="cor-p-selecionado">*
 														Cor</label>
 												</div>
@@ -473,40 +496,40 @@
 
 											<div class="input-field  col s6 l4 m4">
 												<input id="tamanho-p-selecionado" name="tamanho" type="text"
-													class="truncate" maxlength="100"> <label
+													class="truncate" maxlength="100" disabled> <label
 													id="label-tamanho-p-selecionado"
 													for="tamanho-p-selecionado">* Tam.</label>
 											</div>
 
 											<div class="input-field  col s6 l3 m3">
 												<input id="quantidade-p-selecionado" name="quantidade"
-													type="text" class="truncate" maxlength="100" required>
-												<label id="label-qtd-p-selecionado"
+													type="text" class="truncate" maxlength="100" disabled
+													required> <label id="label-qtd-p-selecionado"
 													for="quantidade-p-selecionado">Qtde. do produto</label>
 											</div>
 										</div>
 
 										<!-- Valor, Quantidade de estoque e Data de Vigência-->
 										<div class="row">
-											<div class="input-field  col s4 l4 m4">
-												<input id="valor-p-selecionado" name="valor" type="text"
-													class="truncate"> <label
+											<div class="input-field  col s7 l4 m4">
+												<input id="valor-p-selecionado" name="valor"
+													class="truncate" type="text" disabled required> <label
 													id="label-valor-p-selecionado" for="valor-p-selecionado">Valor
 													(R$)</label>
 											</div>
 
-											<div class="input-field  col s4 l4 m4 ">
+											<div class="input-field  col s5 l4 m4 ">
 												<input id="qtdEstoque-p-selecionado" name="qtdEstoque"
-													pattern="[0-9.]+" type="number"> <label
-													id="label-qtdEstoque-p-selecionado"
+													pattern="[0-9.]+" type="number" disabled required>
+												<label id="label-qtdEstoque-p-selecionado"
 													for="qtdEstoque-p-selecionado">Qtd. Estoque</label>
 											</div>
 
-											<div class="input-field col s4 m4 l4">
+											<div class="input-field col s12 m4 l4">
 												<label id="label-dataVigencia-p-selecionado"
 													for="dataVigencia-p-selecionado">Dt. vigência</label> <input
-													id="dataVigencia-p-selecionado" type="date"
-													class="datepicker" name="dataVigencia">
+													id="dataVigencia-p-selecionado" name="dataVigencia"
+													class="datepicker" type="date" disabled required>
 											</div>
 										</div>
 
@@ -515,7 +538,7 @@
 											<div class="input-field col s12">
 												<textarea id="descricao-p-selecionado"
 													class="materialize-textarea" data-length="255"
-													maxlength="255"></textarea>
+													maxlength="255" disabled></textarea>
 												<label id="label-descricao-p-selecionado"
 													for="descricao-p-selecionado">Descrição do produto</label>
 											</div>
@@ -624,7 +647,7 @@
 						<!-- Select de categoria e subcategoria -->
 						<form id="form-fornecedor-p-selecionado">
 							<div class="row">
-								<div class="input-field col s12 m6 l6">
+								<div class="input-field col s12 m12 l12">
 									<select id="select-fornecedor-p-selecionado" name="categoria"
 										required>
 									</select> <label>fornecedor:</label>
@@ -819,7 +842,7 @@
 					<div class="row">
 						<div class="col s12 m12 l12">
 							<a class="modal-action modal-close right"
-								onclick="abrirFormProduto(); esconderListaCategoria();"><i
+								onclick="esconderListaCategoria();"><i
 								class="material-icons grey-text">close</i></a>
 						</div>
 					</div>
@@ -888,7 +911,7 @@
 						</div>
 					</div>
 
-					<!-- ícones para esconder ou mostrar lista de categorias -->
+					<!-- Ícones para esconder ou mostrar lista de categorias -->
 					<div class="row">
 						<!-- Mostrar e esconder lista de categorias -->
 						<div class="col s12 m12 l12 right-align">
