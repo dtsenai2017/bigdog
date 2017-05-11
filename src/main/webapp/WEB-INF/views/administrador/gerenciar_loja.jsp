@@ -87,7 +87,7 @@
 				</ul>
 
 				<!-- Janela principal de produto -->
-				<div id="principal-produto">
+				<div id="principal-produto" class="s12 m12 l12">
 					<!-- Linha espaçadora -->
 					<div class="row">
 						<div class="col s12 m12 l12"></div>
@@ -96,7 +96,9 @@
 					<!-- Barra de pesquisa de produto -->
 					<div class="row">
 						<div class="col s12 m12 l12">
-							<nav class="brown lighten-2 hoverable">
+							<p>Qual produto você está procurando?</p>
+
+							<nav class="red lighten-2 hoverable">
 							<div class="nav-wrapper">
 								<form>
 									<div class="input-field">
@@ -931,7 +933,7 @@
 
 					<!-- Lista de categorias -->
 					<div class="row">
-						<div id="cx-lista-categoria" class="col s12 m12 l12">
+						<div class="col s12 m12 l12">
 							<ul id="lista-categoria" class="collection">
 								<!-- ... -->
 							</ul>
@@ -1019,7 +1021,7 @@
 				<!-- Tabs de fornecedor -->
 				<ul id="tabs-swipe-demo" class="tabs">
 					<li class="tab col s6"><a href="#principal-fornecedor"
-						onclick="Materialize.fadeInImage('#principal-fornecedor')"><i
+						onclick="abrirPrincipalFornecedor(); Materialize.fadeInImage('#principal-fornecedor')"><i
 							class="material-icons brown-text text-lighten-2">local_shipping</i>Principal</a></li>
 					<li class="tab col s6"><a href="#novo-fornecedor"
 						onclick="Materialize.fadeInImage('#novo-fornecedor')"><i
@@ -1028,7 +1030,243 @@
 				</ul>
 
 				<!-- Janela principal de fornecedor -->
-				<div id="principal-fornecedor" class="col s12 blue">Test 1</div>
+				<div id="principal-fornecedor" class="col s12 m12 l12">
+					<!-- Linha espaçadora -->
+					<div class="row">
+						<div class="col s12 m12 l12"></div>
+					</div>
+
+					<!-- Descrição de busca e Barra de pesquisa de fornecedor -->
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<p>Qual fornecedor você está procurando?</p>
+
+							<nav class="brown lighten-2 hoverable">
+							<div class="nav-wrapper">
+								<form>
+									<div class="input-field">
+										<input id="search-fornecedor" type="search" class="truncate"
+											data-list="#lista-fornecedor" onkeyup="buscar(this.id);"
+											placeholder="Nome ou CNPJ"> <label class="label-icon"
+											for="search-fornecedor"><i class="material-icons">search</i></label><i
+											class="material-icons">close</i>
+									</div>
+								</form>
+							</div>
+							</nav>
+						</div>
+					</div>
+
+					<!-- Lista de fornecedor -->
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<ul id="lista-fornecedor" class="collection">
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal de fornecedor selecionado -->
+				<div id="modal-fornecedor" class="modal modal-fixed-footer white">
+					<!-- Modal content -->
+					<div class="modal-content">
+						<!-- Botão fechar -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<a class="modal-action modal-close right"><i
+									class="material-icons grey-text">close</i></a>
+							</div>
+						</div>
+
+						<!-- Título de modal (Nome do fornecedor) -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<h5 id="titulo-modal-fornecedor"></h5>
+
+								<!-- divider -->
+								<div class="divider"></div>
+							</div>
+						</div>
+
+						<!-- Informações do fornecedor (Razao social e CNPJ)-->
+						<div class="row">
+							<div class="col s12 m6 l6">
+								<h6>
+									<b>Razão Social</b>
+								</h6>
+
+								<p id="razaoSocialFornecedor"></p>
+							</div>
+
+							<div class="col s12 m6 l6">
+								<h6>
+									<b>CNPJ</b>
+								</h6>
+
+								<p id="cnpjFornecedor"></p>
+							</div>
+						</div>
+
+						<!-- Informações de contato fornecedor (Email, Telefone e celular)-->
+						<div class="row">
+							<div class="col s12 m6 l6">
+								<h6>
+									<b>Email</b>
+								</h6>
+
+								<p id="emailContatoFornecedor"></p>
+							</div>
+
+							<div class="col s12 m3 l3">
+								<h6>
+									<b>Telefone</b>
+								</h6>
+
+								<p id="telefoneContatoFornecedor"></p>
+							</div>
+
+							<div class="col s12 m3 l3">
+								<h6>
+									<b>Celular</b>
+								</h6>
+
+								<p id="celularContatoFornecedor"></p>
+							</div>
+						</div>
+
+						<!-- Título de endereços -->
+						<div class="row">
+							<!-- Título de endereços -->
+							<div class="col s12 m12 l12">
+								<h5>Endereço(s) do Fornecedor</h5>
+
+								<!-- divider -->
+								<div class="divider"></div>
+							</div>
+						</div>
+
+						<!-- Endereços -->
+						<div class="row">
+							<!-- Lista de endereços -->
+							<div class="col s12 m6 l6">
+								<ul id="lista-endereco-fornecedor" class="collection"></ul>
+							</div>
+
+							<div class="col s12 m6 l6">
+								<!-- Descrição de formulário de endereço -->
+								<h6 align="center">Formulário</h6>
+
+								<!-- divider -->
+								<div class="divider"></div>
+
+								<!-- CEP e Logradouro -->
+								<form id="form-endereco-fornecedor">
+									<div class="row">
+										<div class="input-field col s12 m4 l4">
+											<input id="cep-f-selecionado" type="text" maxlength="10"
+												onblur="buscarCep(this)" required> <label
+												for="cep-f-selecionado">CEP</label>
+										</div>
+
+										<div class="input-field col s12 m8 l8">
+											<input id="logradouro-f-selecionado" type="text"
+												maxlength="255"> <label for="logradouro">Logradouro</label>
+										</div>
+									</div>
+
+									<!-- Número, Complemento e Bairro -->
+									<div class="row">
+										<div class="input-field col s5 m3 l3">
+											<input id="numero-f-selecionado" type="number" maxlength="10"
+												step="1" required> <label for="numero">Nº</label>
+										</div>
+
+										<div class="input-field col s7 m4 l4">
+											<input id="complemento-f-selecionado" type="text"
+												maxlength="50"> <label for="complemento">*Complemento</label>
+										</div>
+
+										<div class="input-field col s12 m5 l5">
+											<input id="bairro-f-selecionado" type="text" maxlength="100"
+												required> <label for="bairro">Bairro</label>
+										</div>
+									</div>
+
+									<!-- Cidade e UF -->
+									<div class="row">
+										<div class="input-field col s7 m9 l9">
+											<input id="cidade-f-selecionado" type="text" maxlength="100"
+												required> <label for="cidade">Cidade</label>
+										</div>
+
+										<div class="input-field col s5 m3 l3">
+											<select id="select-uf" name="uf" required>
+												<option value="AC">AC</option>
+												<option value="AL">AL</option>
+												<option value="AP">AP</option>
+												<option value="AM">AM</option>
+												<option value="BA">BA</option>
+												<option value="CE">CE</option>
+												<option value="DF">DF</option>
+												<option value="ES">ES</option>
+												<option value="GO">GO</option>
+												<option value="MA">MA</option>
+												<option value="MT">MT</option>
+												<option value="MS">MS</option>
+												<option value="MG">MG</option>
+												<option value="PA">PA</option>
+												<option value="PB">PB</option>
+												<option value="PR">PR</option>
+												<option value="PE">PE</option>
+												<option value="PI">PI</option>
+												<option value="RJ">RJ</option>
+												<option value="RN">RN</option>
+												<option value="RS">RS</option>
+												<option value="RO">RO</option>
+												<option value="RR">RR</option>
+												<option value="SC">SC</option>
+												<option value="SP">SP</option>
+												<option value="SE">SE</option>
+												<option value="TO">TO</option>
+											</select> <label>UF</label>
+										</div>
+									</div>
+
+									<!-- Botão Submit -->
+									<div class="row">
+										<div class="col s12 m6 l6">
+											<a
+												class="waves-effect waves-light btn red lighten-2 col s12 m10 l10">Deletar
+												Endereço<i class="material-icons right">delete</i>
+											</a>
+										</div>
+
+										<div class="col s12 m6 l6">
+											<button
+												class="btn waves-effect waves-light right green lighten-2 col s12 m10 l10"
+												type="submit" name="action">
+												Novo Endereço<i class="material-icons right">add</i>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<!-- /.col -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.modal-content -->
+
+					<!-- Modal footer -->
+					<div class="modal-footer white">
+						<!-- Botão para excluir fornecedor -->
+						<button id="btn-excluir-fornecedor"
+							class="btn-flat waves-effect waves-red left">
+							<i class="material-icons left red-text">delete</i> Excluir
+							Fornecedor
+						</button>
+					</div>
+				</div>
 
 				<!-- Janela de cadastro de fornecedor -->
 				<div id="novo-fornecedor">
@@ -1121,8 +1359,8 @@
 							<!-- CEP e Logradouro -->
 							<div class="row">
 								<div class="input-field col s12 m4 l4">
-									<input id="cep" name="cep" type="text" maxlength="10">
-									<label for="cep">CEP</label>
+									<input id="cep" name="cep" type="text" maxlength="10"
+										onblur="buscarCep(this)" required> <label for="cep">CEP</label>
 								</div>
 
 								<div class="input-field col s12 m8 l8">
@@ -1223,8 +1461,5 @@
 	<script type="text/javascript"
 		src="resources/dedicated/js/administrador/mascara-loja.js"
 		charset="utf-8" defer></script>
-
-	<!-- Blob converter -->
-	<script src="//wzrd.in/standalone/blob-util@latest" defer></script>
 </body>
 </html>

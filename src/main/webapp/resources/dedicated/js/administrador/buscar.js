@@ -4,3 +4,11 @@ function buscar(tipo) {
 		hidden_mode : true
 	});
 }
+
+// Buscar CEP
+function buscarCep(e) {
+	if ($(e).prop('id') == 'cep-f-selecionado') {
+	} else if ($(e).prop('id') == 'cep') {
+		// ...
+	}
+}

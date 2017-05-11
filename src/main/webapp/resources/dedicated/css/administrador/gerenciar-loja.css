@@ -20,6 +20,26 @@ main {
 	display: none;
 }
 
+/* Lista de produtos */
+#lista-produto li {
+	display: none;
+}
+
+/* Hover na lista de produtos */
+#lista-produto li:hover {
+	transition: 0.4s;
+	color: white;
+	background-color: #ef5350;
+}
+
+/* Modal para produto */
+#modal-produto {
+	width: 94% !important;
+	height: 90% !important;
+	max-width: 100% !important;
+	max-height: 90% !important;
+}
+
 /* Main Fornecedor */
 #main-fornecedor {
 	display: none;
@@ -30,24 +50,24 @@ main {
 	display: none;
 }
 
-/* Lista de produtos */
-#lista-produto li {
+/* Lista de fornecedores */
+#lista-fornecedor li {
 	display: none;
 }
 
-/* Hover na lista de produtos */
-#lista-produto li:hover {
+/* Hover na lista de fornecedores */
+#lista-fornecedor li:hover {
 	transition: 0.4s;
 	color: white;
-	background-color: #EE6363;
+	background-color: #8d6e63;
 }
 
 /* Modal para produto */
-#modal-produto {
-	width: 94% !important;
-	height: 90% !important;
+#modal-fornecedor {
+	width: 75% !important;
+	height: 60% !important;
 	max-width: 100% !important;
-	max-height: 90% !important;
+	max-height: 100% !important;
 }
 
 /* Botão de alteção de foto */

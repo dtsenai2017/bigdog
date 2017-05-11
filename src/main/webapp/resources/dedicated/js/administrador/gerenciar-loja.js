@@ -32,28 +32,23 @@ $('select').material_select();
 // Escondendo link para lista de categorias
 $('#btn-esconder-categorias').hide();
 
-// Selecionar janela (Produto ou Fornecedor)
-// Mostrar Produto
+// PRODUTO
 $("#btn-produto").click(function() {
 	// Mostrando janela
 	$('#main-produto').fadeIn(1500);
 	$('#main-fornecedor').hide();
 });
 
-// Mostrar lista completa de categoria no modal
-function mostrarListaCategoria() {
-	$('#lista-categoria li').fadeIn(500);
-	$('#btn-esconder-categorias').fadeIn(800);
-	$('#btn-mostrar-categorias').hide();
-}
-
-// Esconder lista completa de categoria no modal
-function esconderListaCategoria() {
-	$('#btn-mostrar-categorias').fadeIn(500);
-	$('#lista-categoria li').fadeOut(300);
-	$('#btn-esconder-categorias').hide();
-	$('#search-categoria').val('');
-}
+// Input search produto (Enter press)
+$('#search-produto').keypress(function(e) {
+	// Verifica se ENTER foi pressionado
+	if(e.which == 13) {
+		// Cancela qualquer ação padrão do elemento
+		e.preventDefault();
+		
+        Materialize.toast("Digite apenas sua busca!", 1600);
+    }
+});
 
 // Abrir tab principal de produtos
 function abrirPrincipalProduto() {
@@ -382,6 +377,21 @@ $("#btn-alterar-produto").click(function(){
 		}
 	});
 });
+
+// Mostrar lista completa de categoria no modal
+function mostrarListaCategoria() {
+	$('#lista-categoria li').fadeIn(500);
+	$('#btn-esconder-categorias').fadeIn(800);
+	$('#btn-mostrar-categorias').hide();
+}
+
+// Esconder lista completa de categoria no modal
+function esconderListaCategoria() {
+	$('#btn-mostrar-categorias').fadeIn(500);
+	$('#lista-categoria li').fadeOut(300);
+	$('#btn-esconder-categorias').hide();
+	$('#search-categoria').val('');
+}
 
 // Abrir modal para edição de categoria de produto cadastrado.
 function abrirModalAlterarCategoria(){
@@ -1302,6 +1312,96 @@ $("#btn-fornecedor").click(function() {
 	$('#main-fornecedor').fadeIn(1500);
 	$('#main-produto').hide();
 });
+
+// Input search fornecedor (Enter press)
+$('#search-fornecedor').keypress(function(e) {
+	// Verifica se ENTER foi pressionado
+	if(e.which == 13) {
+		// Cancela qualquer ação padrão do elemento
+		e.preventDefault();
+		
+        Materialize.toast("Digite apenas sua busca!", 1600);
+    }
+});
+
+// Abrir tab principal de fornecedores
+function abrirPrincipalFornecedor() {
+	// Refresh na lista
+	refreshListaFornecedor();
+	
+	// Função para refresh de lista
+	function refreshListaFornecedor(){
+		$('#lista-fornecedor').empty();
+	}
+	
+	// Populando lista de fornecedores
+	$.getJSON({
+		url : "adm/fornecedor",
+		type : "GET",
+		success : function(fornecedores) {
+			// Populando Lista
+			$.each(fornecedores, function(index, fornecedor) {
+				// Linha de lista
+				var liFornecedor = '<li class="collection-item">'
+					+ '<span><b>' + fornecedor.nomeFantasia + '</b>' 
+					+ '</span>' + '<br><span>'+ fornecedor.cnpj + '</span>'
+					+ '<a href="#modal-fornecedor" onclick="abrirModalFornecedor('
+					+ fornecedor.idFornecedor + ');" class="secondary-content">'
+					+ '<i class="material-icons cyan-text">' + 'open_in_new'
+					+ '</i></a></li>';
+				
+
+				// Populando lista
+				$('#lista-fornecedor').append(liFornecedor);
+			});
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
+}
+
+// Carregar dados de fornecedor selecionado para modal
+function abrirModalFornecedor(idFornecedor){
+	// Limpando lista de endereços de fornecedor
+	$('#lista-endereco-fornecedor').empty().html(' ');
+	
+	// Populando lista de fornecedores
+	$.getJSON({
+		url : "adm/fornecedor/" + idFornecedor,
+		type : "GET",
+		success : function(fornecedor) {
+			// Atribuindo informação de fornecedor
+			$('#titulo-modal-fornecedor').text(fornecedor.nomeFantasia);
+			$('#razaoSocialFornecedor').text(fornecedor.razaoSocial);
+			$('#cnpjFornecedor').text(fornecedor.cnpj);
+			
+			// Atribuindo contato de fornecedor
+			$('#emailContatoFornecedor').text(fornecedor.contato.email);
+			$('#telefoneContatoFornecedor').text(fornecedor.contato.telefone);
+			$('#celularContatoFornecedor').text(fornecedor.contato.celular);
+			
+			// Populando Lista de endereços de fornecedor
+			$.each(fornecedor.enderecos, function(index, endereco) {
+				// Linha de lista
+				var liEnderecoFornecedor = '<li class="collection-item"><div'
+					+ 'class="truncate">' + endereco.logradouro
+					+ '<a href="#!" onclick="abrirEnderecoFornecedor('
+					+ endereco.idEnderecoFornecedor + ')"'
+					+ 'class="secondary-content">'
+					+ '<i class="material-icons '
+					+ 'blue-text">' + 'room' + '</i></a></div></li>';
+				
+
+				// Populando lista
+				$('#lista-endereco-fornecedor').append(liEnderecoFornecedor);
+			});
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
+}
 
 // Inserir novo fornecedor
 // Cadastrar uma nova subcategoria

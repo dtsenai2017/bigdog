@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.validation.ConstraintViolationException;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,5 +53,18 @@ public class FornecedorController {
 	public List<Fornecedor> listarFornecedor() {
 		// Retornando lista
 		return fornecedorDAO.listar();
+	}
+
+	// Listar (id)
+	@RequestMapping(value = "fornecedor/{id}", method = RequestMethod.GET)
+	public Fornecedor listarFornecedor(@PathVariable("id") Long idFornecedor) {
+		// Objeto que será retornado
+		Fornecedor fornecedor = fornecedorDAO.listar(idFornecedor);
+		
+		// Inicializando endereços de fornecedor
+		Hibernate.initialize(fornecedor.getEnderecos());
+		
+		// Retornando objeto
+		return fornecedor;
 	}
 }
