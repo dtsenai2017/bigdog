@@ -70,11 +70,6 @@ main {
 	max-height: 90% !important;
 }
 
-/* Botão de alteção de foto */
-#btn-alterar-foto {
-	display: none;
-}
-
 /* Modal para editar produto */
 #modal-editar-produto {
 	width: 74% !important;
@@ -117,9 +112,4 @@ main {
 #modal-categoria {
 	width: 90% !important;
 	max-width: 100% !important;
-}
-
-/* Botões para inserir ou alterar endereço de fornecedor */
-#btn-inserir-endereco {
-	display: none;
 }

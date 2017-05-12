@@ -1088,9 +1088,11 @@
 							</div>
 						</div>
 
-						<!-- Informações do fornecedor (Razao social e CNPJ)-->
+						<!-- Informações do fornecedor (ID, Razao social e CNPJ)-->
 						<div class="row">
 							<div class="col s12 m6 l6">
+								<input id="idFornecedor-selecionado" type="hidden">
+
 								<h6>
 									<b>Razão Social</b>
 								</h6>
@@ -1195,11 +1197,7 @@
 					</div>
 				</div>
 
-				<!-- Modal para alterar fornecedor
-				<!-- ... -->
-
 				<!-- Modal para inserir ou alterar endereço de fornecedor selecionado -->
-				<!-- Modal Structure -->
 				<div id="modal-endereco-fornecedor" class="modal modal-fixed-footer">
 					<!-- Modal content -->
 					<div class="modal-content">
@@ -1225,9 +1223,8 @@
 							<!-- Formulário de Endereço -->
 							<!-- CEP e Logradouro -->
 							<form id="form-endereco-fornecedor">
-								<!-- ID de fornecedor -->
-								<input id="idFornecedor-selecionado" type="hidden"> <input
-									id="idEnderecoFornecedor-selecionado" type="hidden">
+								<!-- ID do endereço -->
+								<input id="idEnderecoFornecedor-selecionado" type="hidden">
 
 								<div class="row">
 									<div class="input-field col s12 m3 l3">
@@ -1310,10 +1307,16 @@
 								<!-- Botão Submit -->
 								<div class="row">
 									<div class="col s12 m12 l12">
+										<button id="btn-alterar-endereco"
+											class="btn waves-effect waves-light right green lighten-2"
+											type="submit" name="action">
+											Alterar<i id="icon-btn-endereco" class="material-icons right">mode_edit</i>
+										</button>
+
 										<button id="btn-inserir-endereco"
 											class="btn waves-effect waves-light right green lighten-2"
 											type="submit" name="action">
-											Novo Endereço<i id="icon-btn-endereco"
+											Inserir novo<i id="icon-btn-endereco"
 												class="material-icons right">add</i>
 										</button>
 									</div>

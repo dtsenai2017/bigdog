@@ -1,5 +1,6 @@
 package br.com.bigdog.admcontroller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ public class EnderecoFornecedorController {
 	private GenericDAO<EnderecoFornecedor> enderecoFornecedorDAO;
 
 	// Construtor
+	@Autowired
 	public EnderecoFornecedorController(GenericDAO<EnderecoFornecedor> enderecoFornecedorDAO) {
 		this.enderecoFornecedorDAO = enderecoFornecedorDAO;
 	}
@@ -44,6 +46,9 @@ public class EnderecoFornecedorController {
 		enderecoFornecedorAtual.setBairro(enderecoFornecedor.getBairro());
 		enderecoFornecedorAtual.setCidade(enderecoFornecedor.getCidade());
 		enderecoFornecedorAtual.setUf(enderecoFornecedor.getUf());
+
+		// Alterando
+		enderecoFornecedorDAO.alterar(enderecoFornecedorAtual);
 
 		// Retornando
 		return ResponseEntity.ok().build();

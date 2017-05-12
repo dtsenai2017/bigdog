@@ -53,6 +53,9 @@ public class Cliente {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_cliente", nullable = false)
 	private List<Pet> pets;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "id_cliente", nullable = false)
+	private List<Compra> compras;
 
 	// Getters e Setters
 	public Long getIdCliente() {
@@ -135,10 +138,18 @@ public class Cliente {
 		this.pets = pets;
 	}
 
+	public List<Compra> getCompras() {
+		return compras;
+	}
+
+	public void setCompras(List<Compra> compras) {
+		this.compras = compras;
+	}
+
 	@Override
 	public String toString() {
 		return "Cliente [idCliente=" + idCliente + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", cpf="
 				+ cpf + ", dataNascimento=" + dataNascimento + ", genero=" + genero + ", enderecos=" + enderecos
-				+ ", contato=" + contato + ", pets=" + pets + "]";
+				+ ", contato=" + contato + ", pets=" + pets + ", compras=" + compras + "]";
 	}
 }
