@@ -1,9 +1,9 @@
-// Input Valor do formulário de cadastro de produto
+// Input Valor do formulário de inserção
 $('#valor').mask('0.000.000.00', {
 	reverse : true
 });
 
-// Input Valor do formulário de alteração de produto
+// Input Valor do formulário de alteração
 $('#valor-p-selecionado').mask('0.000.000.00', {
 	reverse : true
 });
@@ -17,5 +17,8 @@ $('#celular').mask('(00) 0000-0000');
 // Telefone
 $('#telefone').mask('(00) 0000-0000');
 
-// Cep
+// Cep de formulário de inserção
 $('#cep').mask('00000-000');
+
+// Cep de formulário de alteração
+$('#cep-f-selecionado').mask('00000-000');

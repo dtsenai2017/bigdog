@@ -50,6 +50,13 @@ public class CategoriaController {
 		}
 	}
 
+	// Listar Categorias para formulário
+	@RequestMapping(value = "categoria", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Categoria> listarCategorias() {
+		// Retornando
+		return categoriaDAO.listar();
+	}
+
 	// Inserir subcategoria
 	@RequestMapping(value = "subcategoria/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> inserirSubCategoria(@PathVariable("id") Long idCategoria,
@@ -64,10 +71,10 @@ public class CategoriaController {
 		// Valor da lista da categoria
 		subCategorias = categoria.getSubCategorias();
 
-		// Adicionando lista de requisição
+		// Adicionando subcategoria em lista de categoria
 		subCategorias.add(subCategoria);
 
-		// Adicionando valor em lista de categoria
+		// Adicionando lista alterada
 		categoria.setSubCategorias(subCategorias);
 
 		// Inserindo
@@ -81,13 +88,6 @@ public class CategoriaController {
 			e.printStackTrace();
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	}
-
-	// Listar Categorias para formulário
-	@RequestMapping(value = "categoria", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public List<Categoria> listarCategorias() {
-		// Retornando
-		return categoriaDAO.listar();
 	}
 
 	// Listar subcategorias de categoria selecionada para formulário

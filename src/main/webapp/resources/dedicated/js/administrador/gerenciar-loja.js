@@ -121,7 +121,7 @@ function abrirModalProduto(idProduto){
 			// Imagem, id de produto, nome do produto e descrição do
 			// produto
 			$('#imagem-produto-selecionado').attr('src', atob(produto.foto));
-			$('#idProduto-p').val(produto.idProduto);
+			$('#idProduto-selecionado').val(produto.idProduto);
 			$('#nomeProduto').text(produto.nome);
 			$('#descricaoProduto').text(produto.descricao);
 			
@@ -249,7 +249,7 @@ $("#btn-alterar-foto").click(function() {
 	var mensagem;
 	
 	// Id e objeto que será alterado
-	var idProduto = $('#idProduto-p').val();
+	var idProduto = $('#idProduto-selecionado').val();
 	var produto = {
 			foto
 	}
@@ -325,7 +325,7 @@ $("#checkbox-alterar-produto").change(function() {
 /* Atribuindo valores de produto para formulário de alteração */
 $("#btn-alterar-produto").click(function(){
     // Atributo
-	var idProduto = $('#idProduto-p').val();
+	var idProduto = $('#idProduto-selecionado').val();
 	
 	// Atribuindo valor de select de edição
 	if($('#checkbox-alterar-produto').prop('checked')){
@@ -569,7 +569,7 @@ $( "#form-alterar-produto" ).submit(function( event ) {
 	
 	// Objeto que receberá dados de alteração
 	 var produto = {
-		 idProduto : $('#idProduto-p').val(),
+		 idProduto : $('#idProduto-selecionado').val(),
 		 nome : $('#nome-p-selecionado').val(),
 		 descricao : $('#descricao-p-selecionado').val(),
 		 qtdEstoque : $('#qtdEstoque-p-selecionado').val(),
@@ -834,7 +834,7 @@ $("#form-produto").submit(function(e) {
 $("#btn-excluir-produto").click(function() {
 	// Atributo
 	var mensagem;
-	var idProduto = $('#idProduto-p').val();
+	var idProduto = $('#idProduto-selecionado').val();
 
 	// Confirmar exclusão
 	$.confirm({
@@ -1372,6 +1372,7 @@ function abrirModalFornecedor(idFornecedor){
 		type : "GET",
 		success : function(fornecedor) {
 			// Atribuindo informação de fornecedor
+			$('#idFornecedor-selecionado').val(fornecedor.idFornecedor);
 			$('#titulo-modal-fornecedor').text(fornecedor.nomeFantasia);
 			$('#razaoSocialFornecedor').text(fornecedor.razaoSocial);
 			$('#cnpjFornecedor').text(fornecedor.cnpj);
@@ -1383,16 +1384,30 @@ function abrirModalFornecedor(idFornecedor){
 			
 			// Populando Lista de endereços de fornecedor
 			$.each(fornecedor.enderecos, function(index, endereco) {
-				// Linha de lista
-				var liEnderecoFornecedor = '<li class="collection-item"><div'
-					+ 'class="truncate">' + endereco.logradouro
-					+ '<a href="#!" onclick="abrirEnderecoFornecedor('
+				// Linha de endereco
+				var liEnderecoFornecedor = '<li><div class="collapsible-header">'
+					+ endereco.logradouro + '</div>'
+					+ '<div class="collapsible-body cyan white-text">'
+					+ '<span><b>CEP: </b>'
+					+ endereco.cep + '<br></span>'
+					+ '<span><b>Nº: </b>'
+					+ endereco.numero + '<br></span>'
+					+ '<span><b>Complemento: </b>'
+					+ endereco.complemento + '<br></span>'
+					+ '<span><b>Bairro: </b>'
+					+ endereco.bairro + '<br></span>'
+					+ '<span><b>Cidade: </b>'
+					+ endereco.cidade + '<br></span>'
+					+ '<span><b>UF: </b>'
+					+ endereco.uf + '<br></span>'
+					+ '<div class="divider"></div><br>'
+					+ '<div align="right"><a onclick="abrirAlterarEndereco('
 					+ endereco.idEnderecoFornecedor + ')"'
-					+ 'class="secondary-content">'
-					+ '<i class="material-icons '
-					+ 'blue-text">' + 'room' + '</i></a></div></li>';
-				
-
+					+ 'href="#modal-endereco-fornecedor">'
+					+ '<i class="material-icons red-text text-lighten-2">'
+					+ 'mode_edit</i></a></div>'
+					+ '</div></li>';
+					
 				// Populando lista
 				$('#lista-endereco-fornecedor').append(liEnderecoFornecedor);
 			});
@@ -1404,94 +1419,193 @@ function abrirModalFornecedor(idFornecedor){
 }
 
 // Inserir novo fornecedor
-// Cadastrar uma nova subcategoria
-$("#form-fornecedor")
-		.submit(
-				function(e) {
-					// Cancela qualquer ação padrão do elemento
-					e.preventDefault();
+$("#form-fornecedor").submit(function(e) {
+	// Atributos
+	var mensagem;
+	
+	// Cancela qualquer ação padrão do elemento
+	e.preventDefault();
+	
+	// Limpar campos de formulário
+	function limparFormFornecedor() {
+		// Limpando campos
+		$('#nomeFantasia').val('');
+		$('#razaoSocial').val('');
+		$('#cnpj').val('');
+		$('#email').val('');
+		$('#telefone').val('');
+		$('#celular').val('');
+		$('#cep').val('');
+		$('#logradouro').val('');
+		$('#numero').val('');
+		$('#complemento').val('');
+		$('#bairro').val('');
+		$('#cidade').val('');
+		$('#uf').val('AC').attr('select', true);
+	}
+	
+	// Atributo que será inserido (Fornecedor, Contato e UM
+	// endereço)
+	var fornecedor = {
+		nomeFantasia : $('#form-fornecedor').find(
+				'input[name="nomeFantasia"]').val(),
+		razaoSocial : $('#form-fornecedor').find(
+				'input[name="razaoSocial"]').val(),
+		cnpj : $('#form-fornecedor').find('input[name="cnpj"]')
+				.val(),
+		contato : {
+			email : $('#form-fornecedor').find(
+					'input[name="email"]').val(),
+			telefone : $('#form-fornecedor').find(
+					'input[name="telefone"]').val(),
+			celular : $('#form-fornecedor').find(
+					'input[name="celular"]').val()
+		},
+		enderecos : [ {
+			cep : $('#form-fornecedor').find(
+					'input[name="cep"]').val(),
+			logradouro : $('#form-fornecedor').find(
+					'input[name="logradouro"]').val(),
+			numero : $('#form-fornecedor').find(
+					'input[name="numero"]').val(),
+			complemento : $('#form-fornecedor').find(
+					'input[name="complemento"]').val(),
+			bairro : $('#form-fornecedor').find(
+					'input[name="bairro"]').val(),
+			cidade : $('#form-fornecedor').find(
+					'input[name="cidade"]').val(),
+			uf : $('#form-fornecedor')
+					.find('select[name="uf"]').val()
+		} ]
+	}
+	
+	// Cadastrando novo fornecedor, com UM endereço.
+	$.ajax({
+		type : "POST",
+		url : "adm/fornecedor",
+		data : JSON.stringify(fornecedor),
+		contentType : "application/json; charset=utf-8",
+		success : function(s) {
+			// Mensagem para toast
+			mensagem = 'Fornecedor cadastrado com sucesso!';
+	
+			// Limpar Formulario
+			limparFormFornecedor();
+		},
+		error : function(e) {
+			// Mensagem para toast
+			mensagem = 'Ops, houve um problema!';
+		},
+		complete : function() {
+			// Toast
+			Materialize.toast(mensagem, 2800);
+		}
+	});
+});
 
-					// Atributos
-					var mensagem;
+// Inserir endereço em fornecedor selecionado
+$("#form-endereco-fornecedor").submit(function(e) {
+	// Cancela qualquer ação padrão do elemento
+	e.preventDefault();
+	
+	// Atributos
+	var idFornecedor = $('#idFornecedor-selecionado').val();
+	var enderecoFornecedor = {
+		cep : $('#cep-f-selecionado').val(),
+		logradouro : $('#logradouro-f-selecionado').val(),
+		numero : $('#numero-f-selecionado').val(),
+		complemento: $('#complemento-f-selecionado').val(),
+		bairro : $('#bairro-f-selecionado').val(),
+		cidade : $('#cidade-f-selecionado').val(),
+		uf : $('#uf-f-selecionado').val()
+	}
+	
+	// Inserindo endereço em fornecedor
+	$.ajax({
+		type : "POST",
+		url : "adm/enderecoFornecedor/" +idFornecedor,
+		data : JSON.stringify(enderecoFornecedor),
+		contentType : "application/json; charset=utf-8",
+		success : function(s) {
+			// Mensagem para toast
+			mensagem = 'Endereço adicionado!';
+		},
+		error : function(e) {
+			// Mensagem para toast
+			mensagem = 'Ops, houve um problema!';
+		},
+		complete : function() {
+			// Toast
+			Materialize.toast(mensagem, 2800);
+		}
+	});
+});
 
-					// Atributo que será inserido (Fornecedor, Contato e UM
-					// endereço)
-					var fornecedor = {
-						nomeFantasia : $('#form-fornecedor').find(
-								'input[name="nomeFantasia"]').val(),
-						razaoSocial : $('#form-fornecedor').find(
-								'input[name="razaoSocial"]').val(),
-						cnpj : $('#form-fornecedor').find('input[name="cnpj"]')
-								.val(),
-						contato : {
-							email : $('#form-fornecedor').find(
-									'input[name="email"]').val(),
-							telefone : $('#form-fornecedor').find(
-									'input[name="telefone"]').val(),
-							celular : $('#form-fornecedor').find(
-									'input[name="celular"]').val()
-						},
-						enderecos : [ {
-							cep : $('#form-fornecedor').find(
-									'input[name="cep"]').val(),
-							logradouro : $('#form-fornecedor').find(
-									'input[name="logradouro"]').val(),
-							numero : $('#form-fornecedor').find(
-									'input[name="numero"]').val(),
-							complemento : $('#form-fornecedor').find(
-									'input[name="complemento"]').val(),
-							bairro : $('#form-fornecedor').find(
-									'input[name="bairro"]').val(),
-							cidade : $('#form-fornecedor').find(
-									'input[name="cidade"]').val(),
-							uf : $('#form-fornecedor')
-									.find('select[name="uf"]').val()
-						} ]
-					}
-
-					// alert($("#form-fornecedor :input[name='cidade']").val());
-
-					// alert($('#form-fornecedor').find(
-					// 'input[name="nomeFantasia"]').val());
-
-					// Cadastrando novo fornecedor
-					$.ajax({
-						type : "POST",
-						url : "adm/fornecedor",
-						data : JSON.stringify(fornecedor),
-						contentType : "application/json; charset=utf-8",
-						success : function(s) {
-							// Mensagem para toast
-							mensagem = 'Fornecedor cadastrado com sucesso!';
-
-							// Limpar Formulario
-							limparFormFornecedor();
-						},
-						error : function(e) {
-							// Mensagem para toast
-							mensagem = 'Ops, houve um problema!';
-						},
-						complete : function() {
-							// Toast
-							Materialize.toast(mensagem, 2800);
-						}
-					});
-				});
-
-// Limpar campos de formulário
-function limparFormFornecedor() {
-	// Limpando campos
-	$('#nomeFantasia').val('');
-	$('#razaoSocial').val('');
-	$('#cnpj').val('');
-	$('#email').val('');
-	$('#telefone').val('');
-	$('#celular').val('');
-	$('#cep').val('');
-	$('#logradouro').val('');
-	$('#numero').val('');
-	$('#complemento').val('');
-	$('#bairro').val('');
-	$('#cidade').val('');
-	$('#uf').val('AC').attr('select', true);
+// Puxar dados de endereço para formulário de alteração
+function abrirAlterarEndereco(idEnderecoFornecedor) {
+	// Populando formulário
+	// Populando lista de fornecedores
+	$.getJSON({
+		url : "adm/enderecoFornecedor/" + idEnderecoFornecedor,
+		type : "GET",
+		success : function(endereco) {
+			// Ativando labels
+			$('#label-cep-f-selecionado').addClass('active');
+			$('#label-logradouro-f-selecionado').addClass('active');
+			$('#label-numero-f-selecionado').addClass('active');
+			$('#label-complemento-f-selecionado').addClass('active');
+			$('#label-bairro-f-selecionado').addClass('active');
+			$('#label-cidade-f-selecionado').addClass('active');
+			
+			// Atribuindo valores para formulário
+			$('#idFornecedor-selecionado').val(idFornecedor);
+			$('#idEnderecoFornecedor-selecionado').val(endereco.idEnderecoFornecedor);
+			$('#cep-f-selecionado').val(endereco.cep);
+			$('#logradouro-f-selecionado').val(endereco.logradouro);
+			$('#numero-f-selecionado').val(endereco.numero);
+			$('#complemento-f-selecionado').val(endereco.complemento);
+			$('#bairro-f-selecionado').val(endereco.bairro);
+			$('#cidade-f-selecionado').val(endereco.cidade);
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
 }
+
+// Alterar endereço selecionado
+$("#btn-alterar-endereco").click(function() {
+	Materialize.toast('Alterado', 2500);
+});
+
+// Excluir endereço de fornecedor selecionado
+$("#btn-excluir-endereco").click(function() {
+	// Atributo
+	var idEnderecoFornecedor = $('#idEnderecoFornecedor-selecionado').val();
+	var idFornecedor = $('#idFornecedor-selecionado').val();
+	
+	// Excluindo endereço
+	$.ajax({
+		type : "DELETE",
+		url : "adm/enderecoFornecedor/" + idEnderecoFornecedor,
+		contentType : "application/json; charset=utf-8",
+		success : function(s) {
+			// Mensagem para toast
+			mensagem = 'Endereço excluído!';
+			
+			// Fechando modal de endereco
+			$('#modal-endereco-fornecedor').modal('close');
+			
+			// Refresh em modal de fornecedor
+			abrirModalFornecedor(idFornecedor);
+		},
+		error : function(e) {
+			// Mensagem para toast
+			mensagem = 'Ops, houve um problema!';
+		},
+		complete : function() {
+			// Toast
+			Materialize.toast(mensagem, 2800);
+		}
+	});
+});

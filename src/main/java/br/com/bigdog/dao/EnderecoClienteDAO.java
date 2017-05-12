@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.bigdog.model.EnderecoCliente;
 
 @Repository
-public class EnderecoDAO implements GenericDAO<EnderecoCliente> {
+public class EnderecoClienteDAO implements GenericDAO<EnderecoCliente> {
 	// Gerenciador de Entidades
 	@PersistenceContext
 	private EntityManager manager;

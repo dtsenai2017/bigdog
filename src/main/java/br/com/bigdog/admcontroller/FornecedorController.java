@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bigdog.dao.GenericDAO;
+import br.com.bigdog.model.EnderecoFornecedor;
 import br.com.bigdog.model.Fornecedor;
 
 @RestController
@@ -60,11 +61,41 @@ public class FornecedorController {
 	public Fornecedor listarFornecedor(@PathVariable("id") Long idFornecedor) {
 		// Objeto que será retornado
 		Fornecedor fornecedor = fornecedorDAO.listar(idFornecedor);
-		
+
 		// Inicializando endereços de fornecedor
 		Hibernate.initialize(fornecedor.getEnderecos());
-		
+
 		// Retornando objeto
 		return fornecedor;
+	}
+
+	// Inserir Endereço em fornecedor
+	@RequestMapping(value = "enderecoFornecedor/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Void> inserirEndereco(@PathVariable("id") Long idFornecedor,
+			@RequestBody EnderecoFornecedor endereco) {
+		// Atribuindo valor
+		Fornecedor fornecedor = fornecedorDAO.listar(idFornecedor);
+		Hibernate.initialize(fornecedor.getEnderecos());
+
+		// Lista
+		List<EnderecoFornecedor> enderecos = fornecedor.getEnderecos();
+
+		// Atribuindo endereco em lista de fornecedor
+		enderecos.add(endereco);
+
+		// Adicionando lista alterada
+		fornecedor.setEnderecos(enderecos);
+
+		// Inserindo
+		try {
+			fornecedorDAO.alterar(fornecedor);
+			return ResponseEntity.ok().build();
+		} catch (ConstraintViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

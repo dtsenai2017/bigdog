@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -33,6 +34,9 @@ public class Compra {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_compra", nullable = false)
 	private List<ItemCompra> itensCompra;
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "id_endereco_compra", nullable = false)
+	private EnderecoCompra endereco;
 
 	// Getters e Setters
 	public Long getIdCompra() {
@@ -83,9 +87,17 @@ public class Compra {
 		this.itensCompra = itensCompra;
 	}
 
+	public EnderecoCompra getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(EnderecoCompra endereco) {
+		this.endereco = endereco;
+	}
+
 	@Override
 	public String toString() {
 		return "Compra [idCompra=" + idCompra + ", dataCompra=" + dataCompra + ", status=" + status + ", valor=" + valor
-				+ ", frete=" + frete + ", itensCompra=" + itensCompra + "]";
+				+ ", frete=" + frete + ", itensCompra=" + itensCompra + ", endereco=" + endereco + "]";
 	}
 }

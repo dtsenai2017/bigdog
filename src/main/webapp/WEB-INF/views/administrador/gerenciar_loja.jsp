@@ -87,7 +87,7 @@
 				</ul>
 
 				<!-- Janela principal de produto -->
-				<div id="principal-produto" class="s12 m12 l12">
+				<div id="principal-produto">
 					<!-- Linha espaçadora -->
 					<div class="row">
 						<div class="col s12 m12 l12"></div>
@@ -225,11 +225,11 @@
 										</div>
 									</div>
 
-									<!-- ID de produto -->
-									<input id="idProduto-p" type="hidden">
-
 									<!-- Marca, categoria e subcategoria -->
 									<div class="row">
+										<!-- ID de produto -->
+										<input id="idProduto-selecionado" type="hidden">
+
 										<div class="col s12 m6 l6">
 											<h6>
 												<b>Marca</b>
@@ -1030,7 +1030,7 @@
 				</ul>
 
 				<!-- Janela principal de fornecedor -->
-				<div id="principal-fornecedor" class="col s12 m12 l12">
+				<div id="principal-fornecedor">
 					<!-- Linha espaçadora -->
 					<div class="row">
 						<div class="col s12 m12 l12"></div>
@@ -1134,124 +1134,51 @@
 							</div>
 						</div>
 
+						<!-- Botão Alterar Fornecedor -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<button id="btn-alterar-fornecedor"
+									data-target="modal-editar-fornecedor"
+									class="btn waves-effect waves-light cyan truncate left">
+									<i class="material-icons green-text text-lighten-4 left">mode_edit</i>
+									Alterar Fornecedor
+								</button>
+							</div>
+						</div>
+
 						<!-- Título de endereços -->
 						<div class="row">
-							<!-- Título de endereços -->
+							<!-- Título e descrição de endereços -->
 							<div class="col s12 m12 l12">
 								<h5>Endereço(s) do Fornecedor</h5>
 
 								<!-- divider -->
 								<div class="divider"></div>
+
+								<span>Para alterar ou excluir endereço, selecione o
+									endereço e clique em <span class="grey-text"><i
+										class="material-icons red-text text-lighten-2">mode_edit</i></span>.
+								</span>
 							</div>
 						</div>
 
 						<!-- Endereços -->
 						<div class="row">
+							<!-- Botão inserir novo endereço -->
+							<div class="col s12 m2 l2 center">
+								<!-- Botão para excluir fornecedor -->
+								<a id="btn-novo-endereco-fornecedor"
+									href="#modal-endereco-fornecedor"
+									class="btn waves-effect green"> <i class="material-icons">add</i>
+								</a>
+							</div>
+
 							<!-- Lista de endereços -->
-							<div class="col s12 m6 l6">
-								<ul id="lista-endereco-fornecedor" class="collection"></ul>
+							<div class="col s12 m10 l10">
+								<ul id="lista-endereco-fornecedor" class="collapsible hoverable"
+									data-collapsible="accordion">
+								</ul>
 							</div>
-
-							<div class="col s12 m6 l6">
-								<!-- Descrição de formulário de endereço -->
-								<h6 align="center">Formulário</h6>
-
-								<!-- divider -->
-								<div class="divider"></div>
-
-								<!-- CEP e Logradouro -->
-								<form id="form-endereco-fornecedor">
-									<div class="row">
-										<div class="input-field col s12 m4 l4">
-											<input id="cep-f-selecionado" type="text" maxlength="10"
-												onblur="buscarCep(this)" required> <label
-												for="cep-f-selecionado">CEP</label>
-										</div>
-
-										<div class="input-field col s12 m8 l8">
-											<input id="logradouro-f-selecionado" type="text"
-												maxlength="255"> <label for="logradouro">Logradouro</label>
-										</div>
-									</div>
-
-									<!-- Número, Complemento e Bairro -->
-									<div class="row">
-										<div class="input-field col s5 m3 l3">
-											<input id="numero-f-selecionado" type="number" maxlength="10"
-												step="1" required> <label for="numero">Nº</label>
-										</div>
-
-										<div class="input-field col s7 m4 l4">
-											<input id="complemento-f-selecionado" type="text"
-												maxlength="50"> <label for="complemento">*Complemento</label>
-										</div>
-
-										<div class="input-field col s12 m5 l5">
-											<input id="bairro-f-selecionado" type="text" maxlength="100"
-												required> <label for="bairro">Bairro</label>
-										</div>
-									</div>
-
-									<!-- Cidade e UF -->
-									<div class="row">
-										<div class="input-field col s7 m9 l9">
-											<input id="cidade-f-selecionado" type="text" maxlength="100"
-												required> <label for="cidade">Cidade</label>
-										</div>
-
-										<div class="input-field col s5 m3 l3">
-											<select id="select-uf" name="uf" required>
-												<option value="AC">AC</option>
-												<option value="AL">AL</option>
-												<option value="AP">AP</option>
-												<option value="AM">AM</option>
-												<option value="BA">BA</option>
-												<option value="CE">CE</option>
-												<option value="DF">DF</option>
-												<option value="ES">ES</option>
-												<option value="GO">GO</option>
-												<option value="MA">MA</option>
-												<option value="MT">MT</option>
-												<option value="MS">MS</option>
-												<option value="MG">MG</option>
-												<option value="PA">PA</option>
-												<option value="PB">PB</option>
-												<option value="PR">PR</option>
-												<option value="PE">PE</option>
-												<option value="PI">PI</option>
-												<option value="RJ">RJ</option>
-												<option value="RN">RN</option>
-												<option value="RS">RS</option>
-												<option value="RO">RO</option>
-												<option value="RR">RR</option>
-												<option value="SC">SC</option>
-												<option value="SP">SP</option>
-												<option value="SE">SE</option>
-												<option value="TO">TO</option>
-											</select> <label>UF</label>
-										</div>
-									</div>
-
-									<!-- Botão Submit -->
-									<div class="row">
-										<div class="col s12 m6 l6">
-											<a
-												class="waves-effect waves-light btn red lighten-2 col s12 m10 l10">Deletar
-												Endereço<i class="material-icons right">delete</i>
-											</a>
-										</div>
-
-										<div class="col s12 m6 l6">
-											<button
-												class="btn waves-effect waves-light right green lighten-2 col s12 m10 l10"
-												type="submit" name="action">
-												Novo Endereço<i class="material-icons right">add</i>
-											</button>
-										</div>
-									</div>
-								</form>
-							</div>
-							<!-- /.col -->
 						</div>
 						<!-- /.row -->
 					</div>
@@ -1264,6 +1191,145 @@
 							class="btn-flat waves-effect waves-red left">
 							<i class="material-icons left red-text">delete</i> Excluir
 							Fornecedor
+						</button>
+					</div>
+				</div>
+
+				<!-- Modal para alterar fornecedor
+				<!-- ... -->
+
+				<!-- Modal para inserir ou alterar endereço de fornecedor selecionado -->
+				<!-- Modal Structure -->
+				<div id="modal-endereco-fornecedor" class="modal modal-fixed-footer">
+					<!-- Modal content -->
+					<div class="modal-content">
+						<div class="container">
+							<!-- Botão fechar -->
+							<div class="row">
+								<div class="col s12 m12 l12">
+									<a class="modal-action modal-close right"><i
+										class="material-icons grey-text">close</i></a>
+								</div>
+							</div>
+
+							<!-- Título de modal -->
+							<div class="row">
+								<div class="col s12 m12 l12">
+									<h5 align="center">Endereço</h5>
+
+									<!-- divider -->
+									<div class="divider"></div>
+								</div>
+							</div>
+
+							<!-- Formulário de Endereço -->
+							<!-- CEP e Logradouro -->
+							<form id="form-endereco-fornecedor">
+								<!-- ID de fornecedor -->
+								<input id="idFornecedor-selecionado" type="hidden"> <input
+									id="idEnderecoFornecedor-selecionado" type="hidden">
+
+								<div class="row">
+									<div class="input-field col s12 m3 l3">
+										<input id="cep-f-selecionado" type="text" maxlength="10"
+											onblur="buscarCep(this)" required> <label
+											id="label-cep-f-selecionado" for="cep-f-selecionado">CEP</label>
+									</div>
+
+									<div class="input-field col s12 m9 l9">
+										<input id="logradouro-f-selecionado" type="text"
+											maxlength="255"> <label
+											id="label-logradouro-f-selecionado"
+											for="logradouro-f-selecionado">Logradouro</label>
+									</div>
+								</div>
+
+								<!-- Número, Complemento e Bairro -->
+								<div class="row">
+									<div class="input-field col s5 m2 l2">
+										<input id="numero-f-selecionado" type="number" maxlength="10"
+											step="1" required> <label
+											id="label-numero-f-selecionado" for="numero-f-selecionado">Nº</label>
+									</div>
+
+									<div class="input-field col s7 m3 l3">
+										<input id="complemento-f-selecionado" type="text"
+											maxlength="50"> <label
+											id="label-complemento-f-selecionado"
+											for="complemento-f-selecionado">* Complemento</label>
+									</div>
+
+									<div class="input-field col s12 m7 l7">
+										<input id="bairro-f-selecionado" type="text" maxlength="100"
+											required> <label id="label-bairro-f-selecionado"
+											for="bairro-f-selecionado">Bairro</label>
+									</div>
+								</div>
+
+								<!-- Cidade e UF -->
+								<div class="row">
+									<div class="input-field col s7 m9 l9">
+										<input id="cidade-f-selecionado" type="text" maxlength="100"
+											required> <label id="label-cidade-f-selecionado"
+											for="cidade-f-selecionado">Cidade</label>
+									</div>
+
+									<div class="input-field col s5 m3 l3">
+										<select id="uf-f-selecionado" required>
+											<option value="AC">AC</option>
+											<option value="AL">AL</option>
+											<option value="AP">AP</option>
+											<option value="AM">AM</option>
+											<option value="BA">BA</option>
+											<option value="CE">CE</option>
+											<option value="DF">DF</option>
+											<option value="ES">ES</option>
+											<option value="GO">GO</option>
+											<option value="MA">MA</option>
+											<option value="MT">MT</option>
+											<option value="MS">MS</option>
+											<option value="MG">MG</option>
+											<option value="PA">PA</option>
+											<option value="PB">PB</option>
+											<option value="PR">PR</option>
+											<option value="PE">PE</option>
+											<option value="PI">PI</option>
+											<option value="RJ">RJ</option>
+											<option value="RN">RN</option>
+											<option value="RS">RS</option>
+											<option value="RO">RO</option>
+											<option value="RR">RR</option>
+											<option value="SC">SC</option>
+											<option value="SP">SP</option>
+											<option value="SE">SE</option>
+											<option value="TO">TO</option>
+										</select> <label>UF</label>
+									</div>
+								</div>
+
+								<!-- Botão Submit -->
+								<div class="row">
+									<div class="col s12 m12 l12">
+										<button id="btn-inserir-endereco"
+											class="btn waves-effect waves-light right green lighten-2"
+											type="submit" name="action">
+											Novo Endereço<i id="icon-btn-endereco"
+												class="material-icons right">add</i>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!-- /.container -->
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<!-- Botão para excluir fornecedor -->
+						<button id="btn-excluir-endereco"
+							class="btn-flat waves-effect waves-red left">
+							<i class="material-icons left red-text">delete</i> Excluir
+							Endereço
 						</button>
 					</div>
 				</div>
@@ -1291,7 +1357,7 @@
 								<!-- Título -->
 								<div class="col s12 m12 l12">
 									<h6 align="left">
-										<b>Fornecedor</b>
+										<b>Dados do Fornecedor</b>
 									</h6>
 									<!-- divider -->
 									<div class="divider"></div>
@@ -1349,7 +1415,7 @@
 								<!-- Título -->
 								<div class="col s12 m12 l12">
 									<h6 align="left">
-										<b>Endereço</b>
+										<b>Dados de Endereço</b>
 									</h6>
 									<!-- divider -->
 									<div class="divider"></div>

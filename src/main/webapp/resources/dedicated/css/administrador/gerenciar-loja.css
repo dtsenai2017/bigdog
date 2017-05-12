@@ -34,9 +34,9 @@ main {
 
 /* Modal para produto */
 #modal-produto {
-	width: 94% !important;
+	width: 90% !important;
 	height: 90% !important;
-	max-width: 100% !important;
+	max-width: 90% !important;
 	max-height: 90% !important;
 }
 
@@ -64,10 +64,10 @@ main {
 
 /* Modal para produto */
 #modal-fornecedor {
-	width: 75% !important;
-	height: 60% !important;
-	max-width: 100% !important;
-	max-height: 100% !important;
+	width: 90% !important;
+	height: 90% !important;
+	max-width: 90% !important;
+	max-height: 90% !important;
 }
 
 /* Botão de alteção de foto */
@@ -117,4 +117,9 @@ main {
 #modal-categoria {
 	width: 90% !important;
 	max-width: 100% !important;
+}
+
+/* Botões para inserir ou alterar endereço de fornecedor */
+#btn-inserir-endereco {
+	display: none;
 }
