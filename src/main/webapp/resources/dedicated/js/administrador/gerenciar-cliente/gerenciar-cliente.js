@@ -20,11 +20,14 @@ function buscarCliente(idCliente) {
 		url : "visualizarCliente/" + idCliente,
 		type : "GET",
 		success : function(cliente) {
-			// Setando nome cliente para modal
-			$("#modal-cliente-info h5").append(cliente.nome);
+			// Setando id e nome cliente para modal
+			$('#idCliente-selecionado').val(cliente.idCliente);
+			$('#modal-cliente-info h5').append(cliente.nome);
 
 			// Atributos para valores nulos
 			var telefone;
+			var nascimento = new Date(cliente.dataNascimento);
+			nascimento.setDate(nascimento.getDate() + 1);
 
 			// Atribui valores caso for nulo
 			if (cliente.contato.telefone == null) {
@@ -34,15 +37,16 @@ function buscarCliente(idCliente) {
 			}
 
 			// Dados do cliente
-			var clienteDados = "<span><b>Nome Completo: </b>" + cliente.nome
-					+ "</span><br>" + "<span><b>CPF: </b>" + cliente.cpf
-					+ "</span><br>" + "<span><b>Gênero: </b>" + cliente.genero
-					+ "</span><br>" + "<span><b>Data de Nascimento: </b>"
-					+ cliente.dataNascimento + "</span><br>"
-					+ "<span><b>Email de Contato: </b>" + cliente.contato.email
-					+ "</span><br>" + "<span><b>Celular: </b>"
-					+ cliente.contato.celular + "</span><br>"
-					+ "<span><b>Telefone: </b>" + telefone + "</span><br>";
+			var clienteDados = "<span><b>Nome Completo : </b>" + cliente.nome
+					+ "</span><br>" + "<span><b>CPF : </b>" + cliente.cpf
+					+ "</span><br>" + "<span><b>Gênero : </b>" + cliente.genero
+					+ "</span><br>" + "<span><b>Data de Nascimento : </b>"
+					+ $.datepicker.formatDate("dd/mm/yy", nascimento)
+					+ "</span><br>" + "<span><b>Email de Contato : </b>"
+					+ cliente.contato.email + "</span><br>"
+					+ "<span><b>Celular : </b>" + cliente.contato.celular
+					+ "</span><br>" + "<span><b>Telefone : </b>" + telefone
+					+ "</span><br>";
 
 			// Define cor de fundo dos dados do CLIENTE de acordo com
 			// gênero
@@ -58,16 +62,26 @@ function buscarCliente(idCliente) {
 
 			// FOREACH Endereços do cliente
 			$.each(cliente.enderecos, function(index, endereco) {
+				// Atribui valor para caso for nulo
+				var complemento = endereco.complemento;
+
+				// Atribuindo valor
+				if (complemento == '') {
+					complemento = '-';
+				}
+
 				// Atributo de lista de endereços do cliente
-				var enderecoList = "<span><b>Logradouro:</b> "
+				var enderecoList = "<span><b>Logradouro : </b> "
 						+ endereco.logradouro + "</span><br>"
-						+ "<span><b>CEP:</b> " + endereco.cep + "</span><br>"
-						+ "<span><b>Nº:</b> " + endereco.numero + "</span><br>"
-						+ "<span><b>Bairro:</b> " + endereco.bairro
-						+ "</span><br>" + "<span><b>Cidade:</b> "
-						+ endereco.cidade + "</span><br>" + "<span><b>UF:</b> "
-						+ endereco.uf + "</span><div class='divider'>"
-						+ "</div><br>";
+						+ "<span><b>CEP :</b> " + endereco.cep + "</span><br>"
+						+ "<span><b>Nº :</b> " + endereco.numero
+						+ "</span><br>" + "<span><b>Complemento :</b> "
+						+ complemento + "</span><br>"
+						+ "<span><b>Bairro :</b> " + endereco.bairro
+						+ "</span><br>" + "<span><b>Cidade :</b> "
+						+ endereco.cidade + "</span><br>"
+						+ "<span><b>UF :</b> " + endereco.uf
+						+ "</span><div class='divider'>" + "</div><br>";
 
 				// Adicionando para collection de endereços em
 				// modal
@@ -152,23 +166,23 @@ function buscarCliente(idCliente) {
 				}
 
 				// Objeto de lista
-				var petList = "<span><b>Nome:</b> " + pet.nome + "</span><br>"
-						+ "<span><b>Espécie:</b> " + pet.especie
-						+ "</span><br>" + "<span><b>Raça:</b> " + raca
-						+ "</span><br>" + "<span><b>RGA:</b> " + rga
-						+ "</span><br>" + "<span><b>Pedigree:</b> " + pedigree
-						+ "</span><br>" + "<span><b>Carteira Vacina:</b> "
+				var petList = "<h5><b>" + pet.nome + "</b></h5>"
+						+ "<span><b>Espécie :</b> " + pet.especie
+						+ "</span><br>" + "<span><b>Raça :</b> " + raca
+						+ "</span><br>" + "<span><b>RGA :</b> " + rga
+						+ "</span><br>" + "<span><b>Pedigree :</b> " + pedigree
+						+ "</span><br>" + "<span><b>Carteira Vacina :</b> "
 						+ carteiraVacina + "</span><br>"
-						+ "<span><b>Nascimento:</b> " + dataNascimento
-						+ "</span><br>" + "<span><b>Pelagem:</b> " + pelagem
-						+ "</span><br><span><b>Castrado:</b> " + castrado
-						+ "</span><br>" + "<span><b>Peso:</b> " + peso
-						+ "</span><br>" + "<span><b>Observações:</b> "
+						+ "<span><b>Nascimento :</b> " + dataNascimento
+						+ "</span><br>" + "<span><b>Pelagem :</b> " + pelagem
+						+ "</span><br><span><b>Castrado :</b> " + castrado
+						+ "</span><br>" + "<span><b>Peso :</b> " + peso
+						+ "</span><br>" + "<span><b>Observações :</b> "
 						+ observacoes + "</span><br>"
 						+ "<a href='#modal-editar-pet' onclick='visualizarPet("
-						+ pet.idPet + ");' style='color: brown' "
-						+ " class='right'>" + "<b>Editar</b>" + "</a><br>"
-						+ "<div class='divider'>" + "</div><br>";
+						+ pet.idPet + ");' class='right'>"
+						+ "<i class='material-icons red-text'>mode_edit</i>"
+						+ "</a><br>" + "<div class='divider'>" + "<br>";
 
 				// Adicionando para collection de pets
 				// em modal
@@ -229,6 +243,9 @@ function visualizarPet(idPet) {
 
 // Alterar pet
 function alterarPet() {
+	// Atributo
+	var mensagem;
+
 	// Verifica alteração
 	$.confirm({
 		title : 'Alteração',
@@ -258,22 +275,12 @@ function alterarPet() {
 						data : JSON.stringify(pet),
 						contentType : "application/json",
 						success : function(data) {
-							// Sucesso
-							$.dialog({
-								type : 'green',
-								boxWidth : '40%',
-								useBootstrap : false,
-								title : 'Alteração efetuada com sucesso!',
-								content : 'O Pet foi alterado!',
-								close : function() {
-									// Recarregando página de clientes
-									window.location.reload();
-								}
-							});
+							// Recarregando página de clientes
+							window.location.reload();
 						},
 						error : function(e) {
 							// Erro
-							console.log("ERRO: " + e.toString());
+							console.log('ERROR :' + e);
 						}
 					});
 				}
@@ -293,3 +300,10 @@ function alterarPet() {
 	// Caixa de confirmação
 }
 // Alterar Pet
+
+// Excluir cliente
+$('#btn-excluir-cliente').click(
+		function() {
+			Materialize.toast("Cliente " + $('#idCliente-selecionado').val()
+					+ " excluído", 1000);
+		});

@@ -1,15 +1,4 @@
 @CHARSET "ISO-8859-1";
-
-body {
-	display: flex;
-	min-height: 100vh;
-	flex-direction: column;
-}
-
-main {
-	flex: 1 0 auto;
-}
-
 /* Main Produto */
 #main-produto {
 	display: none;
@@ -18,6 +7,11 @@ main {
 /* Tab Principal Produto */
 #principal-produto {
 	display: none;
+}
+
+/* Descrição de pesquisa de produto */
+#desc-search-produto {
+	font-size: 11px;
 }
 
 /* Lista de produtos */
@@ -34,48 +28,10 @@ main {
 
 /* Modal para produto */
 #modal-produto {
-	width: 90% !important;
-	height: 90% !important;
-	max-width: 90% !important;
-	max-height: 90% !important;
-}
-
-/* Main Fornecedor */
-#main-fornecedor {
-	display: none;
-}
-
-/* Tab Principal Fornecedor */
-#principal-fornecedor {
-	display: none;
-}
-
-/* Lista de fornecedores */
-#lista-fornecedor li {
-	display: none;
-}
-
-/* Hover na lista de fornecedores */
-#lista-fornecedor li:hover {
-	transition: 0.4s;
-	color: white;
-	background-color: #8d6e63;
-}
-
-/* Modal para produto */
-#modal-fornecedor {
-	width: 90% !important;
-	height: 90% !important;
-	max-width: 90% !important;
-	max-height: 90% !important;
-}
-
-/* Modal para editar produto */
-#modal-editar-produto {
-	width: 74% !important;
+	width: 100% !important;
 	height: 90% !important;
 	max-width: 100% !important;
-	max-height: 100% !important;
+	max-height: 90% !important;
 }
 
 /* Modal para edição de categoria de produtos cadastrados */
@@ -112,4 +68,12 @@ main {
 #modal-categoria {
 	width: 90% !important;
 	max-width: 100% !important;
+}
+
+/* Modal para editar produto selecionado */
+#modal-editar-produto {
+	width: 74% !important;
+	height: 90% !important;
+	max-width: 100% !important;
+	max-height: 100% !important;
 }

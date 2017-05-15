@@ -1,0 +1,42 @@
+@CHARSET "ISO-8859-1";
+
+/* Main Fornecedor */
+#main-fornecedor {
+	display: none;
+}
+
+/* Tab Principal Fornecedor */
+#principal-fornecedor {
+	display: none;
+}
+
+/* Descrição de pesquisa de fornecedor*/
+#desc-search-fornecedor {
+	font-size: 11px;
+}
+
+/* Lista de fornecedores cadastrados */
+#lista-fornecedor li {
+	display: none;
+}
+
+/* Hover na lista de fornecedores */
+#lista-fornecedor li:hover {
+	transition: 0.4s;
+	color: white;
+	background-color: #8d6e63;
+}
+
+/* Modal para fornecedor selecionado */
+#modal-fornecedor {
+	width: 100% !important;
+	height: 90% !important;
+	max-width: 100% !important;
+	max-height: 90% !important;
+}
+
+/* Modal para alterar fornecedor */
+#modal-alterar-fornecedor {
+	height: 90% !important;
+	max-height: 90% !important;
+}

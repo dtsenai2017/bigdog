@@ -124,6 +124,6 @@
 
 	<!-- JS para busca -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/administrador/buscar.js" defer></script>
+		src="resources/dedicated/js/administrador/component/buscar.js" defer></script>
 </body>
 </html>

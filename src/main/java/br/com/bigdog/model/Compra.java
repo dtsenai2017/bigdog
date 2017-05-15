@@ -37,6 +37,9 @@ public class Compra {
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_endereco_compra", nullable = false)
 	private EnderecoCompra endereco;
+	@OneToOne(orphanRemoval = false)
+	@JoinColumn(name = "id_cliente", nullable = false)
+	private Cliente cliente;
 
 	// Getters e Setters
 	public Long getIdCompra() {
@@ -95,9 +98,18 @@ public class Compra {
 		this.endereco = endereco;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	@Override
 	public String toString() {
 		return "Compra [idCompra=" + idCompra + ", dataCompra=" + dataCompra + ", status=" + status + ", valor=" + valor
-				+ ", frete=" + frete + ", itensCompra=" + itensCompra + ", endereco=" + endereco + "]";
+				+ ", frete=" + frete + ", itensCompra=" + itensCompra + ", endereco=" + endereco + ", cliente="
+				+ cliente + "]";
 	}
 }

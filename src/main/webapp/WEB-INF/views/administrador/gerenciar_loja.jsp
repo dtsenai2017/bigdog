@@ -8,9 +8,17 @@
 <!-- Título -->
 <title>Administrador | Gerenciar Loja</title>
 
-<!-- CSS dedicado -->
+<!-- CSS dedicado em geral -->
 <link rel="stylesheet"
-	href="resources/dedicated/css/administrador/gerenciar-loja.css">
+	href="resources/dedicated/css/administrador/gerenciar-loja/gerenciar-loja.css">
+
+<!-- CSS dedicado para gerenciamento de produto -->
+<link rel="stylesheet"
+	href="resources/dedicated/css/administrador/gerenciar-loja/gerenciar-produto.css">
+
+<!-- CSS dedicado para gerenciamento de produto -->
+<link rel="stylesheet"
+	href="resources/dedicated/css/administrador/gerenciar-loja/gerenciar-fornecedor.css">
 </head>
 <body>
 	<!--  import navbar -->
@@ -96,9 +104,7 @@
 					<!-- Barra de pesquisa de produto -->
 					<div class="row">
 						<div class="col s12 m12 l12">
-							<p>Qual produto você está procurando?</p>
-
-							<nav class="red lighten-2 hoverable">
+							<nav class="red hoverable">
 							<div class="nav-wrapper">
 								<form>
 									<div class="input-field">
@@ -693,6 +699,19 @@
 						<div class="row">
 							<!-- Formulário de cadastro de produto -->
 							<form id="form-produto" class="col s12 m12 l12" method="post">
+								<!-- Descrição de produto -->
+								<div class="row">
+									<!-- Título -->
+									<div class="col s12 m12 l12">
+										<h6 align="left">
+											<b>Dados do Produto</b>
+										</h6>
+
+										<!-- divider -->
+										<div class="divider"></div>
+									</div>
+								</div>
+
 								<!-- Visualização da foto do produto -->
 								<div class="row">
 									<div class="col s12 m12 l12" align="center">
@@ -1039,17 +1058,15 @@
 					<!-- Descrição de busca e Barra de pesquisa de fornecedor -->
 					<div class="row">
 						<div class="col s12 m12 l12">
-							<p>Qual fornecedor você está procurando?</p>
-
-							<nav class="brown lighten-2 hoverable">
+							<nav class="brown hoverable">
 							<div class="nav-wrapper">
 								<form>
 									<div class="input-field">
 										<input id="search-fornecedor" type="search" class="truncate"
 											data-list="#lista-fornecedor" onkeyup="buscar(this.id);"
-											placeholder="Nome ou CNPJ"> <label class="label-icon"
-											for="search-fornecedor"><i class="material-icons">search</i></label><i
-											class="material-icons">close</i>
+											placeholder="Nome, CNPJ, Telefone, Celular ou Email">
+										<label class="label-icon" for="search-fornecedor"><i
+											class="material-icons">search</i></label><i class="material-icons">close</i>
 									</div>
 								</form>
 							</div>
@@ -1139,12 +1156,12 @@
 						<!-- Botão Alterar Fornecedor -->
 						<div class="row">
 							<div class="col s12 m12 l12">
-								<button id="btn-alterar-fornecedor"
+								<a id="btn-alterar-fornecedor" href="#modal-alterar-fornecedor"
 									data-target="modal-editar-fornecedor"
-									class="btn waves-effect waves-light cyan truncate left">
-									<i class="material-icons green-text text-lighten-4 left">mode_edit</i>
-									Alterar Fornecedor
-								</button>
+									class="btn waves-effect waves-light cyan truncate left"> <i
+									class="material-icons green-text text-lighten-4 left">mode_edit</i>
+									Alterar
+								</a>
 							</div>
 						</div>
 
@@ -1195,6 +1212,101 @@
 							Fornecedor
 						</button>
 					</div>
+				</div>
+
+				<!-- Modal para alteração do fornecedor -->
+				<div id="modal-alterar-fornecedor" class="modal">
+					<!-- Modal content -->
+					<div class="modal-content">
+						<div class="container">
+							<!-- Botão fechar -->
+							<div class="row">
+								<div class="col s12 m12 l12">
+									<a class="modal-action modal-close right"><i
+										class="material-icons grey-text">close</i></a>
+								</div>
+							</div>
+
+							<!-- Título de modal -->
+							<div class="row">
+								<div class="col s12 m12 l12">
+									<h5 align="center">Alterar Fornecedor</h5>
+
+									<!-- divider -->
+									<div class="divider"></div>
+								</div>
+							</div>
+
+							<!-- Formulário -->
+							<form id="form-alterar-fornecedor">
+								<!-- Nome fantasia -->
+								<div class="row">
+									<div class="input-field col s12 m12 l12">
+										<input id="nomeFantasia-f-selecionado" type="text"
+											maxlength="255" required> <label
+											id="label-nomeFantasia-f-selecionado"
+											for="nomeFantasia-f-selecionado">Nome Fantasia</label>
+									</div>
+								</div>
+
+								<!-- Razão Social -->
+								<div class="row">
+									<div class="input-field col s12 m12 l12">
+										<input id="razaoSocial-f-selecionado" type="text"
+											maxlength="255" required> <label
+											id="label-razaoSocial-f-selecionado"
+											for="razaoSocial-f-selecionado">Razão Social</label>
+									</div>
+								</div>
+
+								<!-- CNPJ e Email -->
+								<div class="row">
+									<div class="input-field col s12 m5 l5">
+										<input id="cnpj-f-selecionado" minlength="14" type="text"
+											maxlength="18" required> <label
+											id="label-cnpj-f-selecionado" for="cnpj-f-selecionado">CNPJ</label>
+									</div>
+
+									<div class="input-field col s12 m7 l7">
+										<input id="email-f-selecionado" type="email" class="validate">
+										<label id="label-email-f-selecionado"
+											for="email-f-selecionado">Email</label>
+									</div>
+								</div>
+
+								<!-- Celular e Telefone -->
+								<div class="row">
+									<div class="input-field col s6 m6 l6">
+										<i class="material-icons prefix">stay_current_portrait</i> <input
+											id="celular-f-selecionado" type="tel" required> <label
+											id="label-celular-f-selecionado" for="celular-f-selecionado">Celular</label>
+									</div>
+
+									<div class="input-field col s6 m6 l6">
+										<i class="material-icons prefix">phone</i> <input
+											id="telefone-f-selecionado" type="tel"> <label
+											id="label-telefone-f-selecionado"
+											for="telefone-f-selecionado">* Telefone</label>
+									</div>
+								</div>
+
+								<!-- Botões Alterar Fornecedor -->
+								<div class="row">
+									<div class="col s12 m12 l12">
+										<button id="btn-alterar-fornecedor"
+											class="btn waves-effect waves-light right green lighten-2"
+											type="submit" name="action">
+											Alterar<i id="icon-btn-endereco" class="material-icons right">mode_edit</i>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!-- /.container -->
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer"></div>
 				</div>
 
 				<!-- Modal para inserir ou alterar endereço de fornecedor selecionado -->
@@ -1304,7 +1416,7 @@
 									</div>
 								</div>
 
-								<!-- Botão Submit -->
+								<!-- Botões Alterar ou Inserir Endereço -->
 								<div class="row">
 									<div class="col s12 m12 l12">
 										<button id="btn-alterar-endereco"
@@ -1370,31 +1482,29 @@
 							<!-- Nome fantasia -->
 							<div class="row">
 								<div class="input-field col s12 m12 l12">
-									<input id="nomeFantasia" name="nomeFantasia" type="text"
-										maxlength="255" required> <label for="nomeFantasia">Nome
-										Fantasia</label>
+									<input id="nomeFantasia" type="text" maxlength="255" required>
+									<label for="nomeFantasia">Nome Fantasia</label>
 								</div>
 							</div>
 
 							<!-- Razão Social -->
 							<div class="row">
 								<div class="input-field col s12 m12 l12">
-									<input id="razaoSocial" name="razaoSocial" type="text"
-										maxlength="255" required> <label for="razaoSocial">Razão
-										Social</label>
+									<input id="razaoSocial" type="text" maxlength="255" required>
+									<label for="razaoSocial">Razão Social</label>
 								</div>
 							</div>
 
 							<!-- CNPJ e Email -->
 							<div class="row">
 								<div class="input-field col s12 m5 l5">
-									<input id="cnpj" name="cnpj" minlength="14" type="text"
-										maxlength="18" required> <label for="cnpj">CNPJ</label>
+									<input id="cnpj" minlength="14" type="text" maxlength="18"
+										required> <label for="cnpj">CNPJ</label>
 								</div>
 
 								<div class="input-field col s12 m7 l7">
-									<input id="email" name="email" type="email" class="validate"
-										required> <label id="label-email" for="email">Email</label>
+									<input id="email" type="email" class="validate" required>
+									<label id="label-email" for="email">Email</label>
 								</div>
 							</div>
 
@@ -1402,14 +1512,12 @@
 							<div class="row">
 								<div class="input-field col s6 m6 l6">
 									<i class="material-icons prefix">stay_current_portrait</i> <input
-										id="celular" name="celular" type="tel" required> <label
-										for="celular">Celular</label>
+										id="celular" type="tel" required> <label for="celular">Celular</label>
 								</div>
 
 								<div class="input-field col s6 m6 l6">
 									<i class="material-icons prefix">phone</i> <input id="telefone"
-										name="telefone" type="tel"> <label for="telefone">*
-										Telefone</label>
+										type="tel"> <label for="telefone">* Telefone</label>
 								</div>
 							</div>
 
@@ -1428,43 +1536,43 @@
 							<!-- CEP e Logradouro -->
 							<div class="row">
 								<div class="input-field col s12 m4 l4">
-									<input id="cep" name="cep" type="text" maxlength="10"
+									<input id="cep" type="text" maxlength="10"
 										onblur="buscarCep(this)" required> <label for="cep">CEP</label>
 								</div>
 
 								<div class="input-field col s12 m8 l8">
-									<input id="logradouro" name="logradouro" type="text"
-										maxlength="255"> <label for="logradouro">Logradouro</label>
+									<input id="logradouro" type="text" maxlength="255"> <label
+										for="logradouro">Logradouro</label>
 								</div>
 							</div>
 
 							<!-- Número, Complemento e Bairro -->
 							<div class="row">
 								<div class="input-field col s5 m3 l3">
-									<input id="numero" name="numero" type="number" maxlength="10"
-										step="1" required> <label for="numero">Nº</label>
+									<input id="numero" type="number" maxlength="10" step="1"
+										required> <label for="numero">Nº</label>
 								</div>
 
 								<div class="input-field col s7 m4 l4">
-									<input id="complemento" name="complemento" type="text"
-										maxlength="50"> <label for="complemento">*Complemento</label>
+									<input id="complemento" type="text" maxlength="50"> <label
+										for="complemento">*Complemento</label>
 								</div>
 
 								<div class="input-field col s12 m5 l5">
-									<input id="bairro" name="bairro" type="text" maxlength="100"
-										required> <label for="bairro">Bairro</label>
+									<input id="bairro" type="text" maxlength="100" required>
+									<label for="bairro">Bairro</label>
 								</div>
 							</div>
 
 							<!-- Cidade e UF -->
 							<div class="row">
 								<div class="input-field col s7 m9 l9">
-									<input id="cidade" name="cidade" type="text" maxlength="100"
-										required> <label for="cidade">Cidade</label>
+									<input id="cidade" type="text" maxlength="100" required>
+									<label for="cidade">Cidade</label>
 								</div>
 
 								<div class="input-field col s5 m3 l3">
-									<select id="select-uf" name="uf" required>
+									<select id="select-uf" required>
 										<option value="AC">AC</option>
 										<option value="AL">AL</option>
 										<option value="AP">AP</option>
@@ -1521,14 +1629,24 @@
 	<c:import url="component/footer.jsp" />
 
 	<!-- Script's dedicado -->
-	<!-- JS dedicado -->
+	<!-- JS dedicado para loja em geral -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/administrador/gerenciar-loja.js"
+		src="resources/dedicated/js/administrador/gerenciar-loja/gerenciar-loja.js"
+		charset="utf-8" defer></script>
+
+	<!-- JS dedicado para gerenciamento de produtos -->
+	<script type="text/javascript"
+		src="resources/dedicated/js/administrador/gerenciar-loja/gerenciar-produto.js"
+		charset="utf-8" defer></script>
+
+	<!-- JS dedicado para gerenciamento de fornecedor -->
+	<script type="text/javascript"
+		src="resources/dedicated/js/administrador/gerenciar-loja/gerenciar-fornecedor.js"
 		charset="utf-8" defer></script>
 
 	<!-- Mascaras -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/administrador/mascara-loja.js"
+		src="resources/dedicated/js/administrador/gerenciar-loja/mascara-loja.js"
 		charset="utf-8" defer></script>
 </body>
 </html>

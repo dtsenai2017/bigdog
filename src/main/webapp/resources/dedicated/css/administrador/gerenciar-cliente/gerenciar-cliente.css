@@ -1,0 +1,19 @@
+@CHARSET "ISO-8859-1";
+
+/* Lista de clientes */
+#lista-clientes li {
+	display: none;
+}
+
+/* Linhas de lista de clientes */
+#lista-clientes li:hover {
+	transition: 0.4s;
+	color: white;
+	background-color: #7e57c2;
+}
+
+/* Modal que contém informações do cliente */
+#modal-cliente-info {
+	width: 88% !important;
+	max-width: 100% !important;
+}
