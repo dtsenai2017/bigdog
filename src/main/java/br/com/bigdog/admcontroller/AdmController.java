@@ -53,7 +53,15 @@ public class AdmController {
 	// -------------------- Gerenciar Loja
 
 	// Gerenciar Agendamentos
-	// ...
+	// Ir para Gerenciar Agendamentos
+	@RequestMapping(value = "gerenciarAgenda", method = RequestMethod.GET)
+	public ModelAndView agendaAdm(ModelAndView mav) {
+		// Adicionando view
+		mav.setViewName("administrador/gerenciar_agenda");
+
+		// Retornando
+		return mav;
+	}
 	// -------------------- Gerenciar Agendamentos
 
 	// Agendamento

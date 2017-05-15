@@ -15,6 +15,7 @@ import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Cliente;
 
 @RestController
+@RequestMapping(value = "adm/")
 public class AdmClienteController {
 	// Atributos
 	private GenericDAO<Cliente> clienteDAO;
@@ -26,9 +27,15 @@ public class AdmClienteController {
 	}
 
 	// Requisições
-	// Visualizar cliente (Endereço, Pets, Compras e Agendamentos)
-	@RequestMapping(value = "visualizarCliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public Cliente visualizarCliente(@PathVariable("id") Long id) {
+	// Listar
+	@RequestMapping(value = "cliente", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Cliente> listar() {
+		return clienteDAO.listar();
+	}
+
+	// Listar (id)
+	@RequestMapping(value = "cliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Cliente listar(@PathVariable("id") Long id) {
 		// Buscando cliente
 		Cliente cliente = clienteDAO.listar(id);
 
@@ -42,28 +49,8 @@ public class AdmClienteController {
 		return cliente;
 	}
 
-	// Listar
-	@RequestMapping(value = "/admCliente", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public List<Cliente> listar() {
-		return clienteDAO.listar();
-	}
-
-	// Listar (id)
-	@RequestMapping(value = "/admCliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public Cliente listar(@PathVariable("id") Long id) {
-		// Buscando cliente
-		Cliente cliente = clienteDAO.listar(id);
-
-		// Inicializando objetos(listas) de cliente
-		Hibernate.initialize(cliente.getEnderecos());
-		Hibernate.initialize(cliente.getPets());
-
-		// Retornando
-		return cliente;
-	}
-
 	// Excluir
-	@RequestMapping(value = "/admCliente/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "cliente/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> excluir(@PathVariable("id") Long id) {
 		clienteDAO.excluir(id);
 		return ResponseEntity.ok().build();

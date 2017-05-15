@@ -13,6 +13,7 @@ import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Pet;
 
 @RestController
+@RequestMapping(value = "adm/")
 public class AdmPetController {
 	// Atributos
 	private GenericDAO<Pet> petDAO;
@@ -25,7 +26,7 @@ public class AdmPetController {
 
 	// Requisições
 	// Listar (id)
-	@RequestMapping(value = "/admPet/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "pet/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Pet listar(@PathVariable("id") Long id) {
 		try {
 			return petDAO.listar(id);
@@ -35,7 +36,7 @@ public class AdmPetController {
 	}
 
 	// Alterar Pet (Castrado, Peso e Observações)
-	@RequestMapping(value = "admPet/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "pet/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> alterarPet(@PathVariable("id") Long id, @RequestBody Pet pet) {
 		// Pet atual
 		Pet petAtual = petDAO.listar(id);

@@ -60,7 +60,7 @@ public class PetController {
 	}
 
 	// Excluir
-	@RequestMapping(value = "/pet/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "pet/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> excluir(@PathVariable("id") Long id) {
 		petDAO.excluir(id);
 		return ResponseEntity.ok().build();

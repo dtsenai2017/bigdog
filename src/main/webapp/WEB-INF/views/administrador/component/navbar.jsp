@@ -85,7 +85,7 @@
 				class="material-icons left red-text text-red">shopping_cart</i>Loja</a></li>
 
 		<!-- Agenda -->
-		<li><a href="gerenciarAgendamentos"><i
+		<li><a href="gerenciarAgenda"><i
 				class="material-icons left cyan-text text-cyan">event_note</i>Agenda</a></li>
 	</ul>
 

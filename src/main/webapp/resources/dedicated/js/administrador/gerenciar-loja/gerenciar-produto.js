@@ -27,7 +27,7 @@ $('.datepicker').pickadate(	{
 	labelYearSelect : 'Selecione um ano',
 	selectMonths : true,
 	selectYears : 15,
-	format : 'dd/mm/yyyy'
+	format : 'yyyy-mm-dd'
 });
 
 // Input Textarea com contador de caracter (Descrição de produto)
@@ -494,7 +494,23 @@ function abrirPrincipalProduto() {
 function abrirModalProduto(idProduto) {
 	// Fechando card reveal, caso esteje aberto...
 	$('#titulo-card-reveal').click();
-
+	
+	// Limpando campos de modal
+	$('#imagem-produto-selecionado').attr('src', '');
+	$('#idProduto-selecionado').val('');
+	$('#nomeProduto').text('');
+	$('#descricaoProduto').text('');
+	$('#marcaProduto').text('');
+	$('#categoriaProduto').text('');
+	$('#subcategoriaProduto').text('');
+	$('#corProduto').text('');
+	$('#tamanhoProduto').text('');
+	$('#quantidadeProduto').text('');
+	$('#qtdEstoqueProduto').text('');
+	$('#valorProduto').text('');
+	$('#fornecedorProduto').text('');
+	$('#dataVigenciaProduto').text('');
+	
 	// Populando dados de modal com produto selecionado
 	$.getJSON({
 		url : "adm/produto/" + idProduto,
@@ -505,11 +521,18 @@ function abrirModalProduto(idProduto) {
 			dataVigencia.setDate(dataVigencia.getDate() + 1);
 			
 			// Atributos que podem ser null
+			var subCategoria;
 			var descricao = produto.descricao;
 			var tamanho = produto.tamanho;
 			var cor = produto.cor;
 			
 			// Atribuindo valores
+			if(produto.subCategoria == null){
+				subCategoria = '-';
+			} else {
+				subCategoria = produto.subCategoria.nome;
+			}
+			
 			if ( descricao == '' ){
 				descricao = '-';
 			}
@@ -529,8 +552,8 @@ function abrirModalProduto(idProduto) {
 			$('#descricaoProduto').text(descricao);
 			$('#marcaProduto').text(produto.marca);
 			$('#categoriaProduto').text(produto.categoria.nome);
-			$('#subcategoriaProduto').text(produto.subCategoria.nome);
 			$('#corProduto').text(cor);
+			$('#subcategoriaProduto').text(subCategoria);
 			$('#tamanhoProduto').text(tamanho);
 			$('#quantidadeProduto').text(produto.quantidade);
 			$('#qtdEstoqueProduto').text(produto.qtdEstoque);
@@ -731,10 +754,10 @@ $("#btn-alterar-produto").click(function(){
 			$('#cor-p-selecionado').val(produto.cor);
 			$('#idCategoria-p-selecionado').val(produto.categoria.idCategoria);
 			$('#disabled-categoria').val(produto.categoria.nome);
-			$('#idSubcategoria-p-selecionado').val(produto.subCategoria.idSubCategoria);
+			$('#idSubcategoria-p-selecionado').val(produto.subCategoria == null ? null : produto.subCategoria.idSubCategoria);
 			$('#disabled-fornecedor').val(produto.fornecedor.nomeFantasia);
 			$('#idFornecedor-p-selecionado').val(produto.fornecedor.idFornecedor);
-			$('#disabled-subcategoria').val(produto.subCategoria.nome);
+			$('#disabled-subcategoria').val(produto.subCategoria == null ? null : produto.subCategoria.nome);
 			$('#tamanho-p-selecionado').val(produto.tamanho);
 			$('#quantidade-p-selecionado').val(produto.quantidade);
 			$('#valor-p-selecionado').val(produto.valor);
@@ -882,8 +905,7 @@ $("#form-categoria-p-selecionado")
 						$('#idCategoria-p-selecionado').val(
 								categoria.idCategoria);
 						$('#disabled-categoria').val(categoria.nome);
-						$('#idSubcategoria-p-selecionado').val(
-								subCategoria.idSubCategoria);
+						$('#idSubcategoria-p-selecionado').val(null);
 						$('#disabled-subcategoria').val('Nenhuma selecionada.');
 
 						// Atribuindo valor para mensagem
@@ -966,6 +988,11 @@ $( "#form-alterar-produto" ).submit(function( event ) {
 	// Cancela qualquer ação padrão do elemento
 	event.preventDefault();
 	
+	// Atributos
+	var subCategoria = {
+			idSubCategoria : $('#idSubcategoria-p-selecionado').val()
+	}
+	
 	// Verifica edição está habilitada
 	if(!$('#checkbox-alterar-produto').prop('checked')){
 		// Mensagem toast
@@ -974,7 +1001,7 @@ $( "#form-alterar-produto" ).submit(function( event ) {
 	}
 	
 	// Objeto que receberá dados de alteração
-	 var produto = {
+	var produto = {
 		 idProduto : $('#idProduto-selecionado').val(),
 		 nome : $('#nome-p-selecionado').val(),
 		 descricao : $('#descricao-p-selecionado').val(),
@@ -989,9 +1016,10 @@ $( "#form-alterar-produto" ).submit(function( event ) {
 		 categoria : {
 			 idCategoria : $('#idCategoria-p-selecionado').val()
 		 },
-		 subCategoria : {
-			 idSubCategoria : $('#idSubcategoria-p-selecionado').val()
-		 },
+		 subCategoria : 
+				subCategoria.idSubCategoria == '' ?
+						null :
+							subCategoria,
 		 fornecedor : {
 			 idFornecedor : $('#idFornecedor-p-selecionado').val()
 		 }
@@ -1176,7 +1204,10 @@ $("#form-produto").submit(function(e) {
 	var file = $('#foto')[0].files[0];
 	var reader = new FileReader();
 	var dataVigencia = new Date($('#dataVigencia').val());
-
+	var subCategoria = {
+		idSubCategoria : $('#select-subcategoria').val()
+	}
+	
 	// Atributo que será inserido
 	var produto = {
 		nome : $('#nome').val(),
@@ -1188,13 +1219,14 @@ $("#form-produto").submit(function(e) {
 		cor : $('#cor').val(),
 		foto,
 		quantidade : $('#quantidade').val(),
-		dataVigencia : $.datepicker.formatDate('yy-mm-dd', dataVigencia),
+		dataVigencia : dataVigencia,
 		categoria : {
 			idCategoria : $('#select-categoria').val()
 		},
-		subCategoria : {
-			idSubCategoria : $('#select-subcategoria').val()
-		},
+		subCategoria : 
+			subCategoria.idSubCategoria == '' ?
+					null :
+						subCategoria,
 		fornecedor : {
 			idFornecedor : $('#select-fornecedor').val()
 		}
@@ -1206,7 +1238,7 @@ $("#form-produto").submit(function(e) {
 		var fotoByte = btoa(e.target.result);
 
 		// Atribuindo valor de foto para produto
-		produto.foto = fotoByte; 
+		produto.foto = fotoByte;
 		
 		// Cadastrando produto
 		$.ajax({
@@ -1217,22 +1249,22 @@ $("#form-produto").submit(function(e) {
 			success : function(s) {
 				// Mensagem para toast
 				mensagem = 'Produto inserido com sucesso!';
-				
+						
 				// Refresh no formulário
 				abrirFormProduto();
 			},
-			error : function(e) {
-				// Mensagem para toast
-				mensagem = 'Ops, houve um problema!';
-				console.log(e);
-			},
-			complete : function() {
-				// Toast
-				Materialize.toast(mensagem, 2800);
-			}
+		 	error : function(e) {
+		 		// Mensagem para toast
+		 		mensagem = 'Ops, houve um problema!';
+		 		console.log(e);
+		 },
+		 	complete : function() {
+		 		// Toast
+		 		Materialize.toast(mensagem, 2800);
+		 }
 		});
 	}
-
+		
 	// Conversão de file para blob
 	reader.readAsDataURL(file);
 });

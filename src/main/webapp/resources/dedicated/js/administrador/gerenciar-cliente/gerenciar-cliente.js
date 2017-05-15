@@ -17,7 +17,7 @@ function buscarCliente(idCliente) {
 
 	// Listar (id)
 	$.getJSON({
-		url : "visualizarCliente/" + idCliente,
+		url : "adm/cliente/" + idCliente,
 		type : "GET",
 		success : function(cliente) {
 			// Setando id e nome cliente para modal
@@ -220,7 +220,7 @@ function visualizarPet(idPet) {
 
 	// Listando e atribuindo valores para formulário de alteração
 	$.getJSON({
-		url : "admPet/" + idPet,
+		url : "adm/pet/" + idPet,
 		type : "GET",
 		success : function(pet) {
 			// Ativando labels de inputs
@@ -270,7 +270,7 @@ function alterarPet() {
 
 					// Alterando pet com id
 					$.ajax({
-						url : 'admPet/' + pet.idPet,
+						url : 'adm/pet/' + pet.idPet,
 						type : 'put',
 						data : JSON.stringify(pet),
 						contentType : "application/json",
@@ -302,8 +302,50 @@ function alterarPet() {
 // Alterar Pet
 
 // Excluir cliente
-$('#btn-excluir-cliente').click(
-		function() {
-			Materialize.toast("Cliente " + $('#idCliente-selecionado').val()
-					+ " excluído", 1000);
-		});
+$('#btn-excluir-cliente').click(function() {
+	// Verifica alteração
+	$.confirm({
+		title : 'Exclusão de cliente',
+		animation : 'top',
+		useBootstrap : false,
+		theme : 'material',
+		boxWidth : '50%',
+		content : 'Deseja realmente excluir ?',
+		buttons : {
+			// CONFIRMAR
+			confirm : {
+				text : 'Confirmar',
+				btnClass : 'btn-green',
+				action : function() {
+					// Id do cliente
+					var idCliente = $('#idCliente-selecionado').val();
+
+					// Excluindo cliente...
+					$.ajax({
+						url : 'adm/cliente/' + idCliente,
+						type : 'DELETE',
+						contentType : "application/json",
+						success : function(s) {
+							// Recarregando página de clientes
+							window.location.reload();
+						},
+						error : function(e) {
+							// Erro
+							console.log('ERROR :' + e);
+						}
+					});
+				}
+			// Opção Confirmar
+			},
+			cancel : {
+				// CANCELAR
+				text : 'Cancelar',
+				action : function() {
+					// ...
+				}
+			}
+		// Opção Cancelar
+		}
+	// Botões (Confirmar e Cancelar)
+	});
+});
