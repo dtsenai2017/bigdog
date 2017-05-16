@@ -42,7 +42,6 @@ public class AdmClienteController {
 		// Inicializando objetos(listas) de cliente
 		Hibernate.initialize(cliente.getEnderecos());
 		Hibernate.initialize(cliente.getPets());
-		// Hibernate.initialize(cliente.getCompras());
 		// Hibernate.initialize(cliente.getAgendamentos());
 
 		// Retornando
@@ -55,7 +54,4 @@ public class AdmClienteController {
 		clienteDAO.excluir(id);
 		return ResponseEntity.ok().build();
 	}
-
-	// Alterar Cliente (Nome, CPF, Email, Genero, Nascimento)
-	// ...
 }

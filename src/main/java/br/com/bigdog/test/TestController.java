@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.bigdog.dao.CompraDAO;
 import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Categoria;
 import br.com.bigdog.model.Cliente;
+import br.com.bigdog.model.Compra;
 import br.com.bigdog.model.Fornecedor;
 import br.com.bigdog.model.Produto;
 
@@ -26,15 +28,17 @@ public class TestController {
 	private GenericDAO<Categoria> categoriaDAO;
 	private GenericDAO<Fornecedor> fornecedorDAO;
 	private GenericDAO<Produto> produtoDAO;
+	private CompraDAO compraDAO;
 
 	// Construtor
 	@Autowired
 	public TestController(GenericDAO<Cliente> clienteDAO, GenericDAO<Categoria> categoriaDAO,
-			GenericDAO<Fornecedor> fornecedorDAO, GenericDAO<Produto> produtoDAO) {
+			GenericDAO<Fornecedor> fornecedorDAO, GenericDAO<Produto> produtoDAO, CompraDAO compraDAO) {
 		this.clienteDAO = clienteDAO;
 		this.categoriaDAO = categoriaDAO;
 		this.fornecedorDAO = fornecedorDAO;
 		this.produtoDAO = produtoDAO;
+		this.compraDAO = compraDAO;
 	}
 
 	// INSERÇÂO DE DADOS : Cliente, Endereço de Cliente, Pet e Contato
@@ -107,5 +111,14 @@ public class TestController {
 			e.printStackTrace();
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	// INSERÇÂO DE DADOS : Compra
+	@RequestMapping(value = "dataTestCompra", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Void> dataTestCompra(@RequestBody Compra compra) {
+		// Inserindo
+		compraDAO.inserir(compra);
+
+		return ResponseEntity.ok().build();
 	}
 }

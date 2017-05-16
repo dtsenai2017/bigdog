@@ -22,7 +22,6 @@ function buscarCliente(idCliente) {
 		success : function(cliente) {
 			// Setando id e nome cliente para modal
 			$('#idCliente-selecionado').val(cliente.idCliente);
-			$('#modal-cliente-info h5').append(cliente.nome);
 
 			// Atributos para valores nulos
 			var telefone;
@@ -60,7 +59,7 @@ function buscarCliente(idCliente) {
 			// modal
 			$('#dados-cliente').append(clienteDados);
 
-			// FOREACH Endereços do cliente
+			// Endereços do cliente
 			$.each(cliente.enderecos, function(index, endereco) {
 				// Atribui valor para caso for nulo
 				var complemento = endereco.complemento;
@@ -71,8 +70,8 @@ function buscarCliente(idCliente) {
 				}
 
 				// Atributo de lista de endereços do cliente
-				var enderecoList = "<span><b>Logradouro : </b> "
-						+ endereco.logradouro + "</span><br>"
+				var enderecoList = "<h5 align='center'><b>"
+						+ endereco.logradouro + "</b></h5>"
 						+ "<span><b>CEP :</b> " + endereco.cep + "</span><br>"
 						+ "<span><b>Nº :</b> " + endereco.numero
 						+ "</span><br>" + "<span><b>Complemento :</b> "
@@ -88,7 +87,7 @@ function buscarCliente(idCliente) {
 				$('#lista-endereco').append(enderecoList);
 			});
 
-			// FOREACH Pets
+			// Pets do cliente
 			$.each(cliente.pets, function(index, pet) {
 				// Atributos para valores nulos
 				var castrado;
@@ -155,7 +154,8 @@ function buscarCliente(idCliente) {
 				if (pet.dataNascimento.length == 0) {
 					dataNascimento = "Não há informação.";
 				} else {
-					dataNascimento = pet.dataNascimento;
+					dataNascimento = new Date(pet.dataNascimento);
+					dataNascimento.setDate(dataNascimento.getDate() + 1);
 				}
 
 				// Raça
@@ -166,19 +166,21 @@ function buscarCliente(idCliente) {
 				}
 
 				// Objeto de lista
-				var petList = "<h5><b>" + pet.nome + "</b></h5>"
-						+ "<span><b>Espécie :</b> " + pet.especie
+				var petList = "<h5 align='center' ><b>" + pet.nome
+						+ "</b></h5>" + "<span><b>Espécie :</b> " + pet.especie
 						+ "</span><br>" + "<span><b>Raça :</b> " + raca
 						+ "</span><br>" + "<span><b>RGA :</b> " + rga
 						+ "</span><br>" + "<span><b>Pedigree :</b> " + pedigree
 						+ "</span><br>" + "<span><b>Carteira Vacina :</b> "
 						+ carteiraVacina + "</span><br>"
-						+ "<span><b>Nascimento :</b> " + dataNascimento
+						+ "<span><b>Nascimento :</b> "
+						+ $.datepicker.formatDate("dd/mm/yy", dataNascimento)
 						+ "</span><br>" + "<span><b>Pelagem :</b> " + pelagem
 						+ "</span><br><span><b>Castrado :</b> " + castrado
-						+ "</span><br>" + "<span><b>Peso :</b> " + peso
-						+ "</span><br>" + "<span><b>Observações :</b> "
-						+ observacoes + "</span><br>"
+						+ "</span><br>" + "<span><b>Peso :</b> "
+						+ peso.toFixed(2) + " kg</span><br>"
+						+ "<span><b>Observações :</b> " + observacoes
+						+ "</span><br>"
 						+ "<a href='#modal-editar-pet' onclick='visualizarPet("
 						+ pet.idPet + ");' class='right'>"
 						+ "<i class='material-icons red-text'>mode_edit</i>"
@@ -189,9 +191,6 @@ function buscarCliente(idCliente) {
 				$('#lista-pet').append(petList);
 			});
 
-			// FOREACH Compras
-			// ...
-
 			// FOREACH Agendamentos
 			// ...
 		},
@@ -199,8 +198,46 @@ function buscarCliente(idCliente) {
 			console.log("ERROR: ", e);
 		}
 	});
+
+	// Listando compras de cliente
+	$.getJSON({
+		url : "adm/compraCliente/" + idCliente,
+		type : "GET",
+		success : function(compras) {
+			// Compras realizadas do cliente
+			$.each(compras, function(index, compra) {
+				// Atributo date
+				var dataCompra = new Date(compra.dataCompra);
+				dataCompra.setDate(dataCompra.getDate() + 1);
+
+				// Atributo de lista de compras do
+				// cliente
+				var compraList = "<h5 align='center'><b>"
+						+ $.datepicker.formatDate("dd/mm/yy", dataCompra)
+						+ "</b></h5>" + "<span><b>Qtd de Itens : </b>"
+						+ compra.itensCompra.length + "</span><br>"
+						+ "<span><b>Valor : </b>R$ " + compra.valor.toFixed(2)
+						+ "</span><br><span><b>Endereço : </b>"
+						+ compra.endereco.logradouro + ", "
+						+ compra.endereco.numero + " / " + compra.endereco.cep
+						+ "</span><br>" + "<span><b>Status da Compra : </b><i>"
+						+ compra.status
+						+ "</i></span><br><a href='#modal-compra-cliente' "
+						+ "onclick='abrirCompraCliente(" + compra.idCompra
+						+ ")'" + "class='text-red text-lighten-4'>"
+						+ "STATUS</a><div class='divider'>";
+
+				// Adicionando para collection de
+				// compras
+				$('#lista-compra').append(compraList);
+			});
+		},
+		error : function(e) {
+			// Error
+			console.log("ERROR : " + e);
+		}
+	});
 }
-// Buscar cliente selecionado
 
 // * EDITAR DADOS DO CLIENTE (Dados do cliente, pets, compra e agendamentos)
 // PET
@@ -239,7 +276,64 @@ function visualizarPet(idPet) {
 		}
 	});
 }
-// Abri dados do pet no formulario
+
+// Abrir dados da compra para moda
+function abrirCompraCliente(idCompra) {
+	// Listando compra
+	$.getJSON({
+		url : "adm/compra/" + idCompra,
+		type : "GET",
+		success : function(compra) {
+			// Ativando label de input
+			$('#label-status-compra-selecionada').addClass('active');
+
+			// Atribuindo valor para input (id e status)
+			$('#idCompra-selecionada').val(compra.idCompra);
+			$('#status-compra-selecionada').val(compra.status);
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+		}
+	});
+}
+
+// Alterar status de compra
+$("#form-status-compra").submit(function(e) {
+	// Cancela qualquer ação padrão do elemento
+	e.preventDefault();
+
+	// Atributos
+	var mensagem;
+	var compra = {
+		idCompra : $('#idCompra-selecionada').val(),
+		status : $('#status-compra-selecionada').val()
+	}
+
+	// Listando compra
+	$.ajax({
+		url : "adm/alterarStatus/" + compra.idCompra,
+		type : "PUT",
+		data : JSON.stringify(compra),
+		contentType : "application/json",
+		success : function(s) {
+			// Mensagem
+			mensagem = "Status alterado!";
+
+			// Fechando modal's
+			$('#modal-compra-cliente').modal('close');
+			$('#modal-cliente-info').modal('close');
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+
+			// Mensagem
+			mensagem = "Ops, houve um problema!";
+		},
+		complete : function(e) {
+			Materialize.toast(mensagem, 2000);
+		}
+	});
+});
 
 // Alterar pet
 function alterarPet() {

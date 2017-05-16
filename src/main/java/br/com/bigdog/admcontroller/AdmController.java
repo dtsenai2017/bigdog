@@ -21,10 +21,6 @@ public class AdmController {
 	}
 
 	// Requisições
-	// Dashboard
-	// ...
-	// -------------------- Dashboard
-
 	// Gerenciar Cliente
 	// Ir para Gerenciar Cliente
 	@RequestMapping(value = "gerenciarCliente", method = RequestMethod.GET)
@@ -38,7 +34,6 @@ public class AdmController {
 		// Retornando
 		return mav;
 	}
-	// -------------------- Gerenciar Cliente
 
 	// Gerenciar Loja
 	// Ir para Gerenciar Loja
@@ -50,7 +45,6 @@ public class AdmController {
 		// Retornando
 		return mav;
 	}
-	// -------------------- Gerenciar Loja
 
 	// Gerenciar Agendamentos
 	// Ir para Gerenciar Agendamentos
@@ -62,7 +56,6 @@ public class AdmController {
 		// Retornando
 		return mav;
 	}
-	// -------------------- Gerenciar Agendamentos
 
 	// Agendamento
 	// ...

@@ -96,13 +96,10 @@
 
 						<!-- ID e Nome do cliente -->
 						<input id="idCliente-selecionado" type="hidden">
-						<h5></h5>
-
-						<!-- Divider -->
-						<div class="divider"></div>
 
 						<!-- Lista de dados(Endereço, Pets, Compras e Agendamentos realizados -->
 						<div class="col s12 m12 l12">
+							<!-- Lista de dados -->
 							<ul class="collapsible hoverable" data-collapsible="accordion">
 								<!-- Cliente -->
 								<li>
@@ -165,23 +162,6 @@
 					</button>
 				</div>
 			</div>
-
-			<!-- Modal editar Cliente -->
-			<div id="modal-editar-cliente" class="modal">
-				<!-- Model content -->
-				<div class="modal-content">
-					<!-- Título -->
-					<h6>Editar cliente</h6>
-
-				</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<a href="#!"
-						class="modal-action modal-close waves-effect waves-green btn-flat">Voltar</a>
-				</div>
-			</div>
-			<!-- /#modal-editar-cliente -->
 
 			<!-- Modal editar pet -->
 			<div id="modal-editar-pet" class="modal">
@@ -262,6 +242,54 @@
 				<div class="modal-footer"></div>
 			</div>
 			<!-- /#modal-editar-pet -->
+
+			<!-- Modal para visualizar compra de cliente -->
+			<div id="modal-compra-cliente" class="modal">
+				<!-- Modal content -->
+				<div class="modal-content">
+					<div class="container">
+						<!-- Botão fechar -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<a class="modal-action modal-close right"><i
+									class="material-icons grey-text">close</i></a>
+							</div>
+						</div>
+
+						<!-- Título -->
+						<div class="row">
+							<!-- Título -->
+							<h5 class="center-align">Alterar Status</h5>
+
+							<!-- divider -->
+							<div class="divider"></div>
+						</div>
+
+						<!-- Alterar status -->
+						<div class="row">
+							<form id="form-status-compra">
+								<div class="input-field col s12 m12 l12">
+									<input id="idCompra-selecionada" type="hidden"> <input
+										id="status-compra-selecionada" type="text" class="validate"
+										required> <label for="status-compra-selecionada"
+										id="label-status-compra-selecionada">Status da compra</label>
+								</div>
+
+								<div class="col s12 m12 l12">
+									<button class="btn waves-effect cyan white-text right">
+										<i class="material-icons left">mode_edit</i> Alterar
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer"></div>
+			</div>
+			<!-- /#modal-compra-cliente -->
+
 		</div>
 		<!-- /.row -->
 	</div>
