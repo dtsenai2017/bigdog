@@ -115,10 +115,13 @@ public class TestController {
 
 	// INSERÇÂO DE DADOS : Compra
 	@RequestMapping(value = "dataTestCompra", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Void> dataTestCompra(@RequestBody Compra compra) {
-		// Inserindo
-		compraDAO.inserir(compra);
+	public ResponseEntity<Void> dataTestCompra(@RequestBody List<Compra> compras) {
+		// Inserindo lista
+		for (Compra compra : compras) {
+			compraDAO.inserir(compra);
+		}
 
+		// Retornando
 		return ResponseEntity.ok().build();
 	}
 }

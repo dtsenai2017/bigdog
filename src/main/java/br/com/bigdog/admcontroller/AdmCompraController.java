@@ -27,14 +27,10 @@ public class AdmCompraController {
 	}
 
 	// Requisições
-	// Realizar compra
-	@RequestMapping(value = "compra", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Void> dataTestCompra(@RequestBody Compra compra) {
-		// Inserindo
-		compraDAO.inserir(compra);
-
-		// Retornando
-		return ResponseEntity.ok().build();
+	// Listar
+	@RequestMapping(value = "compra", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Compra> listar() {
+		return compraDAO.listar();
 	}
 
 	// Listar (id)

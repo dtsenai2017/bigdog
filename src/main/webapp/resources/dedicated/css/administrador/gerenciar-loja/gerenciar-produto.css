@@ -72,8 +72,8 @@
 
 /* Modal para editar produto selecionado */
 #modal-editar-produto {
-	width: 74% !important;
+	width: 100% !important;
 	height: 90% !important;
 	max-width: 100% !important;
-	max-height: 100% !important;
+	max-height: 90% !important;
 }

@@ -3,6 +3,7 @@ package br.com.bigdog.model;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.bigdog.value.TipoServico;
 
+@Entity
 public class Servico {
 	// Atributos
 	@Id

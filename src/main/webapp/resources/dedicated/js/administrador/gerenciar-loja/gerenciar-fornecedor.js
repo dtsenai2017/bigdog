@@ -4,6 +4,7 @@ $("#btn-fornecedor").click(function() {
 	// Mostrando janela
 	$('#main-fornecedor').fadeIn(1500);
 	$('#main-produto').hide();
+	$('#main-compras').hide();
 });
 
 // Input search fornecedor (Enter press)

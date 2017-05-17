@@ -60,7 +60,79 @@
 	<!-- Row --> <!-- Swipe's -->
 	<div class="row">
 		<!-- Dashboard -->
-		<div id="swipe-dashboard" class="col s12 m12 l12"></div>
+		<div id="swipe-dashboard" class="col s12 m12 l12 center">
+			<!-- Botão para carregar gráficos -->
+			<div class="row">
+				<a class="waves-effect btn cyan white-text truncate"
+					onclick="consumir()"><i class="material-icons left">trending_up</i>Abrir
+					Gráficos</a>
+			</div>
+
+			<!-- divider -->
+			<div class="divider"></div>
+
+			<!-- Caixa pra gráfico -->
+			<div class="row">
+				<div id="grafico1" style="height: 400px"></div>
+			</div>
+
+			<script type="text/javascript">
+				function consumir() {
+					console.log('entrou');
+					var chart = new Array();
+					// Envia a chamada ajax para o servidor
+					$
+							.ajax({
+								url : 'adm/produto',
+								type : 'GET',
+								mediaType : 'JSON',
+								success : function(data) {
+									var produtos = data;
+
+									Highcharts
+											.chart(
+													'grafico1',
+													{
+														chart : {
+															type : 'pie',
+															options3d : {
+																enabled : true,
+																alpha : 45
+															}
+														},
+														title : {
+															text : 'Produtos Em Estoque'
+														},
+														subtitle : {
+															text : 'DTCommerce'
+														},
+														plotOptions : {
+															pie : {
+																innerSize : 100,
+																depth : 45
+															}
+														},
+														series : [ {
+															name : 'Quantidade em estoque é de: ',
+															data :  gerarProdutos(produtos) 
+														} ]
+													});
+
+									function gerarProdutos(produtos) {
+										for (var int = 0; int < produtos.length; int++) {
+											chart[int] = [ produtos[int].nome,
+												produtos[int].qtdEstoque ]; 
+										}
+										console.log(chart)
+										return chart;
+									}
+
+								}
+
+							});
+				}
+			</script>
+		</div>
 		<!-- /.swipe-dashboard -->
 
 		<!-- Gerenciar -->
@@ -132,7 +204,22 @@
 		<!-- /.swipe-gerenciar -->
 
 		<!-- Agenda -->
-		<div id="swipe-agenda" class="col s12 m12 l12 red">Agenda</div>
+		<div id="swipe-agenda" class="col s12 m12 l12">
+			<!-- Content -->
+			<div class="row">
+				<div class="col s12 m4 l4">
+					<h5 align="center">Consultas agendadas</h5>
+
+					<div class="divider"></div>
+				</div>
+
+				<div class="col s12 m8 l8">
+					<h5 align="center">Agendar</h5>
+
+					<div class="divider"></div>
+				</div>
+			</div>
+		</div>
 		<!-- /.swipe-agenda -->
 	</div>
 	<!-- /.row --> <!-- /.container --> </main>
@@ -150,5 +237,9 @@
 	<script type="text/javascript"
 		src="resources/dedicated/js/administrador/dashboard/dashboard.js"
 		defer></script>
+
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 </body>
 </html>

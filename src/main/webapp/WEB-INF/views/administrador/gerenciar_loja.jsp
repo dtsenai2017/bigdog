@@ -19,6 +19,10 @@
 <!-- CSS dedicado para gerenciamento de produto -->
 <link rel="stylesheet"
 	href="resources/dedicated/css/administrador/gerenciar-loja/gerenciar-fornecedor.css">
+
+<!-- CSS dedicado para compras -->
+<link rel="stylesheet"
+	href="resources/dedicated/css/administrador/gerenciar-loja/gerenciar-compra.css">
 </head>
 <body>
 	<!--  import navbar -->
@@ -70,6 +74,14 @@
 				<a id="btn-fornecedor"
 					class="waves-effect btn col s12 m12 l12 white grey-text text-grey truncate"><i
 					class="material-icons left brown-text text-lighten-2">local_shipping</i>Fornecedor</a>
+
+				<!-- Espaçador -->
+				<div class="col s12 m12 l12"></div>
+
+				<!-- Botão compras -->
+				<a id="btn-compras" onclick="abrirCompras();"
+					class="waves-effect btn col s12 m12 l12 white grey-text text-grey truncate"><i
+					class="material-icons left cyan-text">shopping_basket</i>Compras</a>
 			</div>
 
 			<!-- Janela produto -->
@@ -1620,6 +1632,276 @@
 				<!-- /#novo-fornecedor -->
 			</div>
 			<!-- /#main-fornecedor -->
+
+			<!-- Janela de compras -->
+			<div id="main-compras" class="col s12 m9 l9">
+				<!-- Título de janela -->
+				<h5 align="center">Compras</h5>
+
+				<!-- divider -->
+				<div class="divider"></div>
+
+				<!-- br -->
+				<br>
+
+				<!-- Barra de pesquisa de compras -->
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<nav class="cyan hoverable">
+						<div class="nav-wrapper">
+							<form>
+								<div class="input-field">
+									<input id="search-compra" type="search" class="truncate"
+										data-list="#lista-compra" onkeyup="buscar(this.id);"
+										placeholder="Data ou nome do cliente"> <label
+										class="label-icon" for="search-cmpra"><i
+										class="material-icons">search</i></label><i class="material-icons">close</i>
+								</div>
+							</form>
+						</div>
+						</nav>
+					</div>
+				</div>
+
+				<!-- Lista de compras -->
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<ul id="lista-compra" class="collection">
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- /#main-compras -->
+
+			<!-- Modal para informação de compra -->
+			<div id="modal-info-compra" class="modal">
+				<!-- Modal content -->
+				<div class="modal-content">
+					<div class="container">
+						<!-- Botão fechar -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<a class="modal-action modal-close right"><i
+									class="material-icons grey-text">close</i></a>
+							</div>
+						</div>
+
+						<!-- Título da modal -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<h5 align="center">Informações da Compra</h5>
+
+								<p>
+									<b>Informações da compra</b>
+								</p>
+
+								<!-- divider -->
+								<div class="divider"></div>
+							</div>
+						</div>
+
+						<!-- Descrição para informações da compra -->
+						<!-- Data da compra, status e frete -->
+						<div class="row">
+							<div class="col s12 m4 l4">
+								<h6>
+									<b>Data da compra</b>
+								</h6>
+
+								<p id="dataCompra-selecionada"></p>
+							</div>
+
+							<div class="col s12 m4 l4">
+								<h6>
+									<b>Frete</b>
+								</h6>
+
+								<p id="frete-selecionada"></p>
+							</div>
+
+							<div class="col s12 m4 l4">
+								<h6>
+									<b>Status da compra</b>
+								</h6>
+
+								<p id="status-selecionada"></p>
+							</div>
+						</div>
+
+						<!-- Descrição para informações do cliente -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<p>
+									<b>Informações dos cliente</b>
+								</p>
+
+								<div class="divider"></div>
+							</div>
+						</div>
+
+						<!-- Informações do cliente  -->
+						<!-- Nome, cpf, email e celular -->
+						<div class="row">
+							<div class="col s12 m8 l8">
+								<h6>
+									<b>Nome do Cliente</b>
+								</h6>
+
+								<p id="cliente-compra-selecionada"></p>
+							</div>
+
+							<div class="col s12 m4 l4">
+								<h6>
+									<b>CPF</b>
+								</h6>
+
+								<p id="clienteCpf-compra-selecionada"></p>
+							</div>
+
+							<div class="col s12 m8 l8">
+								<h6>
+									<b>Email</b>
+								</h6>
+
+								<p id="clienteEmail-compra-selecionada"></p>
+							</div>
+
+							<div class="col s12 m4 l4">
+								<h6>
+									<b>Celular</b>
+								</h6>
+
+								<p id="clienteCelular-compra-selecionada"></p>
+							</div>
+						</div>
+
+						<!-- Descrição para informações do endereço de entrega -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<p>
+									<b>Endereço de Entrega</b>
+								</p>
+
+								<div class="divider"></div>
+							</div>
+						</div>
+
+						<!-- Endereço da compra -->
+						<div class="row">
+							<!-- CEP -->
+							<div class="col s12 m5 l5">
+								<h6>
+									<b>CEP</b>
+								</h6>
+
+								<p id="cep-compra-selecionada"></p>
+							</div>
+
+							<!-- Logradouro -->
+							<div class="col s12 m7 l7">
+								<h6>
+									<b>Logradouro</b>
+								</h6>
+
+								<p id="logradouro-compra-selecionada"></p>
+							</div>
+
+							<!-- Complemento -->
+							<div class="col s12 m5 l5">
+								<h6>
+									<b>Complemento</b>
+								</h6>
+
+								<p id="complemento-compra-selecionada"></p>
+							</div>
+
+							<!-- Bairro -->
+							<div class="col s12 m7 l7">
+								<h6>
+									<b>Bairro</b>
+								</h6>
+
+								<p id="bairro-compra-selecionada"></p>
+							</div>
+
+							<!-- Cidade -->
+							<div class="col s12 m8 l8">
+								<h6>
+									<b>Cidade</b>
+								</h6>
+
+								<p id="cidade-compra-selecionada"></p>
+							</div>
+
+							<!-- UF -->
+							<div class="col s12 m4 l4">
+								<h6>
+									<b>UF</b>
+								</h6>
+
+								<p id="uf-compra-selecionada"></p>
+							</div>
+						</div>
+
+						<!-- Descrição para informações do(s) produto(s) -->
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<p>
+									<b>Informações dos itens</b>
+								</p>
+
+								<div class="divider"></div>
+							</div>
+						</div>
+
+						<!-- Itens da compra  -->
+						<div class="row">
+							<!-- Tabela de itens -->
+							<div class="col s12 m12 l12">
+								<table id="tabela-itens-compra" class="striped">
+									<thead>
+										<tr>
+											<th>Nome</th>
+											<th>Qtd.</th>
+											<th>Valor (uni.)</th>
+											<th>Valor (total)</th>
+										</tr>
+									</thead>
+
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+
+							<!-- divider -->
+							<div class="col s12 m12 l12">
+								<div class="divider"></div>
+							</div>
+
+							<!-- Valor total da compra -->
+							<div class="col s12 m12 l12 right-align">
+								<h6>
+									<b>QTD. DE ITENS</b> : <span id="qtdItens-selecionada"></span>
+								</h6>
+
+								<h5>
+									<b>TOTAL : </b> <span id="valor-selecionada"></span>
+								</h5>
+
+								<div class="divider"></div>
+							</div>
+						</div>
+						<!-- /#itens-compra -->
+					</div>
+					<!-- /.container -->
+				</div>
+				<!-- /.modal-content -->
+
+				<!-- Modal footer -->
+				<div class="modal-footer"></div>
+			</div>
+			<!-- /#modal-info-compra -->
+
 		</div>
 		<!-- /.row (Conteúdo main) -->
 	</div>
@@ -1642,6 +1924,11 @@
 	<!-- JS dedicado para gerenciamento de fornecedor -->
 	<script type="text/javascript"
 		src="resources/dedicated/js/administrador/gerenciar-loja/gerenciar-fornecedor.js"
+		charset="utf-8" defer></script>
+
+	<!-- JS dedicado para compras -->
+	<script type="text/javascript"
+		src="resources/dedicated/js/administrador/gerenciar-loja/gerenciar-compra.js"
 		charset="utf-8" defer></script>
 
 	<!-- Mascaras -->

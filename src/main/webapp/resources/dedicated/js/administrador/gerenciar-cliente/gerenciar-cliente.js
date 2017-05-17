@@ -36,8 +36,8 @@ function buscarCliente(idCliente) {
 			}
 
 			// Dados do cliente
-			var clienteDados = "<span><b>Nome Completo : </b>" + cliente.nome
-					+ "</span><br>" + "<span><b>CPF : </b>" + cliente.cpf
+			var clienteDados = "<h5 align='center'><b>" + cliente.nome
+					+ "</b></h5><br>" + "<span><b>CPF : </b>" + cliente.cpf
 					+ "</span><br>" + "<span><b>Gênero : </b>" + cliente.genero
 					+ "</span><br>" + "<span><b>Data de Nascimento : </b>"
 					+ $.datepicker.formatDate("dd/mm/yy", nascimento)

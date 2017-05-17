@@ -4,6 +4,7 @@ $("#btn-produto").click(function() {
 	// Mostrando janela
 	$('#main-produto').fadeIn(1500);
 	$('#main-fornecedor').hide();
+	$('#main-compras').hide();
 });
 
 // Inicializador para datepicker

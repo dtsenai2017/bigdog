@@ -1,0 +1,18 @@
+@CHARSET "ISO-8859-1";
+
+/* Main Compra */
+#main-compras {
+	display: none;
+}
+
+/* Escondendo Linhas de lista de compras */
+#lista-compra li {
+	display: none;
+}
+
+/* Hover em linha de lista de compras */
+#lista-compra li:hover {
+	transition: 0.4s;
+	color: white;
+	background-color: #26c6da;
+}
