@@ -87,6 +87,10 @@
 		<!-- Agenda -->
 		<li><a href="gerenciarAgenda"><i
 				class="material-icons left cyan-text text-cyan">event_note</i>Agenda</a></li>
+
+		<!-- Serviço -->
+		<li><a href="gerenciarServico" class="waves-effect"><i
+				class="material-icons left grey-text text-grey">work</i>Serviço</a></li>
 	</ul>
 
 	<!-- Sidenav mobile -->
@@ -114,6 +118,10 @@
 		<!-- Agenda -->
 		<li><a href="gerenciarAgenda" class="waves-effect"><i
 				class="material-icons left cyan-text text-cyan">event_note</i>Agenda</a></li>
+
+		<!-- Serviço -->
+		<li><a href="gerenciarServico" class="waves-effect"><i
+				class="material-icons left grey-text text-grey">work</i>Serviço</a></li>
 	</ul>
 	</header>
 

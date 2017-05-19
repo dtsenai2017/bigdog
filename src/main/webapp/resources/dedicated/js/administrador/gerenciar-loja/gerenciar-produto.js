@@ -1,5 +1,5 @@
 // JS dedicado para gerenciamento de produto
-// Botão de opção de gerenciamento para produto
+// Botão de opção de gerenciamento para produto (Abre janela principal)
 $("#btn-produto").click(function() {
 	// Mostrando janela
 	$('#main-produto').fadeIn(1500);

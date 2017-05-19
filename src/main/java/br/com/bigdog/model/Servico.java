@@ -26,11 +26,11 @@ public class Servico {
 	@Column(nullable = false)
 	private String nome;
 	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo_servico", columnDefinition = "enum ('Clínica Veterinária','Banho e Tosa')", nullable = false)
+	@Column(name = "tipo_servico", columnDefinition = "enum ('Veterinario','Estetica')", nullable = false)
 	private TipoServico tipoServico;
-	@Column(nullable = false, columnDefinition = "decimal(4,2)")
+	@Column(nullable = false, columnDefinition = "decimal(10,2)")
 	private Double valor;
-	@DateTimeFormat(pattern = "hh:mm:ss")
+	@DateTimeFormat(pattern = "HH:mm:ss")
 	@Temporal(TemporalType.TIME)
 	@Column(name = "tempo_estimado", nullable = false)
 	private Date tempoEstimado;
@@ -85,4 +85,11 @@ public class Servico {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
+
+	@Override
+	public String toString() {
+		return "Servico [idServico=" + idServico + ", nome=" + nome + ", tipoServico=" + tipoServico + ", valor="
+				+ valor + ", tempoEstimado=" + tempoEstimado + ", observacao=" + observacao + "]";
+	}
+
 }

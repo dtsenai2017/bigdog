@@ -1,0 +1,20 @@
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+/* Main serviço */
+#main-servico {
+	display: none;
+}
+
+/* Modal com formulário de serviço */
+#modal-servico {
+	height: 90% !important;
+	max-height: 90% !important;
+}

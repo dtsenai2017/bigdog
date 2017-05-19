@@ -27,9 +27,9 @@ public class Compra {
 	private Date dataCompra;
 	@Column(length = 50)
 	private String status;
-	@Column(columnDefinition = "decimal(5,2) unsigned", nullable = false)
+	@Column(columnDefinition = "decimal(10,2) unsigned", nullable = false)
 	private Double valor;
-	@Column(columnDefinition = "decimal(5,2) unsigned default 0", nullable = false)
+	@Column(columnDefinition = "decimal(10,2) unsigned default 0", nullable = false)
 	private Double frete;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_compra", nullable = false)

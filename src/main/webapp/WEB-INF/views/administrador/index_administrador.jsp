@@ -138,13 +138,13 @@
 		<!-- Gerenciar -->
 		<div id="swipe-gerenciar" class="col s12 m12 l12">
 			<!-- Cliente -->
-			<div id="#painel-cliente" class="col s6 m4 l4">
+			<div id="#painel-cliente" class="col s6 m3 l3">
 				<div class="row">
 					<div class="col s12 m12 l12">
 						<div class="card hoverable">
 							<div class="card-image">
 								<img
-									src="resources/dedicated/img/administrador/gerenciar-cliente.png"
+									src="resources/dedicated/img/administrador/gerenciar/gerenciar-cliente.png"
 									class="responsive-img"> <span class="card-title">Cliente</span>
 								<a href="gerenciarCliente"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
@@ -159,13 +159,13 @@
 			</div>
 
 			<!-- Loja -->
-			<div id="#painel-loja" class="col s6 m4 l4">
+			<div id="#painel-loja" class="col s6 m3 l3">
 				<div class="row">
 					<div class="col s12 m12 l12">
 						<div class="card hoverable">
 							<div class="card-image">
 								<img
-									src="resources/dedicated/img/administrador/gerenciar-loja.png"
+									src="resources/dedicated/img/administrador/gerenciar/gerenciar-loja.png"
 									class="responsive-img"> <span class="card-title">Loja</span>
 								<a href="gerenciarLoja"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
@@ -180,13 +180,13 @@
 			</div>
 
 			<!-- Agenda -->
-			<div id="#painel-agenda" class="col s6 m4 l4">
+			<div id="#painel-agenda" class="col s6 m3 l3">
 				<div class="row">
 					<div class="col s12 m12 l12">
 						<div class="card hoverable">
 							<div class="card-image">
 								<img
-									src="resources/dedicated/img/administrador/gerenciar-agenda.png"
+									src="resources/dedicated/img/administrador/gerenciar/gerenciar-agenda.png"
 									class="responsive-img"> <span class="card-title">Agenda</span>
 								<a href="gerenciarAgenda"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
@@ -200,29 +200,44 @@
 				</div>
 			</div>
 
+			<!-- Serviço -->
+			<div id="#painel-servico" class="col s6 m3 l3">
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<div class="card hoverable">
+							<div class="card-image">
+								<img
+									src="resources/dedicated/img/administrador/gerenciar/gerenciar-agenda.png"
+									class="responsive-img"> <span class="card-title">Serviço</span>
+								<a href="gerenciarServico"
+									class="btn-floating halfway-fab waves-effect waves-light red"><i
+									class="material-icons">pets</i></a>
+							</div>
+							<div class="card-content">
+								<p class="truncate">Gerencie seus serviços.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 		<!-- /.swipe-gerenciar -->
 
 		<!-- Agenda -->
 		<div id="swipe-agenda" class="col s12 m12 l12">
-			<!-- Content -->
 			<div class="row">
-				<div class="col s12 m4 l4">
-					<h5 align="center">Consultas agendadas</h5>
-
-					<div class="divider"></div>
-				</div>
-
-				<div class="col s12 m8 l8">
-					<h5 align="center">Agendar</h5>
+				<!-- Consultas agendadas -->
+				<div class="col s12 m12 l12">
+					<!-- Descrição para lista de agendamentos marcados para o dia -->
+					<h5 align="center">Agenda de Hoje</h5>
 
 					<div class="divider"></div>
 				</div>
 			</div>
 		</div>
-		<!-- /.swipe-agenda -->
-	</div>
-	<!-- /.row --> <!-- /.container --> </main>
+	</main>
+	<!-- /.container -->
 
 	<!-- import footer -->
 	<c:import url="component/footer.jsp" />
@@ -238,6 +253,7 @@
 		src="resources/dedicated/js/administrador/dashboard/dashboard.js"
 		defer></script>
 
+	<!-- Scripts para gráficos -->
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/highcharts-3d.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>

@@ -1,5 +1,5 @@
 // JS dedicado para gerenciamento de fornecedor
-// Botão de opção de gerenciamento para fornecedor
+// Botão de opção de gerenciamento para fornecedor (Abre janela principal)
 $("#btn-fornecedor").click(function() {
 	// Mostrando janela
 	$('#main-fornecedor').fadeIn(1500);

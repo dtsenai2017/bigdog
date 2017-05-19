@@ -29,7 +29,7 @@ public class Produto {
 	private String descricao;
 	@Column(name = "qtd_estoque", nullable = false, columnDefinition = "bigint unsigned")
 	private Long qtdEstoque;
-	@Column(nullable = false, columnDefinition = "decimal(5,2) unsigned")
+	@Column(nullable = false, columnDefinition = "decimal(10,2) unsigned")
 	private Double valor;
 	@Column(length = 100, nullable = false)
 	private String marca;
