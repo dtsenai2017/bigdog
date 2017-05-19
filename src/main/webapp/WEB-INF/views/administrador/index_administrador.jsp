@@ -5,6 +5,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!-- Ícone da aba -->
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/dedicated/img/administrador/adm-icon.ico">
+
 <!-- Título -->
 <title>Big Dog | Index Administrador</title>
 
@@ -207,7 +211,7 @@
 						<div class="card hoverable">
 							<div class="card-image">
 								<img
-									src="resources/dedicated/img/administrador/gerenciar/gerenciar-agenda.png"
+									src="resources/dedicated/img/administrador/gerenciar/gerenciar-servico.png"
 									class="responsive-img"> <span class="card-title">Serviço</span>
 								<a href="gerenciarServico"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i

@@ -39,7 +39,7 @@ function abrirCompras() {
 						+ $.datepicker.formatDate('dd/mm/yy', dataCompra)
 						+ '</h5>' + '<span><b>Nome do Cliente</b> : '
 						+ compra.cliente.nome + '</span><br>'
-						+ '<span><b>Valor Total</b> : R$'
+						+ '<span><b>Valor Total</b> : R$ '
 						+ compra.valor.toFixed(2) + '</span><br>'
 						+ '<span><b>STATUS : </b>' + compra.status
 						+ '</span></li>';

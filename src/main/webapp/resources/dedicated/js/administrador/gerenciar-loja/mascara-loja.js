@@ -1,10 +1,10 @@
 // Input Valor do formulário de inserção
-$('#valor').mask('000.000.00', {
+$('#valor').mask('000000.00', {
 	reverse : true
 });
 
 // Input Valor do formulário de alteração de produto
-$('#valor-p-selecionado').mask('000.000.00', {
+$('#valor-p-selecionado').mask('000000.00', {
 	reverse : true
 });
 

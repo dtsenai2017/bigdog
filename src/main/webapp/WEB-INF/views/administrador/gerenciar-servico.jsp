@@ -6,6 +6,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!-- Ícone da aba -->
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/dedicated/img/administrador/adm-icon.ico">
+
 <!-- Título -->
 <title>Administrador | Gerenciar Serviços</title>
 
@@ -22,6 +26,9 @@
 
 	<!--  import navbar -->
 	<c:import url="component/navbar.jsp" />
+
+	<!-- Atribuindo valor monetário -->
+	<fmt:setLocale value="pt_BR" />
 
 	<!-- main - container principal -->
 	<main class="container"> <!-- Descrição -->
@@ -88,14 +95,15 @@
 							data-collapsible="accordion">
 							<c:forEach items="${servicoEstetica }" var="servicoEstetica">
 								<li>
-									<div class="collapsible-header">
+									<div class="collapsible-header waves-effect">
 										<span>${servicoEstetica.nome }</span>
 									</div>
 									<div class="collapsible-body">
-										<span>Valor : R$ ${servicoEstetica.valor }</span><br> <span>Tempo
-											estimado : <fmt:formatDate pattern="hh:mm"
-												value="${servicoEstetica.tempoEstimado }" />hrs.
-										</span><br> <span>Observações :
+										<span><b>Valor </b>: <fmt:formatNumber
+												value="${servicoEstetica.valor }" type="currency" /></span><br>
+										<span><b>Tempo estimado </b>: <fmt:formatDate
+												pattern="HH:mm" value="${servicoEstetica.tempoEstimado }" />hrs.
+										</span><br> <span><b>Observações </b>:
 											${servicoEstetica.observacao }</span>
 
 										<p align="right">
@@ -141,14 +149,15 @@
 							<c:forEach items="${servicoVeterinario }"
 								var="servicoVeterinario">
 								<li>
-									<div class="collapsible-header">
+									<div class="collapsible-header waves-effect">
 										<span>${servicoVeterinario.nome }</span>
 									</div>
 									<div class="collapsible-body">
-										<span>Valor : ${servicoVeterinario.valor }</span><br> <span>Tempo
-											estimado : <fmt:formatDate pattern="hh:mm"
-												value="${servicoVeterinario.tempoEstimado }" />hrs.
-										</span><br> <span>Observações :
+										<span><b>Valor </b>: <fmt:formatNumber
+												value="${servicoVeterinario.valor }" type="currency" /></span><br>
+										<span><b>Tempo estimado </b>: <fmt:formatDate
+												pattern="HH:mm" value="${servicoVeterinario.tempoEstimado }" />hrs.
+										</span><br> <span><b>Observações </b>:
 											${servicoVeterinario.observacao }</span>
 
 										<p align="right">

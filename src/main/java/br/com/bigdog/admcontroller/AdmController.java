@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.bigdog.admdao.GenericDAO;
+import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.Servico;
 import br.com.bigdog.value.TipoServico;

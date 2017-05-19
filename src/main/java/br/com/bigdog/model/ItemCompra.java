@@ -17,7 +17,7 @@ public class ItemCompra {
 	private String nome;
 	@Column(columnDefinition = "bigint unsigned", nullable = false)
 	private Long quantidade;
-	@Column(nullable = false, columnDefinition = "decimal(5,2) unsigned")
+	@Column(nullable = false, columnDefinition = "decimal(10,2) unsigned")
 	private Double valor;
 
 	// Getters e Setters

@@ -5,6 +5,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!-- Ícone da aba -->
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/dedicated/img/administrador/adm-icon.ico">
+
 <!-- Título -->
 <title>Administrador | Gerenciar Agenda</title>
 
@@ -40,8 +44,7 @@
 		<!-- Conteúdo main -->
 		<div class="row">
 			<!-- Opções -->
-			<div class="col s12 m12 l12">
-			</div>
+			<div class="col s12 m12 l12"></div>
 
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-package br.com.bigdog.admdao;
+package br.com.bigdog.dao;
 
 public class AgendamentoDAO {
 

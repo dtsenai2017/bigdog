@@ -1,4 +1,4 @@
-package br.com.bigdog.admdao;
+package br.com.bigdog.dao;
 
 import java.util.List;
 
@@ -9,41 +9,41 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.bigdog.model.Cliente;
+import br.com.bigdog.model.Servico;
 
 @Repository
-public class ClienteDAO implements GenericDAO<Cliente> {
+public class ServicoDAO implements GenericDAO<Servico> {
 	// Gerenciador de Entidades
 	@PersistenceContext
 	private EntityManager manager;
 
 	// Inserir
 	@Transactional
-	public void inserir(Cliente cliente) {
-		manager.persist(cliente);
+	public void inserir(Servico servico) {
+		manager.persist(servico);
 	}
 
 	// Listar
-	public List<Cliente> listar() {
-		TypedQuery<Cliente> query = manager.createQuery("SELECT c FROM Cliente c", Cliente.class);
+	public List<Servico> listar() {
+		TypedQuery<Servico> query = manager.createQuery("SELECT s FROM Servico s", Servico.class);
 		return query.getResultList();
 	}
 
 	// Listar (id)
-	public Cliente listar(Long id) {
-		return manager.find(Cliente.class, id);
+	public Servico listar(Long id) {
+		return manager.find(Servico.class, id);
 	}
 
 	// Alterar
 	@Transactional
-	public void alterar(Cliente cliente) {
-		manager.merge(cliente);
+	public void alterar(Servico servico) {
+		manager.merge(servico);
 	}
 
 	// Excluir (id)
 	@Transactional
 	public void excluir(Long id) {
-		Cliente cliente = listar(id);
-		manager.remove(cliente);
+		Servico servico = listar(id);
+		manager.remove(servico);
 	}
 }

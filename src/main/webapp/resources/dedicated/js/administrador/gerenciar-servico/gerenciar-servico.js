@@ -65,11 +65,11 @@ $("#form-servico").submit(function(e) {
 		idServico : $('#idServico').val(),
 		nome : $('#nome-servico').val(),
 		tipoServico : $('#tipo-servico').val(),
-		valor : $('#valor-servico').val(),
+		valor : parseFloat($('#valor-servico').val()),
 		tempoEstimado : tempoEstimado,
 		observacao : $('#observacao-servico').val()
 	}
-
+	
 	// Verifica tipo de requisição (Inserção ou alteração)
 	if (servico.idServico == '') {
 		// Cadastrando novo serviço
@@ -92,7 +92,23 @@ $("#form-servico").submit(function(e) {
 		});
 	} else {
 		// Alterando serviço
-		Materialize.toast('Alteração', 1500);
+		$.ajax({
+			type : "PUT",
+			url : "adm/servico/" + servico.idServico,
+			data : JSON.stringify(servico),
+			contentType : "application/json; charset=utf-8",
+			success : function(s) {
+				// Reload
+				location.reload();
+			},
+			error : function(e) {
+				mensagem = 'Ops, houve um problema!';
+			},
+			complete : function() {
+				// Toast
+				Materialize.toast(mensagem, 2000);
+			}
+		});
 	}
 });
 
@@ -112,6 +128,8 @@ function modalAlterarServico(idServico) {
 			// Atributos para data
 			var tempoEstimadoAtual = servico.tempoEstimado.split(':');
 			
+			console.log(tempoEstimadoAtual[0] + ' / ' + tempoEstimadoAtual[1] + ' / ' + tempoEstimadoAtual[2]);
+			
 			// Ativando labels
 			$('#label-nome-servico').addClass('active');
 			$('#label-valor-servico').addClass('active');
@@ -125,6 +143,8 @@ function modalAlterarServico(idServico) {
 			$('#valor-servico').val(servico.valor);
 			$('#tempo-servico').val(tempoEstimadoAtual[0] + ':' + tempoEstimadoAtual[1]);
 			$('#observacao-servico').val(servico.observacao);
+			
+			$('select').material_select('update');
 			
 			// Alterando botões de formulário
 			$('#btn-alterar-servico').fadeIn(300);

@@ -470,7 +470,7 @@ function abrirPrincipalProduto() {
 						+ produto.marca
 						+ '<br>'
 						+ 'R$ '
-						+ produto.valor
+						+ produto.valor.toFixed(2)
 						+ ' </p>'
 						+ '<a href="#modal-produto"'
 						+ 'onclick="abrirModalProduto('
@@ -558,7 +558,7 @@ function abrirModalProduto(idProduto) {
 			$('#tamanhoProduto').text(tamanho);
 			$('#quantidadeProduto').text(produto.quantidade);
 			$('#qtdEstoqueProduto').text(produto.qtdEstoque);
-			$('#valorProduto').text('R$ ' + produto.valor);
+			$('#valorProduto').text('R$ ' + produto.valor.toFixed(2));
 			$('#fornecedorProduto').text(produto.fornecedor.nomeFantasia);
 			$('#dataVigenciaProduto').text(
 					$.datepicker.formatDate('dd/mm/yy', dataVigencia));
@@ -761,7 +761,7 @@ $("#btn-alterar-produto").click(function(){
 			$('#disabled-subcategoria').val(produto.subCategoria == null ? null : produto.subCategoria.nome);
 			$('#tamanho-p-selecionado').val(produto.tamanho);
 			$('#quantidade-p-selecionado').val(produto.quantidade);
-			$('#valor-p-selecionado').val(produto.valor);
+			$('#valor-p-selecionado').val(produto.valor.toFixed(2));
 			$('#qtdEstoque-p-selecionado').val(produto.qtdEstoque);
 			$('#dataVigencia-p-selecionado').val(produto.dataVigencia);
 			$('#descricao-p-selecionado').val(produto.descricao);
