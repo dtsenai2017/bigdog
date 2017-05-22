@@ -26,6 +26,7 @@ public class Fornecedor {
 	@Column(length = 20, nullable = false, unique = true)
 	private String cnpj;
 	@OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "id_contato", nullable = false)
 	private Contato contato;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_fornecedor", nullable = false)

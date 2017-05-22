@@ -88,7 +88,6 @@
 	<div id="modal-cliente-info" class="modal modal-fixed-footer">
 		<!-- Modal content -->
 		<div class="modal-content">
-			<!-- Container -->
 			<div class="container">
 				<!-- Botão fechar -->
 				<div class="row">
@@ -98,60 +97,73 @@
 					</div>
 				</div>
 
-				<!-- ID e Nome do cliente -->
-				<input id="idCliente-selecionado" type="hidden">
+				<!-- Título de modal -->
+				<div class="row">
+					<div class="col s12 m12 l12 center-align">
+						<h5>Informações do cliente</h5>
+
+						<!-- ID e Nome do cliente -->
+						<input id="idCliente-selecionado" type="hidden">
+
+						<!-- divider -->
+						<div class="divider"></div>
+					</div>
+				</div>
 
 				<!-- Lista de dados(Endereço, Pets, Compras e Agendamentos realizados -->
-				<div class="col s12 m12 l12">
-					<!-- Lista de dados -->
-					<ul class="collapsible hoverable" data-collapsible="accordion">
-						<!-- Cliente -->
-						<li>
-							<div class="collapsible-header">
-								<i class="material-icons blue-text text-blue">person_pin</i>Dados
-								do cliente
-							</div>
-							<div id="dados-cliente"
-								class="collapsible-body white-text text-white"></div>
-						</li>
+				<div class="row">
+					<div class="col s12 m12 l12">
+						<!-- Lista de dados -->
+						<ul class="collapsible hoverable" data-collapsible="accordion">
+							<!-- Cliente -->
+							<li>
+								<div class="collapsible-header">
+									<i class="material-icons blue-text text-blue">person_pin</i>Dados
+									do cliente
+								</div>
+								<div id="dados-cliente"
+									class="collapsible-body white-text text-white"></div>
+							</li>
 
-						<!-- Endereços -->
-						<li>
-							<div class="collapsible-header">
-								<i class="material-icons deep-orange-text text-lighten-2">room</i>Endereços
-							</div>
-							<div id="lista-endereco"
-								class="collapsible-body deep-orange lighten-1 white-text text-white"></div>
-						</li>
+							<!-- Endereços -->
+							<li>
+								<div class="collapsible-header">
+									<i class="material-icons deep-orange-text text-lighten-2">room</i>Endereços
+								</div>
+								<div id="lista-endereco"
+									class="collapsible-body deep-orange lighten-1 white-text text-white"></div>
+							</li>
 
-						<!-- Pets -->
-						<li>
-							<div class="collapsible-header">
-								<i class="material-icons green-text text-green">pets</i>Pets
-							</div>
-							<div id="lista-pet"
-								class="collapsible-body green lighten-1 white-text text-white"></div>
-						</li>
+							<!-- Pets -->
+							<li>
+								<div class="collapsible-header">
+									<i class="material-icons green-text text-green">pets</i>Pets
+								</div>
+								<div id="lista-pet"
+									class="collapsible-body green lighten-1 white-text text-white"></div>
+							</li>
 
-						<!-- Compras -->
-						<li>
-							<div class="collapsible-header">
-								<i class="material-icons red-text text-red">shopping_cart</i>Compras
-							</div>
-							<div id="lista-compra"
-								class="collapsible-body red lighten-1 white-text text-white"></div>
-						</li>
+							<!-- Compras -->
+							<li>
+								<div class="collapsible-header">
+									<i class="material-icons red-text text-red">shopping_cart</i>Compras
+								</div>
+								<div id="lista-compra"
+									class="collapsible-body red lighten-1 white-text text-white"></div>
+							</li>
 
-						<!-- Agendamentos -->
-						<li>
-							<div class="collapsible-header">
-								<i class="material-icons cyan-text text-cyan ">event</i>Agendamentos
-							</div>
-							<div id="lista-agendamento"
-								class="collapsible-body cyan lighten-1 white-text text-white"></div>
-						</li>
-					</ul>
+							<!-- Agendamentos -->
+							<li>
+								<div class="collapsible-header">
+									<i class="material-icons cyan-text text-cyan ">event</i>Agendamentos
+								</div>
+								<div id="lista-agendamento"
+									class="collapsible-body cyan lighten-1 white-text text-white"></div>
+							</li>
+						</ul>
+					</div>
 				</div>
+				<!-- /.row -->
 			</div>
 			<!-- /.container -->
 		</div>

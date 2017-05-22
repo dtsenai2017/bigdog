@@ -5,7 +5,6 @@ function buscarCliente(idCliente) {
 
 	// Limpar listas
 	function limparListas() {
-		$('#modal-cliente-info h5').empty();
 		$('#dados-cliente').empty();
 		$('#dados-cliente').removeClass('blue lighten-1');
 		$('#dados-cliente').removeClass('pink lighten-1');
@@ -230,6 +229,40 @@ function buscarCliente(idCliente) {
 				// Adicionando para collection de
 				// compras
 				$('#lista-compra').append(compraList);
+			});
+		},
+		error : function(e) {
+			// Error
+			console.log("ERROR : " + e);
+		}
+	});
+
+	// Listando agendamentos de cliente
+	$.getJSON({
+		url : "adm/agendamentoCliente/" + idCliente,
+		type : "GET",
+		success : function(agendamentos) {
+			// Agendamentos realizados do cliente
+			$.each(agendamentos, function(index, agendamento) {
+				// Atributo date
+				var dataAgendamento = new Date(agendamento.dataAgendada);
+				dataAgendamento.setDate(dataAgendamento.getDate() + 1);
+
+				// Atributo da lista de agendamento
+				var agendamentoList = "<h5 align='center'><b>"
+						+ $.datepicker.formatDate("dd/mm/yy", dataAgendamento)
+						+ "</b></h5>" + "<span><b>Horário : </b>" + " ??? "
+						+ "</span><br>" + "<span><b>Tipo de Serviço : </b>"
+						+ agendamento.servico.tipoServico
+						+ "</span><br><span><b>Valor : R$ </b>"
+						+ agendamento.servico.valor.toFixed(2)
+						+ "</span><br><span>" + "<b>Nome do Pet : </b>"
+						+ agendamento.pet.nome + "</span><br>"
+						+ "<div class='divider'";
+
+				// Adicionando para collection de
+				// agendamentos
+				$('#lista-agendamento').append(agendamentoList);
 			});
 		},
 		error : function(e) {

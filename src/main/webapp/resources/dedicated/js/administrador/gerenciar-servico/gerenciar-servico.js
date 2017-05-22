@@ -22,7 +22,7 @@ function limparFormServico() {
 	// Limpando campos
 	$('#idServico').val('');
 	$('#nome-servico').val('');
-	$('#tipo-servico').val('Veterinário').attr('select', true);
+	$('#tipo-servico').val('Veterinario').attr('select', true);
 	$('#valor-servico').val('');
 	$('#tempo-servico').val('');
 	$('#observacao-servico').val('');
@@ -80,7 +80,7 @@ $("#form-servico").submit(function(e) {
 			contentType : "application/json; charset=utf-8",
 			success : function(s) {
 				// Reload
-				location.reload()
+				 location.reload()
 			},
 			error : function(e) {
 				mensagem = 'Ops, houve um problema!';
@@ -128,8 +128,6 @@ function modalAlterarServico(idServico) {
 			// Atributos para data
 			var tempoEstimadoAtual = servico.tempoEstimado.split(':');
 			
-			console.log(tempoEstimadoAtual[0] + ' / ' + tempoEstimadoAtual[1] + ' / ' + tempoEstimadoAtual[2]);
-			
 			// Ativando labels
 			$('#label-nome-servico').addClass('active');
 			$('#label-valor-servico').addClass('active');
@@ -162,17 +160,45 @@ $('#btn-excluir-servico').click(function() {
 	// Recebendo valor de input do form
 	var idServico = $('#idServico').val();
 	
-	// Cadastrando novo serviço
-	$.ajax({
-		type : "DELETE",
-		url : "adm/servico/" + idServico,
-		success : function(s) {
-			// Reload
-			location.reload()
-		},
-		error : function(e) {
-			// Toast
-			Materialize.toast('Ops, houve um problema!', 2000);
+	// Verifica alteração
+	$.confirm({
+		title : 'Exclusão de serviço',
+		animation : 'top',
+		useBootstrap : false,
+		theme : 'material',
+		boxWidth : '50%',
+		content : 'Deseja realmente excluir ?',
+		buttons : {
+			// CONFIRMAR
+			confirm : {
+				text : 'Confirmar',
+				btnClass : 'btn-green',
+				action : function() {
+					// Cadastrando novo serviço
+					$.ajax({
+						type : "DELETE",
+						url : "adm/servico/" + idServico,
+						success : function(s) {
+							// Reload
+							location.reload()
+						},
+						error : function(e) {
+							// Toast
+							Materialize.toast('Ops, houve um problema!', 2000);
+						}
+					});
+				}
+			// Opção Confirmar
+			},
+			cancel : {
+				// CANCELAR
+				text : 'Cancelar',
+				action : function() {
+					// ...
+				}
+			}
+		// Opção Cancelar
 		}
+	// Botões (Confirmar e Cancelar)
 	});
 });

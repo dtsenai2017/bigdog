@@ -1204,7 +1204,8 @@ $("#form-produto").submit(function(e) {
 	// Atributos para leitura de file
 	var file = $('#foto')[0].files[0];
 	var reader = new FileReader();
-	var dataVigencia = new Date($('#dataVigencia').val());
+	var dataInput = $('#dataVigencia').val();
+	var dataVigencia = dataInput.split("/").reverse().join("-");
 	var subCategoria = {
 		idSubCategoria : $('#select-subcategoria').val()
 	}
@@ -1233,7 +1234,41 @@ $("#form-produto").submit(function(e) {
 		}
 	}
 
-	console.log(produto);
+	// Retornando valor de conversão e fazendo requisição
+	reader.onload = function(e) {
+		// Atributo para foto em BLOB (byteArray[])
+		var fotoByte = btoa(e.target.result);
+
+		// Atribuindo valor de foto para produto
+		produto.foto = fotoByte;
+		
+		// Cadastrando produto
+		$.ajax({
+			type : "POST",
+			url : "adm/produto",
+			data : JSON.stringify(produto),
+			contentType : "application/json; charset=utf-8",
+			success : function(s) {
+				// Mensagem para toast
+				mensagem = 'Produto inserido com sucesso!';
+						
+				// Refresh no formulário
+				abrirFormProduto();
+			},
+		 	error : function(e) {
+		 		// Mensagem para toast
+		 		mensagem = 'Ops, houve um problema!';
+		 		console.log(e);
+		 },
+		 	complete : function() {
+		 		// Toast
+		 		Materialize.toast(mensagem, 2800);
+		 }
+		});
+	}
+		
+	// Conversão de file para blob
+	reader.readAsDataURL(file);
 });
 
 // Excluir Produto

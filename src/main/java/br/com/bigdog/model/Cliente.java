@@ -47,7 +47,7 @@ public class Cliente {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_cliente", nullable = false)
 	private List<EnderecoCliente> enderecos;
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(optional = false, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_contato", nullable = false)
 	private Contato contato;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

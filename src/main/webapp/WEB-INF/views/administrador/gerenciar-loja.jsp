@@ -1879,7 +1879,7 @@
 						</h6>
 
 						<h5>
-							<b>TOTAL : </b> <span id="valor-selecionada"></span>
+							<b>TOTAL + frete : </b> <span id="valor-selecionada"></span>
 						</h5>
 
 						<div class="divider"></div>
