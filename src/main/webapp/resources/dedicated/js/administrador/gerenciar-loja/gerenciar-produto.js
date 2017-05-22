@@ -28,7 +28,7 @@ $('.datepicker').pickadate(	{
 	labelYearSelect : 'Selecione um ano',
 	selectMonths : true,
 	selectYears : 15,
-	format : 'yyyy-mm-dd'
+	format : 'dd/mm/yyyy'
 });
 
 // Input Textarea com contador de caracter (Descrição de produto)
@@ -1233,41 +1233,7 @@ $("#form-produto").submit(function(e) {
 		}
 	}
 
-	// Retornando valor de conversão e fazendo requisição
-	reader.onload = function(e) {
-		// Atributo para foto em BLOB (byteArray[])
-		var fotoByte = btoa(e.target.result);
-
-		// Atribuindo valor de foto para produto
-		produto.foto = fotoByte;
-		
-		// Cadastrando produto
-		$.ajax({
-			type : "POST",
-			url : "adm/produto",
-			data : JSON.stringify(produto),
-			contentType : "application/json; charset=utf-8",
-			success : function(s) {
-				// Mensagem para toast
-				mensagem = 'Produto inserido com sucesso!';
-						
-				// Refresh no formulário
-				abrirFormProduto();
-			},
-		 	error : function(e) {
-		 		// Mensagem para toast
-		 		mensagem = 'Ops, houve um problema!';
-		 		console.log(e);
-		 },
-		 	complete : function() {
-		 		// Toast
-		 		Materialize.toast(mensagem, 2800);
-		 }
-		});
-	}
-		
-	// Conversão de file para blob
-	reader.readAsDataURL(file);
+	console.log(produto);
 });
 
 // Excluir Produto

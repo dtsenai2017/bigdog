@@ -2,7 +2,10 @@ package br.com.bigdog.admcontroller;
 
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,34 +33,60 @@ public class AdmCompraController {
 	// Listar
 	@RequestMapping(value = "compra", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Compra> listar() {
-		return compraDAO.listar();
+		try {
+			// Retornando
+			return compraDAO.listar();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// Listar (id)
 	@RequestMapping(value = "compra/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Compra listar(@PathVariable("id") Long idCompra) {
-		return compraDAO.listar(idCompra);
+		try {
+			// Retornando
+			return compraDAO.listar(idCompra);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// Listar (idCliente)
 	@RequestMapping(value = "compraCliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Compra> listarCompra(@PathVariable("id") Long idCliente) {
-		return compraDAO.listarCompraCliente(idCliente);
+		try {
+			// Retornando
+			return compraDAO.listarCompraCliente(idCliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// Alterar status de compra
 	@RequestMapping(value = "alterarStatus/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> alterarStatus(@PathVariable("id") Long idCompra, @RequestBody Compra compra) {
-		// Compra atual
-		Compra compraAtual = compraDAO.listar(idCompra);
+		try {
+			// Compra atual
+			Compra compraAtual = compraDAO.listar(idCompra);
 
-		// Alterando status
-		compraAtual.setStatus(compra.getStatus());
+			// Alterando status
+			compraAtual.setStatus(compra.getStatus());
 
-		// Alterando...
-		compraDAO.alterar(compraAtual);
+			// Alterando...
+			compraDAO.alterar(compraAtual);
 
-		// Retornando
-		return ResponseEntity.ok().build();
+			// Retornando
+			return ResponseEntity.ok().build();
+		} catch (ConstraintViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

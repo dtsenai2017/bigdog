@@ -191,7 +191,7 @@ function buscarCliente(idCliente) {
 				$('#lista-pet').append(petList);
 			});
 
-			// FOREACH Agendamentos
+			// Agendamentos de cliente
 			// ...
 		},
 		error : function(e) {
@@ -277,7 +277,7 @@ function visualizarPet(idPet) {
 	});
 }
 
-// Abrir dados da compra para moda
+// Abrir dados da compra para modal
 function abrirCompraCliente(idCompra) {
 	// Listando compra
 	$.getJSON({

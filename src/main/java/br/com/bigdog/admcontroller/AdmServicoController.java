@@ -2,7 +2,10 @@ package br.com.bigdog.admcontroller;
 
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,54 +33,88 @@ public class AdmServicoController {
 	// Inserir serviço
 	@RequestMapping(value = "servico", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> inserir(@RequestBody Servico servico) {
-		// Inserindo
-		servicoDAO.inserir(servico);
+		try {
+			// Inserindo
+			servicoDAO.inserir(servico);
 
-		// Retornando
-		return ResponseEntity.ok().build();
+			// Retornando
+			return ResponseEntity.ok().build();
+		} catch (ConstraintViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	// Listar
 	@RequestMapping(value = "servico", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Servico> listar() {
 		// Retornando
-		return servicoDAO.listar();
+		try {
+			return servicoDAO.listar();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// Listar (id)
 	@RequestMapping(value = "servico/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Servico listar(@PathVariable("id") Long idServico) {
 		// Retornando
-		return servicoDAO.listar(idServico);
+		try {
+			return servicoDAO.listar(idServico);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// Alterar
 	@RequestMapping(value = "servico/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> alterar(@PathVariable("id") Long idServico, @RequestBody Servico servico) {
-		// Serviço atual
-		Servico servicoAtual = servicoDAO.listar(idServico);
+		try {
+			// Serviço atual
+			Servico servicoAtual = servicoDAO.listar(idServico);
 
-		// Atribuindo valores
-		servicoAtual.setNome(servico.getNome());
-		servicoAtual.setTipoServico(servico.getTipoServico());
-		servicoAtual.setTempoEstimado(servico.getTempoEstimado());
-		servicoAtual.setValor(servico.getValor());
-		servicoAtual.setObservacao(servico.getObservacao());
+			// Atribuindo valores
+			servicoAtual.setNome(servico.getNome());
+			servicoAtual.setTipoServico(servico.getTipoServico());
+			servicoAtual.setTempoEstimado(servico.getTempoEstimado());
+			servicoAtual.setValor(servico.getValor());
+			servicoAtual.setObservacao(servico.getObservacao());
 
-		// Alterando
-		servicoDAO.alterar(servicoAtual);
+			// Alterando
+			servicoDAO.alterar(servicoAtual);
 
-		// Retornando
-		return ResponseEntity.ok().build();
+			// Retornando
+			return ResponseEntity.ok().build();
+		} catch (ConstraintViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	// Excluir
 	@RequestMapping(value = "servico/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> excluir(@PathVariable("id") Long idServico) {
-		// Excluindo
-		servicoDAO.excluir(idServico);
+		try {
+			// Excluindo
+			servicoDAO.excluir(idServico);
 
-		// Retornando
-		return ResponseEntity.ok().build();
+			// Retornando
+			return ResponseEntity.ok().build();
+		} catch (ConstraintViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

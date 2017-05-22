@@ -173,7 +173,10 @@
 			</div>
 		</div>
 	</div>
+	</main>
+	<!-- /.container -->
 
+	<!-- Modal's -->
 	<!-- Modal para novo serviço-->
 	<div id="modal-servico" class="modal modal-fixed-footer">
 		<!-- Modal content -->
@@ -254,9 +257,7 @@
 				class="material-icons left red-text">delete</i>Excluir Serviço</a>
 		</div>
 	</div>
-
-	</main>
-	<!-- /.container -->
+	<!-- /#modal-servico -->
 
 	<!-- import footer -->
 	<c:import url="component/footer.jsp" />

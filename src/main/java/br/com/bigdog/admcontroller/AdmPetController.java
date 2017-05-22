@@ -1,6 +1,9 @@
 package br.com.bigdog.admcontroller;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,18 +41,26 @@ public class AdmPetController {
 	// Alterar Pet (Castrado, Peso e Observações)
 	@RequestMapping(value = "pet/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> alterarPet(@PathVariable("id") Long id, @RequestBody Pet pet) {
-		// Pet atual
-		Pet petAtual = petDAO.listar(id);
+		try {
+			// Pet atual
+			Pet petAtual = petDAO.listar(id);
 
-		// Setando valores
-		petAtual.setCastrado(pet.isCastrado());
-		petAtual.setPeso(pet.getPeso());
-		petAtual.setObservacoes(pet.getObservacoes());
+			// Setando valores
+			petAtual.setCastrado(pet.isCastrado());
+			petAtual.setPeso(pet.getPeso());
+			petAtual.setObservacoes(pet.getObservacoes());
 
-		// Alterando...
-		petDAO.alterar(petAtual);
+			// Alterando...
+			petDAO.alterar(petAtual);
 
-		// Retornando
-		return ResponseEntity.ok().build();
+			// Retornando
+			return ResponseEntity.ok().build();
+		} catch (ConstraintViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

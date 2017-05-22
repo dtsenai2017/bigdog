@@ -150,7 +150,7 @@
 								<img
 									src="resources/dedicated/img/administrador/gerenciar/gerenciar-cliente.png"
 									class="responsive-img"> <span class="card-title">Cliente</span>
-								<a href="gerenciarCliente"
+								<a id="btn-gerenciar-cliente" href="gerenciarCliente"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">recent_actors</i></a>
 							</div>
@@ -171,7 +171,7 @@
 								<img
 									src="resources/dedicated/img/administrador/gerenciar/gerenciar-loja.png"
 									class="responsive-img"> <span class="card-title">Loja</span>
-								<a href="gerenciarLoja"
+								<a id="btn-gerenciar-loja" href="gerenciarLoja"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">store</i></a>
 							</div>
@@ -192,7 +192,7 @@
 								<img
 									src="resources/dedicated/img/administrador/gerenciar/gerenciar-agenda.png"
 									class="responsive-img"> <span class="card-title">Agenda</span>
-								<a href="gerenciarAgenda"
+								<a id="btn-gerenciar-agenda" href="gerenciarAgenda"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">event_note</i></a>
 							</div>
@@ -213,7 +213,7 @@
 								<img
 									src="resources/dedicated/img/administrador/gerenciar/gerenciar-servico.png"
 									class="responsive-img"> <span class="card-title">Serviço</span>
-								<a href="gerenciarServico"
+								<a id="btn-gerenciar-servico" href="gerenciarServico"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">pets</i></a>
 							</div>

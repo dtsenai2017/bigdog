@@ -10,14 +10,20 @@
 </head>
 <body>
 	<!-- import navbar -->
-	<c:import url="../component/navbar.jsp" />
+	<c:import url="administrador/component/navbar.jsp" />
 
 	<!-- Main content -->
 	<main> <!-- Container -->
-	<div class="container"></div>
-	</main>
+	<div class="container">
+		<div class="row">
+			<form id="form-login" action="login" method="post">
+				<input name="email" type="email" required> <input
+					name="senha" type="password" required>
 
-	<!-- import footer -->
-	<c:import url="../component/footer.jsp" />
+				<button type="submit">Logar</button>
+			</form>
+		</div>
+	</div>
+	</main>
 </body>
 </html>

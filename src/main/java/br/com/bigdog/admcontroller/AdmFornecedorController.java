@@ -53,24 +53,24 @@ public class AdmFornecedorController {
 	// Alterar fornecedor
 	@RequestMapping(value = "fornecedor/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> alterar(@PathVariable("id") Long idFornecedor, @RequestBody Fornecedor fornecedor) {
-		// Fornecedor atual
-		Fornecedor fornecedorAtual = fornecedorDAO.listar(idFornecedor);
-		Contato contatoAtual = fornecedorAtual.getContato();
-		Contato contato = fornecedor.getContato();
-
-		// Atribuindo valor para contato
-		contatoAtual.setEmail(contato.getEmail());
-		contatoAtual.setCelular(contato.getCelular());
-		contatoAtual.setTelefone(contato.getTelefone());
-
-		// Alterando campos (Todos campos alteráveis)
-		fornecedorAtual.setNomeFantasia(fornecedor.getNomeFantasia());
-		fornecedorAtual.setRazaoSocial(fornecedor.getRazaoSocial());
-		fornecedorAtual.setContato(contatoAtual);
-		fornecedorAtual.setCnpj(fornecedor.getCnpj());
-
-		// Inserir novo fornecedor
 		try {
+			// Fornecedor atual
+			Fornecedor fornecedorAtual = fornecedorDAO.listar(idFornecedor);
+			Contato contatoAtual = fornecedorAtual.getContato();
+			Contato contato = fornecedor.getContato();
+
+			// Atribuindo valor para contato
+			contatoAtual.setEmail(contato.getEmail());
+			contatoAtual.setCelular(contato.getCelular());
+			contatoAtual.setTelefone(contato.getTelefone());
+
+			// Alterando campos (Todos campos alteráveis)
+			fornecedorAtual.setNomeFantasia(fornecedor.getNomeFantasia());
+			fornecedorAtual.setRazaoSocial(fornecedor.getRazaoSocial());
+			fornecedorAtual.setContato(contatoAtual);
+			fornecedorAtual.setCnpj(fornecedor.getCnpj());
+
+			// Alterando
 			fornecedorDAO.alterar(fornecedorAtual);
 			return ResponseEntity.ok().build();
 		} catch (ConstraintViolationException e) {
@@ -85,42 +85,52 @@ public class AdmFornecedorController {
 	// Listar
 	@RequestMapping(value = "fornecedor", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Fornecedor> listarFornecedor() {
-		// Retornando lista
-		return fornecedorDAO.listar();
+		try {
+			// Retornando lista
+			return fornecedorDAO.listar();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// Listar (id)
 	@RequestMapping(value = "fornecedor/{id}", method = RequestMethod.GET)
 	public Fornecedor listarFornecedor(@PathVariable("id") Long idFornecedor) {
-		// Objeto que será retornado
-		Fornecedor fornecedor = fornecedorDAO.listar(idFornecedor);
+		try {
+			// Objeto que será retornado
+			Fornecedor fornecedor = fornecedorDAO.listar(idFornecedor);
 
-		// Inicializando endereços de fornecedor
-		Hibernate.initialize(fornecedor.getEnderecos());
+			// Inicializando endereços de fornecedor
+			Hibernate.initialize(fornecedor.getEnderecos());
 
-		// Retornando objeto
-		return fornecedor;
+			// Retornando objeto
+			return fornecedor;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// Inserir Endereço em fornecedor
 	@RequestMapping(value = "enderecoFornecedor/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> inserirEndereco(@PathVariable("id") Long idFornecedor,
 			@RequestBody EnderecoFornecedor endereco) {
-		// Atribuindo valor
-		Fornecedor fornecedor = fornecedorDAO.listar(idFornecedor);
-		Hibernate.initialize(fornecedor.getEnderecos());
-
-		// Lista
-		List<EnderecoFornecedor> enderecos = fornecedor.getEnderecos();
-
-		// Atribuindo endereco em lista de fornecedor
-		enderecos.add(endereco);
-
-		// Adicionando lista alterada
-		fornecedor.setEnderecos(enderecos);
-
-		// Inserindo
 		try {
+			// Atribuindo valor
+			Fornecedor fornecedor = fornecedorDAO.listar(idFornecedor);
+			Hibernate.initialize(fornecedor.getEnderecos());
+
+			// Lista
+			List<EnderecoFornecedor> enderecos = fornecedor.getEnderecos();
+
+			// Atribuindo endereco em lista de fornecedor
+			enderecos.add(endereco);
+
+			// Adicionando lista alterada
+			fornecedor.setEnderecos(enderecos);
+
+			// Alterando
 			fornecedorDAO.alterar(fornecedor);
 			return ResponseEntity.ok().build();
 		} catch (ConstraintViolationException e) {
@@ -135,8 +145,8 @@ public class AdmFornecedorController {
 	// Excluir fornecedor
 	@RequestMapping(value = "fornecedor/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> excluir(@PathVariable("id") Long idFornecedor) {
-		// Excluindo fornecedor
 		try {
+			// Excluindo fornecedor
 			fornecedorDAO.excluir(idFornecedor);
 			return ResponseEntity.ok().build();
 		} catch (DataIntegrityViolationException e) {

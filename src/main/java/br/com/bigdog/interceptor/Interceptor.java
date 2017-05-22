@@ -12,6 +12,9 @@ public class Interceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		// Handler
 		HandlerMethod method = (HandlerMethod) handler;
+		
+		System.out.println("Método Chamado ==>" + method.getMethod().getName());
+		System.out.println("Controller Chamado ==>" + method.getBean().getClass().getSimpleName());
 
 		// CLIENTE
 

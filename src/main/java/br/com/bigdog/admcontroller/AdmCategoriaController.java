@@ -54,31 +54,34 @@ public class AdmCategoriaController {
 	@RequestMapping(value = "categoria", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Categoria> listarCategorias() {
 		// Retornando
-		return categoriaDAO.listar();
+		try {
+			return categoriaDAO.listar();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Inserir subcategoria
 	@RequestMapping(value = "subcategoria/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> inserirSubCategoria(@PathVariable("id") Long idCategoria,
 			@RequestBody SubCategoria subCategoria) {
-		// Categoria
-		Categoria categoria = categoriaDAO.listar(idCategoria);
-		Hibernate.initialize(categoria.getSubCategorias());
-
-		// Lista
-		List<SubCategoria> subCategorias = new ArrayList<SubCategoria>();
-
-		// Valor da lista da categoria
-		subCategorias = categoria.getSubCategorias();
-
-		// Adicionando subcategoria em lista de categoria
-		subCategorias.add(subCategoria);
-
-		// Adicionando lista alterada
-		categoria.setSubCategorias(subCategorias);
-
-		// Inserindo
 		try {
+			// Categoria
+			Categoria categoria = categoriaDAO.listar(idCategoria);
+			Hibernate.initialize(categoria.getSubCategorias());
+
+			// Lista
+			List<SubCategoria> subCategorias = new ArrayList<SubCategoria>();
+
+			// Valor da lista da categoria
+			subCategorias = categoria.getSubCategorias();
+
+			// Adicionando subcategoria em lista de categoria
+			subCategorias.add(subCategoria);
+
+			// Adicionando lista alterada
+			categoria.setSubCategorias(subCategorias);
+
 			categoriaDAO.alterar(categoria);
 			return ResponseEntity.ok().build();
 		} catch (ConstraintViolationException e) {
@@ -93,14 +96,19 @@ public class AdmCategoriaController {
 	// Listar subcategorias de categoria selecionada para formulário
 	@RequestMapping(value = "categoria/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Categoria listarCategoria(@PathVariable("id") Long idCategoria) {
-		// Listando categoria
-		Categoria categoria = categoriaDAO.listar(idCategoria);
+		try {
+			// Listando categoria
+			Categoria categoria = categoriaDAO.listar(idCategoria);
 
-		// Buscando subcategorias pelo hibernate
-		Hibernate.initialize(categoria.getSubCategorias());
+			// Buscando subcategorias pelo hibernate
+			Hibernate.initialize(categoria.getSubCategorias());
 
-		// Retornando
-		return categoria;
+			// Retornando
+			return categoria;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	// Excluir categoria (Se categoria estiver vinculada em algum produto, não é
