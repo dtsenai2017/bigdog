@@ -55,7 +55,7 @@
 				<!-- Agenda -->
 				<li class="tab col s4 m4 l4"
 					onclick="Materialize.fadeInImage('#swipe-agenda')"><a
-					href="#swipe-agenda"><i
+					id="btn-agenda-hoje" href="#swipe-agenda"><i
 						class="material-icons center cyan-text text-cyan">event_note</i>Agenda</a></li>
 			</ul>
 		</div>
@@ -233,10 +233,17 @@
 			<div class="row">
 				<!-- Consultas agendadas -->
 				<div class="col s12 m12 l12">
-					<!-- Descrição para lista de agendamentos marcados para o dia -->
-					<h5 align="center">Agenda de Hoje</h5>
+					<!-- Título de swipe -->
+					<h5 align="center">Agendamentos de Hoje</h5>
 
+					<!-- divider -->
 					<div class="divider"></div>
+
+					<!-- Lista de agendamentos -->
+					<ul id="lista-agendamento-hoje" class="collapsible popout"
+						data-collapsible="accordion">
+
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -250,12 +257,7 @@
 	<!-- JS com AJAX dedicado -->
 	<script type="text/javascript"
 		src="resources/dedicated/js/administrador/index-administrador.js"
-		defer></script>
-
-	<!-- Imports para os gráficos -->
-	<script type="text/javascript"
-		src="resources/dedicated/js/administrador/dashboard/dashboard.js"
-		defer></script>
+		charset="utf-8" defer></script>
 
 	<!-- Scripts para gráficos -->
 	<script src="https://code.highcharts.com/highcharts.js"></script>

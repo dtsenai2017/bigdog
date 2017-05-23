@@ -31,6 +31,9 @@ function abrirModalAgendamento(idAgendamento) {
 			$('#agendamento-pet-sexo').text(agendamento.pet.sexo);
 			$('#agendamento-dataAgendada').text(
 					$.datepicker.formatDate('dd/mm/yy', dataAgendada));
+			$('#agendamento-horarioAgendado').text(
+					dataAgendada.getHours() + ":" + dataAgendada.getMinutes()
+							+ "hrs.");
 			$('#agendamento-servico-nome').text(agendamento.servico.nome);
 			$('#agendamento-servico-tipoServico').text(
 					agendamento.servico.tipoServico);

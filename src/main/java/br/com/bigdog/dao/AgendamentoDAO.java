@@ -47,6 +47,16 @@ public class AgendamentoDAO {
 		return query.getResultList();
 	}
 
+	// Listar agendamentos do dia e do mês
+	public List<Agendamento> listarAgendamentoNow(String data) {
+		// Query
+		TypedQuery<Agendamento> query = manager.createQuery(
+				"SELECT a FROM Agendamento a WHERE a.dataAgendada LIKE '%" + data + "%'", Agendamento.class);
+
+		// Retornando
+		return query.getResultList();
+	}
+
 	// Alterar
 	@Transactional
 	public void alterar(Agendamento agendamento) {

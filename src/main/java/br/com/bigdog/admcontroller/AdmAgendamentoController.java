@@ -1,5 +1,7 @@
 package br.com.bigdog.admcontroller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.ConstraintViolationException;
@@ -47,6 +49,24 @@ public class AdmAgendamentoController {
 		try {
 			// Retornando
 			return agendamentoDAO.listarAgendamentoCliente(idCliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	// Listar agendamentos de hoje
+	@RequestMapping(value = "agendamentoHoje", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Agendamento> listarAgendamentoHoje() {
+		// Atribuindo valor de data para pesquisa (Data de Hoje)
+		Date today = new Date();
+		today.setDate(25);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String data = sdf.format(today);
+
+		// Retornando data
+		try {
+			return agendamentoDAO.listarAgendamentoNow(data);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

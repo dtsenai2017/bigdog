@@ -21,9 +21,9 @@ public class Agendamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_agendamento", columnDefinition = "bigint unsigned")
 	private Long idAgendamento;
-	@Temporal(TemporalType.DATE)
 	@Column(name = "data_agendada", nullable = false)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "pt-BR", timezone = "America/Sao_Paulo")
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "pt-BR", timezone = "America/Sao_Paulo")
 	private Date dataAgendada;
 	@OneToOne(orphanRemoval = false)
 	@JoinColumn(name = "id_cliente")

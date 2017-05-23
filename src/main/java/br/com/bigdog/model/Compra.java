@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Compra {
 	// Atributos
@@ -24,6 +26,7 @@ public class Compra {
 	private Long idCompra;
 	@Column(name = "data_compra", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "pt-BR", timezone = "America/Sao_Paulo")
 	private Date dataCompra;
 	@Column(length = 50)
 	private String status;
