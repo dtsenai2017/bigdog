@@ -17,6 +17,7 @@
 /* Lista de produtos */
 #lista-produto li {
 	display: none;
+	transition: 0.4s;
 }
 
 /* Hover na lista de produtos */

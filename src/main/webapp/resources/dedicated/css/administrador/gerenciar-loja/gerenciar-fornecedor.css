@@ -18,6 +18,7 @@
 /* Lista de fornecedores cadastrados */
 #lista-fornecedor li {
 	display: none;
+	transition: 0.4s;
 }
 
 /* Hover na lista de fornecedores */

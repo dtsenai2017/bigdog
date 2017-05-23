@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.bigdog.dao.AgendamentoDAO;
 import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.Servico;
@@ -19,12 +20,15 @@ public class AdmController {
 	// Atributos
 	private GenericDAO<Cliente> clienteDAO;
 	private GenericDAO<Servico> servicoDAO;
+	private AgendamentoDAO agendamentoDAO;
 
 	// Construtor
 	@Autowired
-	public AdmController(GenericDAO<Cliente> clienteDAO, GenericDAO<Servico> serviceDAO) {
+	public AdmController(GenericDAO<Cliente> clienteDAO, GenericDAO<Servico> servicoDAO,
+			AgendamentoDAO agendamentoDAO) {
 		this.clienteDAO = clienteDAO;
-		this.servicoDAO = serviceDAO;
+		this.servicoDAO = servicoDAO;
+		this.agendamentoDAO = agendamentoDAO;
 	}
 
 	// Requisições
@@ -59,6 +63,9 @@ public class AdmController {
 	public ModelAndView agendaAdm(ModelAndView mav) {
 		// Adicionando view
 		mav.setViewName("administrador/gerenciar-agenda");
+
+		// Adicionando lista
+		mav.addObject("agendamentos", agendamentoDAO.listar());
 
 		// Retornando
 		return mav;

@@ -2,8 +2,12 @@ package br.com.bigdog.admcontroller;
 
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +29,18 @@ public class AdmAgendamentoController {
 	}
 
 	// Requisições
+	// Listar (id)
+	@RequestMapping(value = "agendamento/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Agendamento listar(@PathVariable("id") Long idAgendamento) {
+		try {
+			// Retornando
+			return agendamentoDAO.listar(idAgendamento);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	// Listar (idCliente)
 	@RequestMapping(value = "agendamentoCliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Agendamento> listarAgendamento(@PathVariable("id") Long idCliente) {
@@ -34,6 +50,24 @@ public class AdmAgendamentoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	// Excluir
+	@RequestMapping(value = "agendamento/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> excluir(@PathVariable("id") Long idAgendamento) {
+		try {
+			// Excluindo
+			agendamentoDAO.excluir(idAgendamento);
+
+			// Retornando
+			return ResponseEntity.ok().build();
+		} catch (ConstraintViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

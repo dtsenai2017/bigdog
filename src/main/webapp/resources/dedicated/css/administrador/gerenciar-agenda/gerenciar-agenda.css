@@ -10,7 +10,15 @@ main {
 	flex: 1 0 auto;
 }
 
-/* Main agenda */
-#main-agenda {
+/* Lista de agendamentos */
+#lista-agendamento li {
 	display: none;
+	transition: 0.4s;
+}
+
+/* Linhas de lista de agendamentos */
+#lista-agendamento li:hover {
+	transition: 0.4s;
+	color: white;
+	background-color: #26c6da;
 }

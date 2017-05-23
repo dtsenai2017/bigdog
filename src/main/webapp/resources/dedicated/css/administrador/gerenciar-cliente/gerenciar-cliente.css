@@ -1,8 +1,19 @@
 @CHARSET "ISO-8859-1";
 
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
 /* Lista de clientes */
 #lista-clientes li {
 	display: none;
+	transition: 0.4s;
 }
 
 /* Linhas de lista de clientes */

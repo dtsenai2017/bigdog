@@ -61,24 +61,21 @@
 	<!-- Lista de clientes -->
 	<div class="row">
 		<!-- Lista de cliente -->
-		<div>
-			<ul id="lista-clientes" class="collection"
-				data-collapsible="accordion">
-				<!-- Foreach -->
-				<c:forEach items="${clientes }" var="cliente">
-					<!-- Linha do cliente -->
-					<li class="collection-item avatar"><img
-						title="${cliente.nome }"
-						src="${cliente.genero == Genero.Masculino ? 'resources/dedicated/img/cliente/genero_masculino.png' : 'resources/dedicated/img/cliente/genero_feminino.png' }"
-						class="circle"> <span class="title truncate"><b>${cliente.nome }</b></span>
-						<p class="truncate">${cliente.cpf }<br>${cliente.email }
-							<br> ${cliente.contato.celular }
-						</p> <a onclick="buscarCliente(${cliente.idCliente})"
-						href="#modal-cliente-info" class="secondary-content"><i
-							class="material-icons red-text text-lighten-2">zoom_in</i></a></li>
-				</c:forEach>
-			</ul>
-		</div>
+		<ul id="lista-clientes" class="collection">
+			<!-- Foreach -->
+			<c:forEach items="${clientes }" var="cliente">
+				<!-- Linha do cliente -->
+				<li class="collection-item avatar"><img
+					title="${cliente.nome }"
+					src="${cliente.genero == Genero.Masculino ? 'resources/dedicated/img/cliente/genero_masculino.png' : 'resources/dedicated/img/cliente/genero_feminino.png' }"
+					class="circle"> <span class="title truncate"><b>${cliente.nome }</b></span>
+					<p class="truncate">${cliente.cpf }<br>${cliente.email } <br>
+						${cliente.contato.celular }
+					</p> <a onclick="buscarCliente(${cliente.idCliente})"
+					href="#modal-cliente-info" class="secondary-content"><i
+						class="material-icons red-text text-lighten-2">zoom_in</i></a></li>
+			</c:forEach>
+		</ul>
 	</div>
 	</main>
 	<!-- /.container -->
@@ -306,6 +303,9 @@
 		<div class="modal-footer"></div>
 	</div>
 	<!-- /#modal-compra-cliente -->
+	
+	<!--  import navbar -->
+	<c:import url="component/footer.jsp" />
 
 	<!-- Script's dedicado -->
 	<!-- JS dedicado -->

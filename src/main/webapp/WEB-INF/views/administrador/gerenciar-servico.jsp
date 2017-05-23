@@ -95,7 +95,7 @@
 							data-collapsible="accordion">
 							<c:forEach items="${servicoEstetica }" var="servicoEstetica">
 								<li>
-									<div class="collapsible-header waves-effect">
+									<div class="collapsible-header waves-effect waves-orange">
 										<span>${servicoEstetica.nome }</span>
 									</div>
 									<div class="collapsible-body">
@@ -149,7 +149,7 @@
 							<c:forEach items="${servicoVeterinario }"
 								var="servicoVeterinario">
 								<li>
-									<div class="collapsible-header waves-effect">
+									<div class="collapsible-header waves-effect waves-red">
 										<span>${servicoVeterinario.nome }</span>
 									</div>
 									<div class="collapsible-body">

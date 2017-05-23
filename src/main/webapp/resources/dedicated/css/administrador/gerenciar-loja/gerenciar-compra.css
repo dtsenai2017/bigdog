@@ -8,6 +8,7 @@
 /* Escondendo Linhas de lista de compras */
 #lista-compra li {
 	display: none;
+	transition: 0.4s;
 }
 
 /* Hover em linha de lista de compras */

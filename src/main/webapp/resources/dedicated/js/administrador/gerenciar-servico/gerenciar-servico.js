@@ -157,7 +157,7 @@ function modalAlterarServico(idServico) {
 
 // Excluir serviço selecionado
 $('#btn-excluir-servico').click(function() {
-	// Recebendo valor de input do form
+	// Recebendo valor de input id
 	var idServico = $('#idServico').val();
 	
 	// Verifica alteração
@@ -174,7 +174,7 @@ $('#btn-excluir-servico').click(function() {
 				text : 'Confirmar',
 				btnClass : 'btn-green',
 				action : function() {
-					// Cadastrando novo serviço
+					// Deletando serviço
 					$.ajax({
 						type : "DELETE",
 						url : "adm/servico/" + idServico,

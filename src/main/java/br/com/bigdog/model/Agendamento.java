@@ -25,13 +25,13 @@ public class Agendamento {
 	@Column(name = "data_agendada", nullable = false)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", locale = "pt-BR", timezone = "America/Sao_Paulo")
 	private Date dataAgendada;
-	@OneToOne
+	@OneToOne(orphanRemoval = false)
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
-	@OneToOne
+	@OneToOne(orphanRemoval = false)
 	@JoinColumn(name = "id_servico")
 	private Servico servico;
-	@OneToOne
+	@OneToOne(orphanRemoval = false)
 	@JoinColumn(name = "id_pet")
 	private Pet pet;
 
