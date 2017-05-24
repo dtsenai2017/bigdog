@@ -53,6 +53,7 @@ public class Cliente {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_cliente", nullable = false)
 	private List<Pet> pets;
+	private String id_redes;
 
 	// Getters e Setters
 	public Long getIdCliente() {
@@ -135,10 +136,18 @@ public class Cliente {
 		this.pets = pets;
 	}
 
+	public String getId_redes() {
+		return id_redes;
+	}
+
+	public void setId_redes(String id_redes) {
+		this.id_redes = id_redes;
+	}
+
 	@Override
 	public String toString() {
 		return "Cliente [idCliente=" + idCliente + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", cpf="
 				+ cpf + ", dataNascimento=" + dataNascimento + ", genero=" + genero + ", enderecos=" + enderecos
-				+ ", contato=" + contato + ", pets=" + pets + "]";
+				+ ", contato=" + contato + ", pets=" + pets + ", id_redes=" + id_redes + "]";
 	}
 }

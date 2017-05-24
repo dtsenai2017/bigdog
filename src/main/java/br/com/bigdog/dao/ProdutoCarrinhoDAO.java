@@ -35,10 +35,23 @@ public class ProdutoCarrinhoDAO {
 		return manager.find(ProdutoCarrinho.class, id);
 	}
 
+	// Alterar
+	@Transactional
+	public void alterar(ProdutoCarrinho produtoCarrinho) {
+		// TODO Auto-generated method stub
+		manager.merge(produtoCarrinho);
+	}
+
 	// Excluir
 	@Transactional
 	public void excluir(Long id) {
 		ProdutoCarrinho produtoCarrinho = listar(id);
 		manager.remove(produtoCarrinho);
+	}
+
+	// Listar com Limite
+	public List<ProdutoCarrinho> listarComLimite(long primeiroIndex, long ultimoIndex) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

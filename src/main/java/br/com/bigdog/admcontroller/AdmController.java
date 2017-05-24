@@ -10,22 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.bigdog.dao.AgendamentoDAO;
+import br.com.bigdog.dao.ClienteDAO;
 import br.com.bigdog.dao.GenericDAO;
-import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.Servico;
 import br.com.bigdog.value.TipoServico;
 
 @RestController
 public class AdmController {
 	// Atributos
-	private GenericDAO<Cliente> clienteDAO;
+	private ClienteDAO clienteDAO;
 	private GenericDAO<Servico> servicoDAO;
 	private AgendamentoDAO agendamentoDAO;
 
 	// Construtor
 	@Autowired
-	public AdmController(GenericDAO<Cliente> clienteDAO, GenericDAO<Servico> servicoDAO,
-			AgendamentoDAO agendamentoDAO) {
+	public AdmController(ClienteDAO clienteDAO, GenericDAO<Servico> servicoDAO, AgendamentoDAO agendamentoDAO) {
 		this.clienteDAO = clienteDAO;
 		this.servicoDAO = servicoDAO;
 		this.agendamentoDAO = agendamentoDAO;

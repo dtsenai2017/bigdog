@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bigdog.dao.GenericDAO;
+import br.com.bigdog.dao.PetDAO;
 import br.com.bigdog.model.Pet;
 
 @RestController
 public class PetController {
 	// Atributos
-	private GenericDAO<Pet> petDAO;
+	private PetDAO petDAO;
 
 	// Construtor
 	@Autowired
-	public PetController(GenericDAO<Pet> petDAO) {
+	public PetController(PetDAO petDAO) {
 		this.petDAO = petDAO;
 	}
 

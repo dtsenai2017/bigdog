@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.bigdog.model.Cliente;
 
 @Repository
-public class ClienteDAO implements GenericDAO<Cliente> {
+public class ClienteDAO {
 	// Gerenciador de Entidades
 	@PersistenceContext
 	private EntityManager manager;
@@ -45,5 +45,50 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 	public void excluir(Long id) {
 		Cliente cliente = listar(id);
 		manager.remove(cliente);
+	}
+
+	// Listar (idRedes)
+	public Cliente busca(String id) {
+		TypedQuery<Cliente> query = manager.createQuery("select c from Cliente c where c.id_redes = :id_redes",
+				Cliente.class);
+		query.setParameter("id_redes", id);
+		try {
+			return query.getSingleResult();
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+
+	// Listar
+	public Cliente buscaCpf(String id) {
+		TypedQuery<Cliente> query = manager.createQuery("select c from Cliente c where c.cpf = :cpf", Cliente.class);
+		query.setParameter("cpf", id);
+		try {
+			return query.getSingleResult();
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+
+	// Listar com Limite
+	public List<Cliente> listarComLimite(int primeiroIndex, int ultimoIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// Logar
+	public Cliente logar(Cliente cliente) {
+		TypedQuery<Cliente> query = manager
+				.createQuery("SELECT c FROM Cliente c WHERE c.email = :email AND c.senha = :senha", Cliente.class);
+		query.setParameter("email", cliente.getEmail());
+		query.setParameter("senha", cliente.getSenha());
+		try {
+			return query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

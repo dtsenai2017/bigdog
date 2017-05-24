@@ -15,9 +15,9 @@ public class Contato {
 	private Long idContato;
 	@Column(unique = true)
 	private String email;
-	@Column(length = 15)
+	@Column(length = 20)
 	private String telefone;
-	@Column(length = 15, nullable = false)
+	@Column(length = 20, nullable = false)
 	private String celular;
 
 	// Getters e Setters

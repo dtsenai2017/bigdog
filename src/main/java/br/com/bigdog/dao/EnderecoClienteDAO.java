@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.bigdog.model.EnderecoCliente;
 
 @Repository
-public class EnderecoClienteDAO implements GenericDAO<EnderecoCliente> {
+public class EnderecoClienteDAO {
 	// Gerenciador de Entidades
 	@PersistenceContext
 	private EntityManager manager;
@@ -45,5 +45,11 @@ public class EnderecoClienteDAO implements GenericDAO<EnderecoCliente> {
 	public void excluir(Long id) {
 		EnderecoCliente endereco = listar(id);
 		manager.remove(endereco);
+	}
+
+	// Listar com limite
+	public List<EnderecoCliente> listarComLimite(long primeiroIndex, long ultimoIndex) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

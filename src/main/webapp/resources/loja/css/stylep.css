@@ -1,0 +1,28 @@
+.cxAvatar h2{
+	margin-top: 1em;
+}
+
+
+
+@media screen and (min-width: 814px) {
+
+	.search {
+		width: 50%;
+		margin-left: 1em;
+		margin-top: 0.4em;
+	}
+
+		.icon03 {
+		position: absolute;
+		margin-left: 70%;
+		margin-top: 0.5em;
+	}
+
+	.icon01 {
+		position: absolute;
+		margin-left: 67%;
+
+	}
+
+	.totalP {}
+}

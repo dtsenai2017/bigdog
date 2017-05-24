@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bigdog.dao.AgendamentoDAO;
+import br.com.bigdog.dao.CategoriaDAO;
+import br.com.bigdog.dao.ClienteDAO;
 import br.com.bigdog.dao.CompraDAO;
 import br.com.bigdog.dao.GenericDAO;
+import br.com.bigdog.dao.ProdutoDAO;
 import br.com.bigdog.model.Agendamento;
 import br.com.bigdog.model.Categoria;
 import br.com.bigdog.model.Cliente;
@@ -26,18 +29,17 @@ import br.com.bigdog.model.Produto;
 @RestController
 public class TestController {
 	// Atributos
-	private GenericDAO<Cliente> clienteDAO;
-	private GenericDAO<Categoria> categoriaDAO;
+	private ClienteDAO clienteDAO;
+	private CategoriaDAO categoriaDAO;
 	private GenericDAO<Fornecedor> fornecedorDAO;
-	private GenericDAO<Produto> produtoDAO;
+	private ProdutoDAO produtoDAO;
 	private AgendamentoDAO agendamentoDAO;
 	private CompraDAO compraDAO;
 
 	// Construtor
 	@Autowired
-	public TestController(GenericDAO<Cliente> clienteDAO, GenericDAO<Categoria> categoriaDAO,
-			GenericDAO<Fornecedor> fornecedorDAO, GenericDAO<Produto> produtoDAO, CompraDAO compraDAO,
-			AgendamentoDAO agendamentoDAO) {
+	public TestController(ClienteDAO clienteDAO, CategoriaDAO categoriaDAO, GenericDAO<Fornecedor> fornecedorDAO,
+			ProdutoDAO produtoDAO, CompraDAO compraDAO, AgendamentoDAO agendamentoDAO) {
 		this.clienteDAO = clienteDAO;
 		this.categoriaDAO = categoriaDAO;
 		this.fornecedorDAO = fornecedorDAO;

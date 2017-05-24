@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.ConstraintViolationException;
 
 import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.bigdog.dao.CategoriaDAO;
 import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.Categoria;
 import br.com.bigdog.model.SubCategoria;
@@ -24,11 +26,12 @@ import br.com.bigdog.model.SubCategoria;
 @RequestMapping("adm/")
 public class AdmCategoriaController {
 	// Atributos
-	private GenericDAO<Categoria> categoriaDAO;
+	private CategoriaDAO categoriaDAO;
 	private GenericDAO<SubCategoria> subCategoriaDAO;
 
 	// Construtor
-	public AdmCategoriaController(GenericDAO<Categoria> categoriaDAO, GenericDAO<SubCategoria> subCategoriaDAO) {
+	@Autowired
+	public AdmCategoriaController(CategoriaDAO categoriaDAO, GenericDAO<SubCategoria> subCategoriaDAO) {
 		this.categoriaDAO = categoriaDAO;
 		this.subCategoriaDAO = subCategoriaDAO;
 	}

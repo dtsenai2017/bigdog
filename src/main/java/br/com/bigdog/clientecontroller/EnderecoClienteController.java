@@ -14,19 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bigdog.dao.GenericDAO;
+import br.com.bigdog.dao.ClienteDAO;
+import br.com.bigdog.dao.EnderecoClienteDAO;
 import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.EnderecoCliente;
 
 @RestController
 public class EnderecoClienteController {
 	// Atributos
-	private GenericDAO<Cliente> clienteDAO;
-	private GenericDAO<EnderecoCliente> enderecoDAO;
+	private ClienteDAO clienteDAO;
+	private EnderecoClienteDAO enderecoDAO;
 
 	// Construtor
 	@Autowired
-	public EnderecoClienteController(GenericDAO<Cliente> clienteDAO, GenericDAO<EnderecoCliente> enderecoDAO) {
+	public EnderecoClienteController(ClienteDAO clienteDAO, EnderecoClienteDAO enderecoDAO) {
 		this.clienteDAO = clienteDAO;
 		this.enderecoDAO = enderecoDAO;
 	}

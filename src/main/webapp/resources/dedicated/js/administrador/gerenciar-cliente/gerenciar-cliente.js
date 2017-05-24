@@ -223,8 +223,7 @@ function buscarCliente(idCliente) {
 						+ compra.status
 						+ "</i></span><br><a href='#modal-compra-cliente' "
 						+ "onclick='abrirCompraCliente(" + compra.idCompra
-						+ ")'" + "class='text-red text-lighten-4'>"
-						+ "STATUS</a><div class='divider'>";
+						+ ")'" + ">" + "STATUS</a><div class='divider'>";
 
 				// Adicionando para collection de
 				// compras

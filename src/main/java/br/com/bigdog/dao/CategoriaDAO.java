@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.bigdog.model.Categoria;
 
 @Repository
-public class CategoriaDAO implements GenericDAO<Categoria> {
+public class CategoriaDAO {
 	// Gerenciador de Entidades
 	@PersistenceContext
 	private EntityManager manager;
@@ -45,5 +45,11 @@ public class CategoriaDAO implements GenericDAO<Categoria> {
 	public void excluir(Long id) {
 		Categoria categoria = listar(id);
 		manager.remove(categoria);
+	}
+
+	// Listar com limite
+	public List<Categoria> listarComLimite(long primeiroIndex, long ultimoIndex) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

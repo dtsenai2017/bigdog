@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bigdog.dao.GenericDAO;
+import br.com.bigdog.dao.ClienteDAO;
 import br.com.bigdog.model.Cliente;
 
 @RestController
 @RequestMapping(value = "adm/")
 public class AdmClienteController {
 	// Atributos
-	private GenericDAO<Cliente> clienteDAO;
+	private ClienteDAO clienteDAO;
 
 	// Construtor
 	@Autowired
-	public AdmClienteController(GenericDAO<Cliente> clienteDAO) {
+	public AdmClienteController(ClienteDAO clienteDAO) {
 		this.clienteDAO = clienteDAO;
 	}
 

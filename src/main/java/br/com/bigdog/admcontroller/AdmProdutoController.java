@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bigdog.dao.GenericDAO;
+import br.com.bigdog.dao.ProdutoDAO;
 import br.com.bigdog.model.Produto;
 
 @RestController
 @RequestMapping("adm/")
 public class AdmProdutoController {
 	// Atributos
-	private GenericDAO<Produto> produtoDAO;
+	private ProdutoDAO produtoDAO;
 
 	// Construtor
 	@Autowired
-	public AdmProdutoController(GenericDAO<Produto> produtoDAO) {
+	public AdmProdutoController(ProdutoDAO produtoDAO) {
 		this.produtoDAO = produtoDAO;
 	}
 
-	// Inserir ou alterar produto
+	// Inserir produto
 	@RequestMapping(value = "produto", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> inserir(@RequestBody Produto produto) {
 		try {

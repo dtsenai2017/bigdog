@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.bigdog.model.Produto;
 
 @Repository
-public class ProdutoDAO implements GenericDAO<Produto> {
+public class ProdutoDAO {
 	// Gerenciador de entidades
 	@PersistenceContext
 	private EntityManager manager;
@@ -24,8 +24,14 @@ public class ProdutoDAO implements GenericDAO<Produto> {
 	}
 
 	// Listar
-	public List<Produto> listar() {
+	public List<Produto> listarOrdenado() {
 		TypedQuery<Produto> query = manager.createQuery("SELECT p FROM Produto p", Produto.class);
+		return query.getResultList();
+	}
+
+	// Listar ORDER
+	public List<Produto> listar() {
+		TypedQuery<Produto> query = manager.createQuery("SELECT p FROM Produto p ORDER BY RAND()", Produto.class);
 		return query.getResultList();
 	}
 
@@ -45,5 +51,25 @@ public class ProdutoDAO implements GenericDAO<Produto> {
 	public void excluir(Long id) {
 		Produto produto = listar(id);
 		manager.remove(produto);
+	}
+
+	// Listar por subcategoria
+	public List<Produto> buscar(Long id) {
+		TypedQuery<Produto> query = manager.createQuery(
+				"SELECT p FROM Produto p WHERE p.subCategoria.idSubCategoria = :idSubCategoria", Produto.class);
+		query.setParameter("idSubCategoria", id);
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	// Listar com Limite
+	public List<Produto> listarComLimite(int primeiroIndex, int ultimoIndex) {
+		TypedQuery<Produto> query = manager.createQuery("SELECT p FROM Produto p ORDER BY RAND()", Produto.class);
+		query.setFirstResult(primeiroIndex);
+		query.setMaxResults(ultimoIndex);
+		return query.getResultList();
 	}
 }
