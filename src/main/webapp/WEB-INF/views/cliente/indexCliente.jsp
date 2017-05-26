@@ -1,12 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
 <head>
-<title>Big Dog - Bem Vindo</title>
+<meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+<!-- Ícone de aba -->
 <link rel="icon" href="resources/loja/imagens/logos/favicon.png">
+
+<!-- Título -->
+<title>Big Dog - Bem Vindo</title>
+
+<!-- Import CSS -->
 <link rel="stylesheet" type="text/css"
 	href="resources/loja/css/login.css">
 <link rel="stylesheet" type="text/css"
@@ -20,20 +26,29 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="resources/loja/css/materializeModificado.min.css">
-<script type="text/javascript" src="resources/loja/js/menu.js"></script>
 
-<main>
+<!-- Import JS -->
+<script type="text/javascript" src="resources/loja/js/menu.js"></script>
 <body>
+	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
+	<main> <!-- Avatar -->
 	<div class="cxAvatar">
+		<!-- Avatar -->
 		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
+
+		<!-- Nome do cliente -->
 		<div class="cx08">
 			<h2>${clienteLogado.nome }</h2>
 		</div>
+
+		<!-- ??? -->
 		<div class="menuu">
 			<i class="fa fa-bars" aria-hidden></i> Menu
 		</div>
+
+		<!-- Opções do menu -->
 		<div class="cx05">
 			<ul id="ul">
 				<li id="pf" class="id"><a href="home-user"><i
@@ -99,24 +114,24 @@
 		</div>
 		<br>
 	</div>
-</main>
-<c:import url="component/footerLoja.jsp"></c:import>
+	</main>
+	<c:import url="component/footerLoja.jsp"></c:import>
 
 
-<script src="resources/loja/js/jquery.min.js"></script>
-<script>
-	$(".menuu").click(function() {
+	<script src="resources/loja/js/jquery.min.js"></script>
+	<script>
+		$(".menuu").click(function() {
 
-		$("#ul").toggle();
-	});
-</script>
-<script>
-	$(document).ready(function() {
-		$('.menu-anchor').on('click touchstart', function(e) {
-			$('html').toggleClass('menu-active');
-			e.preventDefault();
+			$("#ul").toggle();
 		});
-	})
-</script>
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('.menu-anchor').on('click touchstart', function(e) {
+				$('html').toggleClass('menu-active');
+				e.preventDefault();
+			});
+		})
+	</script>
 </body>
 </html>

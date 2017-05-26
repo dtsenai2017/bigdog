@@ -60,7 +60,7 @@ public class AdmAgendamentoController {
 	public List<Agendamento> listarAgendamentoHoje() {
 		// Atribuindo valor de data para pesquisa (Data de Hoje)
 		Date today = new Date();
-		today.setDate(25);
+		// today.setDate(25);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String data = sdf.format(today);
 

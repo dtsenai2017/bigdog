@@ -5,9 +5,13 @@
 <html>
 <meta charset="utf-8">
 <head>
-<title>Big Dog - Bem Vindo</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+<!-- Título -->
+<title>Big Dog - Bem Vindo</title>
+
+<!-- Import's CSS -->
 <link rel="icon" href="resources/loja/imagens/logos/favicon.png">
 <link rel="stylesheet" type="text/css"
 	href="resources/loja/css/style.css">
@@ -16,32 +20,42 @@
 <link type="text/css" rel="stylesheet"
 	href="resources/loja/css/materializeModificado.min.css"
 	media="screen,projection" />
-<script type="text/javascript" src="resources/loja/js/menu.js"></script>
 
+<!-- Import's JS -->
+<script type="text/javascript" src="resources/loja/js/menu.js"></script>
 </head>
-<main>
 <body>
+	<!-- Locale para fmt money -->
+	<f:setLocale value="pt-BR" />
+
+	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
+
+	<main>
 	<div class="totalP">
+		<!-- Imagem do produto -->
 		<div class="imgProduto">
 			<img src="resources/loja/imagens/semFoto.png" class="produto">
 		</div>
 
+		<!-- Descrição do produto -->
 		<div class="descricaoProd">
 			<h2>${produto.nome }</h2>
-			<p>${produto.descricao }</p>
+			<p>${produto.descricao == '' ? 'Sem descrição' : produto.descricao }</p>
 			<h3>
-				Valor: R$
-				<f:formatNumber type="number" maxFractionDigits="3"
-					value="${produto.valor }"></f:formatNumber>
+				Valor:
+				<f:formatNumber type="currency" value="${produto.valor }" />
 			</h3>
 
+			<!-- Botão para adicionar produto no carrinho -->
 			<a href="addProduto?id=${produto.idProduto }"><button
 					class="waves-effect waves-light btn"
 					style="background-color: #770505;">
 					<img src="resources/loja/imagens/icones/icon-08.png">
 					<p style="margin-top: -0.5em;">Carrinho</p>
 				</button></a>
+
+			<!-- Botão para comprar já -->
 			<button class="waves-effect waves-light btn"
 				style="background-color: #005900;">
 				<a style="color: white;" href="comprarJa?id=${produto.idProduto }"><img
@@ -50,39 +64,41 @@
 			</button>
 		</div>
 
+		<!-- Descrição de outros produtos -->
 		<p class="produtos">Outros Produtos</p>
 
+		<!-- Lista de outros produtos -->
 		<c:forEach items="${outrosProdutos }" var="produto2">
 			<a href="produto?idProduto=${produto2.idProduto }">
 				<div class="p" id="prodd">
 					<img src="resources/loja/imagens/semFoto.png">
-					<p>${produto2.nome }
+					<p>${produto2.nome }</p>
 					<h2>
-						R$
-						<f:formatNumber type="number" maxFractionDigits="3"
-							value="${produto.valor }"></f:formatNumber>
+						<f:formatNumber type="currency" value="${produto.valor }" />
 					</h2>
-					</p>
 				</div>
 			</a>
 		</c:forEach>
 	</div>
-</main>
-<c:import url="component/footerLoja.jsp"></c:import>
+	</main>
 
+	<!-- Import footer -->
+	<c:import url="component/footerLoja.jsp"></c:import>
 
-<script type="text/javascript"
-	src="resources/jquery/jquery-2.2.2.min.js" /></script>
-<script type="text/javascript"
-	src="resources/loja/js/materialize.min.js"></script>
-<script>
-	$(document).ready(function() {
-		$('.menu-anchor').on('click touchstart', function(e) {
-			$('html').toggleClass('menu-active');
-			e.preventDefault();
-		});
-	})
-</script>
+	<!-- Import JS -->
+	<script type="text/javascript"
+		src="resources/jquery/jquery-2.2.2.min.js" /></script>
+	<script type="text/javascript"
+		src="resources/loja/js/materialize.min.js"></script>
+
+	<!-- Script para menu lateral -->
+	<script>
+		$(document).ready(function() {
+			$('.menu-anchor').on('click touchstart', function(e) {
+				$('html').toggleClass('menu-active');
+				e.preventDefault();
+			});
+		})
+	</script>
 </body>
-</main>
 </html>

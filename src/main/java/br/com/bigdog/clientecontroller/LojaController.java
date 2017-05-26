@@ -28,7 +28,6 @@ public class LojaController {
 	@Autowired
 	public LojaController(ProdutoCarrinhoDAO carrinhoDAO, ProdutoDAO produtoDAO,
 			CarrinhoDoClienteDAO carrinhoDoClienteDAO) {
-		// TODO Auto-generated constructor stub
 		this.carrinhoDAO = carrinhoDAO;
 		this.produtoDAO = produtoDAO;
 		this.carrinhoDoClienteDAO = carrinhoDoClienteDAO;
@@ -36,53 +35,68 @@ public class LojaController {
 
 	@RequestMapping("addProduto")
 	public String addProduto(Long id, HttpSession session) {
-
+		// Atributos
 		String retorno;
-
 		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
 
+		// Verifica cliente logado
 		if (cliente != null) {
-
+			// Produto no carrinho
 			ProdutoCarrinho carrinho = new ProdutoCarrinho();
+
+			// Produto que será adicionado e atributo que verifica existência de
+			// produto no carrinho
 			Produto produto = produtoDAO.listar(id);
-			List<ProdutoCarrinho> carrinhoDoCliente = carrinhoDoClienteDAO
-					.listarCarrinhoDoCliente(cliente.getIdCliente());
 			boolean existe = false;
 
+			// Lista de produtos no carrinho do cliente
+			List<ProdutoCarrinho> carrinhoDoCliente = carrinhoDoClienteDAO
+					.listarCarrinhoDoCliente(cliente.getIdCliente());
+
+			// Verifica lista de produtos no carrinho se é existente com o
+			// adicionado
 			for (ProdutoCarrinho produtoCarrinho : carrinhoDoCliente) {
 				if (produtoCarrinho.getProduto().getIdProduto() == produto.getIdProduto()) {
 					existe = true;
 				}
 			}
 
+			// Caso produto não existir em carrinho de cliente...
 			if (!existe) {
 				carrinho.setCliente(cliente);
 				carrinho.setProduto(produto);
 				carrinho.setQuantidade((long) 1);
+				System.out.println("CARRINHO: " + carrinho.toString());
 
 				carrinhoDAO.inserir(carrinho);
 			}
 
+			// Atribuindo valor para view
 			retorno = "redirect:confirmarCompra";
 		} else {
+			// Atribuindo valor para view
 			retorno = "redirect:entrar";
 		}
 
+		// Ir para...
 		return retorno;
 	}
 
+	// Confirmação de compra
 	@RequestMapping("confirmarCompra")
 	public String confirmarCompra(HttpSession session) {
-
+		// Atributos
 		String retorno;
 		double totalCarrinho = 0;
 		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
 
+		// Verifica se cliente é logado
 		if (cliente != null) {
-
+			// Lista de produtos no carrinho
 			List<ProdutoCarrinho> carrinhoDoCliente = carrinhoDoClienteDAO
 					.listarCarrinhoDoCliente(cliente.getIdCliente());
 
+			// Atribuindo valor total de produtos
 			for (ProdutoCarrinho produtoCarrinho : carrinhoDoCliente) {
 				totalCarrinho += produtoCarrinho.getProduto().getValor() * produtoCarrinho.getQuantidade();
 			}

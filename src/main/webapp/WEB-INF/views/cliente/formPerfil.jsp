@@ -4,12 +4,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
 <head>
-<title>Big Dog - Bem Vindo</title>
+<meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+<!-- Ícone de aba -->
 <link rel="icon" href="resources/loja/imagens/logos/favicon.png">
+
+<!-- Título -->
+<title>Big Dog - Bem Vindo</title>
+
+<!-- Import CSS -->
 <link rel="stylesheet" type="text/css"
 	href="resources/loja/css/login.css">
 <link rel="stylesheet" type="text/css"
@@ -22,8 +28,12 @@
 <link type="text/css" rel="stylesheet"
 	href="resources/loja/css/materializeModificado.min.css"
 	media="screen,projection" />
+
+<!-- Import JS -->
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
 <script src="resources/loja/js/vanilla-masker.min.js"></script>
+
+<!-- Mask -->
 <script type="text/javascript">
 	window.onload = function mask() {
 		VMasker(document.querySelector(".dataN")).maskPattern("99/99/9999");
@@ -35,14 +45,15 @@
 		$('#idCliente').val(localStorage.getItem("id_cliente"))
 	}
 </script>
-
 </head>
-<main>
 <body>
+	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
+	<main> <!-- Dados do cliente -->
 	<div class="cxAvatar">
 		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
+
 		<div class="cx08">
 			<h2>${clienteLogado.nome }</h2>
 		</div>
@@ -153,50 +164,53 @@
 			</div>
 		</form>
 	</div>
-</main>
-<footer class="page-footer">
-	<div class="container">
-		<div class="footer-copyright">
-			<div class="container" style="text-align: center;">
-				© 2017 Copyright BIG Dog - SENAI Informática <a
-					class="grey-text text-lighten-4 right"
-					href="https://www.facebook.com/bigdogPETeVET/"><img
-					style="margin-top: -0.5em"
-					src="resources/loja/imagens/icones/icon-04.png"></a>
+	</main>
+
+	<!-- Footer -->
+	<footer class="page-footer">
+		<div class="container">
+			<div class="footer-copyright">
+				<div class="container" style="text-align: center;">
+					© 2017 Copyright BIG Dog - SENAI Informática <a
+						class="grey-text text-lighten-4 right"
+						href="https://www.facebook.com/bigdogPETeVET/"><img
+						style="margin-top: -0.5em"
+						src="resources/loja/imagens/icones/icon-04.png"></a>
+				</div>
 			</div>
 		</div>
-	</div>
-</footer>
+	</footer>
 
-<script type="text/javascript"
-	src="resources/jquery/jquery-2.2.2.min.js" /></script>
-<script type="text/javascript"
-	src="resources/loja/js/materialize.min.js"></script>
-<script type="text/javascript">
-	$(".button-collapse").sideNav();
-	$(document).ready(function() {
-		Materialize.updateTextFields();
-	});
+	<!-- Import JS -->
+	<script type="text/javascript"
+		src="resources/jquery/jquery-2.2.2.min.js" /></script>
+	<script type="text/javascript"
+		src="resources/loja/js/materialize.min.js"></script>
 
-	$(document).ready(function() {
-		$('select').material_select();
-	});
-</script>
-
-
-<script>
-	$(".menuu").click(function() {
-
-		$("#ul").toggle();
-	});
-</script>
-<script>
-	$(document).ready(function() {
-		$('.menu-anchor').on('click touchstart', function(e) {
-			$('html').toggleClass('menu-active');
-			e.preventDefault();
+	<!-- Script's -->
+	<script type="text/javascript">
+		$(".button-collapse").sideNav();
+		$(document).ready(function() {
+			Materialize.updateTextFields();
 		});
-	})
-</script>
+
+		$(document).ready(function() {
+			$('select').material_select();
+		});
+	</script>
+	<script>
+		$(".menuu").click(function() {
+
+			$("#ul").toggle();
+		});
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('.menu-anchor').on('click touchstart', function(e) {
+				$('html').toggleClass('menu-active');
+				e.preventDefault();
+			});
+		})
+	</script>
 </body>
 </html>

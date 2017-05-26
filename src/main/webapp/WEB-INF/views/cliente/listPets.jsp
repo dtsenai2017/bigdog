@@ -1,11 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
 <head>
-<title>Big Dog - Bem Vindo</title>
+<meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+<!-- Título -->
+<title>Big Dog - Bem Vindo</title>
+
+<!-- Import CSS -->
 <link rel="icon" href="resources/loja/imagens/logos/favicon.png">
 <link rel="stylesheet" type="text/css"
 	href="resources/loja/css/login.css">
@@ -21,13 +25,15 @@
 <link type="text/css" rel="stylesheet"
 	href="resources/loja/css/materializeModificado.min.css"
 	media="screen,projection" />
-<script type="text/javascript" src="resources/loja/js/menu.js"></script>
 
+<!-- Import JS -->
+<script type="text/javascript" src="resources/loja/js/menu.js"></script>
 </head>
-<main>
 <body>
+	<!-- Import footer -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
+	<main> <!-- Dados do cliente -->
 	<div class="cxAvatar">
 		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
 		<div class="cx08">
@@ -94,22 +100,22 @@
 		</div>
 		<br>
 	</div>
-</main>
-<c:import url="component/footerLoja.jsp"></c:import>
+	</main>
+	<c:import url="component/footerLoja.jsp"></c:import>
 
-<script src="resources/loja/js/jquery.min.js"></script>
-<script>
-	$(".menuu").click(function() {
+	<script src="resources/loja/js/jquery.min.js"></script>
+	<script>
+		$(".menuu").click(function() {
 
-		$("#ul").toggle();
-	});
-</script>
-<script>
-	$(document).ready(function() {
-		$('.menu-anchor').on('click touchstart', function(e) {
-			$('html').toggleClass('menu-active');
-			e.preventDefault();
+			$("#ul").toggle();
 		});
-	})
-</script>
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('.menu-anchor').on('click touchstart', function(e) {
+				$('html').toggleClass('menu-active');
+				e.preventDefault();
+			});
+		})
+	</script>
 </html>

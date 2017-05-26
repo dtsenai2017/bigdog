@@ -1,12 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
 <head>
-<title>Big Dog - Bem Vindo</title>
+<meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+<!-- Ícone de aba -->
 <link rel="icon" href="resources/loja/imagens/logos/favicon.png">
+
+<!-- Título -->
+<title>Big Dog - Bem Vindo</title>
+
+<!-- Import CSS -->
 <link rel="stylesheet" type="text/css"
 	href="resources/loja/css/login.css">
 <link rel="stylesheet" type="text/css"
@@ -18,6 +24,8 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="resources/loja/css/materializeModificado.min.css">
+
+<!-- Import JS -->
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
 <script src="resources/loja/js/vanilla-masker.min.js"></script>
 <script type="text/javascript">
@@ -25,25 +33,32 @@
 		VMasker(document.querySelector(".cep")).maskPattern("99999-999");
 	}
 </script>
-
 </head>
-<main>
 <body>
+	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
+
+	<main> <!-- Dados do cliente -->
 	<div class="cxAvatar">
+		<!-- Imagem do avatar -->
 		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
+
+		<!-- Nome do cliente -->
 		<div class="cx08">
 			<h2>${clienteLogado.nome }</h2>
 		</div>
 
+		<!-- Menu lateral -->
 		<div class="menuu">
 			<i class="fa fa-bars" aria-hidden></i> Menu
 		</div>
+
+		<!-- Opções do menu -->
 		<div class="cx05">
 			<ul id="ul">
 				<li id="pf" class="id"><a href="home-user"><i
 						class="fa fa-home" aria-hidden="true"></i> Inicio</a></li>
-				<li id="pf"><a href=""><i class="fa fa-user"
+				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
 						src="resources/loja/imagens/icones/icon-09.png"> Meus Pets</a></li>
@@ -56,10 +71,13 @@
 			</ul>
 		</div>
 
+		<!-- Botão para cadastrar novo endereço -->
 		<div class="cx03">
 			<i class="fa fa-address-book" aria-hidden="true"></i> Cadastrar
 			Endereço
 		</div>
+
+		<!-- Formulário de endereço -->
 		<form id="form" action="cadastra-endereco" class="form" method="post">
 			<div class="row roww">
 				<div class="input-field col s6">
@@ -104,7 +122,6 @@
 				</div>
 			</div>
 
-
 			<div class="row">
 				<div class="input-field col s6">
 					<input id="complemento" type="text"
@@ -129,109 +146,135 @@
 			</button>
 		</form>
 	</div>
-</main>
-<c:import url="component/footerLoja.jsp"></c:import>
+	</main>
 
+	<!-- Import footer -->
+	<c:import url="component/footerLoja.jsp"></c:import>
 
-<script type="text/javascript"
-	src="resources/jquery/jquery-2.2.2.min.js" /></script>
-<script type="text/javascript"
-	src="resources/loja/js/materialize.min.js"></script>
+	<!-- Import JS -->
+	<script type="text/javascript"
+		src="resources/jquery/jquery-2.2.2.min.js" /></script>
+	<script type="text/javascript"
+		src="resources/loja/js/materialize.min.js"></script>
 
-<script type="text/javascript">
-	$(".button-collapse").sideNav();
-	$(document).ready(function() {
-		Materialize.updateTextFields();
-	});
-
-	$(document).ready(function() {
-		$('select').material_select();
-	});
-</script>
-
-
-<script>
-	$(".menuu").click(function() {
-
-		$("#ul").toggle();
-	});
-</script>
-<script>
-	$(document).ready(function() {
-		$('.menu-anchor').on('click touchstart', function(e) {
-			$('html').toggleClass('menu-active');
-			e.preventDefault();
+	<!-- Script's -->
+	<script type="text/javascript">
+		$(".button-collapse").sideNav();
+		$(document).ready(function() {
+			Materialize.updateTextFields();
 		});
-	})
-</script>
-<script type="text/javascript">
-	$(document).ready(
-			function() {
 
-				function limpa_formulário_cep() {
-					// Limpa valores do formulário de cep.
-					$("#logradouro").val("");
-					$("#bairro").val("");
-					$("#cidade").val("");
-					$("#uf").val("");
-				}
+		$(document).ready(function() {
+			$('select').material_select();
+		});
+	</script>
+	<script>
+		$(".menuu").click(function() {
 
-				// Quando o campo cep perde o foco.
-				$("#cep").blur(
+			$("#ul").toggle();
+		});
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('.menu-anchor').on('click touchstart', function(e) {
+				$('html').toggleClass('menu-active');
+				e.preventDefault();
+			});
+		})
+	</script>
+
+	<!-- Busca cep -->
+	<script type="text/javascript">
+		$(document)
+				.ready(
 						function() {
 
-							// Nova variável "cep" somente com dígitos.
-							var cep = $(this).val().replace(/\D/g, '');
-
-							// Verifica se campo cep possui valor informado.
-							if (cep != "") {
-
-								// Expressão regular para validar o CEP.
-								var validacep = /^[0-9]{8}$/;
-
-								// Valida o formato do CEP.
-								if (validacep.test(cep)) {
-
-									// Preenche os campos com "..." enquanto
-									// consulta webservice.
-									$("#logradouro").val("...");
-									$("#bairro").val("...");
-									$("#cidade").val("...");
-									$("#uf").val("...");
-
-									// Consulta o webservice viacep.com.br/
-									$.getJSON("//viacep.com.br/ws/" + cep
-											+ "/json/?callback=?", function(
-											dados) {
-
-										if (!("erro" in dados)) {
-											// Atualiza os campos com os valores da
-											// consulta.
-											$("#logradouro").val(
-													dados.logradouro);
-											$("#bairro").val(dados.bairro);
-											$("#cidade").val(dados.localidade);
-											$("#uf").val(dados.uf);
-										} // end if.
-										else {
-											// CEP pesquisado não foi encontrado.
-											limpa_formulário_cep();
-											alert("CEP não encontrado.");
-										}
-									});
-								} // end if.
-								else {
-									// cep é inválido.
-									limpa_formulário_cep();
-									alert("Formato de CEP inválido.");
-								}
-							} // end if.
-							else {
-								// cep sem valor, limpa formulário.
-								limpa_formulário_cep();
+							function limpa_formulário_cep() {
+								// Limpa valores do formulário de cep.
+								$("#logradouro").val("");
+								$("#bairro").val("");
+								$("#cidade").val("");
+								$("#uf").val("");
 							}
+
+							// Quando o campo cep perde o foco.
+							$("#cep")
+									.blur(
+											function() {
+
+												// Nova variável "cep" 
+												// somente com dígitos.
+												var cep = $(this).val()
+														.replace(/\D/g, '');
+
+												// Verifica se campo 
+												// cep possui valor informado.
+												if (cep != "") {
+
+													// Expressão regular para validar o CEP.
+													var validacep = /^[0-9]{8}$/;
+
+													// Valida o formato do CEP.
+													if (validacep.test(cep)) {
+
+														// Preenche os 
+														// campos com "..." enquanto
+														// consulta webservice.
+														$("#logradouro").val(
+																"...");
+														$("#bairro").val("...");
+														$("#cidade").val("...");
+														$("#uf").val("...");
+
+														// Consulta o webservice viacep.com.br/
+														$
+																.getJSON(
+																		"//viacep.com.br/ws/"
+																				+ cep
+																				+ "/json/?callback=?",
+																		function(
+																				dados) {
+
+																			if (!("erro" in dados)) {
+																				// Atualiza os 
+																				// campos com os valores da
+																				// consulta.
+																				$(
+																						"#logradouro")
+																						.val(
+																								dados.logradouro);
+																				$(
+																						"#bairro")
+																						.val(
+																								dados.bairro);
+																				$(
+																						"#cidade")
+																						.val(
+																								dados.localidade);
+																				$(
+																						"#uf")
+																						.val(
+																								dados.uf);
+																			} // end if.
+																			else {
+																				// CEP pesquisado não foi encontrado.
+																				limpa_formulário_cep();
+																				alert("CEP não encontrado.");
+																			}
+																		});
+													} // end if.
+													else {
+														// cep é inválido.
+														limpa_formulário_cep();
+														alert("Formato de CEP inválido.");
+													}
+												} // end if.
+												else {
+													// cep sem valor, limpa formulário.
+													limpa_formulário_cep();
+												}
+											});
 						});
-			});
-</script>
+	</script>
 </body>
 </html>

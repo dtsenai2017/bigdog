@@ -1,6 +1,6 @@
 package br.com.bigdog.model;
 
-public class Usuario {
+public class Administrador {
 	// Atributos
 	private String email;
 	private String senha;

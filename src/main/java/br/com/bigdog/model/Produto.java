@@ -1,6 +1,7 @@
 package br.com.bigdog.model;
 
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -46,6 +48,8 @@ public class Produto {
 	@Lob
 	@Column(nullable = false, length = 5242880)
 	private byte[] foto;
+	@Transient
+	private String fotoString;
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
@@ -145,6 +149,11 @@ public class Produto {
 		this.foto = foto;
 	}
 
+	public String getFotoString() {
+		fotoString = Base64.getEncoder().encodeToString(foto);
+		return fotoString;
+	}
+
 	public Categoria getCategoria() {
 		return categoria;
 	}
@@ -174,6 +183,7 @@ public class Produto {
 		return "Produto [idProduto=" + idProduto + ", nome=" + nome + ", descricao=" + descricao + ", qtdEstoque="
 				+ qtdEstoque + ", valor=" + valor + ", marca=" + marca + ", cor=" + cor + ", tamanho=" + tamanho
 				+ ", quantidade=" + quantidade + ", dataVigencia=" + dataVigencia + ", foto=" + Arrays.toString(foto)
-				+ ", categoria=" + categoria + ", subCategoria=" + subCategoria + ", fornecedor=" + fornecedor + "]";
+				+ ", fotoString=" + fotoString + ", categoria=" + categoria + ", subCategoria=" + subCategoria
+				+ ", fornecedor=" + fornecedor + "]";
 	}
 }
