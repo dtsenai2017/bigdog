@@ -1,12 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
 <head>
-<title>Big Dog - Bem Vindo</title>
+<meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+<!-- Título -->
+<title>Big Dog - Bem Vindo</title>
+
+<!-- Ícone de aba -->
 <link rel="icon" href="resources/loja/imagens/logos/favicon.png">
+
+<!-- Import CSS -->
 <link rel="stylesheet" type="text/css"
 	href="resources/loja/css/style.css">
 <link rel="stylesheet" type="text/css"
@@ -17,22 +23,27 @@
 	href="resources/loja/css/materializeModificado.min.css"
 	media="screen,projection" />
 
+<!-- Import JS -->
 <script type="text/javascript"
 	src="resources/jquery/jquery-2.2.2.min.js" /></script>
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
 <script type="text/javascript" src="resources/loja/js/jquery.min.js"></script>
 <script type="text/javascript"
 	src="resources/loja/js/materialize.min.js"></script>
+
+<!-- Script de inicialização de select -->
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('select').material_select();
-
 	});
 </script>
 </head>
-<main>
+
 <body>
+	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
+
+	<main>
 	<div class="demo">
 		<div id="demo">
 			<div class="dvs">
@@ -106,61 +117,65 @@
 			</div>
 		</div>
 	</div>
-</main>
-<c:import url="component/footerLoja.jsp"></c:import>
-<script type="text/javascript">
-	function pagamentoBoleto() {
-		console.log("pagamentoBoleto");
-		redirecionar("pag/gerarBoleto");
+	</main>
 
-	}
+	<!-- Import footer -->
+	<c:import url="component/footerLoja.jsp"></c:import>
 
-	function pagamentoPagSeguro() {
-		console.log("pagamento pagseguro");
-		redirecionar("pag/pagseguro");
-	}
+	<!-- Scripts -->
+	<script type="text/javascript">
+		function pagamentoBoleto() {
+			console.log("pagamentoBoleto");
+			redirecionar("pag/gerarBoleto");
 
-	function redirecionar(url) {
+		}
 
-		url += "/" + document.getElementById('selectEnderecos').value;
+		function pagamentoPagSeguro() {
+			console.log("pagamento pagseguro");
+			redirecionar("pag/pagseguro");
+		}
 
-		console.log(url);
+		function redirecionar(url) {
 
-		window.location.href = url;
-	}
-</script>
-<script>
-	$(document).ready(function() {
-		$('.menu-anchor').on('click touchstart', function(e) {
-			$('html').toggleClass('menu-active');
-			e.preventDefault();
-		});
+			url += "/" + document.getElementById('selectEnderecos').value;
 
-		$('select').on("change", function() {
-			var valSelect = $("option:selected", this).val();
-			console.log(valSelect);
+			console.log(url);
 
-			$.ajax({
-				headers : {
-					'Content-Type' : 'application/json'
-				},
-				type : 'GET',
-				url : 'rest/dinamic/endereco/' + valSelect,
-				dataType : 'json',
-				success : function(data) {
-					console.log(data);
-
-					$("#pLogradouro").html(data.logradouro);
-					$("#pNumero").html('Número: ' + data.numero);
-					$("#pBairro").html(data.bairro);
-					$("#pCidade").html(data.cidade);
-				},
-				error : function() {
-					console.log('só triteza');
-				}
+			window.location.href = url;
+		}
+	</script>
+	<script>
+		$(document).ready(function() {
+			$('.menu-anchor').on('click touchstart', function(e) {
+				$('html').toggleClass('menu-active');
+				e.preventDefault();
 			});
-		});
-	})
-</script>
+
+			$('select').on("change", function() {
+				var valSelect = $("option:selected", this).val();
+				console.log(valSelect);
+
+				$.ajax({
+					headers : {
+						'Content-Type' : 'application/json'
+					},
+					type : 'GET',
+					url : 'rest/dinamic/endereco/' + valSelect,
+					dataType : 'json',
+					success : function(data) {
+						console.log(data);
+
+						$("#pLogradouro").html(data.logradouro);
+						$("#pNumero").html('Número: ' + data.numero);
+						$("#pBairro").html(data.bairro);
+						$("#pCidade").html(data.cidade);
+					},
+					error : function() {
+						console.log('só triteza');
+					}
+				});
+			});
+		})
+	</script>
 </body>
 </html>

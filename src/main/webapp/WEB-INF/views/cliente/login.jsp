@@ -1,16 +1,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
+<head>
 <meta charset="UTF-8">
 <meta name="google-signin-client_id"
 	content="125644047445-9j60sbkl1kssriskoolv4o946m18r8in.apps.googleusercontent.com">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="resources/loja/imagens/logos/favicon.png">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="resources/loja/js/fb.js"></script>
 
-<head>
+<!-- Logo de aba -->
+<link rel="icon" href="resources/loja/imagens/logos/favicon.png">
+
+<!-- Título -->
 <title>Big Dog - Bem Vindo</title>
+
+<!-- Import CSS -->
 <link rel="stylesheet" type="text/css"
 	href="resources/loja/css/social-buttons.css">
 <link rel="stylesheet" type="text/css"
@@ -18,9 +21,13 @@
 <link type="text/css" rel="stylesheet"
 	href="resources/loja/css/materializeModificado.min.css"
 	media="screen,projection" />
+
+<!-- Import JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="resources/loja/js/fb.js"></script>
 </head>
-<main>
 <body id="body">
+	<!-- header -->
 	<header>
 		<div class="img00">
 			<a href="home"><img
@@ -28,7 +35,8 @@
 		</div>
 	</header>
 
-
+	<!-- Formulário de login -->
+	<main>
 	<form id="formm" class="form" action="javascript:logar();"
 		method="post">
 		<div class="cx02">
@@ -118,17 +126,17 @@
 			</script>
 		</div>
 	</form>
-</main>
-<c:import url="component/footerLoja.jsp"></c:import>
+	</main>
+	<c:import url="component/footerLoja.jsp"></c:import>
 
-<script type="text/javascript"
-	src="resources/loja/js/materialize.min.js"></script>
-<script type="text/javascript">
-	function cadastrese() {
-		localStorage.setItem("id_redes", 0);
-		window.location = "faca-parte";
-	}
-</script>
+	<script type="text/javascript"
+		src="resources/loja/js/materialize.min.js"></script>
+	<script type="text/javascript">
+		function cadastrese() {
+			localStorage.setItem("id_redes", 0);
+			window.location = "faca-parte";
+		}
+	</script>
 
 </body>
 </html>
