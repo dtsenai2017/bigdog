@@ -31,6 +31,16 @@ public class AdmController {
 	}
 
 	// Requisições
+	// Ir para formulário de login do administrador
+	@RequestMapping(value = "admLogin")
+	public ModelAndView formLoginAdm(ModelAndView mav) {
+		// Atribuindo view
+		mav.setViewName("administrador/login-administrador");
+
+		// Retornando MaV
+		return mav;
+	}
+
 	// Gerenciar Cliente
 	// Ir para Gerenciar Cliente
 	@RequestMapping(value = "gerenciarCliente", method = RequestMethod.GET)

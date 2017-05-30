@@ -24,6 +24,6 @@ public class Administrador {
 
 	@Override
 	public String toString() {
-		return "Usuario [email=" + email + ", senha=" + senha + "]";
+		return "Administrador [email=" + email + ", senha=" + senha + "]";
 	}
 }

@@ -25,6 +25,7 @@ import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.Compra;
 import br.com.bigdog.model.Fornecedor;
 import br.com.bigdog.model.Produto;
+import br.com.bigdog.model.Servico;
 
 @RestController
 public class TestController {
@@ -33,18 +34,20 @@ public class TestController {
 	private CategoriaDAO categoriaDAO;
 	private GenericDAO<Fornecedor> fornecedorDAO;
 	private ProdutoDAO produtoDAO;
+	private GenericDAO<Servico> servicoDAO;
 	private AgendamentoDAO agendamentoDAO;
 	private CompraDAO compraDAO;
 
 	// Construtor
 	@Autowired
 	public TestController(ClienteDAO clienteDAO, CategoriaDAO categoriaDAO, GenericDAO<Fornecedor> fornecedorDAO,
-			ProdutoDAO produtoDAO, CompraDAO compraDAO, AgendamentoDAO agendamentoDAO) {
+			ProdutoDAO produtoDAO, CompraDAO compraDAO, GenericDAO<Servico> servicoDAO, AgendamentoDAO agendamentoDAO) {
 		this.clienteDAO = clienteDAO;
 		this.categoriaDAO = categoriaDAO;
 		this.fornecedorDAO = fornecedorDAO;
 		this.produtoDAO = produtoDAO;
 		this.compraDAO = compraDAO;
+		this.servicoDAO = servicoDAO;
 		this.agendamentoDAO = agendamentoDAO;
 	}
 
@@ -130,6 +133,26 @@ public class TestController {
 
 		// Retornando
 		return ResponseEntity.ok().build();
+	}
+
+	// INSERÇÃO DE DADOS : Serviço
+	@RequestMapping(value = "dataTestServico", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Void> dataTestServico(@RequestBody List<Servico> servicos) {
+		// Inserindo lista
+		try {
+			// Inserindo lista de dados
+			for (Servico servico : servicos) {
+				servicoDAO.inserir(servico);
+			}
+
+			return ResponseEntity.ok().build();
+		} catch (ConstraintViolationException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	// INSERÇÃO DE DADOS : Agendamento

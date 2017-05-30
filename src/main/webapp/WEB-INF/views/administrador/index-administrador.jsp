@@ -15,6 +15,68 @@
 <!-- CSS dedicado -->
 <link rel="stylesheet"
 	href="resources/dedicated/css/administrador/index-administrador.css">
+
+<!-- Scripts para gráficos -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script type="text/javascript">
+				function consumir() {
+					console.log('entrou');
+					var chart = new Array();
+					// Envia a chamada ajax para o servidor
+					$
+							.ajax({
+								url : 'adm/produto',
+								type : 'GET',
+								mediaType : 'JSON',
+								success : function(data) {
+									var produtos = data;
+
+									Highcharts
+											.chart(
+													'grafico1',
+													{
+														chart : {
+															type : 'pie',
+															options3d : {
+																enabled : true,
+																alpha : 45
+															}
+														},
+														title : {
+															text : 'Produtos Em Estoque'
+														},
+														subtitle : {
+															text : 'DTCommerce'
+														},
+														plotOptions : {
+															pie : {
+																innerSize : 100,
+																depth : 45
+															}
+														},
+														series : [ {
+															name : 'Quantidade em estoque é de: ',
+															data :  gerarProdutos(produtos) 
+														} ]
+													});
+
+									function gerarProdutos(produtos) {
+										for (var int = 0; int < produtos.length; int++) {
+											chart[int] = [ produtos[int].nome,
+												produtos[int].qtdEstoque ]; 
+										}
+										console.log(chart)
+										return chart;
+									}
+
+								}
+
+							});
+				}
+			</script>
 </head>
 <body>
 	<!--  import navbar -->
@@ -79,63 +141,6 @@
 			<div class="row">
 				<div id="grafico1" style="height: 400px"></div>
 			</div>
-
-			<script type="text/javascript">
-				function consumir() {
-					console.log('entrou');
-					var chart = new Array();
-					// Envia a chamada ajax para o servidor
-					$
-							.ajax({
-								url : 'adm/produto',
-								type : 'GET',
-								mediaType : 'JSON',
-								success : function(data) {
-									var produtos = data;
-
-									Highcharts
-											.chart(
-													'grafico1',
-													{
-														chart : {
-															type : 'pie',
-															options3d : {
-																enabled : true,
-																alpha : 45
-															}
-														},
-														title : {
-															text : 'Produtos Em Estoque'
-														},
-														subtitle : {
-															text : 'DTCommerce'
-														},
-														plotOptions : {
-															pie : {
-																innerSize : 100,
-																depth : 45
-															}
-														},
-														series : [ {
-															name : 'Quantidade em estoque é de: ',
-															data :  gerarProdutos(produtos) 
-														} ]
-													});
-
-									function gerarProdutos(produtos) {
-										for (var int = 0; int < produtos.length; int++) {
-											chart[int] = [ produtos[int].nome,
-												produtos[int].qtdEstoque ]; 
-										}
-										console.log(chart)
-										return chart;
-									}
-
-								}
-
-							});
-				}
-			</script>
 		</div>
 		<!-- /.swipe-dashboard -->
 
@@ -150,7 +155,7 @@
 								<img
 									src="resources/dedicated/img/administrador/gerenciar/gerenciar-cliente.png"
 									class="responsive-img"> <span class="card-title">Cliente</span>
-								<a id="btn-gerenciar-cliente" href="gerenciarCliente"
+								<a id="btn-gerenciar-cliente"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">recent_actors</i></a>
 							</div>
@@ -171,7 +176,7 @@
 								<img
 									src="resources/dedicated/img/administrador/gerenciar/gerenciar-loja.png"
 									class="responsive-img"> <span class="card-title">Loja</span>
-								<a id="btn-gerenciar-loja" href="gerenciarLoja"
+								<a id="btn-gerenciar-loja"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">store</i></a>
 							</div>
@@ -192,7 +197,7 @@
 								<img
 									src="resources/dedicated/img/administrador/gerenciar/gerenciar-agenda.png"
 									class="responsive-img"> <span class="card-title">Agenda</span>
-								<a id="btn-gerenciar-agenda" href="gerenciarAgenda"
+								<a id="btn-gerenciar-agenda"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">event_note</i></a>
 							</div>
@@ -213,7 +218,7 @@
 								<img
 									src="resources/dedicated/img/administrador/gerenciar/gerenciar-servico.png"
 									class="responsive-img"> <span class="card-title">Serviço</span>
-								<a id="btn-gerenciar-servico" href="gerenciarServico"
+								<a id="btn-gerenciar-servico"
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">pets</i></a>
 							</div>
@@ -242,7 +247,6 @@
 					<!-- Lista de agendamentos -->
 					<ul id="lista-agendamento-hoje" class="collapsible popout"
 						data-collapsible="accordion">
-
 					</ul>
 				</div>
 			</div>
@@ -258,10 +262,5 @@
 	<script type="text/javascript"
 		src="resources/dedicated/js/administrador/index-administrador.js"
 		charset="utf-8" defer></script>
-
-	<!-- Scripts para gráficos -->
-	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/highcharts-3d.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 </body>
 </html>

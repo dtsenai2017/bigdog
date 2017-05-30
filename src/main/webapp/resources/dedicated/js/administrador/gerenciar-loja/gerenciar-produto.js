@@ -41,6 +41,7 @@ $('#search-produto').keypress(function(e) {
 		// Cancela qualquer ação padrão do elemento
 		e.preventDefault();
 
+		// Toast
 		Materialize.toast("Apenas digite sua busca!", 2500);
 	}
 });
@@ -79,6 +80,10 @@ function abrirModalCategorias() {
 	// Carregar categorias
 	$.getJSON({
 		url : "adm/categoria",
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(categorias) {
 			// Populando Lista
@@ -131,8 +136,12 @@ $("#form-categoria").submit(function(e) {
 
 	// Cadastrando nova categoria
 	$.ajax({
-		type : "POST",
 		url : "adm/categoria",
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
+		type : "POST",		
 		data : JSON.stringify(categoria),
 		contentType : "application/json; charset=utf-8",
 		success : function(s) {
@@ -170,6 +179,10 @@ function refreshFormListaCategoria() {
 	// Listando categorias para formulário de alteração
 	$.getJSON({
 		url : "adm/categoria",
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(categorias) {
 			// Populando Lista
@@ -202,6 +215,10 @@ function refreshFormListaSubcategoria(idCategoria) {
 	// Listando categorias para formulário
 	$.getJSON({
 		url : "adm/categoria/" + idCategoria,
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(categoria) {
 			// Populando Lista
@@ -238,8 +255,12 @@ function abrirEditarCategoria(idCategoria) {
 
 	// Buscando categoria selecionada
 	$.ajax({
-		type : "GET",
 		url : "adm/categoria/" + idCategoria,
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
+		type : "GET",
 		contentType : "application/json; charset=utf-8",
 		success : function(categoria) {
 			// Atribuindo valor de id para input
@@ -289,8 +310,12 @@ $("#form-subcategoria").submit(function(e) {
 
 	// Cadastrando nova categoria
 	$.ajax({
-		type : "POST",
 		url : "adm/subcategoria/ " + idCategoria,
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
+		type : "POST",
 		data : JSON.stringify(subcategoria),
 		contentType : "application/json; charset=utf-8",
 		success : function(s) {
@@ -340,6 +365,10 @@ $("#btn-excluir-categoria").click(function() {
 					// Excluindo
 					$.ajax({
 						url : 'adm/categoria/' + idCategoria,
+						headers : {
+							'Authorization' : localStorage
+									.getItem("tokenBigDog")
+						},
 						type : 'DELETE',
 						success : function(result) {
 							// Atribundo valor para mensagem de toast
@@ -403,6 +432,10 @@ function excluirSubcategoria(idSubCategoria) {
 					// Excluindo
 					$.ajax({
 						url : 'adm/subcategoria/' + idSubCategoria,
+						headers : {
+							'Authorization' : localStorage
+									.getItem("tokenBigDog")
+						},
 						type : 'DELETE',
 						success : function(result) {
 							// Atribundo valor para mensagem de toast
@@ -451,6 +484,10 @@ function abrirPrincipalProduto() {
 	// Populando lista de produtos
 	$.getJSON({
 		url : "adm/produto",
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(produtos) {
 			// Populando Lista
@@ -515,6 +552,10 @@ function abrirModalProduto(idProduto) {
 	// Populando dados de modal com produto selecionado
 	$.getJSON({
 		url : "adm/produto/" + idProduto,
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(produto) {
 			// Atributo para data
@@ -689,8 +730,12 @@ $("#btn-alterar-foto").click(function() {
 		
 		// Cadastrando produto
 		$.ajax({
-			type : "PUT",
 			url : "adm/produtoImagem/"+ idProduto,
+			headers : {
+				'Authorization' : localStorage
+						.getItem("tokenBigDog")
+			},
+			type : "PUT",			
 			data : JSON.stringify(produto),
 			contentType : "application/json; charset=utf-8",
 			success : function(s) {
@@ -733,8 +778,16 @@ $("#btn-alterar-produto").click(function(){
     // Requisição para atribuição de valores do produto no formulário
     $.getJSON({
 		url : "adm/produto/" + idProduto,
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(produto) {
+			// Atributos
+			var dataVigencia = new Date(produto.dataVigencia);
+			dataVigencia.setDate(dataVigencia.getDate() + 1);
+			
 			// Ativando labels
 			$('#label-nome-p-selecionado').addClass('active');
 			$('#label-marca-p-selecionado').addClass('active');
@@ -763,7 +816,7 @@ $("#btn-alterar-produto").click(function(){
 			$('#quantidade-p-selecionado').val(produto.quantidade);
 			$('#valor-p-selecionado').val(produto.valor.toFixed(2));
 			$('#qtdEstoque-p-selecionado').val(produto.qtdEstoque);
-			$('#dataVigencia-p-selecionado').val(produto.dataVigencia);
+			$('#dataVigencia-p-selecionado').val($.datepicker.formatDate('dd/mm/yy', dataVigencia));
 			$('#descricao-p-selecionado').val(produto.descricao);
 			
 			// re-initialize material-select
@@ -812,6 +865,10 @@ function abrirModalAlterarCategoria(){
     // Listando categorias para formulário de alteração
 	$.getJSON({
 		url : "adm/categoria",
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(categorias) {
 			// Populando Lista
@@ -849,6 +906,10 @@ $('#select-categoria-p-selecionado').change(
 			// Listando categorias para formulário
 			$.getJSON({
 				url : "adm/categoria/" + idCategoria,
+				headers : {
+					'Authorization' : localStorage
+							.getItem("tokenBigDog")
+				},
 				type : "GET",
 				success : function(categoria) {
 					// Populando Lista
@@ -941,6 +1002,10 @@ function abrirModalAlterarFornecedor(){
 	// Listando fornecedores para formulário de alteração
 	$.getJSON({
 		url : "adm/fornecedor",
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(fornecedores) {
 			// Populando Lista
@@ -990,6 +1055,8 @@ $( "#form-alterar-produto" ).submit(function( event ) {
 	event.preventDefault();
 	
 	// Atributos
+	var dataInput = $('#dataVigencia-p-selecionado').val();
+	var dataVigencia = dataInput.split("/").reverse().join("-");
 	var subCategoria = {
 			idSubCategoria : $('#idSubcategoria-p-selecionado').val()
 	}
@@ -1012,7 +1079,7 @@ $( "#form-alterar-produto" ).submit(function( event ) {
 		 cor : $('#cor-p-selecionado').val(),
 		 tamanho : $('#tamanho-p-selecionado').val(),
 		 quantidade : $('#quantidade-p-selecionado').val(),
-		 dataVigencia : $('#dataVigencia-p-selecionado').val(),
+		 dataVigencia : dataVigencia,
 		 foto : null,
 		 categoria : {
 			 idCategoria : $('#idCategoria-p-selecionado').val()
@@ -1028,8 +1095,12 @@ $( "#form-alterar-produto" ).submit(function( event ) {
 	 
 	// Cadastrando produto
 	$.ajax({
-		type : "PUT",
 		url : "adm/produto/"+ produto.idProduto,
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
+		type : "PUT",
 		data : JSON.stringify(produto),
 		contentType : "application/json; charset=utf-8",
 		success : function(s) {
@@ -1152,6 +1223,10 @@ function abrirFormProduto() {
 	// Listando categorias para formulário
 	$.getJSON({
 		url : "adm/categoria",
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(categorias) {
 			// Populando Lista
@@ -1175,6 +1250,10 @@ function abrirFormProduto() {
 	// Listando fornecedores para formulário
 	$.getJSON({
 		url : "adm/fornecedor",
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(fornecedores) {
 			// Populando Lista
@@ -1244,8 +1323,12 @@ $("#form-produto").submit(function(e) {
 		
 		// Cadastrando produto
 		$.ajax({
-			type : "POST",
 			url : "adm/produto",
+			headers : {
+				'Authorization' : localStorage
+						.getItem("tokenBigDog")
+			},
+			type : "POST",
 			data : JSON.stringify(produto),
 			contentType : "application/json; charset=utf-8",
 			success : function(s) {
@@ -1294,6 +1377,10 @@ $("#btn-excluir-produto").click(function() {
 					// Excluindo
 					$.ajax({
 						url : 'adm/produto/' + idProduto,
+						headers : {
+							'Authorization' : localStorage
+									.getItem("tokenBigDog")
+						},
 						type : 'DELETE',
 						success : function(result) {
 							// Atribundo valor para mensagem de toast
@@ -1345,6 +1432,10 @@ $('#select-categoria').change(
 			// Listando categorias para formulário
 			$.getJSON({
 				url : "adm/categoria/" + idCategoria,
+				headers : {
+					'Authorization' : localStorage
+							.getItem("tokenBigDog")
+				},
 				type : "GET",
 				success : function(categoria) {
 					// Populando Lista

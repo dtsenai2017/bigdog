@@ -17,6 +17,28 @@ $('#tempo-servico').clockpicker({
 $('#btn-alterar-servico').hide();
 $('#btn-excluir-servico').hide();
 
+// Recarregar página
+function recarregarGerenciarServico() {
+	// Recarregando...
+	var xhr = new XMLHttpRequest();
+	
+	// Tipo, url e async
+	xhr.open('GET', "gerenciarServico", false);
+	
+	// Atribuindo token
+	xhr.setRequestHeader("Authorization", localStorage.getItem("tokenBigDog"));
+	
+	// Response
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			$(document.body).html(xhr.response);
+		}
+	};
+	
+	// Request send()
+	xhr.send();
+}
+
 // Limpar formulário de serviço
 function limparFormServico() {
 	// Limpando campos
@@ -74,13 +96,17 @@ $("#form-servico").submit(function(e) {
 	if (servico.idServico == '') {
 		// Cadastrando novo serviço
 		$.ajax({
-			type : "POST",
 			url : "adm/servico",
+			headers : {
+				'Authorization' : localStorage
+						.getItem("tokenBigDog")
+			},
+			type : "POST",
 			data : JSON.stringify(servico),
 			contentType : "application/json; charset=utf-8",
 			success : function(s) {
 				// Reload
-				 location.reload()
+				recarregarGerenciarServico();
 			},
 			error : function(e) {
 				mensagem = 'Ops, houve um problema!';
@@ -93,13 +119,17 @@ $("#form-servico").submit(function(e) {
 	} else {
 		// Alterando serviço
 		$.ajax({
-			type : "PUT",
 			url : "adm/servico/" + servico.idServico,
+			headers : {
+				'Authorization' : localStorage
+						.getItem("tokenBigDog")
+			},
+			type : "PUT",
 			data : JSON.stringify(servico),
 			contentType : "application/json; charset=utf-8",
 			success : function(s) {
 				// Reload
-				location.reload();
+				recarregarGerenciarServico();
 			},
 			error : function(e) {
 				mensagem = 'Ops, houve um problema!';
@@ -123,6 +153,10 @@ function modalAlterarServico(idServico) {
 	// Atribuindo valores para campos
 	$.getJSON({
 		url : "adm/servico/" + idServico,
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(servico){
 			// Atributos para data
@@ -176,11 +210,15 @@ $('#btn-excluir-servico').click(function() {
 				action : function() {
 					// Deletando serviço
 					$.ajax({
-						type : "DELETE",
 						url : "adm/servico/" + idServico,
+						headers : {
+							'Authorization' : localStorage
+									.getItem("tokenBigDog")
+						},
+						type : "DELETE",
 						success : function(s) {
 							// Reload
-							location.reload()
+							recarregarGerenciarServico();
 						},
 						error : function(e) {
 							// Toast

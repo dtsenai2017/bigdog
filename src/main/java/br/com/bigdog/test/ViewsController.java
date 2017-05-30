@@ -20,6 +20,6 @@ public class ViewsController {
 	// Index Administrador
 	@RequestMapping("/indexAdministrador")
 	public String indexAdministrador() {
-		return "administrador/index_administrador";
+		return "administrador/index-administrador";
 	}
 }

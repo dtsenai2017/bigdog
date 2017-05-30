@@ -287,7 +287,7 @@
 								<div class="input-field col s4 m4 l4">
 									<label for="dataVigencia">Dt. vigência</label> <input
 										id="dataVigencia" type="date" class="datepicker"
-										name="dataVigencia">
+										name="dataVigencia" required>
 								</div>
 							</div>
 

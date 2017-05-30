@@ -22,6 +22,10 @@ function abrirCompras() {
 	// Populando lista de fornecedores
 	$.getJSON({
 		url : "adm/compra",
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(compras) {
 			$.each(compras, function(index, compra) {
@@ -82,6 +86,10 @@ function abrirCompra(idCompra) {
 	// Populando lista de fornecedores
 	$.getJSON({
 		url : "adm/compra/" + idCompra,
+		headers : {
+			'Authorization' : localStorage
+					.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(compra) {
 			// Data da compra

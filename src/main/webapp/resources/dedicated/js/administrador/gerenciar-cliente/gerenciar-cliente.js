@@ -1,3 +1,25 @@
+// Recarregar página
+function recarregarGerenciarCliente() {
+	// Recarregando...
+	var xhr = new XMLHttpRequest();
+
+	// Tipo, url e async
+	xhr.open('GET', "gerenciarCliente", false);
+
+	// Atribuindo token
+	xhr.setRequestHeader("Authorization", localStorage.getItem("tokenBigDog"));
+
+	// Response
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			$(document.body).html(xhr.response);
+		}
+	};
+
+	// Request send()
+	xhr.send();
+}
+
 // Buscar cliente selecionado
 function buscarCliente(idCliente) {
 	// Limpando listas de endereco, pet, compra e agendamento...
@@ -17,6 +39,9 @@ function buscarCliente(idCliente) {
 	// Listar (id)
 	$.getJSON({
 		url : "adm/cliente/" + idCliente,
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(cliente) {
 			// Setando id e nome cliente para modal
@@ -201,6 +226,9 @@ function buscarCliente(idCliente) {
 	// Listando compras de cliente
 	$.getJSON({
 		url : "adm/compraCliente/" + idCliente,
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(compras) {
 			// Compras realizadas do cliente
@@ -239,6 +267,9 @@ function buscarCliente(idCliente) {
 	// Listando agendamentos de cliente
 	$.getJSON({
 		url : "adm/agendamentoCliente/" + idCliente,
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(agendamentos) {
 			// Agendamentos realizados do cliente
@@ -271,7 +302,6 @@ function buscarCliente(idCliente) {
 	});
 }
 
-// * EDITAR DADOS DO CLIENTE (Dados do cliente, pets, compra e agendamentos)
 // PET
 // Abri dados do pet no formulario
 function visualizarPet(idPet) {
@@ -290,6 +320,9 @@ function visualizarPet(idPet) {
 	// Listando e atribuindo valores para formulário de alteração
 	$.getJSON({
 		url : "adm/pet/" + idPet,
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(pet) {
 			// Ativando labels de inputs
@@ -314,6 +347,9 @@ function abrirCompraCliente(idCompra) {
 	// Listando compra
 	$.getJSON({
 		url : "adm/compra/" + idCompra,
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(compra) {
 			// Ativando label de input
@@ -344,6 +380,9 @@ $("#form-status-compra").submit(function(e) {
 	// Listando compra
 	$.ajax({
 		url : "adm/alterarStatus/" + compra.idCompra,
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
 		type : "PUT",
 		data : JSON.stringify(compra),
 		contentType : "application/json",
@@ -397,12 +436,16 @@ function alterarPet() {
 					// Alterando pet com id
 					$.ajax({
 						url : 'adm/pet/' + pet.idPet,
+						headers : {
+							'Authorization' : localStorage
+									.getItem("tokenBigDog")
+						},
 						type : 'put',
 						data : JSON.stringify(pet),
 						contentType : "application/json",
 						success : function(data) {
 							// Recarregando página de clientes
-							window.location.reload();
+							recarregarGerenciarCliente();
 						},
 						error : function(e) {
 							// Erro
@@ -428,50 +471,55 @@ function alterarPet() {
 // Alterar Pet
 
 // Excluir cliente
-$('#btn-excluir-cliente').click(function() {
-	// Verifica alteração
-	$.confirm({
-		title : 'Exclusão de cliente',
-		animation : 'top',
-		useBootstrap : false,
-		theme : 'material',
-		boxWidth : '50%',
-		content : 'Deseja realmente excluir ?',
-		buttons : {
-			// CONFIRMAR
-			confirm : {
-				text : 'Confirmar',
-				btnClass : 'btn-green',
-				action : function() {
-					// Id do cliente
-					var idCliente = $('#idCliente-selecionado').val();
+$('#btn-excluir-cliente').click(
+		function() {
+			// Verifica alteração
+			$.confirm({
+				title : 'Exclusão de cliente',
+				animation : 'top',
+				useBootstrap : false,
+				theme : 'material',
+				boxWidth : '50%',
+				content : 'Deseja realmente excluir ?',
+				buttons : {
+					// CONFIRMAR
+					confirm : {
+						text : 'Confirmar',
+						btnClass : 'btn-green',
+						action : function() {
+							// Id do cliente
+							var idCliente = $('#idCliente-selecionado').val();
 
-					// Excluindo cliente...
-					$.ajax({
-						url : 'adm/cliente/' + idCliente,
-						type : 'DELETE',
-						contentType : "application/json",
-						success : function(s) {
-							// Recarregando página de clientes
-							window.location.reload();
-						},
-						error : function(e) {
-							// Erro
-							console.log('ERROR :' + e);
+							// Excluindo cliente...
+							$.ajax({
+								url : 'adm/cliente/' + idCliente,
+								headers : {
+									'Authorization' : localStorage
+											.getItem("tokenBigDog")
+								},
+								type : 'DELETE',
+								contentType : "application/json",
+								success : function(s) {
+									// Recarregando página de clientes
+									recarregarGerenciarCliente();
+								},
+								error : function(e) {
+									// Erro
+									console.log('ERROR :' + e);
+								}
+							});
 						}
-					});
+					// Opção Confirmar
+					},
+					cancel : {
+						// CANCELAR
+						text : 'Cancelar',
+						action : function() {
+							// ...
+						}
+					}
+				// Opção Cancelar
 				}
-			// Opção Confirmar
-			},
-			cancel : {
-				// CANCELAR
-				text : 'Cancelar',
-				action : function() {
-					// ...
-				}
-			}
-		// Opção Cancelar
-		}
-	// Botões (Confirmar e Cancelar)
-	});
-});
+			// Botões (Confirmar e Cancelar)
+			});
+		});

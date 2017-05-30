@@ -19,10 +19,6 @@
 <!-- JQuery ui css -->
 <link rel="stylesheet" href="resources/jquery/css/jquery-ui.css" />
 
-<!-- CSS de footer -->
-<link rel="stylesheet"
-	href="resources/dedicated/css/administrador/component/footer.css">
-
 <!-- Import's JS -->
 <!-- JQuery -->
 <script src="resources/jquery/jquery-3.2.1.js" defer></script>
@@ -54,16 +50,16 @@
 			<!-- Logo -->
 			<div class="col m3 l3">
 				<a class="brand-logo "><b><span style="font-size: 34px;">Administrador</span></b></a>
-				<a href="" data-activates="menu-mobile" class="button-collapse"><i
-					class="material-icons">menu</i></a>
+				<a id="btn-index-administrador" data-activates="menu-mobile"
+					class="button-collapse"><i class="material-icons">menu</i></a>
 			</div>
 
 			<!-- Links -->
 			<div class="right col m7 l7 hide-on-med-and-down">
 				<ul id="nav-mobile" class="right">
 					<!-- Início -->
-					<li class="waves-effect"><a href="indexAdministrador"><i
-							class="material-icons center">home</i></a></li>
+					<li class="waves-effect"><a id="btn-index-administrador"><i
+							class="material-icons  center">home</i></a></li>
 
 					<!-- Gerenciar -->
 					<li><a class="dropdown-button waves-effect"
@@ -72,32 +68,32 @@
 				</ul>
 			</div>
 		</div>
-		<!-- /.row -->
 	</div>
+
 	<!-- /.nav-wrapper --></nav> <!-- Dropdown Gerenciar -->
 	<ul id="dropdown-gerenciar" class="dropdown-content">
 		<!-- Cliente -->
-		<li><a href="gerenciarCliente"><i
-				class="material-icons left blue-text text-blue">people</i>Cliente</a></li>
+		<li><a id="btn-gerenciar-cliente"><i
+				class="material-icons  left blue-text text-blue">people</i>Cliente</a></li>
 
 		<!-- Loja -->
-		<li><a href="gerenciarLoja"><i
-				class="material-icons left red-text text-red">shopping_cart</i>Loja</a></li>
+		<li><a id="btn-gerenciar-loja"><i
+				class="material-icons  left red-text text-red">shopping_cart</i>Loja</a></li>
 
 		<!-- Agenda -->
-		<li><a href="gerenciarAgenda"><i
-				class="material-icons left cyan-text text-cyan">event_note</i>Agenda</a></li>
+		<li><a id="btn-gerenciar-agenda"><i
+				class="material-icons  left cyan-text text-cyan">event_note</i>Agenda</a></li>
 
 		<!-- Serviço -->
-		<li><a href="gerenciarServico" class="waves-effect"><i
-				class="material-icons left grey-text text-grey">work</i>Serviço</a></li>
+		<li><a id="btn-gerenciar-servico" class="waves-effect"><i
+				class="material-icons  left grey-text text-grey">work</i>Serviço</a></li>
 	</ul>
 
 	<!-- Sidenav mobile -->
 	<ul id="menu-mobile" class="side-nav">
 		<!-- Início -->
 		<li><a href="indexAdministrador" class="waves-effect"><i
-				class="material-icons left red-text text-red">home</i>Início</a></li>
+				class="material-icons  left red-text text-red">home</i>Início</a></li>
 
 		<!-- Divider -->
 		<li class="container"><div class="divider"></div></li>
@@ -108,20 +104,20 @@
 			</h6></li>
 
 		<!-- Cliente -->
-		<li><a href="gerenciarCliente" class="waves-effect"><i
-				class="material-icons blue-text text-blue">people</i>Cliente</a></li>
+		<li><a id="btn-gerenciar-cliente" class="waves-effect"><i
+				class="material-icons  blue-text text-blue">people</i>Cliente</a></li>
 
 		<!-- Loja -->
-		<li><a href="gerenciarLoja" class="waves-effect"><i
-				class="material-icons left red-text text-red">store</i>Loja</a></li>
+		<li><a id="btn-gerenciar-loja" class="waves-effect"><i
+				class="material-icons  left red-text text-red">store</i>Loja</a></li>
 
 		<!-- Agenda -->
-		<li><a href="gerenciarAgenda" class="waves-effect"><i
-				class="material-icons left cyan-text text-cyan">event_note</i>Agenda</a></li>
+		<li><a id="btn-gerenciar-agenda" class="waves-effect"><i
+				class="material-icons  left cyan-text text-cyan">event_note</i>Agenda</a></li>
 
 		<!-- Serviço -->
-		<li><a href="gerenciarServico" class="waves-effect"><i
-				class="material-icons left grey-text text-grey">work</i>Serviço</a></li>
+		<li><a id="btn-gerenciar-servico" class="waves-effect"><i
+				class="material-icons  left grey-text text-grey">work</i>Serviço</a></li>
 	</ul>
 	</header>
 

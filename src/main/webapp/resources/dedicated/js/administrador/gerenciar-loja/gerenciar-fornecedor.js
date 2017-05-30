@@ -27,6 +27,9 @@ function abrirPrincipalFornecedor() {
 	$.getJSON({
 		url : "adm/fornecedor",
 		type : "GET",
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
 		success : function(fornecedores) {
 			// Populando Lista
 			$.each(fornecedores, function(index, fornecedor) {
@@ -76,6 +79,9 @@ function abrirModalFornecedor(idFornecedor) {
 	// Populando lista de fornecedores
 	$.getJSON({
 		url : "adm/fornecedor/" + idFornecedor,
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(fornecedor) {
 			// Atributos para exibição no front, caso
@@ -212,8 +218,11 @@ $("#form-fornecedor").submit(function(e) {
 
 	// Cadastrando novo fornecedor, com UM endereço.
 	$.ajax({
-		type : "POST",
 		url : "adm/fornecedor",
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
+		type : "POST",
 		data : JSON.stringify(fornecedor),
 		contentType : "application/json; charset=utf-8",
 		success : function(s) {
@@ -253,6 +262,9 @@ $("#btn-alterar-fornecedor").click(function() {
 	// Populando lista de fornecedores
 	$.getJSON({
 		url : "adm/fornecedor/" + idFornecedor,
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(fornecedor) {
 			// Ativando label
@@ -298,8 +310,11 @@ $("#form-alterar-fornecedor").submit(function(e) {
 
 	// Alterando
 	$.ajax({
-		type : "PUT",
 		url : "adm/fornecedor/" + fornecedor.idFornecedor,
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
+		type : "PUT",
 		data : JSON.stringify(fornecedor),
 		contentType : "application/json; charset=utf-8",
 		success : function(s) {
@@ -345,8 +360,12 @@ $("#btn-excluir-fornecedor").click(
 						action : function() {
 							// Excluindo endereço
 							$.ajax({
-								type : "DELETE",
 								url : "adm/fornecedor/" + idFornecedor,
+								headers : {
+									'Authorization' : localStorage
+											.getItem("tokenBigDog")
+								},
+								type : "DELETE",
 								contentType : "application/json;"
 										+ " charset=utf-8",
 								success : function(s) {
@@ -412,8 +431,11 @@ $("#form-endereco-fornecedor").submit(
 			if (enderecoFornecedor.idEnderecoFornecedor == '') {
 				// INSERÇÂO
 				$.ajax({
-					type : "POST",
 					url : "adm/enderecoFornecedor/" + idFornecedor,
+					headers : {
+						'Authorization' : localStorage.getItem("tokenBigDog")
+					},
+					type : "POST",
 					data : JSON.stringify(enderecoFornecedor),
 					contentType : "application/json; charset=utf-8",
 					success : function(s) {
@@ -439,9 +461,12 @@ $("#form-endereco-fornecedor").submit(
 				// ALTERAÇÂO
 				// Inserindo endereço em fornecedor
 				$.ajax({
-					type : "PUT",
 					url : "adm/enderecoFornecedor/"
 							+ enderecoFornecedor.idEnderecoFornecedor,
+					headers : {
+						'Authorization' : localStorage.getItem("tokenBigDog")
+					},
+					type : "PUT",
 					data : JSON.stringify(enderecoFornecedor),
 					contentType : "application/json; charset=utf-8",
 					success : function(s) {
@@ -472,6 +497,9 @@ function abrirAlterarEndereco(idEnderecoFornecedor) {
 	// Populando lista de fornecedores
 	$.getJSON({
 		url : "adm/enderecoFornecedor/" + idEnderecoFornecedor,
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
 		type : "GET",
 		success : function(endereco) {
 			// Escondendo botão de inserção de novo endereço
@@ -526,57 +554,69 @@ function limparFormEndereco() {
 }
 
 // Excluir endereço de fornecedor selecionado
-$("#btn-excluir-endereco").click(function() {
-	// Atributo
-	var idEnderecoFornecedor = $('#idEnderecoFornecedor-selecionado').val();
-	var idFornecedor = $('#idFornecedor-selecionado').val();
+$("#btn-excluir-endereco").click(
+		function() {
+			// Atributo
+			var idEnderecoFornecedor = $('#idEnderecoFornecedor-selecionado')
+					.val();
+			var idFornecedor = $('#idFornecedor-selecionado').val();
 
-	// Confirmar exclusão
-	$.confirm({
-		title : 'Exclusão!',
-		animation : 'top',
-		useBootstrap : false,
-		theme : 'material',
-		boxWidth : '50%',
-		content : 'Deseja excluir endereço?',
-		buttons : {
-			// CONFIRMAR
-			confirm : {
-				text : 'Excluir',
-				btnClass : 'btn-red',
-				action : function() {
-					// Excluindo endereço
-					$.ajax({
-						type : "DELETE",
-						url : "adm/enderecoFornecedor/" + idEnderecoFornecedor,
-						contentType : "application/json; charset=utf-8",
-						success : function(s) {
-							// Mensagem para toast
-							mensagem = 'Endereço excluído!';
+			// Confirmar exclusão
+			$.confirm({
+				title : 'Exclusão!',
+				animation : 'top',
+				useBootstrap : false,
+				theme : 'material',
+				boxWidth : '50%',
+				content : 'Deseja excluir endereço?',
+				buttons : {
+					// CONFIRMAR
+					confirm : {
+						text : 'Excluir',
+						btnClass : 'btn-red',
+						action : function() {
+							// Excluindo endereço
+							$.ajax({
+								url : "adm/enderecoFornecedor/"
+										+ idEnderecoFornecedor,
+								headers : {
+									'Authorization' : localStorage
+											.getItem("tokenBigDog")
+								},
+								type : "DELETE",
+								contentType : "application/"
+										+ "json; charset=utf-8",
+								success : function(s) {
+									// Mensagem para
+									// toast
+									mensagem = 'Endereço excluído!';
 
-							// Fechando Modal
-							$('#modal-endereco-fornecedor').modal('close');
+									// Fechando Modal
+									$('#modal-endereco-fornecedor').modal(
+											'close');
 
-							// Refresh em modal de fornecedor
-							refreshModalFornecedor(idFornecedor);
-						},
-						error : function(e) {
-							// Mensagem para toast
-							mensagem = 'Ops, houve um problema!';
-						},
-						complete : function() {
-							// Toast
-							Materialize.toast(mensagem, 2800);
+									// Refresh em modal
+									// de fornecedor
+									refreshModalFornecedor(idFornecedor);
+								},
+								error : function(e) {
+									// Mensagem para
+									// toast
+									mensagem = 'Ops, houve um problema!';
+								},
+								complete : function() {
+									// Toast
+									Materialize.toast(mensagem, 2800);
+								}
+							});
 						}
-					});
+					},
+					cancel : {
+						// CANCELAR
+						text : 'Cancelar',
+						action : function() {
+						}
+					}
 				}
-			},
-			cancel : {
-				// CANCELAR
-				text : 'Cancelar',
-				action : function() {
-				}
-			}
-		}
-	});
-});
+			});
+		});

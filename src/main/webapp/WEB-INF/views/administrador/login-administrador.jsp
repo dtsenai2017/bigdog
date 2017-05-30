@@ -32,87 +32,65 @@
 	src="resources/materialize/js/materialize.min.js" defer></script>
 
 <!-- Título -->
-<title>Login do Administrador</title>
-
+<title>Administrador | Login</title>
 </head>
 <body>
 	<!-- Container de login -->
 	<main>
-	<div id="cx-login-adm">
-		<div class="container">
-			<div class="row">
-				<!-- Formulário -->
-				<div class="col s12 m12 l12">
-					<div class="row">
-						<div class="col s12 m4 l4">
-							<!-- Card -->
-							<div class="card hoverable">
-								<!-- Imagem -->
-								<div class="card-image">
-									<img src="resources/dedicated/img/administrador/logo-login.png"
-										class="responsive-img">
-									<h5 class="card-title">
-										Pet Shop <b>BIGDOG</b>
-									</h5>
-								</div>
+	<div id="cx-login-adm" class="container">
+		<div class="row">
+			<!-- Formulário -->
+			<div class="col s12 m12 l12">
+				<div class="row">
+					<!-- Ícone de formulário -->
+					<div align="center">
+						<i class="material-icons red-text text-lighten-1 large">supervisor_account</i>
+					</div>
 
-								<!-- Content -->
-								<div class="card-content">
-									<p>Clínica Veterinária e Pet Shop. Rações em geral,
-										farmácia veterinária, vacinas, cirurgias, exames
-										laboratoriais, Banho & Tosa e muito mais.</p>
-								</div>
+					<!-- Descrição de formulário -->
+					<h5 id="title-form-login" align="center">BIGDOG</h5>
+					<h6 align="center" class="grey-text text-lighten-1">Área
+						Administrativa</h6>
 
-								<!-- Link -->
-								<div class="card-action">
-									<a href="home" class="red-text text-lighten-2"><b>Ir
-											para Site</b></a>
-								</div>
-							</div>
-						</div>
+					<!-- br -->
+					<br>
 
-						<!-- Formulário de login -->
-						<div class="col s12 m8 l8">
-							<!-- Ícone de formulário -->
-							<div align="center">
-								<i class="material-icons red-text text-lighten-2 large">person</i>
-							</div>
+					<!-- br -->
+					<br>
 
-							<!-- Descrição de formulário -->
-							<h5 align="center">Administração</h5>
-							<h6 align="center" class="grey-text">Área de Login</h6>
+					<!-- Formulário -->
+					<div class="col s12 m6 l6 offset-m3">
+						<div class="container">
+							<div class="row">
+								<form id="form-login-adm">
+									<div class="input-field col s12 m12 l12">
+										<i class="material-icons prefix red-text text-lighten-2">email</i>
+										<input id="adm-email" type="email" class="validate" required
+											value="admin_bigdog@gmail.com"> <label
+											for="adm-email" data-error="inválido" data-success="ok">Email</label>
+									</div>
 
-							<!-- br -->
-							<br>
+									<div class="input-field col s12 m12 l12">
+										<i class="material-icons prefix red-text text-lighten-2">lock</i>
+										<input id="adm-senha" type="password" required
+											value="bigdog1234"> <label for="adm-senha">Senha</label>
+									</div>
 
-							<!-- Formulário -->
-							<div class="container">
-								<div class="row">
-									<form>
-										<div class="col s12 m12 l12">
-											<div class="input-field col s12 m12 l12">
-												<i class="material-icons prefix">account_circle</i> <input
-													id="adm-email" type="email" class="validate" required>
-												<label for="adm-email" data-error="inválido"
-													data-success="ok">Email</label>
-											</div>
+									<!-- Botão voltar e submit -->
+									<div id="btn-login-adm" class="col s12 m12 l12">
+										<a href="home"
+											class="col s12 m4 l4 btn waves-effect waves-light brown lighten-1 left">Site</a>
+
+										<!-- Espaçador para mobile -->
+										<div class="col s12 m12 l12 hide-on-med-and-up">
+											<br>
 										</div>
 
-										<div class="col s12 m12 l12">
-											<div class="input-field col s12 m12 l12">
-												<i class="material-icons prefix">vpn_key</i> <input
-													id="adm-senha" type="password" class="validate" required>
-												<label for="adm-senha">Senha</label>
-											</div>
-										</div>
-
-										<!-- Botão -->
-										<div id="btn-login-adm" class="col s12 m12 l12 center">
-											<button class="btn waves-effect waves-light red lighten-1"
-												type="submit" name="action">Logar</button>
-										</div>
-									</form>
-								</div>
+										<button
+											class="col s12 m4 l4 btn waves-effect waves-light red lighten-1 right"
+											type="submit" name="action">Logar</button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -122,7 +100,9 @@
 	</div>
 	</main>
 
-	<!-- import footer -->
-	<c:import url="component/footer.jsp" />
+	<!-- JS dedicado para login -->
+	<script type="text/javascript"
+		src="resources/dedicated/js/administrador/login-administrador.js"
+		charset="utf-8" defer></script>
 </body>
 </html>

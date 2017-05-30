@@ -14,6 +14,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.bigdog.value.TipoServico;
 
 @Entity
@@ -31,6 +33,7 @@ public class Servico {
 	@Column(nullable = false, columnDefinition = "decimal(10,2)")
 	private Double valor;
 	@DateTimeFormat(pattern = "HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", locale = "pt-BR", timezone = "America/Sao_Paulo")
 	@Temporal(TemporalType.TIME)
 	@Column(name = "tempo_estimado", nullable = false)
 	private Date tempoEstimado;

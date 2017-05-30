@@ -1,3 +1,9 @@
+<head>
+<!-- CSS de footer -->
+<link rel="stylesheet"
+	href="resources/dedicated/css/administrador/component/footer.css">
+</head>
+
 <footer class="page-footer red darken-3">
 	<div class="container"></div>
 	<div class="footer-copyright red darken-3">
