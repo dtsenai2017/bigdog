@@ -1,7 +1,6 @@
 package br.com.bigdog.model;
 
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -150,8 +149,7 @@ public class Produto {
 	}
 
 	public String getFotoString() {
-		fotoString = Base64.getEncoder().encodeToString(foto);
-		return fotoString;
+		return new String(foto);
 	}
 
 	public Categoria getCategoria() {

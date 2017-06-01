@@ -23,7 +23,6 @@
 	media="screen,projection">
 </head>
 <body>
-
 	<!--  import navbar -->
 	<c:import url="component/navbar.jsp" />
 

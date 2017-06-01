@@ -5,6 +5,47 @@ $(".button-collapse").sideNav();
 // Modal initialize
 $('.modal').modal();
 
+// Redirecionar página
+function indexAdministrador() {
+	// Requisição
+	var xhr = new XMLHttpRequest();
+
+	// Tipo, url e async
+	xhr.open('GET', 'indexAdministrador', false);
+
+	// Atribuindo token
+	xhr.setRequestHeader("Authorization", localStorage.getItem("tokenBigDog"));
+
+	// Response
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			// Replace html
+			$(document.body).html(xhr.response);
+		}
+	};
+
+	// Request send()
+	xhr.send();
+}
+
+// Logo do administrador
+$("#logo-administrador").click(function() {
+	// Ir para index
+	indexAdministrador();
+});
+
+// Link de index do administrador
+$("#btn-index-administrador").click(function() {
+	// Ir para index
+	indexAdministrador();
+});
+
+// Link de index do administrador (mobile)
+$("#btn-mobile-index-administrador").click(function() {
+	// Ir para index
+	indexAdministrador();
+});
+
 // Links da navbar
 $("#dropdown-gerenciar a").click(
 		function() {

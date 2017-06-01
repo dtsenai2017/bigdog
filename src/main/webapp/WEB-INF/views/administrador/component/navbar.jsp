@@ -49,9 +49,10 @@
 		<div class="row">
 			<!-- Logo -->
 			<div class="col m3 l3">
-				<a class="brand-logo "><b><span style="font-size: 34px;">Administrador</span></b></a>
-				<a id="btn-index-administrador" data-activates="menu-mobile"
-					class="button-collapse"><i class="material-icons">menu</i></a>
+				<a id="logo-administrador" href="#" class="brand-logo "><b><span
+						style="font-size: 34px;">BIGDOG</span></b></a> <a
+					data-activates="menu-mobile" class="button-collapse"><i
+					class="material-icons">menu</i></a>
 			</div>
 
 			<!-- Links -->
@@ -92,7 +93,7 @@
 	<!-- Sidenav mobile -->
 	<ul id="menu-mobile" class="side-nav">
 		<!-- Início -->
-		<li><a href="indexAdministrador" class="waves-effect"><i
+		<li><a id="btn-mobile-index-administrador" class="waves-effect"><i
 				class="material-icons  left red-text text-red">home</i>Início</a></li>
 
 		<!-- Divider -->

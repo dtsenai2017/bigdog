@@ -49,14 +49,21 @@ function buscarCliente(idCliente) {
 
 			// Atributos para valores nulos
 			var telefone;
+			var email;
 			var nascimento = new Date(cliente.dataNascimento);
 			nascimento.setDate(nascimento.getDate() + 1);
 
 			// Atribui valores caso for nulo
 			if (cliente.contato.telefone == null) {
-				telefone = "Não informou telefone.";
+				telefone = "-";
 			} else {
 				telefone = cliente.contato.telefone;
+			}
+
+			if (cliente.contato.email == null) {
+				email = "-"
+			} else {
+				email = cliente.contato.email;
 			}
 
 			// Dados do cliente
@@ -66,10 +73,9 @@ function buscarCliente(idCliente) {
 					+ "</span><br>" + "<span><b>Data de Nascimento : </b>"
 					+ $.datepicker.formatDate("dd/mm/yy", nascimento)
 					+ "</span><br>" + "<span><b>Email de Contato : </b>"
-					+ cliente.contato.email + "</span><br>"
-					+ "<span><b>Celular : </b>" + cliente.contato.celular
-					+ "</span><br>" + "<span><b>Telefone : </b>" + telefone
-					+ "</span><br>";
+					+ email + "</span><br>" + "<span><b>Celular : </b>"
+					+ cliente.contato.celular + "</span><br>"
+					+ "<span><b>Telefone : </b>" + telefone + "</span><br>";
 
 			// Define cor de fundo dos dados do CLIENTE de acordo com
 			// gênero
@@ -134,49 +140,49 @@ function buscarCliente(idCliente) {
 
 				// Rga
 				if (pet.rga.lenght == 0) {
-					rga = "Não há informação."
+					rga = "-"
 				} else {
 					rga = pet.rga;
 				}
 
 				// Carteina de Vacina
 				if (pet.carteiraVacina.length == 0) {
-					carteiraVacina = "Não há informação."
+					carteiraVacina = "-"
 				} else {
 					carteiraVacina = pet.carteiraVacina;
 				}
 
 				// Peso
 				if (pet.peso == null) {
-					peso = "Não há informação!";
+					peso = "-";
 				} else {
 					peso = pet.peso;
 				}
 
 				// Pedigree
 				if (pet.pedigree.length == 0) {
-					pedigree = "Não há informação.";
+					pedigree = "-";
 				} else {
 					pedigree = pet.pedigree;
 				}
 
 				// Pelagem
 				if (pet.pelagem.length == 0) {
-					pelagem = "Não há informação.";
+					pelagem = "-";
 				} else {
 					pelagem = pet.pelagem;
 				}
 
 				// Observações
 				if (pet.observacoes.length == 0) {
-					observacoes = "Não há informação!";
+					observacoes = "-";
 				} else {
 					observacoes = pet.observacoes;
 				}
 
 				// Data de Nascimento
 				if (pet.dataNascimento.length == 0) {
-					dataNascimento = "Não há informação.";
+					dataNascimento = "-";
 				} else {
 					dataNascimento = new Date(pet.dataNascimento);
 					dataNascimento.setDate(dataNascimento.getDate() + 1);
@@ -184,7 +190,7 @@ function buscarCliente(idCliente) {
 
 				// Raça
 				if (pet.raca.length == 0) {
-					raca = "Não há informação!";
+					raca = "-";
 				} else {
 					raca = pet.raca;
 				}
@@ -214,9 +220,6 @@ function buscarCliente(idCliente) {
 				// em modal
 				$('#lista-pet').append(petList);
 			});
-
-			// Agendamentos de cliente
-			// ...
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
@@ -281,14 +284,16 @@ function buscarCliente(idCliente) {
 				// Atributo da lista de agendamento
 				var agendamentoList = "<h5 align='center'><b>"
 						+ $.datepicker.formatDate("dd/mm/yy", dataAgendamento)
-						+ "</b></h5>" + "<span><b>Horário : </b>" + " ??? "
-						+ "</span><br>" + "<span><b>Tipo de Serviço : </b>"
+						+ "</b></h5>" + "<span><b>Horário : </b>"
+						+ dataAgendamento.getHours() + ":"
+						+ dataAgendamento.getMinutes() + "hrs.</span><br>"
+						+ "<span><b>Tipo de Serviço : </b>"
 						+ agendamento.servico.tipoServico
 						+ "</span><br><span><b>Valor : R$ </b>"
 						+ agendamento.servico.valor.toFixed(2)
 						+ "</span><br><span>" + "<b>Nome do Pet : </b>"
 						+ agendamento.pet.nome + "</span><br>"
-						+ "<div class='divider'";
+						+ "<div class='divider'>";
 
 				// Adicionando para collection de
 				// agendamentos

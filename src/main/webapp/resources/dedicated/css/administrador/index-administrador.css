@@ -15,10 +15,23 @@ swipe-dashboard {
 	height: 1000px;
 }
 
+/* Swipe de gerenciamento */
 #swipe-gerenciar {
 	display: none;
 }
 
+/* Swipe de agenda */
 #swipe-agenda {
 	display: none;
+}
+
+/* Imagem para card de agendamento */
+.img-agendamento-hoje {
+	max-width: 160px !important;
+	margin: auto;
+}
+
+/* Card image de agendamento */
+#card-agendamento-imagem {
+	padding: 8% !important;
 }

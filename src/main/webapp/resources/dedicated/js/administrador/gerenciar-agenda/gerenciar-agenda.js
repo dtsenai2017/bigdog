@@ -13,7 +13,7 @@ function abrirModalAgendamento(idAgendamento) {
 		url : "adm/agendamento/" + idAgendamento,
 		type : "GET",
 		success : function(agendamento) {
-			// Atributor
+			// Atributos
 			var dataAgendada = new Date(agendamento.dataAgendada);
 			var tempoEstimado = agendamento.servico.tempoEstimado.split(':');
 

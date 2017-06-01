@@ -76,7 +76,7 @@
 		<a href="produto?idProduto=${produto.idProduto }">
 			<div class="p" id="pro">
 				<!-- Foto -->
-				<img src="resources/loja/imagens/semFoto.png">
+				<img src="${produto.fotoString }">
 
 				<!-- Nome e preço -->
 				<p>${produto.nome }</p>

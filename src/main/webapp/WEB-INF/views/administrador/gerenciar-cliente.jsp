@@ -32,8 +32,8 @@
 			<h5 class="left-align">Gerenciar Clientes</h5>
 
 			<!-- Subtítulo -->
-			<p class="left-align grey-text text lighten-1">Pesquise o cliente
-				desejado para consultar, alterar ou excluir.</p>
+			<p class="left-align grey-text text lighten-1">Consulte o cliente
+				desejado.</p>
 
 			<!-- Divider -->
 			<div class="divider"></div>
@@ -303,7 +303,7 @@
 		<div class="modal-footer"></div>
 	</div>
 	<!-- /#modal-compra-cliente -->
-	
+
 	<!--  import navbar -->
 	<c:import url="component/footer.jsp" />
 

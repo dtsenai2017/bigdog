@@ -24,8 +24,16 @@
 	</servlet-mapping>
 
 	<!-- Erro 404 -->
-	<!-- <error-page> <error-code>404</error-code> <location>/WEB-INF/views/other/error_page.jsp</location> 
-		</error-page> -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/other/not-found-page.jsp</location>
+	</error-page>
+
+	<!-- Erro 401 -->
+	<error-page>
+		<error-code>401</error-code>
+		<location>/WEB-INF/views/other/unauthorized-page.jsp</location>
+	</error-page>
 
 	<!-- Tempo de sessão -->
 	<session-config>

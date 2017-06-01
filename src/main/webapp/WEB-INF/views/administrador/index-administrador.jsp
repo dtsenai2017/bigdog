@@ -88,8 +88,7 @@
 		<!-- Section -->
 		<div class="section">
 			<!-- Título -->
-			<h5 class="center-align">Consulte, Gerencie e Agende com
-				facilidade</h5>
+			<h4 class="center-align">Área do Administrador</h4>
 
 			<!-- Divider -->
 			<div class="divider"></div>
@@ -129,6 +128,8 @@
 		<div id="swipe-dashboard" class="col s12 m12 l12 center">
 			<!-- Botão para carregar gráficos -->
 			<div class="row">
+				<h5 align="center"></h5>
+
 				<a class="waves-effect btn cyan white-text truncate"
 					onclick="consumir()"><i class="material-icons left">trending_up</i>Abrir
 					Gráficos</a>
@@ -146,6 +147,16 @@
 
 		<!-- Gerenciar -->
 		<div id="swipe-gerenciar" class="col s12 m12 l12">
+
+			<!-- Descrição de gerenciamento -->
+			<h5 align="center">Opções de gerenciamento</h5>
+
+			<!-- divider -->
+			<div class="divider"></div>
+
+			<!-- br -->
+			<br>
+
 			<!-- Cliente -->
 			<div id="#painel-cliente" class="col s6 m3 l3">
 				<div class="row">
@@ -236,21 +247,20 @@
 		<!-- Agenda -->
 		<div id="swipe-agenda" class="col s12 m12 l12">
 			<div class="row">
-				<!-- Consultas agendadas -->
-				<div class="col s12 m12 l12">
-					<!-- Título de swipe -->
-					<h5 align="center">Agendamentos de Hoje</h5>
+				<!-- Descrição para agendamentos de hoje -->
+				<h5 align="center">Agendamentos de hoje</h5>
 
-					<!-- divider -->
-					<div class="divider"></div>
+				<!-- divider -->
+				<div class="divider"></div>
 
-					<!-- Lista de agendamentos -->
-					<ul id="lista-agendamento-hoje" class="collapsible popout"
-						data-collapsible="accordion">
-					</ul>
-				</div>
+				<!-- br -->
+				<br>
+
+				<!-- Lista de agendamentos -->
+				<div id="lista-agendamentos-hoje"></div>
 			</div>
 		</div>
+	</div>
 	</main>
 	<!-- /.container -->
 

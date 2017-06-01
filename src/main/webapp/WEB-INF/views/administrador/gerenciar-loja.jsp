@@ -124,7 +124,7 @@
 								<div class="input-field">
 									<input id="search-produto" type="search" class="truncate"
 										data-list="#lista-produto" onkeyup="buscar(this.id);"
-										placeholder="Nome, Marca ou Categoria."> <label
+										placeholder="Nome, Marca ou Categoria ou Preço"> <label
 										class="label-icon" for="search-produto"><i
 										class="material-icons">search</i></label><i class="material-icons">close</i>
 								</div>
@@ -568,7 +568,7 @@
 							<div class="input-field">
 								<input id="search-compra" type="search" class="truncate"
 									data-list="#lista-compra" onkeyup="buscar(this.id);"
-									placeholder="Data ou nome do cliente"> <label
+									placeholder="Data, Cliente, Valor ou Status"> <label
 									class="label-icon" for="search-cmpra"><i
 									class="material-icons">search</i></label><i class="material-icons">close</i>
 							</div>
@@ -1320,7 +1320,7 @@
 			<!-- Título de modal (Nome do fornecedor) -->
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<h5 id="titulo-modal-fornecedor"></h5>
+					<h5 align="center" id="titulo-modal-fornecedor"></h5>
 
 					<!-- divider -->
 					<div class="divider"></div>
@@ -1715,7 +1715,7 @@
 
 					<div class="col s12 m4 l4">
 						<h6>
-							<b>Status da compra</b>
+							<b><a href="#">Status da compra</a></b>
 						</h6>
 
 						<p id="status-selecionada"></p>

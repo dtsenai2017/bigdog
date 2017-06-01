@@ -62,10 +62,11 @@ public class RestLojaController {
 
 		Double totalCarrinho = (double) 0;
 
-		for (ProdutoCarrinho produtoCarrinho : carrinhoDoClienteDAO
-				.listarCarrinhoDoCliente(carrinho.getCliente().getIdCliente())) {
-			totalCarrinho += produtoCarrinho.getProduto().getValor() * produtoCarrinho.getQuantidade();
-		}
+		// for (ProdutoCarrinho produtoCarrinho : carrinhoDoClienteDAO
+		// .listarCarrinhoDoCliente(carrinho.getCliente().getIdCliente())) {
+		// totalCarrinho += produtoCarrinho.getProduto().getValor() *
+		// produtoCarrinho.getQuantidade();
+		// }
 
 		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 

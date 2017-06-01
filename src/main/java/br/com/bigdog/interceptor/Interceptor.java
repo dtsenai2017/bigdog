@@ -21,6 +21,12 @@ public class Interceptor extends HandlerInterceptorAdapter {
 		if (request.getRequestURI().contains("resources")) {
 			return true;
 		}
+
+		// Verifica se handler é valido (Instânciado)
+		if (!(handler instanceof HandlerMethod)) {
+			return true;
+		}
+
 		// Handler
 		HandlerMethod method = (HandlerMethod) handler;
 

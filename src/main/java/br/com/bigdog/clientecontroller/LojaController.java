@@ -63,7 +63,7 @@ public class LojaController {
 
 			// Caso produto não existir em carrinho de cliente...
 			if (!existe) {
-				carrinho.setCliente(cliente);
+				// carrinho.setCliente(cliente);
 				carrinho.setProduto(produto);
 				carrinho.setQuantidade((long) 1);
 				System.out.println("CARRINHO: " + carrinho.toString());
@@ -143,7 +143,7 @@ public class LojaController {
 			}
 
 			if (!existe) {
-				carrinho.setCliente(cliente);
+				// carrinho.setCliente(cliente);
 				carrinho.setProduto(produto);
 				carrinho.setQuantidade((long) 1);
 
