@@ -63,9 +63,9 @@ public class AdmAgendamentoController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String data = sdf.format(today);
 
-		// Retornando data
+		// Retornando agendamentos referentes ao dia
 		try {
-			return agendamentoDAO.listarAgendamentoNow(data);
+			return agendamentoDAO.listarAgendamentoHoje(data);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

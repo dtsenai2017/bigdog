@@ -47,11 +47,11 @@ public class AgendamentoDAO {
 		return query.getResultList();
 	}
 
-	// Listar agendamentos do dia e do mês
-	public List<Agendamento> listarAgendamentoNow(String data) {
+	// Listar agendamentos do dia e do mês (Hoje)
+	public List<Agendamento> listarAgendamentoHoje(String data) {
 		// Query
-		TypedQuery<Agendamento> query = manager.createQuery(
-				"SELECT a FROM Agendamento a WHERE a.dataAgendada LIKE '%" + data + "%'", Agendamento.class);
+		TypedQuery<Agendamento> query = manager.createQuery("SELECT a FROM Agendamento a WHERE (a.dataAgendada LIKE '%"
+				+ data + "%') ORDER BY TIME(a.dataAgendada)", Agendamento.class);
 
 		// Retornando
 		return query.getResultList();

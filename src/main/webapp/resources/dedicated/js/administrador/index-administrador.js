@@ -105,10 +105,41 @@ $("#btn-agenda-hoje").click(
 				},
 				type : "GET",
 				success : function(agendamentos) {
+					console.log(agendamentos);
+
+					// Atribui quantidade para caso null
+					if (agendamentos.length == 0) {
+						$('#qtd-agendamentos-hoje').text(
+								'Nenhum agendamento marcado para hoje.');
+					} else if (agendamentos.length == 1) {
+						$('#qtd-agendamentos-hoje').text(
+								'Há ' + agendamentos.length
+										+ ' agendamento marcado para hoje.');
+					} else {
+						$('#qtd-agendamentos-hoje').text(
+								'Há ' + agendamentos.length
+										+ ' agendamentos marcados para hoje.');
+					}
+
+					// Atribui card para cada agendamento
 					$.each(agendamentos, function(index, agendamento) {
 						// Atributos
 						var imgServico;
 						var dataAgendada = new Date(agendamento.dataAgendada);
+						var telefone;
+						var celular;
+
+						// Atribui valor para telefone e celular para caso null
+						if (agendamento.cliente.contato.telefone == null) {
+							telefone = "-";
+						} else {
+							telefone = agendamento.cliente.contato.telefone;
+						}
+						if (agendamento.cliente.contato.celular == null) {
+							celular = "-";
+						} else {
+							celular = agendamento.cliente.contato.celular;
+						}
 
 						// Atribui valor de imagem de acordo com serviço
 						if (agendamento.servico.tipoServico == 'Veterinario') {
@@ -124,7 +155,7 @@ $("#btn-agenda-hoje").click(
 						// Card
 						var cardAgendamento = '<div class="card '
 								+ 'col s12 m12 l12 hoverable '
-								+ 'grey darken-2' + '">'
+								+ 'brown darken-1' + '">'
 								+ '<div id="card-agendamento-imagem" '
 								+ 'class="card-image waves-effect'
 								+ 'waves-block waves-light">'
@@ -135,19 +166,19 @@ $("#btn-agenda-hoje").click(
 								+ '</div>'
 								+ '<div class="card-content">'
 								+ '<span class="card-title activator truncate '
-								+ 'grey-text text-lighten-3" title="'
+								+ 'red-text text-lighten-3" title="'
 								+ agendamento.cliente.nome
 								+ '">'
 								+ agendamento.cliente.nome
 								+ '<br><i class="material-icons right">'
 								+ 'more_vert</i></span><p class="'
 								+ 'white-text">'
-								+ '<b>Horário : </b>'
+								+ '<b>HORÁRIO : </b>'
 								+ dataAgendada.getHours()
 								+ ':'
 								+ dataAgendada.getMinutes()
 								+ 'hrs.</p></div>'
-								+ '<div class="card-reveal grey '
+								+ '<div class="card-reveal brown lighten-1 '
 								+ 'white-text'
 								+ '">'
 								+ '<span class="card-title white-text">'
@@ -159,21 +190,28 @@ $("#btn-agenda-hoje").click(
 								+ '<p><b>Nome do Pet </b>: '
 								+ agendamento.pet.nome
 								+ '</p>'
+								+ '<p> <b>Telefone </b>: '
+								+ telefone
+								+ '<br>'
+								+ '<b>Celular </b>: '
+								+ celular
+								+ '</p>'
 								+ '<p><b>Serviço </b>: '
 								+ agendamento.servico.nome
-								+ '</p>'
-								+ '<p><b>Valor </b>: R$'
+								+ '<br>'
+								+ '<b>Valor </b>: R$ '
 								+ agendamento.servico.valor.toFixed(2)
-								+ '</p>'
-								+ '<p><b>Observações </b>: '
+								+ '<br>'
+								+ '<b>Observações </b>: '
 								+ agendamento.servico.observacao
 								+ '</p>'
 								+ '<div class="divider"></div>'
-								+ '<a href="#!" class="red-text" '
+								+ '<a href="#!" class="orange-text '
+								+ 'text-lighten-1 right"'
 								+ 'onclick="excluirAgendamento('
 								+ agendamento.idAgendamento
-								+ ')"'
-								+ 'right" >Excluir</a>' + '</div></div>';
+								+ ')"><b>Excluir Agendamento</b></a>'
+								+ '</div></div>';
 
 						// Atribuindo card para lista
 						$('#lista-agendamentos-hoje').append(

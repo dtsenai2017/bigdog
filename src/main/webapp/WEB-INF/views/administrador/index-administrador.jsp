@@ -23,9 +23,10 @@
 
 <script type="text/javascript">
 				function consumir() {
-					console.log('entrou');
+					// Atributos
 					var chart = new Array();
-					// Envia a chamada ajax para o servidor
+					
+					// Requisição
 					$
 							.ajax({
 								url : 'adm/produto',
@@ -95,9 +96,8 @@
 		</div>
 	</div>
 
-	<!-- Row --> <!-- Tab Links -->
+	<!-- Tab Links -->
 	<div class="row">
-		<!-- Col -->
 		<div class="col s12 m12 l12">
 			<!-- Tabs -->
 			<ul class="tabs">
@@ -122,7 +122,7 @@
 		</div>
 	</div>
 
-	<!-- Row --> <!-- Swipe's -->
+	<!-- Swipe's -->
 	<div class="row">
 		<!-- Dashboard -->
 		<div id="swipe-dashboard" class="col s12 m12 l12 center">
@@ -249,6 +249,9 @@
 			<div class="row">
 				<!-- Descrição para agendamentos de hoje -->
 				<h5 align="center">Agendamentos de hoje</h5>
+
+				<!-- Quantidade de agendamentos do dia -->
+				<p id="qtd-agendamentos-hoje" align="right"></p>
 
 				<!-- divider -->
 				<div class="divider"></div>
