@@ -16,11 +16,7 @@
 <link rel="stylesheet"
 	href="resources/dedicated/css/administrador/index-administrador.css">
 
-<!-- Scripts para gráficos -->
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/highcharts-3d.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-
+<!-- Script para gráfico -->
 <script type="text/javascript">
 				function consumir() {
 					// Atributos
@@ -275,5 +271,8 @@
 	<script type="text/javascript"
 		src="resources/dedicated/js/administrador/index-administrador.js"
 		charset="utf-8" defer></script>
+
+	<!-- Scripts para gráficos -->
+	<script src="resources/highcharts/js/highcharts.js"></script>
 </body>
 </html>

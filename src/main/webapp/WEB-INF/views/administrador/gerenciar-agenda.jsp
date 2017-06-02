@@ -50,7 +50,7 @@
 				<div class="input-field">
 					<input id="search-agendamento" type="search" class="truncate"
 						data-list="#lista-agendamento" onkeyup="buscar(this.id)"
-						placeholder="Data, nome do cliente, pet ou serviço."> <label
+						placeholder="Data, Cliente, Pet ou Serviço"> <label
 						class="label-icon" for="search-agendamento"><i
 						class="material-icons">search</i></label> <i class="material-icons">close</i>
 				</div>

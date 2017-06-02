@@ -105,8 +105,6 @@ $("#btn-agenda-hoje").click(
 				},
 				type : "GET",
 				success : function(agendamentos) {
-					console.log(agendamentos);
-
 					// Atribui quantidade para caso null
 					if (agendamentos.length == 0) {
 						$('#qtd-agendamentos-hoje').text(

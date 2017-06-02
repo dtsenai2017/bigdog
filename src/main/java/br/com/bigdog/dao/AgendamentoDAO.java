@@ -25,7 +25,8 @@ public class AgendamentoDAO {
 
 	// Listar
 	public List<Agendamento> listar() {
-		TypedQuery<Agendamento> query = manager.createQuery("SELECT a FROM Agendamento a", Agendamento.class);
+		TypedQuery<Agendamento> query = manager.createQuery("SELECT a FROM Agendamento a ORDER BY DATE(a.dataAgendada)",
+				Agendamento.class);
 		return query.getResultList();
 	}
 

@@ -11,7 +11,7 @@ function indexAdministrador() {
 	var xhr = new XMLHttpRequest();
 
 	// Tipo, url e async
-	xhr.open('GET', 'indexAdministrador', false);
+	xhr.open('GET', 'indexAdministrador', true);
 
 	// Atribuindo token
 	xhr.setRequestHeader("Authorization", localStorage.getItem("tokenBigDog"));

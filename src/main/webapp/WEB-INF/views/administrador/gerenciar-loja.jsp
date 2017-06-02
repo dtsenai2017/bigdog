@@ -463,13 +463,13 @@
 						<!-- CEP e Logradouro -->
 						<div class="row">
 							<div class="input-field col s12 m4 l4">
-								<input id="cep" type="text" maxlength="10"
-									onblur="buscarCep(this)" required> <label for="cep">CEP</label>
+								<input id="cep" type="text" maxlength="10" onblur="buscarCep();"
+									required> <label id="label-cep-fornecedor" for="cep">CEP</label>
 							</div>
 
 							<div class="input-field col s12 m8 l8">
 								<input id="logradouro" type="text" maxlength="255"> <label
-									for="logradouro">Logradouro</label>
+									id="label-logradouro-fornecedor" for="logradouro">Logradouro</label>
 							</div>
 						</div>
 
@@ -487,7 +487,7 @@
 
 							<div class="input-field col s12 m5 l5">
 								<input id="bairro" type="text" maxlength="100" required>
-								<label for="bairro">Bairro</label>
+								<label id="label-bairro-fornecedor" for="bairro">Bairro</label>
 							</div>
 						</div>
 
@@ -495,7 +495,7 @@
 						<div class="row">
 							<div class="input-field col s7 m9 l9">
 								<input id="cidade" type="text" maxlength="100" required>
-								<label for="cidade">Cidade</label>
+								<label id="label-cidade-fornecedor" for="cidade">Cidade</label>
 							</div>
 
 							<div class="input-field col s5 m3 l3">
@@ -1562,7 +1562,7 @@
 					<div class="row">
 						<div class="input-field col s12 m3 l3">
 							<input id="cep-f-selecionado" type="text" maxlength="10"
-								onblur="buscarCep(this)" required> <label
+								onblur="buscarCep();" required> <label
 								id="label-cep-f-selecionado" for="cep-f-selecionado">CEP</label>
 						</div>
 
@@ -1903,6 +1903,11 @@
 	<!-- JS dedicado para loja em geral -->
 	<script type="text/javascript"
 		src="resources/dedicated/js/administrador/gerenciar-loja/gerenciar-loja.js"
+		charset="utf-8" defer></script>
+
+	<!-- ViaCEP -->
+	<script type="text/javascript"
+		src="resources/dedicated/js/administrador/viacep/viacep.js"
 		charset="utf-8" defer></script>
 
 	<!-- JS dedicado para gerenciamento de produtos -->
