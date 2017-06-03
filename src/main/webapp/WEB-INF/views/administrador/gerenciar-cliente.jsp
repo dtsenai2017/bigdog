@@ -32,8 +32,8 @@
 			<h5 class="left-align">Gerenciar Clientes</h5>
 
 			<!-- Subtítulo -->
-			<p class="left-align grey-text text lighten-1">Consulte o cliente
-				desejado.</p>
+			<p class="left-align grey-text text lighten-1">Consulte clientes
+				com facilidade.</p>
 
 			<!-- Divider -->
 			<div class="divider"></div>
@@ -43,13 +43,13 @@
 	<!-- Barra de pesquisa -->
 	<div class="row">
 		<!-- Barra de Pesquisa -->
-		<nav class="deep-purple darken-1 hoverable">
+		<nav class="blue darken-1 hoverable">
 		<div class="nav-wrapper">
 			<form>
 				<div class="input-field">
 					<input id="search-cliente" type="search" class="truncate"
 						data-list="#lista-clientes" onkeyup="buscar(this.id)"
-						placeholder="Nome, CPF, Email ou Celular."> <label
+						placeholder="Nome, CPF, Email ou Celular"> <label
 						class="label-icon" for="search-cliente"><i
 						class="material-icons">search</i></label> <i class="material-icons">close</i>
 				</div>
@@ -82,7 +82,8 @@
 
 	<!-- Modal's -->
 	<!-- Modal de informações de cliente -->
-	<div id="modal-cliente-info" class="modal modal-fixed-footer">
+	<div id="modal-cliente-info"
+		class="modal modal-fixed-footer bottom-sheet">
 		<!-- Modal content -->
 		<div class="modal-content">
 			<div class="container">
@@ -96,11 +97,20 @@
 
 				<!-- Título de modal -->
 				<div class="row">
-					<div class="col s12 m12 l12 center-align">
-						<h5>Informações do cliente</h5>
+					<!-- Descrição para informações gerais -->
+					<div class="col s12 m9 l9 center-align">
+						<h5 align="center">Informações gerais</h5>
 
 						<!-- ID e Nome do cliente -->
 						<input id="idCliente-selecionado" type="hidden">
+
+						<!-- divider -->
+						<div class="divider"></div>
+					</div>
+
+					<!-- Descrição para outras informações -->
+					<div class="col s12 m3 l3 hide-on-med-and-down center-align">
+						<h5 align="center">Mais...</h5>
 
 						<!-- divider -->
 						<div class="divider"></div>
@@ -109,7 +119,7 @@
 
 				<!-- Lista de dados(Endereço, Pets, Compras e Agendamentos realizados -->
 				<div class="row">
-					<div class="col s12 m12 l12">
+					<div class="col s12 m9 l9">
 						<!-- Lista de dados -->
 						<ul class="collapsible hoverable" data-collapsible="accordion">
 							<!-- Cliente -->
@@ -158,6 +168,79 @@
 									class="collapsible-body cyan lighten-1 white-text text-white"></div>
 							</li>
 						</ul>
+					</div>
+
+					<!-- Outras informações -->
+					<div class="col s12 m3 l3 ">
+						<div class="row">
+							<!-- Descrição -->
+							<div class="col s10 m10 l10">
+								<div class="container">
+									<!-- br -->
+									<br>
+
+									<!-- Endereço(s) -->
+									<span class="truncate">Endereço(s)</span>
+
+									<!-- Pet(s) -->
+									<span class="truncate">Pet(s)</span>
+
+									<!-- Compra(s)  -->
+									<span class="truncate">Compra(s)</span>
+
+									<!-- Agendamento(s)  -->
+									<span class="truncate">Agendamento(s)</span>
+								</div>
+							</div>
+
+							<!-- Quantidade -->
+							<div class="col s2 m2 l2">
+								<!-- br -->
+								<br>
+
+								<!-- Endereço(s) -->
+								<span id="qtd-endereco" class="deep-orange-text text-lighten-2"></span>
+
+								<!-- br -->
+								<br>
+
+								<!-- Pet(s) -->
+								<span id="qtd-pet" class="green-text text-lighten-2"></span>
+
+								<!-- br -->
+								<br>
+
+								<!-- Compra(s)  -->
+								<span id="qtd-compra" class="red-text text-lighten-2"></span>
+
+								<!-- br -->
+								<br>
+
+								<!-- Agendamento(s)  -->
+								<span id="qtd-agendamento" class="cyan-text text-lighten-2"></span>
+							</div>
+						</div>
+
+						<!-- Datas -->
+						<div class="row">
+							<div class="col s12 m12 l12 center">
+								<!-- Última compra -->
+								<span><b>Última compra</b></span>
+
+								<!-- br -->
+								<br> <span id="ultima-compra"></span>
+
+								<!-- br -->
+								<br>
+
+								<!-- Último agendamento -->
+								<span><b>Último agendamento</b></span>
+
+								<!-- br -->
+								<br> <span id="ultimo-agendamento"></span>
+
+							</div>
+						</div>
 					</div>
 				</div>
 				<!-- /.row -->

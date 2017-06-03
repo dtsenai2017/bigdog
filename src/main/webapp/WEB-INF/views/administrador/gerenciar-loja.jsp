@@ -43,7 +43,7 @@
 
 				<!-- Subtítulo -->
 				<p class="left-align grey-text text lighten-1">Gerencie sua loja
-					com simplicidade e facilidade.</p>
+					de forma simples.</p>
 
 				<!-- divider -->
 				<div class="divider"></div>
@@ -124,7 +124,7 @@
 								<div class="input-field">
 									<input id="search-produto" type="search" class="truncate"
 										data-list="#lista-produto" onkeyup="buscar(this.id);"
-										placeholder="Nome, Marca ou Categoria ou Preço"> <label
+										placeholder="Nome, Marca, Categoria ou Preço"> <label
 										class="label-icon" for="search-produto"><i
 										class="material-icons">search</i></label><i class="material-icons">close</i>
 								</div>
@@ -463,7 +463,7 @@
 						<!-- CEP e Logradouro -->
 						<div class="row">
 							<div class="input-field col s12 m4 l4">
-								<input id="cep" type="text" maxlength="10" onblur="buscarCep();"
+								<input id="cep" type="text" maxlength="9" onblur="buscarCep();"
 									required> <label id="label-cep-fornecedor" for="cep">CEP</label>
 							</div>
 
@@ -816,13 +816,13 @@
 					</h6>
 
 					<!-- Descrição de card -->
-					<p align="left" class="grey-text text-darken-1">
+					<p align="left">
 						Para alterar a imagem do produto, clique no <b>nome do produto</b>.
 						Para alterar outras informações, clique no <b>botão </b> ALTERAR.
 					</p>
 
 					<!-- Descrição de alteração -->
-					<p align="left" class="grey-text text-darken-1">
+					<p align="left">
 						Produtos alterados não afetam dados dos mesmos em compras <b>já
 							realizadas</b>.
 					</p>
@@ -1561,7 +1561,7 @@
 
 					<div class="row">
 						<div class="input-field col s12 m3 l3">
-							<input id="cep-f-selecionado" type="text" maxlength="10"
+							<input id="cep-f-selecionado" type="text" maxlength="9"
 								onblur="buscarCep();" required> <label
 								id="label-cep-f-selecionado" for="cep-f-selecionado">CEP</label>
 						</div>
@@ -1715,7 +1715,7 @@
 
 					<div class="col s12 m4 l4">
 						<h6>
-							<b><a href="#">Status da compra</a></b>
+							<b><a href="#" class="blue-text text-lighten-2">Status</a></b>
 						</h6>
 
 						<p id="status-selecionada"></p>

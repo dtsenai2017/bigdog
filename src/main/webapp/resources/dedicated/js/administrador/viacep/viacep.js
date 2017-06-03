@@ -3,9 +3,9 @@ function limpa_formulário_cep(tipo) {
 	// Verifica tipo de formulário
 	if (tipo == 'form-inserir') {
 		// Desativa labels
-		$("#label-logradouro-fornecedor").removeClass('activate');
-		$("#label-bairro-fornecedor").removeClass('activate');
-		$("#label-cidade-fornecedor").removeClass('activate');
+		$("#label-logradouro-fornecedor").removeClass('active');
+		$("#label-bairro-fornecedor").removeClass('active');
+		$("#label-cidade-fornecedor").removeClass('active');
 
 		// Limpa valores do formulário de cep.
 		$("#logradouro").val("");
@@ -17,9 +17,9 @@ function limpa_formulário_cep(tipo) {
 		$("select").material_select('update');
 	} else if (tipo == 'form-alterar') {
 		// Desativa labels
-		$("#label-logradouro-f-selecionado").removeClass('activate');
-		$("#label-bairro-f-selecionado").removeClass('activate');
-		$("#label-cidade-f-selecionado").removeClass('activate');
+		$("#label-logradouro-f-selecionado").removeClass('active');
+		$("#label-bairro-f-selecionado").removeClass('active');
+		$("#label-cidade-f-selecionado").removeClass('active');
 
 		// Limpa valores do formulário de cep.
 		$("#logradouro-f-selecionado").val("");

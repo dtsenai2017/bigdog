@@ -166,8 +166,12 @@
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">recent_actors</i></a>
 							</div>
-							<div class="card-content">
-								<p class="truncate">Gerencie clientes cadastrados.</p>
+							<div class="card-content center">
+								<!-- divider e br -->
+								<br>
+								<div class="divider"></div>
+
+								<h6 class="red-text text-lighten-2">Consulte clientes.</h6>
 							</div>
 						</div>
 					</div>
@@ -187,8 +191,12 @@
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">store</i></a>
 							</div>
-							<div class="card-content">
-								<p class="truncate">Gerencie produtos e fornecedores.</p>
+							<div class="card-content center">
+								<!-- divider e br -->
+								<br>
+								<div class="divider"></div>
+
+								<h6 class="red-text text-lighten-2">Gerencie seu pet shop.</h6>
 							</div>
 						</div>
 					</div>
@@ -208,8 +216,12 @@
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">event_note</i></a>
 							</div>
-							<div class="card-content">
-								<p class="truncate">Gerencie agendamentos realizados.</p>
+							<div class="card-content center">
+								<!-- divider e br -->
+								<br>
+								<div class="divider"></div>
+
+								<h6 class="red-text text-lighten-2">Consulte agenda.</h6>
 							</div>
 						</div>
 					</div>
@@ -229,14 +241,17 @@
 									class="btn-floating halfway-fab waves-effect waves-light red"><i
 									class="material-icons">pets</i></a>
 							</div>
-							<div class="card-content">
-								<p class="truncate">Gerencie seus serviços.</p>
+							<div class="card-content center">
+								<!-- divider e br -->
+								<br>
+								<div class="divider"></div>
+
+								<h6 class="red-text text-lighten-2">Gerencie serviços.</h6>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 		<!-- /.swipe-gerenciar -->
 

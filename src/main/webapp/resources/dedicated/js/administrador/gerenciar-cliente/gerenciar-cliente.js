@@ -220,6 +220,11 @@ function buscarCliente(idCliente) {
 				// em modal
 				$('#lista-pet').append(petList);
 			});
+			// -each pets
+
+			// Atribuindo outras informações
+			$('#qtd-endereco').html(cliente.enderecos.length);
+			$('#qtd-pet').html(cliente.pets.length);
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
@@ -238,7 +243,6 @@ function buscarCliente(idCliente) {
 			$.each(compras, function(index, compra) {
 				// Atributo date
 				var dataCompra = new Date(compra.dataCompra);
-				dataCompra.setDate(dataCompra.getDate() + 1);
 
 				// Atributo de lista de compras do
 				// cliente
@@ -260,6 +264,16 @@ function buscarCliente(idCliente) {
 				// compras
 				$('#lista-compra').append(compraList);
 			});
+
+			// Outras informações
+			// Atributos
+			var ultimaCompra = compras[compras.length - 1];
+			var dataUltimaCompra = new Date(ultimaCompra.dataCompra);
+
+			// Atribuindo valores
+			$('#qtd-compra').html(compras.length);
+			$('#ultima-compra').html(
+					$.datepicker.formatDate("dd/mm/yy", dataUltimaCompra));
 		},
 		error : function(e) {
 			// Error
@@ -268,43 +282,68 @@ function buscarCliente(idCliente) {
 	});
 
 	// Listando agendamentos de cliente
-	$.getJSON({
-		url : "adm/agendamentoCliente/" + idCliente,
-		headers : {
-			'Authorization' : localStorage.getItem("tokenBigDog")
-		},
-		type : "GET",
-		success : function(agendamentos) {
-			// Agendamentos realizados do cliente
-			$.each(agendamentos, function(index, agendamento) {
-				// Atributo date
-				var dataAgendamento = new Date(agendamento.dataAgendada);
-				dataAgendamento.setDate(dataAgendamento.getDate() + 1);
+	$
+			.getJSON({
+				url : "adm/agendamentoCliente/" + idCliente,
+				headers : {
+					'Authorization' : localStorage.getItem("tokenBigDog")
+				},
+				type : "GET",
+				success : function(agendamentos) {
+					// Agendamentos realizados do cliente
+					$
+							.each(
+									agendamentos,
+									function(index, agendamento) {
+										// Atributo date
+										var dataAgendamento = new Date(
+												agendamento.dataAgendada);
 
-				// Atributo da lista de agendamento
-				var agendamentoList = "<h5 align='center'><b>"
-						+ $.datepicker.formatDate("dd/mm/yy", dataAgendamento)
-						+ "</b></h5>" + "<span><b>Horário : </b>"
-						+ dataAgendamento.getHours() + ":"
-						+ dataAgendamento.getMinutes() + "hrs.</span><br>"
-						+ "<span><b>Tipo de Serviço : </b>"
-						+ agendamento.servico.tipoServico
-						+ "</span><br><span><b>Valor : R$ </b>"
-						+ agendamento.servico.valor.toFixed(2)
-						+ "</span><br><span>" + "<b>Nome do Pet : </b>"
-						+ agendamento.pet.nome + "</span><br>"
-						+ "<div class='divider'>";
+										// Atributo da lista de agendamento
+										var agendamentoList = "<h5 align='center'><b>"
+												+ $.datepicker.formatDate(
+														"dd/mm/yy",
+														dataAgendamento)
+												+ "</b></h5>"
+												+ "<span><b>Horário : </b>"
+												+ dataAgendamento.getHours()
+												+ ":"
+												+ dataAgendamento.getMinutes()
+												+ "hrs.</span><br>"
+												+ "<span><b>Tipo de Serviço : </b>"
+												+ agendamento.servico.tipoServico
+												+ "</span><br><span><b>Valor : R$ </b>"
+												+ agendamento.servico.valor
+														.toFixed(2)
+												+ "</span><br><span>"
+												+ "<b>Nome do Pet : </b>"
+												+ agendamento.pet.nome
+												+ "</span><br>"
+												+ "<div class='divider'>";
 
-				// Adicionando para collection de
-				// agendamentos
-				$('#lista-agendamento').append(agendamentoList);
+										// Adicionando para collection de
+										// agendamentos
+										$('#lista-agendamento').append(
+												agendamentoList);
+									});
+
+					// Outras informações
+					// Atributos
+					var ultimoAgendamento = agendamentos[agendamentos.length - 1];
+					var dataUltimoAgendamento = new Date(
+							ultimoAgendamento.dataAgendada);
+
+					// Atribuindo valores
+					$('#qtd-agendamento').html(agendamentos.length);
+					$('#ultimo-agendamento').html(
+							$.datepicker.formatDate("dd/mm/yy",
+									dataUltimoAgendamento));
+				},
+				error : function(e) {
+					// Error
+					console.log("ERROR : " + e);
+				}
 			});
-		},
-		error : function(e) {
-			// Error
-			console.log("ERROR : " + e);
-		}
-	});
 }
 
 // PET

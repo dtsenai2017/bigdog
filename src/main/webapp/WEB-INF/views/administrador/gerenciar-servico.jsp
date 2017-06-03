@@ -39,8 +39,8 @@
 				<h5 class="left-align">Gerenciar Serviço</h5>
 
 				<!-- Subtítulo -->
-				<p class="left-align grey-text text lighten-1">Gerencie seus
-					serviços.</p>
+				<p class="left-align grey-text text lighten-1">Gerencie serviços
+					de forma rápida e prática.</p>
 
 				<!-- divider -->
 				<div class="divider"></div>

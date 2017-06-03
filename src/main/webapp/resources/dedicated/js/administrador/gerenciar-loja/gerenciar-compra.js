@@ -31,7 +31,6 @@ function abrirCompras() {
 			$.each(compras, function(index, compra) {
 				// Data da compra
 				var dataCompra = new Date(compra.dataCompra);
-				dataCompra.setDate(dataCompra.getDate() + 1);
 
 				// Objeto em lista
 				var liCompra = '<li class="collection-item">'
@@ -94,7 +93,6 @@ function abrirCompra(idCompra) {
 		success : function(compra) {
 			// Data da compra
 			var dataCompra = new Date(compra.dataCompra);
-			dataCompra.setDate(dataCompra.getDate() + 1);
 			
 			// Atributo para caso nulo
 			var complemento = compra.endereco.complemento;

@@ -49,7 +49,7 @@ public class AdmController {
 		mav.setViewName("administrador/gerenciar-cliente");
 
 		// Adicionando lista
-		mav.addObject("clientes", clienteDAO.listar());
+		mav.addObject("clientes", clienteDAO.listarOrdenado());
 
 		// Retornando
 		return mav;

@@ -33,8 +33,8 @@
 			<h5 class="left-align">Gerenciar Agendamentos</h5>
 
 			<!-- Subtítulo -->
-			<p class="left-align grey-text text lighten-1">Gerencie
-				agendamentos realizados.</p>
+			<p class="left-align grey-text text lighten-1">Consulte
+				agendamentos marcados.</p>
 
 			<!-- divider -->
 			<div class="divider"></div>

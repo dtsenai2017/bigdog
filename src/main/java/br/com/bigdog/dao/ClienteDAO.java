@@ -29,6 +29,12 @@ public class ClienteDAO {
 		return query.getResultList();
 	}
 
+	// Listar ordenado por letra do nome
+	public List<Cliente> listarOrdenado() {
+		TypedQuery<Cliente> query = manager.createQuery("SELECT c FROM Cliente c ORDER BY c.nome", Cliente.class);
+		return query.getResultList();
+	}
+
 	// Listar (id)
 	public Cliente listar(Long id) {
 		return manager.find(Cliente.class, id);

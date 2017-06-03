@@ -20,11 +20,11 @@ main {
 #lista-clientes li:hover {
 	transition: 0.4s;
 	color: white;
-	background-color: #7e57c2;
+	background-color: #42a5f5;
 }
 
 /* Modal que contém informações do cliente */
 #modal-cliente-info {
-	width: 88% !important;
-	max-width: 100% !important;
+	height: 90% !important;
+	max-height: 90% !important;
 }
