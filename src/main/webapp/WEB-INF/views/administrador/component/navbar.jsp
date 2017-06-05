@@ -50,7 +50,7 @@
 			<!-- Logo -->
 			<div class="col m3 l3">
 				<a id="logo-administrador" href="#" class="brand-logo "><b><span
-						style="font-size: 34px;">BIGDOG</span></b></a> <a
+						style="font-size: 34px;">BIGDOG</span></b></a> <a href="#"
 					data-activates="menu-mobile" class="button-collapse"><i
 					class="material-icons">menu</i></a>
 			</div>

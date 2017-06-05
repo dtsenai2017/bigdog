@@ -13,9 +13,18 @@ function abrirModalAgendamento(idAgendamento) {
 		url : "adm/agendamento/" + idAgendamento,
 		type : "GET",
 		success : function(agendamento) {
+			// Atribui 0 para minutos
+			function addZero(i) {
+				if (i < 10) {
+					i = "0" + i;
+				}
+				return i;
+			}
+
 			// Atributos
 			var dataAgendada = new Date(agendamento.dataAgendada);
 			var tempoEstimado = agendamento.servico.tempoEstimado.split(':');
+			var minutos = addZero(dataAgendada.getMinutes());
 
 			// Atribuindo valores para campos
 			$('#idAgendamento-selecionado').val(agendamento.idAgendamento);
@@ -32,8 +41,7 @@ function abrirModalAgendamento(idAgendamento) {
 			$('#agendamento-dataAgendada').text(
 					$.datepicker.formatDate('dd/mm/yy', dataAgendada));
 			$('#agendamento-horarioAgendado').text(
-					dataAgendada.getHours() + ":" + dataAgendada.getMinutes()
-							+ "hrs.");
+					dataAgendada.getHours() + ":" + minutos + "hrs.");
 			$('#agendamento-servico-nome').text(agendamento.servico.nome);
 			$('#agendamento-servico-tipoServico').text(
 					agendamento.servico.tipoServico);

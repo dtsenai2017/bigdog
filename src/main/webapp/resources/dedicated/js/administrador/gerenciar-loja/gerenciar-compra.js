@@ -64,8 +64,10 @@ function abrirCompra(idCompra) {
 
 	// Limpando campos e tabela de itens
 	function limparCamposModalCompra() {
+		$('#idCompra-selecionada').val('');
 		$('#dataCompra-selecionada').text('');
-		$('#status-selecionada').text('');
+		$('#horarioCompra-selecionada').text('');
+		$('#input-status-selecionada').text('');
 		$('#frete-selecionada').text('');
 		$('#cliente-compra-selecionada').text('');
 		$('#clienteCpf-compra-selecionada').text('');
@@ -91,8 +93,18 @@ function abrirCompra(idCompra) {
 		},
 		type : "GET",
 		success : function(compra) {
+			// Atribui 0 para minutos
+			function addZero(i) {
+				if (i < 10) {
+					i = "0" + i;
+				}
+				return i;
+			}
+			
 			// Data da compra
 			var dataCompra = new Date(compra.dataCompra);
+			var horas = addZero(dataCompra.getHours());
+			var minutos = addZero(dataCompra.getMinutes());
 			
 			// Atributo para caso nulo
 			var complemento = compra.endereco.complemento;
@@ -102,10 +114,17 @@ function abrirCompra(idCompra) {
 				complemento = '-';
 			}
 
+			// Ativando input
+			$('#label-status-selecionada').addClass('active');
+
+			// Atribuindo id de compra
+			$('#idCompra-selecionada').val(compra.idCompra);
+			
 			// Atribuindo valores para visualização
 			$('#dataCompra-selecionada').text(
 					$.datepicker.formatDate('dd/mm/yy', dataCompra));
-			$('#status-selecionada').text(compra.status);
+			$('#horarioCompra-selecionada').text(horas + ':' + minutos);
+			$('#input-status-selecionada').val(compra.status);
 			$('#frete-selecionada').text('R$' + compra.frete.toFixed(2));
 			$('#cliente-compra-selecionada').text(compra.cliente.nome);
 			$('#clienteCpf-compra-selecionada').text(compra.cliente.cpf);
@@ -142,3 +161,61 @@ function abrirCompra(idCompra) {
 		}
 	});
 }
+
+// Alterar status de compra
+$('#input-status-selecionada').keypress(function(e) {
+    // Get ENTER
+	if(e.which == 13) {
+		// Cancela qualquer ação padrão do elemento
+		e.preventDefault();
+		
+		// Atributos
+		var idCompra = $('#idCompra-selecionada').val();
+		var compra = {
+			status : $(this).val()
+		}
+		
+		// Confirmar exclusão
+		$.confirm({
+			title : 'Alteração!',
+			animation : 'top',
+			useBootstrap : false,
+			theme : 'material',
+			boxWidth : '50%',
+			content : 'Deseja alterar status?',
+			buttons : {
+				// CONFIRMAR
+				confirm : {
+					text : 'Alterar',
+					btnClass : 'btn-green',
+					action : function() {
+				        // Alterando status
+						$.ajax({
+							url : 'adm/alterarStatus/' + idCompra,
+							data : JSON.stringify(compra),
+							contentType : "application/json; charset=utf-8",
+							headers : {
+								'Authorization' : localStorage
+								.getItem("tokenBigDog")
+							},
+							type : 'PUT',
+							success : function(s){
+								Materialize.toast('Status alterado com sucesso!', 2400);
+							},
+							error : function(e) {
+								console.log("ERROR: ", e);
+								Materialize.toast('Ops, houve um problema!', 2400);
+							}
+				 		});
+					}
+				},
+				cancel : {
+					// CANCELAR
+					text : 'Cancelar',
+					action : function() {
+					}
+				}
+			}
+		});
+	}
+});

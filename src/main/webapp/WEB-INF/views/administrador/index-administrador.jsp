@@ -16,64 +16,92 @@
 <link rel="stylesheet"
 	href="resources/dedicated/css/administrador/index-administrador.css">
 
-<!-- Script para gráfico -->
-<script type="text/javascript">
-				function consumir() {
-					// Atributos
-					var chart = new Array();
-					
-					// Requisição
-					$
-							.ajax({
-								url : 'adm/produto',
-								type : 'GET',
-								mediaType : 'JSON',
-								success : function(data) {
-									var produtos = data;
+<!-- Script para gráfico de tipo de agendamento -->
+<script type="text/javascript" charset="utf-8">
+	// Consumir
+	function consumir() {
+		// Atributos
+		var qtdAgendamento = 0;
+		var qtdEstetica = 0;
+		var qtdVeterinario = 0;
 
-									Highcharts
-											.chart(
-													'grafico1',
-													{
-														chart : {
-															type : 'pie',
-															options3d : {
-																enabled : true,
-																alpha : 45
-															}
-														},
-														title : {
-															text : 'Produtos Em Estoque'
-														},
-														subtitle : {
-															text : 'DTCommerce'
-														},
-														plotOptions : {
-															pie : {
-																innerSize : 100,
-																depth : 45
-															}
-														},
-														series : [ {
-															name : 'Quantidade em estoque é de: ',
-															data :  gerarProdutos(produtos) 
-														} ]
-													});
+		// Requisição Agendamentos
+		$.getJSON({
+			url : 'adm/agendamento',
+			headers : {
+				'Authorization' : localStorage.getItem("tokenBigDog")
+			},
+			async : false,
+			type : 'GET',
+			success : function(agendamentos) {
+				// Atribuindo quantidade total
+				qtdAgendamento = agendamentos.length;
 
-									function gerarProdutos(produtos) {
-										for (var int = 0; int < produtos.length; int++) {
-											chart[int] = [ produtos[int].nome,
-												produtos[int].qtdEstoque ]; 
-										}
-										console.log(chart)
-										return chart;
-									}
+				// Atribuindo valor por tipo de serviço
+				$.each(agendamentos, function(key, agendamento) {
+					if (agendamento.servico.tipoServico == 'Estetica') {
+						qtdEstetica++;
+					} else {
+						qtdVeterinario++;
+					}
+				});
+			},
+			error : function(e) {
+				console.log('ERROR : ' + e);
+			}
+		});
 
-								}
+		// Atribuindo valores de porcentagem
+		qtdEstetica = (qtdEstetica / qtdAgendamento);
+		qtdEstetica *= 100;
+		qtdVeterinario = (qtdVeterinario / qtdAgendamento);
+		qtdVeterinario *= 100;
 
-							});
+		// Gráfico
+		Highcharts.chart('container', {
+			chart : {
+				plotBackgroundColor : null,
+				plotBorderWidth : 0,
+				plotShadow : false
+			},
+			title : {
+				text : 'Tipo de serviço agendado',
+				align : 'center',
+			},
+			tooltip : {
+				pointFormat : '{series.name}: <b>{point.percentage:.2f}%</b>'
+			},
+			plotOptions : {
+				pie : {
+					dataLabels : {
+						enabled : true,
+						distance : -50,
+						style : {
+							fontWeight : 'bold',
+							color : 'white'
+						}
+					},
+					startAngle : -90,
+					endAngle : 90,
+					center : [ '50%', '75%' ]
 				}
-			</script>
+			},
+			series : [ {
+				type : 'pie',
+				name : 'Porcentagem',
+				innerSize : '60%',
+				data : [ [ 'Estética', qtdEstetica ],
+						[ 'Veterinário', qtdVeterinario ], {
+							name : 'Proprietary or Undetectable',
+							y : 0.2,
+							dataLabels : {
+								enabled : false
+							}
+						} ]
+			} ]
+		});
+	}
+</script>
 </head>
 <body>
 	<!--  import navbar -->
@@ -136,7 +164,8 @@
 
 			<!-- Caixa pra gráfico -->
 			<div class="row">
-				<div id="grafico1" style="height: 400px"></div>
+				<div id="container"
+					style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 			</div>
 		</div>
 		<!-- /.swipe-dashboard -->
@@ -288,6 +317,7 @@
 		charset="utf-8" defer></script>
 
 	<!-- Scripts para gráficos -->
-	<script src="resources/highcharts/js/highcharts.js"></script>
+	<script src="resources/highcharts/highcharts.js" defer></script>
+	<script src="resources/highcharts/exporting.js" defer></script>
 </body>
 </html>

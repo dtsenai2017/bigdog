@@ -31,6 +31,18 @@ public class AdmAgendamentoController {
 	}
 
 	// Requisições
+	// Listar
+	@RequestMapping(value = "agendamento", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Agendamento> listarAgendamento() {
+		// Retornando agendamentos referentes ao dia
+		try {
+			return agendamentoDAO.listar();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	// Listar (id)
 	@RequestMapping(value = "agendamento/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Agendamento listar(@PathVariable("id") Long idAgendamento) {

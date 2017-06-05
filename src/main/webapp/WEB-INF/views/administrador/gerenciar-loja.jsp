@@ -1141,7 +1141,7 @@
 			<!-- Botão fechar -->
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<a class="modal-action modal-close right"
+					<a class="modal-action modal-close left"
 						onclick="esconderListaCategoria();"><i
 						class="material-icons grey-text">close</i></a>
 				</div>
@@ -1190,7 +1190,7 @@
 								<input id="search-categoria" type="search" class="truncate"
 									data-list="#lista-categoria"
 									onkeyup="buscar(this.id); verificarValor();"
-									placeholder="Buscar categoria"> <label
+									placeholder="Nome da Categoria"> <label
 									class="label-icon" for="search-categoria"><i
 									class="material-icons">search</i></label><i class="material-icons">close</i>
 							</div>
@@ -1252,7 +1252,7 @@
 			<!-- Botão fechar -->
 			<div class="row">
 				<div class="col s12 m12 l12">
-					<a class="modal-action modal-close right"><i
+					<a class="modal-action modal-close left"><i
 						class="material-icons grey-text">close</i></a>
 				</div>
 			</div>
@@ -1680,7 +1680,7 @@
 					</div>
 				</div>
 
-				<!-- Título da modal -->
+				<!-- Título da modal e id da compra-->
 				<div class="row">
 					<div class="col s12 m12 l12">
 						<h5 align="center">Informações da Compra</h5>
@@ -1692,20 +1692,30 @@
 						<!-- divider -->
 						<div class="divider"></div>
 					</div>
+
+					<input id="idCompra-selecionada" type="hidden">
 				</div>
 
 				<!-- Descrição para informações da compra -->
 				<!-- Data da compra, status e frete -->
 				<div class="row">
-					<div class="col s12 m4 l4">
+					<div class="col s12 m3 l3">
 						<h6>
-							<b>Data da compra</b>
+							<b>Data</b>
 						</h6>
 
 						<p id="dataCompra-selecionada"></p>
 					</div>
 
-					<div class="col s12 m4 l4">
+					<div class="col s12 m3 l3">
+						<h6>
+							<b>Hora</b>
+						</h6>
+
+						<p id="horarioCompra-selecionada"></p>
+					</div>
+
+					<div class="col s12 m3 l3">
 						<h6>
 							<b>Frete</b>
 						</h6>
@@ -1713,12 +1723,14 @@
 						<p id="frete-selecionada"></p>
 					</div>
 
-					<div class="col s12 m4 l4">
-						<h6>
-							<b><a href="#" class="blue-text text-lighten-2">Status</a></b>
-						</h6>
-
-						<p id="status-selecionada"></p>
+					<div class="col s12 m3 l3">
+						<div class="input-field col s12 m12 l12">
+							<form>
+								<input id="input-status-selecionada" type="text" required>
+								<label id="label-status-selecionada"
+									for="input-status-selecionada">Status</label>
+							</form>
+						</div>
 					</div>
 				</div>
 

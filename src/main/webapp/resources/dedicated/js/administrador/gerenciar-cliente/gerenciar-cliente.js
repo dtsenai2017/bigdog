@@ -241,8 +241,18 @@ function buscarCliente(idCliente) {
 		success : function(compras) {
 			// Compras realizadas do cliente
 			$.each(compras, function(index, compra) {
+				// Atribui 0 para minutos
+				function addZero(i) {
+					if (i < 10) {
+						i = "0" + i;
+					}
+					return i;
+				}
+
 				// Atributo date
 				var dataCompra = new Date(compra.dataCompra);
+				var horas = addZero(dataCompra.getHours());
+				var minutos = addZero(dataCompra.getMinutes());
 
 				// Atributo de lista de compras do
 				// cliente
@@ -250,7 +260,9 @@ function buscarCliente(idCliente) {
 						+ $.datepicker.formatDate("dd/mm/yy", dataCompra)
 						+ "</b></h5>" + "<span><b>Qtd de Itens : </b>"
 						+ compra.itensCompra.length + "</span><br>"
-						+ "<span><b>Valor : </b>R$ " + compra.valor.toFixed(2)
+						+ "<span><b>Horário : </b>" + horas + ":" + minutos
+						+ "hrs.</span><br>" + "<span><b>Valor : </b>R$ "
+						+ compra.valor.toFixed(2)
 						+ "</span><br><span><b>Endereço : </b>"
 						+ compra.endereco.logradouro + ", "
 						+ compra.endereco.numero + " / " + compra.endereco.cep

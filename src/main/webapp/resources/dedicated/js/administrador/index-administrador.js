@@ -121,9 +121,18 @@ $("#btn-agenda-hoje").click(
 
 					// Atribui card para cada agendamento
 					$.each(agendamentos, function(index, agendamento) {
+						// Atribui 0 para minutos
+						function addZero(i) {
+							if (i < 10) {
+								i = "0" + i;
+							}
+							return i;
+						}
+
 						// Atributos
 						var imgServico;
 						var dataAgendada = new Date(agendamento.dataAgendada);
+						var minutos = addZero(dataAgendada.getMinutes());
 						var telefone;
 						var celular;
 
@@ -174,7 +183,7 @@ $("#btn-agenda-hoje").click(
 								+ '<b>HORÁRIO : </b>'
 								+ dataAgendada.getHours()
 								+ ':'
-								+ dataAgendada.getMinutes()
+								+ minutos
 								+ 'hrs.</p></div>'
 								+ '<div class="card-reveal brown lighten-1 '
 								+ 'white-text'
