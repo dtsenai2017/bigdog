@@ -56,6 +56,13 @@
 			</form>
 		</div>
 		</nav>
+
+		<!-- Descrição de pesquisa -->
+		<p id="desc-nav-cliente" class="grey-text">
+			Para listar todos os clientes, clique na barra de pesquisa, <b>apague
+				tudo</b> que estiver nela e <b>pressione somente uma vez</b> a tecla de
+			espaço.
+		</p>
 	</div>
 
 	<!-- Lista de clientes -->

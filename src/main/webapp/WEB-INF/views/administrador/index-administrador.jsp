@@ -15,93 +15,6 @@
 <!-- CSS dedicado -->
 <link rel="stylesheet"
 	href="resources/dedicated/css/administrador/index-administrador.css">
-
-<!-- Script para gráfico de tipo de agendamento -->
-<script type="text/javascript" charset="utf-8">
-	// Consumir
-	function consumir() {
-		// Atributos
-		var qtdAgendamento = 0;
-		var qtdEstetica = 0;
-		var qtdVeterinario = 0;
-
-		// Requisição Agendamentos
-		$.getJSON({
-			url : 'adm/agendamento',
-			headers : {
-				'Authorization' : localStorage.getItem("tokenBigDog")
-			},
-			async : false,
-			type : 'GET',
-			success : function(agendamentos) {
-				// Atribuindo quantidade total
-				qtdAgendamento = agendamentos.length;
-
-				// Atribuindo valor por tipo de serviço
-				$.each(agendamentos, function(key, agendamento) {
-					if (agendamento.servico.tipoServico == 'Estetica') {
-						qtdEstetica++;
-					} else {
-						qtdVeterinario++;
-					}
-				});
-			},
-			error : function(e) {
-				console.log('ERROR : ' + e);
-			}
-		});
-
-		// Atribuindo valores de porcentagem
-		qtdEstetica = (qtdEstetica / qtdAgendamento);
-		qtdEstetica *= 100;
-		qtdVeterinario = (qtdVeterinario / qtdAgendamento);
-		qtdVeterinario *= 100;
-
-		// Gráfico
-		Highcharts.chart('container', {
-			chart : {
-				plotBackgroundColor : null,
-				plotBorderWidth : 0,
-				plotShadow : false
-			},
-			title : {
-				text : 'Tipo de serviço agendado',
-				align : 'center',
-			},
-			tooltip : {
-				pointFormat : '{series.name}: <b>{point.percentage:.2f}%</b>'
-			},
-			plotOptions : {
-				pie : {
-					dataLabels : {
-						enabled : true,
-						distance : -50,
-						style : {
-							fontWeight : 'bold',
-							color : 'white'
-						}
-					},
-					startAngle : -90,
-					endAngle : 90,
-					center : [ '50%', '75%' ]
-				}
-			},
-			series : [ {
-				type : 'pie',
-				name : 'Porcentagem',
-				innerSize : '60%',
-				data : [ [ 'Estética', qtdEstetica ],
-						[ 'Veterinário', qtdVeterinario ], {
-							name : 'Proprietary or Undetectable',
-							y : 0.2,
-							dataLabels : {
-								enabled : false
-							}
-						} ]
-			} ]
-		});
-	}
-</script>
 </head>
 <body>
 	<!--  import navbar -->
@@ -124,7 +37,7 @@
 	<div class="row">
 		<div class="col s12 m12 l12">
 			<!-- Tabs -->
-			<ul class="tabs">
+			<ul class="tabs tabs-fixed-width">
 				<!-- Dashboarb -->
 				<li class="tab col s4 m4 l4"
 					onclick="Materialize.fadeInImage('#swipe-dashboard')"><a
@@ -152,17 +65,166 @@
 		<div id="swipe-dashboard" class="col s12 m12 l12 center">
 			<!-- Botão para carregar gráficos -->
 			<div class="row">
-				<h5 align="center"></h5>
-
 				<a class="waves-effect btn cyan white-text truncate"
 					onclick="consumir()"><i class="material-icons left">trending_up</i>Abrir
-					Gráficos</a>
+					Dashboard </a>
 			</div>
 
-			<!-- divider -->
-			<div class="divider"></div>
+			<!-- Informações gerais e últimas atualizações (Compra, Agendamento, Cliente, Fornecedor, Serviço...) -->
+			<div id="info-dashboard" class="row">
+				<!-- Informações gerais -->
+				<div class="col s12 m5 l5">
+					<!-- Descrição -->
+					<h6 align="center">
+						<b>Informações Gerais</b>
+					</h6>
 
-			<!-- Caixa pra gráfico -->
+					<!-- divider -->
+					<div class="divider"></div>
+
+					<!-- Descrição e informação -->
+					<div class="row">
+						<!-- Descrição -->
+						<div class="col s9 m9 l9 left-align">
+							<!-- br -->
+							<br> <span>Cliente</span>
+
+							<!-- br -->
+							<br> <span>Pet</span>
+
+							<!-- br -->
+							<br> <span>Endereço de Cliente</span>
+
+							<!-- br -->
+							<br> <span>Fornecedor</span>
+
+							<!-- br -->
+							<br> <span>Endereço de Fornecedor</span>
+
+							<!-- br -->
+							<br> <span">Categoria</span>
+
+							<!-- br -->
+							<br> <span>Subcategoria</span>
+
+							<!-- br -->
+							<br> <span>Produto</span>
+
+							<!-- br -->
+							<br> <span>Compra</span>
+
+							<!-- br -->
+							<br> <span>Serviço</span>
+
+							<!-- br -->
+							<br> <span>Agendamento</span>
+						</div>
+
+						<!-- Informações -->
+						<div class="col s3 m3 l3 right-align">
+							<!-- br -->
+							<br> <span id="qtdCliente" class="grey-text text-darken-1"></span>
+
+							<!-- br -->
+							<br> <span id="qtdPet" class="grey-text text-darken-1"></span>
+
+							<!-- br -->
+							<br> <span id="qtdEnderecoCliente"
+								class="grey-text text-darken-1"></span>
+
+							<!-- br -->
+							<br> <span id="qtdFornecedor"
+								class="grey-text text-darken-1"></span>
+
+							<!-- br -->
+							<br> <span id="qtdEnderecoFornecedor"
+								class="grey-text text-darken-1"></span>
+
+							<!-- br -->
+							<br> <span id="qtdCategoria" class="grey-text text-darken-1"></span>
+
+							<!-- br -->
+							<br> <span id="qtdSubCategoria"
+								class="grey-text text-darken-1"></span>
+
+							<!-- br -->
+							<br> <span id="qtdProduto" class="grey-text text-darken-1"></span>
+
+							<!-- br -->
+							<br> <span id="qtdCompra" class="grey-text text-darken-1"></span>
+
+							<!-- br -->
+							<br> <span id="qtdServico" class="grey-text text-darken-1"></span>
+
+							<!-- br -->
+							<br> <span id="qtdAgendamento"
+								class="grey-text text-darken-1"></span>
+
+							<!-- br (Ultilzado para alinhamento da ultima quantidade) -->
+							<br>
+						</div>
+					</div>
+
+					<!-- divider -->
+					<div class="divider"></div>
+				</div>
+
+				<!-- Informações sobre últimas atualizações -->
+				<div class="col s12 m7 l7">
+					<!-- Descrição -->
+					<h6 align="center">
+						<b>Últimas atividades</b>
+					</h6>
+
+					<!-- divider -->
+					<div class="divider"></div>
+
+					<!-- Tabs -->
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<ul class="tabs tabs-fixed-width">
+								<!-- Últimos clientes cadastrados (20) -->
+								<li class="tab col s6 m6 l6"><a id="tab-ultimos-clientes"
+									class="active"
+									onclick="Materialize.fadeInImage('#ultimos-clientes')"
+									href="#ultimos-clientes">Clientes</a></li>
+
+								<!-- Últimas compras realizadas (20) -->
+								<li class="tab col s6 m6 l6"><a
+									onclick="Materialize.fadeInImage('#ultimas-compras')"
+									href="#ultimas-compras">Compras</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- Dados de últimas atualizações -->
+					<div class="row">
+						<!-- Últimos clientes -->
+						<div id="ultimos-clientes" class="col s12 m12 l12">
+							<!-- Lista de clientes -->
+							<div id="lista-ultimos-clientes" class="col s12 m12 l12">
+								<table id="table-ultimos-clientes" class="highlight">
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<!-- Últimas compras -->
+						<div id="ultimas-compras" class="col s12 m12 l12">
+							<!-- Lista de clientes -->
+							<div id="lista-ultimas-compras" class="col s12 m12 l12">
+								<table id="table-ultimas-compras" class="highlight">
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Gráfico para tipo de serviço -->
 			<div class="row">
 				<div id="container"
 					style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
@@ -311,13 +373,23 @@
 	<c:import url="component/footer.jsp" />
 
 	<!-- Script's dedicado -->
-	<!-- JS com AJAX dedicado -->
+	<!-- JS dedicado -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/administrador/index-administrador.js"
+		src="resources/dedicated/js/administrador/index/index-administrador.js"
+		charset="utf-8" defer></script>
+
+	<!-- JS para Dashboard -->
+	<script type="text/javascript"
+		src="resources/dedicated/js/administrador/dashboard/dashboard.js"
+		charset="utf-8" defer></script>
+
+	<!-- JS for fixed bug in tabs on Materialize -->
+	<script type="text/javascript"
+		src="resources/dedicated/js/administrador/index/index-tabs.js"
 		charset="utf-8" defer></script>
 
 	<!-- Scripts para gráficos -->
-	<script src="resources/highcharts/highcharts.js" defer></script>
-	<script src="resources/highcharts/exporting.js" defer></script>
+	<script src="resources/highcharts/highcharts.js" charset="utf-8" defer></script>
+	<script src="resources/highcharts/exporting.js" charset="utf-8" defer></script>
 </body>
 </html>

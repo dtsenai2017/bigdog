@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,20 +12,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.bigdog.dao.AgendamentoDAO;
 import br.com.bigdog.dao.ClienteDAO;
+import br.com.bigdog.dao.DadosGeraisDAO;
 import br.com.bigdog.dao.GenericDAO;
+import br.com.bigdog.model.DadosGerais;
 import br.com.bigdog.model.Servico;
 import br.com.bigdog.value.TipoServico;
 
 @RestController
 public class AdmController {
 	// Atributos
+	private DadosGeraisDAO dadosGeraisDAO;
 	private ClienteDAO clienteDAO;
 	private GenericDAO<Servico> servicoDAO;
 	private AgendamentoDAO agendamentoDAO;
 
 	// Construtor
 	@Autowired
-	public AdmController(ClienteDAO clienteDAO, GenericDAO<Servico> servicoDAO, AgendamentoDAO agendamentoDAO) {
+	public AdmController(DadosGeraisDAO dadosGeraisDAO, ClienteDAO clienteDAO, GenericDAO<Servico> servicoDAO,
+			AgendamentoDAO agendamentoDAO) {
+		this.dadosGeraisDAO = dadosGeraisDAO;
 		this.clienteDAO = clienteDAO;
 		this.servicoDAO = servicoDAO;
 		this.agendamentoDAO = agendamentoDAO;
@@ -32,13 +38,31 @@ public class AdmController {
 
 	// Requisições
 	// Ir para formulário de login do administrador
-	@RequestMapping(value = "admLogin")
-	public ModelAndView formLoginAdm(ModelAndView mav) {
-		// Atribuindo view
-		mav.setViewName("administrador/login-administrador");
+	@RequestMapping(value = "adm/dadosGerais", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public DadosGerais dadosGerais() {
+		// Atributo
+		DadosGerais dadosGerais = new DadosGerais();
 
-		// Retornando MaV
-		return mav;
+		// Atribuindo informações gerais
+		dadosGerais.setQtdCliente(dadosGeraisDAO.countCliente());
+		dadosGerais.setQtdPet(dadosGeraisDAO.countPet());
+		dadosGerais.setQtdEnderecoCliente(dadosGeraisDAO.countEnderecoCliente());
+		dadosGerais.setQtdFornecedor(dadosGeraisDAO.countFornecedor());
+		dadosGerais.setQtdEnderecoFornecedor(dadosGeraisDAO.countEnderecoFornecedor());
+		dadosGerais.setQtdCategoria(dadosGeraisDAO.countCategoria());
+		dadosGerais.setQtdSubCategoria(dadosGeraisDAO.countSubCategoria());
+		dadosGerais.setQtdProduto(dadosGeraisDAO.countProduto());
+		dadosGerais.setQtdCompra(dadosGeraisDAO.countCompra());
+		dadosGerais.setQtdServico(dadosGeraisDAO.countServico());
+		dadosGerais.setQtdAgendamento(dadosGeraisDAO.countAgendamento());
+
+		// Atribuindo informações de últimas atualizações(Últimos 10 cadastros
+		// de clientes e últimas 10 compras realizadas)
+		dadosGerais.setUltimosClientes(dadosGeraisDAO.ultimosClientes());
+		dadosGerais.setUltimasCompras(dadosGeraisDAO.ultimasCompras());
+
+		// Retornando...
+		return dadosGerais;
 	}
 
 	// Gerenciar Cliente

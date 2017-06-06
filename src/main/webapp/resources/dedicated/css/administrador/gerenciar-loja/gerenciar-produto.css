@@ -9,8 +9,8 @@
 	display: none;
 }
 
-/* Descrição de pesquisa de produto */
-#desc-search-produto {
+/* Descrição de busca de produto */
+#desc-nav-produto {
 	font-size: 11px;
 }
 
@@ -33,6 +33,11 @@
 	height: 90% !important;
 	max-width: 100% !important;
 	max-height: 90% !important;
+}
+
+/* Descrição de busca de categoria */
+#desc-nav-categoria {
+	font-size: 11px;
 }
 
 /* Modal para edição de categoria de produtos cadastrados */

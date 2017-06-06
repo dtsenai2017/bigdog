@@ -10,6 +10,11 @@ main {
 	flex: 1 0 auto;
 }
 
+/* Descrição de busca de agendamentos */
+#desc-nav-agendamento {
+	font-size: 11px;
+}
+
 /* Lista de agendamentos */
 #lista-agendamento li {
 	display: none;

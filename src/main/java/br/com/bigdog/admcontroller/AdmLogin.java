@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.auth0.jwt.JWTSigner;
 
@@ -27,6 +28,16 @@ public class AdmLogin {
 	}
 
 	// Requisições
+	// Ir para formulário de login do administrador
+	@RequestMapping(value = "admLogin")
+	public ModelAndView formLoginAdm(ModelAndView mav) {
+		// Atribuindo view
+		mav.setViewName("administrador/login-administrador");
+
+		// Retornando MaV
+		return mav;
+	}
+
 	// Verificar Login
 	@RequestMapping(value = "loginAdm", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<TokenADM> loginAdm(@RequestBody Administrador administrador) {

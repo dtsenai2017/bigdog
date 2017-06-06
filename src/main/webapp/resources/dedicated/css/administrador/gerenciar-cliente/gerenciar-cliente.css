@@ -10,6 +10,11 @@ main {
 	flex: 1 0 auto;
 }
 
+/* Descrição de busca de clientes */
+#desc-nav-cliente {
+	font-size: 11px;
+}
+
 /* Lista de clientes */
 #lista-clientes li {
 	display: none;

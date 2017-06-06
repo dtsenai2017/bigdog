@@ -177,21 +177,25 @@ $("#btn-agenda-hoje").click(
 								+ agendamento.cliente.nome
 								+ '">'
 								+ agendamento.cliente.nome
-								+ '<br><i class="material-icons right">'
-								+ 'more_vert</i></span><p class="'
+								+ '<br><i class="material-icons '
+								+ 'red-text text-lighten-1 '
+								+ 'right">'
+								+ 'keyboard_arrow_up</i></span>'
+								+ '<h6 class="'
 								+ 'white-text">'
-								+ '<b>HORÁRIO : </b>'
 								+ dataAgendada.getHours()
 								+ ':'
 								+ minutos
-								+ 'hrs.</p></div>'
+								+ 'hrs.</h6></div>'
 								+ '<div class="card-reveal brown lighten-1 '
 								+ 'white-text'
 								+ '">'
 								+ '<span class="card-title white-text">'
 								+ 'Informações'
-								+ '<i class="material-icons right">'
-								+ 'close'
+								+ '<i class="material-icons '
+								+ 'red-text text-lighten-2 '
+								+ 'right">'
+								+ 'keyboard_arrow_down'
 								+ '</i></span>'
 								+ '<div class="divider"></div>'
 								+ '<p><b>Nome do Pet </b>: '
@@ -212,13 +216,15 @@ $("#btn-agenda-hoje").click(
 								+ '<b>Observações </b>: '
 								+ agendamento.servico.observacao
 								+ '</p>'
-								+ '<div class="divider"></div>'
-								+ '<a href="#!" class="orange-text '
-								+ 'text-lighten-1 right"'
+								+ '<div class="divider"></div><br>'
+								+ '<a href="#!" class="red-text '
+								+ 'text-lighten-2 right"'
 								+ 'onclick="excluirAgendamento('
 								+ agendamento.idAgendamento
-								+ ')"><b>Excluir Agendamento</b></a>'
-								+ '</div></div>';
+								+ ')">'
+								+ '<i class="material-icons">'
+								+ 'delete</i>'
+								+ '</a>' + '</div></div>';
 
 						// Atribuindo card para lista
 						$('#lista-agendamentos-hoje').append(

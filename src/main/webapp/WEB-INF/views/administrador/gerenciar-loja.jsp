@@ -131,6 +131,13 @@
 							</form>
 						</div>
 						</nav>
+
+						<!-- Descrição de pesquisa -->
+						<p id="desc-nav-produto" class="grey-text">
+							Para listar todos os produtos, clique na barra de pesquisa, <b>apague
+								tudo</b> que estiver nela e <b>pressione somente uma vez</b> a tecla
+							de espaço.
+						</p>
 					</div>
 				</div>
 
@@ -364,6 +371,13 @@
 							</form>
 						</div>
 						</nav>
+
+						<!-- Descrição de pesquisa -->
+						<p id="desc-nav-fornecedor" class="grey-text">
+							Para listar todos os fornecedores, clique na barra de pesquisa, <b>apague
+								tudo</b> que estiver nela e <b>pressione somente uma vez</b> a tecla
+							de espaço.
+						</p>
 					</div>
 				</div>
 
@@ -575,6 +589,13 @@
 						</form>
 					</div>
 					</nav>
+
+					<!-- Descrição de pesquisa -->
+					<p id="desc-nav-compra" class="grey-text">
+						Para listar todas as compras, clique na barra de pesquisa, <b>apague
+							tudo</b> que estiver nela e <b>pressione somente uma vez</b> a tecla
+						de espaço.
+					</p>
 				</div>
 			</div>
 
@@ -1197,6 +1218,14 @@
 						</form>
 					</div>
 					</nav>
+
+					<!-- Descrição de pesquisa -->
+					<p id="desc-nav-categoria" class="grey-text">
+						Para listar todas as categorias, clique na barra de pesquisa, <b>apague
+							tudo</b> que estiver nela e <b>pressione somente uma vez</b> a tecla
+						de espaço, ou clique na <i class="material-icons blue-text">keyboard_arrow_down</i>
+						abaixo.
+					</p>
 				</div>
 			</div>
 			<!-- /.row -->

@@ -15,6 +15,45 @@ swipe-dashboard {
 	height: 1000px;
 }
 
+/* Informações gerais de dashboard */
+#info-dashboard {
+	display: none;
+}
+
+/* Caixa para informações dos últimos clientes */
+#ultimos-clientes {
+	display: none;
+}
+
+/* Caixa para lista de últimos clientes */
+#lista-ultimos-clientes {
+	height: auto;
+	max-height: 200px !important;
+	overflow-y: scroll;
+}
+
+/* Linha de conteúdo para cliente */
+#tr-ultimo-cliente {
+	font-size: 11px;
+}
+
+/* Caixa para informações das últimas compras */
+#ultimas-compras {
+	display: none;
+}
+
+/* Caixa para lista de últimas compras */
+#lista-ultimas-compras {
+	height: auto;
+	max-height: 200px !important;
+	overflow-y: scroll;
+}
+
+/* Linha de conteúdo para compra */
+#tr-ultima-compra {
+	font-size: 11px;
+}
+
 /* Swipe de gerenciamento */
 #swipe-gerenciar {
 	display: none;

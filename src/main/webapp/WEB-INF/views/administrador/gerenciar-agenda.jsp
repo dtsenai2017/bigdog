@@ -57,6 +57,13 @@
 			</form>
 		</div>
 		</nav>
+
+		<!-- Descrição de pesquisa -->
+		<p id="desc-nav-agendamento" class="grey-text">
+			Para listar todos os agendamentos, clique na barra de pesquisa, <b>apague
+				tudo</b> que estiver nela e <b>pressione somente uma vez</b> a tecla de
+			espaço.
+		</p>
 	</div>
 
 	<!-- Conteúdo main -->

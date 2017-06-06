@@ -5,6 +5,11 @@
 	display: none;
 }
 
+/* Descrição de busca de compras */
+#desc-nav-compra {
+	font-size: 11px;
+}
+
 /* Escondendo Linhas de lista de compras */
 #lista-compra li {
 	display: none;
