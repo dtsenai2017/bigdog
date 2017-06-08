@@ -16,7 +16,7 @@ import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.EnderecoFornecedor;
 
 @RestController
-@RequestMapping("adm/")
+@RequestMapping(value = "adm/")
 public class AdmEnderecoFornecedorController {
 	// Atributo
 	private GenericDAO<EnderecoFornecedor> enderecoFornecedorDAO;

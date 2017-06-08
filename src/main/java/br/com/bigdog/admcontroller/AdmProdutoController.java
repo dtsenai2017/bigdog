@@ -18,7 +18,7 @@ import br.com.bigdog.dao.ProdutoDAO;
 import br.com.bigdog.model.Produto;
 
 @RestController
-@RequestMapping("adm/")
+@RequestMapping(value = "adm/")
 public class AdmProdutoController {
 	// Atributos
 	private ProdutoDAO produtoDAO;

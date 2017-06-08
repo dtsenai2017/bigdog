@@ -58,7 +58,7 @@ $("#dropdown-gerenciar a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', 'gerenciarCliente', false);
+				xhr.open('GET', 'adm/gerenciarCliente', false);
 
 				// Atribuindo token
 				xhr.setRequestHeader("Authorization", localStorage
@@ -79,7 +79,7 @@ $("#dropdown-gerenciar a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', 'gerenciarLoja', false);
+				xhr.open('GET', 'adm/gerenciarLoja', false);
 
 				// Atribuindo token
 				xhr.setRequestHeader("Authorization", localStorage
@@ -100,7 +100,7 @@ $("#dropdown-gerenciar a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', 'gerenciarAgenda', false);
+				xhr.open('GET', 'adm/gerenciarAgenda', false);
 
 				// Atribuindo token
 				xhr.setRequestHeader("Authorization", localStorage
@@ -121,7 +121,7 @@ $("#dropdown-gerenciar a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', 'gerenciarServico', false);
+				xhr.open('GET', 'adm/gerenciarServico', false);
 
 				// Atribuindo token
 				xhr.setRequestHeader("Authorization", localStorage
@@ -152,7 +152,7 @@ $("#menu-mobile a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', 'gerenciarCliente', false);
+				xhr.open('GET', 'adm/gerenciarCliente', false);
 
 				// Atribuindo token
 				xhr.setRequestHeader("Authorization", localStorage
@@ -173,7 +173,7 @@ $("#menu-mobile a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', 'gerenciarLoja', false);
+				xhr.open('GET', 'adm/gerenciarLoja', false);
 
 				// Atribuindo token
 				xhr.setRequestHeader("Authorization", localStorage
@@ -194,7 +194,7 @@ $("#menu-mobile a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', 'gerenciarAgenda', false);
+				xhr.open('GET', 'adm/gerenciarAgenda', false);
 
 				// Atribuindo token
 				xhr.setRequestHeader("Authorization", localStorage
@@ -215,7 +215,7 @@ $("#menu-mobile a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', 'gerenciarServico', false);
+				xhr.open('GET', 'adm/gerenciarServico', false);
 
 				// Atribuindo tokenç
 				xhr.setRequestHeader("Authorization", localStorage
@@ -233,14 +233,3 @@ $("#menu-mobile a").click(
 				xhr.send();
 			}
 		});
-
-// Recarregando...
-// var xhr = new XMLHttpRequest();
-// xhr.open('GET', "gerenciarServico", false);
-// xhr.setRequestHeader("Authorization", localStorage.getItem("tokenBigDog"));
-// xhr.onreadystatechange = function() {
-// if (xhr.readyState == 4) {
-// $(document.body).html(xhr.response);
-// }
-// };
-// xhr.send();

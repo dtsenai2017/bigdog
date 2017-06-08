@@ -23,7 +23,7 @@ import br.com.bigdog.model.Categoria;
 import br.com.bigdog.model.SubCategoria;
 
 @RestController
-@RequestMapping("adm/")
+@RequestMapping(value = "adm/")
 public class AdmCategoriaController {
 	// Atributos
 	private CategoriaDAO categoriaDAO;

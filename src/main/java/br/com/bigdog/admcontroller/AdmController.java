@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.bigdog.dao.AgendamentoDAO;
 import br.com.bigdog.dao.ClienteDAO;
+import br.com.bigdog.dao.DAOJdbc;
 import br.com.bigdog.dao.DadosGeraisDAO;
 import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.model.DadosGerais;
@@ -19,26 +20,29 @@ import br.com.bigdog.model.Servico;
 import br.com.bigdog.value.TipoServico;
 
 @RestController
+@RequestMapping(value = "adm/")
 public class AdmController {
 	// Atributos
 	private DadosGeraisDAO dadosGeraisDAO;
 	private ClienteDAO clienteDAO;
 	private GenericDAO<Servico> servicoDAO;
 	private AgendamentoDAO agendamentoDAO;
+	private DAOJdbc daoJDBC;
 
 	// Construtor
 	@Autowired
 	public AdmController(DadosGeraisDAO dadosGeraisDAO, ClienteDAO clienteDAO, GenericDAO<Servico> servicoDAO,
-			AgendamentoDAO agendamentoDAO) {
+			AgendamentoDAO agendamentoDAO, DAOJdbc daoJDBC) {
 		this.dadosGeraisDAO = dadosGeraisDAO;
 		this.clienteDAO = clienteDAO;
 		this.servicoDAO = servicoDAO;
 		this.agendamentoDAO = agendamentoDAO;
+		this.daoJDBC = daoJDBC;
 	}
 
 	// Requisições
 	// Ir para formulário de login do administrador
-	@RequestMapping(value = "adm/dadosGerais", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "dadosGerais", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public DadosGerais dadosGerais() {
 		// Atributo
 		DadosGerais dadosGerais = new DadosGerais();
@@ -55,6 +59,7 @@ public class AdmController {
 		dadosGerais.setQtdCompra(dadosGeraisDAO.countCompra());
 		dadosGerais.setQtdServico(dadosGeraisDAO.countServico());
 		dadosGerais.setQtdAgendamento(dadosGeraisDAO.countAgendamento());
+		dadosGerais.setMesCompra(daoJDBC.mesCompra());
 
 		// Atribuindo informações de últimas atualizações(Últimos 10 cadastros
 		// de clientes e últimas 10 compras realizadas)

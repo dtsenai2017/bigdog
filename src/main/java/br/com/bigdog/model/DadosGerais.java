@@ -1,5 +1,6 @@
 package br.com.bigdog.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class DadosGerais {
 	private Long qtdAgendamento;
 	private List<Cliente> ultimosClientes;
 	private List<Compra> ultimasCompras;
+	private Integer[] mesCompra;
 
 	// Getters e Setters
 	public Long getQtdCliente() {
@@ -130,6 +132,14 @@ public class DadosGerais {
 		this.ultimasCompras = ultimasCompras;
 	}
 
+	public Integer[] getMesCompra() {
+		return mesCompra;
+	}
+
+	public void setMesCompra(Integer[] mesCompra) {
+		this.mesCompra = mesCompra;
+	}
+
 	@Override
 	public String toString() {
 		return "DadosGerais [qtdCliente=" + qtdCliente + ", qtdPet=" + qtdPet + ", qtdEnderecoCliente="
@@ -137,6 +147,6 @@ public class DadosGerais {
 				+ qtdEnderecoFornecedor + ", qtdCategoria=" + qtdCategoria + ", qtdSubCategoria=" + qtdSubCategoria
 				+ ", qtdProduto=" + qtdProduto + ", qtdCompra=" + qtdCompra + ", qtdServico=" + qtdServico
 				+ ", qtdAgendamento=" + qtdAgendamento + ", ultimosClientes=" + ultimosClientes + ", ultimasCompras="
-				+ ultimasCompras + "]";
+				+ ultimasCompras + ", mesCompra=" + Arrays.toString(mesCompra) + "]";
 	}
 }

@@ -11,6 +11,9 @@ function consumir() {
 	$('#table-ultimos-clientes tbody').html('');
 	$('#table-ultimas-compras tbody').html('');
 
+	// Atributo para gráfico de compras efetuadas
+	var mesCompra = null;
+
 	// Requisição de dados gerais
 	$
 			.getJSON({
@@ -18,6 +21,7 @@ function consumir() {
 				headers : {
 					'Authorization' : localStorage.getItem("tokenBigDog")
 				},
+				async : false,
 				type : 'GET',
 				success : function(dadosGerais) {
 					// Atribuindo informações gerais
@@ -150,6 +154,12 @@ function consumir() {
 										+ compra.valor.toFixed(2)
 										+ '</b>.</span></td></tr>');
 					});
+
+					// Atribuindo valor para atributo de compras efetuadas nos
+					// seguintes meses
+					mesCompra = dadosGerais.mesCompra;
+
+					console.log(dadosGerais.mesCompra);
 				},
 				error : function(e) {
 					console.log('ERROR : ' + e);
@@ -195,14 +205,14 @@ function consumir() {
 	qtdVeterinario *= 100;
 
 	// Gráfico
-	Highcharts.chart('container', {
+	Highcharts.chart('grafico-tipo-servico', {
 		chart : {
 			plotBackgroundColor : null,
 			plotBorderWidth : 0,
 			plotShadow : false
 		},
 		title : {
-			text : 'Tipo de serviço agendado',
+			text : 'Tipo de serviços agendados (total)',
 			align : 'center',
 		},
 		tooltip : {
@@ -235,6 +245,73 @@ function consumir() {
 							enabled : false
 						}
 					} ]
+		} ]
+	});
+
+	// Atributos para gráfico de compras
+	var data = new Date();
+
+	// Atribuindo valores para meses null
+	for (i = 0; i < mesCompra.length; i++) {
+		// Atribui valor 0 para representar em gráfico, caso for null
+		if (mesCompra[i] == null) {
+			// Atribuindo valores para TESTE
+			// --------------------------------------------------
+			mesCompra[i] = Math.floor((Math.random() * 25) + 1);
+		}
+	}
+
+	// Gráficos para compras no mes no ano...
+	Highcharts.chart('grafico-compras-mes', {
+		chart : {
+			type : 'column'
+		},
+		title : {
+			text : 'Compras realizadas em <b>' + data.getFullYear() + '</b>'
+		},
+		xAxis : {
+			type : 'category',
+			labels : {
+				rotation : -45,
+				style : {
+					fontSize : '13px',
+					fontFamily : 'Verdana, sans-serif'
+				}
+			}
+		},
+		yAxis : {
+			min : 0,
+			title : {
+				text : 'Vendas (quantidade)'
+			}
+		},
+		legend : {
+			enabled : false
+		},
+		tooltip : {
+			pointFormat : 'Vendas realizadas : <b>{point.y}</b>'
+		},
+		series : [ {
+			name : 'Vendas',
+			data : [ [ 'Janeiro', mesCompra[0] ],
+					[ 'Fevereiro', mesCompra[1] ], [ 'Março', mesCompra[2] ],
+					[ 'Abril', mesCompra[3] ], [ 'Maio', mesCompra[4] ],
+					[ 'Junho', mesCompra[5] ], [ 'Julho', mesCompra[6] ],
+					[ 'Agosto', mesCompra[7] ], [ 'Setembro', mesCompra[8] ],
+					[ 'Outubro', mesCompra[9] ], [ 'Novembro', mesCompra[10] ],
+					[ 'Dezembro', mesCompra[11] ] ],
+			dataLabels : {
+				enabled : false,
+				rotation : -90,
+				color : '#FFFFFF',
+				align : 'right',
+				format : '{point.y}', // one decimal
+				y : 10, // 10 pixels down from the top
+				style : {
+					fontSize : '13px',
+					fontFamily : 'Verdana, sans-serif'
+				}
+			}
 		} ]
 	});
 }

@@ -29,7 +29,7 @@ public class AdmLogin {
 
 	// Requisições
 	// Ir para formulário de login do administrador
-	@RequestMapping(value = "admLogin")
+	@RequestMapping(value = "adm/admLogin")
 	public ModelAndView formLoginAdm(ModelAndView mav) {
 		// Atribuindo view
 		mav.setViewName("administrador/login-administrador");
@@ -39,7 +39,7 @@ public class AdmLogin {
 	}
 
 	// Verificar Login
-	@RequestMapping(value = "loginAdm", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "adm/loginAdm", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<TokenADM> loginAdm(@RequestBody Administrador administrador) {
 		System.out.println(administrador.toString());
 

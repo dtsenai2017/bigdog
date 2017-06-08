@@ -7,7 +7,10 @@
 <head>
 <!-- Ícone da aba -->
 <link rel="shortcut icon" type="image/x-icon"
-	href="resources/dedicated/img/administrador/adm-icon.ico">
+	href="<c:url value="/resources/dedicated/img/administrador/adm-icon.ico"/>">
+
+<!-- Título -->
+<title>Administrador | Login</title>
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,21 +21,20 @@
 
 <!-- CSS dedicated -->
 <link rel="stylesheet"
-	href="resources/dedicated/css/administrador/login-administrador.css">
+	href="<c:url value="/resources/dedicated/css/administrador/login-administrador.css"/>">
 
 <!-- Materialize CSS min. -->
-<link rel="stylesheet" href="resources/materialize/css/materialize.css">
+<link rel="stylesheet"
+	href="<c:url value="/resources/materialize/css/materialize.css"/>">
 
 <!-- Import's JS -->
 <!-- JQuery -->
-<script src="resources/jquery/jquery-3.2.1.js" defer></script>
+<script src="<c:url value="/resources/jquery/jquery-3.2.1.js"/>" defer></script>
 
 <!-- Materialize min. -->
 <script type="text/javascript"
-	src="resources/materialize/js/materialize.min.js" defer></script>
-
-<!-- Título -->
-<title>Administrador | Login</title>
+	src="<c:url value="/resources/materialize/js/materialize.min.js"/>"
+	defer></script>
 </head>
 <body>
 	<!-- Container de login -->
@@ -102,7 +104,8 @@
 
 	<!-- JS dedicado para login -->
 	<script type="text/javascript"
-		src="resources/dedicated/js/administrador/login-administrador.js"
+		src="<c:url
+		value="/resources/dedicated/js/administrador/login-administrador.js" />"
 		charset="utf-8" defer></script>
 </body>
 </html>

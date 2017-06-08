@@ -10,7 +10,7 @@ $("#swipe-gerenciar a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', "gerenciarCliente", false);
+				xhr.open('GET', "adm/gerenciarCliente", false);
 
 				// Atribuindo toke
 				xhr.setRequestHeader("Authorization", localStorage
@@ -30,7 +30,7 @@ $("#swipe-gerenciar a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', "gerenciarLoja", false);
+				xhr.open('GET', "adm/gerenciarLoja", false);
 
 				// Atribuindo toke
 				xhr.setRequestHeader("Authorization", localStorage
@@ -50,7 +50,7 @@ $("#swipe-gerenciar a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', "gerenciarAgenda", false);
+				xhr.open('GET', "adm/gerenciarAgenda", false);
 
 				// Atribuindo token
 				xhr.setRequestHeader("Authorization", localStorage
@@ -70,7 +70,7 @@ $("#swipe-gerenciar a").click(
 				var xhr = new XMLHttpRequest();
 
 				// Tipo, url e async
-				xhr.open('GET', "gerenciarServico", false);
+				xhr.open('GET', "adm/gerenciarServico", false);
 
 				// Atribuindo token
 				xhr.setRequestHeader("Authorization", localStorage

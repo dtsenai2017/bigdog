@@ -1054,78 +1054,84 @@ $( "#form-alterar-produto" ).submit(function( event ) {
 	// Cancela qualquer ação padrão do elemento
 	event.preventDefault();
 	
-	// Atributos
-	var dataInput = $('#dataVigencia-p-selecionado').val();
-	var dataVigencia = dataInput.split("/").reverse().join("-");
-	var subCategoria = {
-			idSubCategoria : $('#idSubcategoria-p-selecionado').val()
-	}
-	
-	// Verifica edição está habilitada
-	if(!$('#checkbox-alterar-produto').prop('checked')){
-		// Mensagem toast
-		Materialize.toast('Habilite alteração!', 2000);
-		return;
-	}
-	
-	// Objeto que receberá dados de alteração
-	var produto = {
-		 idProduto : $('#idProduto-selecionado').val(),
-		 nome : $('#nome-p-selecionado').val(),
-		 descricao : $('#descricao-p-selecionado').val(),
-		 qtdEstoque : $('#qtdEstoque-p-selecionado').val(),
-		 valor : $('#valor-p-selecionado').val(),
-		 marca : $('#marca-p-selecionado').val(),
-		 cor : $('#cor-p-selecionado').val(),
-		 tamanho : $('#tamanho-p-selecionado').val(),
-		 quantidade : $('#quantidade-p-selecionado').val(),
-		 dataVigencia : dataVigencia,
-		 foto : null,
-		 categoria : {
-			 idCategoria : $('#idCategoria-p-selecionado').val()
-		 },
-		 subCategoria : 
-				subCategoria.idSubCategoria == '' ?
-						null :
-							subCategoria,
-		 fornecedor : {
-			 idFornecedor : $('#idFornecedor-p-selecionado').val()
-		 }
-	 }
-	 
-	// Cadastrando produto
-	$.ajax({
-		url : "adm/produto/"+ produto.idProduto,
-		headers : {
-			'Authorization' : localStorage
-					.getItem("tokenBigDog")
-		},
-		type : "PUT",
-		data : JSON.stringify(produto),
-		contentType : "application/json; charset=utf-8",
-		success : function(s) {
-			// Mensagem para toast
-			mensagem = 'Produto alterado com sucesso!';
-			
-			// Fechando modal
-			$('#modal-editar-produto').modal('close');
-			
-			// Abrir modal de produto (Refresh)
-			abrirModalProduto(produto.idProduto);
-			
-			// Recarregando lista de produtos na aba 'principal'
-			abrirPrincipalProduto();
-		},
-		error : function(e) {
-			// Mensagem para toast
-			mensagem = 'Ops, houve um problema!';
-			console.log('ERROR : ' + e);
-		},
-		complete : function() {
-			// Toast
-			Materialize.toast(mensagem, 2800);
+	// Verifica data
+	if(verificarData($('#dataVigencia-p-selecionado'))){
+		// Atributos
+		var dataInput = $('#dataVigencia-p-selecionado').val();
+		var dataVigencia = dataInput.split("/").reverse().join("-");
+		var subCategoria = {
+				idSubCategoria : $('#idSubcategoria-p-selecionado').val()
 		}
-	});
+		
+		// Verifica edição está habilitada
+		if(!$('#checkbox-alterar-produto').prop('checked')){
+			// Mensagem toast
+			Materialize.toast('Habilite alteração!', 2000);
+			return;
+		}
+		
+		// Objeto que receberá dados de alteração
+		var produto = {
+			 idProduto : $('#idProduto-selecionado').val(),
+			 nome : $('#nome-p-selecionado').val(),
+			 descricao : $('#descricao-p-selecionado').val(),
+			 qtdEstoque : $('#qtdEstoque-p-selecionado').val(),
+			 valor : $('#valor-p-selecionado').val(),
+			 marca : $('#marca-p-selecionado').val(),
+			 cor : $('#cor-p-selecionado').val(),
+			 tamanho : $('#tamanho-p-selecionado').val(),
+			 quantidade : $('#quantidade-p-selecionado').val(),
+			 dataVigencia : dataVigencia,
+			 foto : null,
+			 categoria : {
+				 idCategoria : $('#idCategoria-p-selecionado').val()
+			 },
+			 subCategoria : 
+					subCategoria.idSubCategoria == '' ?
+							null :
+								subCategoria,
+			 fornecedor : {
+				 idFornecedor : $('#idFornecedor-p-selecionado').val()
+			 }
+		 }
+		 
+		// Cadastrando produto
+		$.ajax({
+			url : "adm/produto/"+ produto.idProduto,
+			headers : {
+				'Authorization' : localStorage
+						.getItem("tokenBigDog")
+			},
+			type : "PUT",
+			data : JSON.stringify(produto),
+			contentType : "application/json; charset=utf-8",
+			success : function(s) {
+				// Mensagem para toast
+				mensagem = 'Produto alterado com sucesso!';
+				
+				// Fechando modal
+				$('#modal-editar-produto').modal('close');
+				
+				// Abrir modal de produto (Refresh)
+				abrirModalProduto(produto.idProduto);
+				
+				// Recarregando lista de produtos na aba 'principal'
+				abrirPrincipalProduto();
+			},
+			error : function(e) {
+				// Mensagem para toast
+				mensagem = 'Ops, houve um problema!';
+				console.log('ERROR : ' + e);
+			},
+			complete : function() {
+				// Toast
+				Materialize.toast(mensagem, 2800);
+			}
+		});
+	} else {
+		// Toast
+		Materialize.toast('Informe a data de vigência!', 2400);
+	}
 });
 
 // Verifica se imagem foi selecionada
@@ -1279,79 +1285,84 @@ function abrirFormProduto() {
 $("#form-produto").submit(function(e) {
 	// Cancela qualquer ação padrão do elemento
 	e.preventDefault();
-
-	// Atributos para leitura de file
-	var file = $('#foto')[0].files[0];
-	var reader = new FileReader();
-	var dataInput = $('#dataVigencia').val();
-	var dataVigencia = dataInput.split("/").reverse().join("-");
-	var subCategoria = {
-		idSubCategoria : $('#select-subcategoria').val()
-	}
 	
-	// Atributo que será inserido
-	var produto = {
-		nome : $('#nome').val(),
-		descricao : $('#descricao').val(),
-		qtdEstoque : $('#qtdEstoque').val(),
-		valor : $('#valor').val(),
-		marca : $('#marca').val(),
-		tamanho : $('#tamanho').val(),
-		cor : $('#cor').val(),
-		foto,
-		quantidade : $('#quantidade').val(),
-		dataVigencia : dataVigencia,
-		categoria : {
-			idCategoria : $('#select-categoria').val()
-		},
-		subCategoria : 
-			subCategoria.idSubCategoria == '' ?
-					null :
-						subCategoria,
-		fornecedor : {
-			idFornecedor : $('#select-fornecedor').val()
+	// Verifica data
+	if(verificarData($('#dataVigencia'))){
+		// Atributos para leitura de file
+		var file = $('#foto')[0].files[0];
+		var reader = new FileReader();
+		var dataInput = $('#dataVigencia').val();
+		var dataVigencia = dataInput.split("/").reverse().join("-");
+		var subCategoria = {
+			idSubCategoria : $('#select-subcategoria').val()
 		}
-	}
-
-	// Retornando valor de conversão e fazendo requisição
-	reader.onload = function(e) {
-		// Atributo para foto em BLOB (byteArray[])
-		var fotoByte = btoa(e.target.result);
-
-		// Atribuindo valor de foto para produto
-		produto.foto = fotoByte;
 		
-		// Cadastrando produto
-		$.ajax({
-			url : "adm/produto",
-			headers : {
-				'Authorization' : localStorage
-						.getItem("tokenBigDog")
+		// Atributo que será inserido
+		var produto = {
+			nome : $('#nome').val(),
+			descricao : $('#descricao').val(),
+			qtdEstoque : $('#qtdEstoque').val(),
+			valor : $('#valor').val(),
+			marca : $('#marca').val(),
+			tamanho : $('#tamanho').val(),
+			cor : $('#cor').val(),
+			foto,
+			quantidade : $('#quantidade').val(),
+			dataVigencia : dataVigencia,
+			categoria : {
+				idCategoria : $('#select-categoria').val()
 			},
-			type : "POST",
-			data : JSON.stringify(produto),
-			contentType : "application/json; charset=utf-8",
-			success : function(s) {
-				// Mensagem para toast
-				mensagem = 'Produto inserido com sucesso!';
-						
-				// Refresh no formulário
-				abrirFormProduto();
-			},
-		 	error : function(e) {
-		 		// Mensagem para toast
-		 		mensagem = 'Ops, houve um problema!';
-		 		console.log(e);
-		 },
-		 	complete : function() {
-		 		// Toast
-		 		Materialize.toast(mensagem, 2800);
-		 }
-		});
+			subCategoria : 
+				subCategoria.idSubCategoria == '' ?
+						null :
+							subCategoria,
+			fornecedor : {
+				idFornecedor : $('#select-fornecedor').val()
+			}
+		}
+	
+		// Retornando valor de conversão e fazendo requisição
+		reader.onload = function(e) {
+			// Atributo para foto em BLOB (byteArray[])
+			var fotoByte = btoa(e.target.result);
+	
+			// Atribuindo valor de foto para produto
+			produto.foto = fotoByte;
+			
+			// Cadastrando produto
+			$.ajax({
+				url : "adm/produto",
+				headers : {
+					'Authorization' : localStorage
+							.getItem("tokenBigDog")
+				},
+				type : "POST",
+				data : JSON.stringify(produto),
+				contentType : "application/json; charset=utf-8",
+				success : function(s) {
+					// Mensagem para toast
+					mensagem = 'Produto inserido com sucesso!';
+							
+					// Refresh no formulário
+					abrirFormProduto();
+				},
+			 	error : function(e) {
+			 		// Mensagem para toast
+			 		mensagem = 'Ops, houve um problema!';
+			 		console.log("ERROR : " + e);
+			 	},
+			 	complete : function() {
+			 		// Toast
+			 		Materialize.toast(mensagem, 2800);
+			 	}
+			});
+		}
+		// Conversão de file para blob
+		reader.readAsDataURL(file);
+	} else {
+		// Toast
+		Materialize.toast('Informe a data de vigência!', 2400);
 	}
-		
-	// Conversão de file para blob
-	reader.readAsDataURL(file);
 });
 
 // Excluir Produto

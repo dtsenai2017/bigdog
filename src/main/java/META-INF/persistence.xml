@@ -3,14 +3,16 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
 
+	<!-- Persistência -->
 	<persistence-unit name="bigdog" transaction-type="RESOURCE_LOCAL">
 		<!-- Implementação de JPA que será utilizada -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+		<!-- Propriedades hibernate -->
 		<properties>
 			<!-- propriedades do Hibernate -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
-			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.enable_lazy_load_no_trans" value="true" />

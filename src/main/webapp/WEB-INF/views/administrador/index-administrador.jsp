@@ -26,7 +26,7 @@
 		<!-- Section -->
 		<div class="section">
 			<!-- Título -->
-			<h4 class="center-align">Área do Administrador</h4>
+			<h4 class="center-align">Administrador</h4>
 
 			<!-- Divider -->
 			<div class="divider"></div>
@@ -164,9 +164,6 @@
 							<br>
 						</div>
 					</div>
-
-					<!-- divider -->
-					<div class="divider"></div>
 				</div>
 
 				<!-- Informações sobre últimas atualizações -->
@@ -226,8 +223,20 @@
 
 			<!-- Gráfico para tipo de serviço -->
 			<div class="row">
-				<div id="container"
-					style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				<!-- divider -->
+				<div class="divider"></div>
+
+				<!-- Tipo de serviços agendados -->
+				<div class="col s12 m6 l6">
+					<div id="grafico-compras-mes"
+						style="min-width: 90%; height: 420px; max-width: 100%; margin: 0 auto"></div>
+				</div>
+
+				<!-- Compras efetuadas nos meses -->
+				<div class="col s12 m6 l6">
+					<div id="grafico-tipo-servico"
+						style="min-width: 90%; height: 420px; max-width: 100%; margin: 0 auto"></div>
+				</div>
 			</div>
 		</div>
 		<!-- /.swipe-dashboard -->

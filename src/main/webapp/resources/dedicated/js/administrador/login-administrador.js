@@ -12,7 +12,7 @@ $("#form-login-adm").submit(
 
 			// Requisição
 			$.ajax({
-				url : "loginAdm",
+				url : "adm/loginAdm",
 				type : "POST",
 				data : JSON.stringify(administrador),
 				async : false,
