@@ -10,9 +10,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.bigdog.model.Servico;
+import br.com.bigdog.value.StatusServico;
 
 @Repository
-public class ServicoDAO implements GenericDAO<Servico> {
+public class ServicoDAO {
 	// Gerenciador de Entidades
 	@PersistenceContext
 	private EntityManager manager;
@@ -26,12 +27,36 @@ public class ServicoDAO implements GenericDAO<Servico> {
 	// Listar
 	public List<Servico> listar() {
 		TypedQuery<Servico> query = manager.createQuery("SELECT s FROM Servico s", Servico.class);
-		return query.getResultList();
+
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Listar (id)
 	public Servico listar(Long id) {
-		return manager.find(Servico.class, id);
+		try {
+			return manager.find(Servico.class, id);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	// Listar serviços por status
+	public List<Servico> listarAtivos(StatusServico status) {
+		TypedQuery<Servico> query = manager.createQuery("SELECT s FROM Servico s WHERE s.status = :status",
+				Servico.class);
+
+		// Atribuindo parâmetro
+		query.setParameter("status", status);
+
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Alterar

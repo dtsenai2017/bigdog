@@ -6,56 +6,89 @@ $("#btn-agenda").click(function() {
 	$('#main-servico').hide();
 });
 
+// Recarregar página
+function recarregarAgendamentos() {
+	// Requisição
+	var xhr = new XMLHttpRequest();
+
+	// Tipo, url e async
+	xhr.open('GET', "adm/gerenciarAgenda", false);
+
+	// Atribuindo token
+	xhr.setRequestHeader("Authorization", localStorage.getItem("tokenBigDog"));
+
+	// Response
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			// Replace html and refresh
+			$(document.body).html(xhr.response);
+		}
+	};
+
+	// Request send()
+	xhr.send();
+}
+
 // Abrir modal com dados de agendamento
 function abrirModalAgendamento(idAgendamento) {
 	// Listando agendamento selecionado
-	$.getJSON({
-		url : "adm/agendamento/" + idAgendamento,
-		type : "GET",
-		success : function(agendamento) {
-			// Atribui 0 para minutos
-			function addZero(i) {
-				if (i < 10) {
-					i = "0" + i;
+	$
+			.getJSON({
+				url : "adm/agendamento/" + idAgendamento,
+				type : "GET",
+				success : function(agendamento) {
+					// Atribui 0 para tempo
+					function addZero(i) {
+						if (i < 10) {
+							i = "0" + i;
+						}
+						return i;
+					}
+
+					// Atributos
+					var dataAgendada = new Date(agendamento.dataAgendada);
+					var tempoEstimado = agendamento.servico.tempoEstimado
+							.split(':');
+					var minutos = addZero(dataAgendada.getMinutes());
+
+					// Atribuindo valores para campos
+					$('#idAgendamento-selecionado').val(
+							agendamento.idAgendamento);
+					$('#agendamento-cliente-nome').text(
+							agendamento.cliente.nome);
+					$('#agendamento-cliente-cpf').text(agendamento.cliente.cpf);
+					$('#agendamento-cliente-telefone').text(
+							agendamento.cliente.contato.telefone != null) ? agendamento.cliente.contato.telefone
+							: '-';
+					$('#agendamento-cliente-celular').text(
+							agendamento.cliente.contato.celular);
+					$('#agendamento-cliente-email')
+							.text(
+									agendamento.cliente.contato.email != null ? agendamento.cliente.contato.email
+											: '-');
+					$('#agendamento-pet-nome').text(agendamento.pet.nome);
+					$('#agendamento-pet-sexo').text(agendamento.pet.sexo);
+					$('#agendamento-dataAgendada').text(
+							$.datepicker.formatDate('dd/mm/yy', dataAgendada));
+					$('#agendamento-horarioAgendado').text(
+							dataAgendada.getHours() + ":" + minutos + "hrs.");
+					$('#agendamento-servico-status').text(
+							agendamento.servico.status);
+					$('#agendamento-servico-nome').text(
+							agendamento.servico.nome);
+					$('#agendamento-servico-tipoServico').text(
+							agendamento.servico.tipoServico);
+					$('#agendamento-servico-tempoEstimado').text(
+							tempoEstimado[0] + ":" + tempoEstimado[1] + "hrs.");
+					$('#agendamento-servico-valor').text(
+							'R$ ' + agendamento.servico.valor.toFixed(2));
+					$('#agendamento-servico-observacoes').text(
+							agendamento.servico.observacao);
+				},
+				error : function(e) {
+					console.log("ERROR: ", e);
 				}
-				return i;
-			}
-
-			// Atributos
-			var dataAgendada = new Date(agendamento.dataAgendada);
-			var tempoEstimado = agendamento.servico.tempoEstimado.split(':');
-			var minutos = addZero(dataAgendada.getMinutes());
-
-			// Atribuindo valores para campos
-			$('#idAgendamento-selecionado').val(agendamento.idAgendamento);
-			$('#agendamento-cliente-nome').text(agendamento.cliente.nome);
-			$('#agendamento-cliente-cpf').text(agendamento.cliente.cpf);
-			$('#agendamento-cliente-telefone').text(
-					agendamento.cliente.contato.telefone);
-			$('#agendamento-cliente-celular').text(
-					agendamento.cliente.contato.celular);
-			$('#agendamento-cliente-email').text(
-					agendamento.cliente.contato.email);
-			$('#agendamento-pet-nome').text(agendamento.pet.nome);
-			$('#agendamento-pet-sexo').text(agendamento.pet.sexo);
-			$('#agendamento-dataAgendada').text(
-					$.datepicker.formatDate('dd/mm/yy', dataAgendada));
-			$('#agendamento-horarioAgendado').text(
-					dataAgendada.getHours() + ":" + minutos + "hrs.");
-			$('#agendamento-servico-nome').text(agendamento.servico.nome);
-			$('#agendamento-servico-tipoServico').text(
-					agendamento.servico.tipoServico);
-			$('#agendamento-servico-tempoEstimado').text(
-					tempoEstimado[0] + ":" + tempoEstimado[1] + "hrs.");
-			$('#agendamento-servico-valor').text(
-					'R$ ' + agendamento.servico.valor.toFixed(2));
-			$('#agendamento-servico-observacoes').text(
-					agendamento.servico.observacao);
-		},
-		error : function(e) {
-			console.log("ERROR: ", e);
-		}
-	});
+			});
 }
 
 // Excluir agendamento
@@ -83,7 +116,7 @@ $('#btn-excluir-agendamento').click(function() {
 						url : "adm/agendamento/" + idAgendamento,
 						success : function(s) {
 							// Reload
-							location.reload()
+							recarregarAgendamentos();
 						},
 						error : function(e) {
 							// Toast

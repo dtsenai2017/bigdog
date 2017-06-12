@@ -66,7 +66,8 @@
 				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
 				<li class="id"><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png"><p id="lip"> Meus Pets</p></a></li>
+						src="resources/loja/imagens/icones/icon-09.png">
+						<p id="lip">Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li><a href="listAgendamentos"><i class="fa fa-calendar"
@@ -135,7 +136,7 @@
 			<div class="row roww">
 				<div class="input-field col s6">
 					<input id="p01" name="raca" value="${alterarPet.raca}" type="text">
-					<label class="active" for="p01">Raça </label>
+					<label class="active" for="p01">Raça *</label>
 				</div>
 			</div>
 
@@ -143,23 +144,23 @@
 				<div class="input-field col s6">
 					<input id="p02"
 						value='<fmt:formatDate value="${alterarPet.dataNascimento }" pattern="dd/MM/yyyy"/>'
-						name="dataNascimento" required="required" type="text"
-						class="dataN"> <label class="active" for="p02">Data
-						de Nascimento</label>
+						name="dataNascimento" type="text" class="dataN"> <label
+						class="active" for="p02">Data de Nascimento *</label>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s6">
 					<input value="${alterarPet.pedigree }" name="pedigree" id="p03"
-						type="text"> <label class="active" for="p03">Pedigree</label>
+						type="text"> <label class="active" for="p03">Pedigree
+						*</label>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s6">
 					<input value="${alterarPet.rga }" name="rga" id="p04" type="text"
-						class=""> <label class="active" for="p04">RGA</label>
+						class=""> <label class="active" for="p04">RGA *</label>
 				</div>
 			</div>
 
@@ -167,7 +168,7 @@
 				<div class="input-field col s6">
 					<input value="${alterarPet.carteiraVacina }" name="carteiraVacina"
 						id="p05" type="text" class=""> <label class="active"
-						for="p05">Carteirinha</label>
+						for="p05">Carteira de Vacina *</label>
 				</div>
 			</div>
 
@@ -176,20 +177,22 @@
 					<div class="input-field col s12">
 						<textarea name="observacoes" id="textarea1"
 							class="materialize-textarea">${alterarPet.observacoes }</textarea>
-						<label for="textarea1">Observação</label>
+						<label for="textarea1">Observação *</label>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
 					<input value="${alterarPet.peso }" name="peso" id="p06" type="text"
-						class="peso"> <label class="active" for="p06">Peso</label>
+						class="peso"> <label class="active" for="p06">Peso
+						*</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
 					<input value="${alterarPet.pelagem }" name="pelagem" id="p07"
-						type="text" class=""> <label class="active" for="p07">Pelagem</label>
+						type="text" class=""> <label class="active" for="p07">Pelagem
+						*</label>
 				</div>
 			</div>
 

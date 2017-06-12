@@ -116,7 +116,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
 					}
 
 					// Verifica token de cliente
-				} else {
+				} else if (request.getRequestURI().contains("and")) {
 					// Token
 					String token = null;
 

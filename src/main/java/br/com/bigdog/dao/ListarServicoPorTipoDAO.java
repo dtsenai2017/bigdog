@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import br.com.bigdog.model.Servico;
+import br.com.bigdog.value.StatusServico;
 import br.com.bigdog.value.TipoServico;
 
 @Repository
@@ -18,12 +19,20 @@ public class ListarServicoPorTipoDAO {
 	private EntityManager manager;
 
 	public List<Servico> listarServicoPorTipoDAO(TipoServico tipoServico) {
-		System.out.println(tipoServico);
+		// Query
+		TypedQuery<Servico> query = manager.createQuery(
+				"SELECT s FROM Servico s WHERE s.tipoServico = :tipoServico AND s.status = :status", Servico.class);
 
-		TypedQuery<Servico> query = manager.createQuery("SELECT s FROM Servico s WHERE s.tipoServico = :tipoServico",
-				Servico.class);
+		// Atribuindo parâmetros
 		query.setParameter("tipoServico", tipoServico);
-		return query.getResultList();
+		query.setParameter("status", StatusServico.Ativo);
+
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			System.err.println(e);
+			return null;
+		}
 	}
 
 }

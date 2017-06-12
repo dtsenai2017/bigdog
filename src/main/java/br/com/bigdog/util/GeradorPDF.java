@@ -1,6 +1,5 @@
 package br.com.bigdog.util;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
@@ -25,11 +24,6 @@ import org.jrimum.domkee.financeiro.banco.febraban.Sacado;
 import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 import org.springframework.stereotype.Component;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 
 import br.com.bigdog.model.Compra;
 
@@ -108,27 +102,5 @@ public class GeradorPDF {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	// Gerar PDF
-	public Document gerarPdf(String caminho) {
-		// Atributos
-		Document document = new Document();
-
-		try {
-			PdfWriter.getInstance(document, new FileOutputStream(caminho));
-			document.open();
-			document.add(new Paragraph("Exemplo Geração de Arquivo PDF via iText - Java"));
-		} catch (DocumentException de) {
-			System.err.println(de.getMessage());
-		} catch (IOException ioe) {
-			System.err.println(ioe.getMessage());
-		}
-
-		// Close
-		document.close();
-
-		// Retornando...
-		return document;
 	}
 }

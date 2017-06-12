@@ -209,12 +209,20 @@
 						<p id="agendamento-horarioAgendado">14:30</p>
 					</div>
 
-					<div class="col s12 m12 l12 truncate">
+					<div class="col s12 m6 l6 truncate">
 						<h6>
 							<b>Serviço</b>
 						</h6>
 
 						<p id="agendamento-servico-nome"></p>
+					</div>
+
+					<div class="col s12 m6 l6 truncate">
+						<h6>
+							<b>Status</b>
+						</h6>
+
+						<p id="agendamento-servico-status"></p>
 					</div>
 
 					<div class="col s12 m4 l4 truncate">

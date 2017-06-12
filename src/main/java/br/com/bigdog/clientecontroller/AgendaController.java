@@ -19,9 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bigdog.dao.AgendamentoDAO;
 import br.com.bigdog.dao.AgendamentosVerificarDAO;
-import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.dao.ListarServicoPorTipoDAO;
+import br.com.bigdog.dao.ServicoDAO;
 import br.com.bigdog.model.Agendamento;
+import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.Servico;
 import br.com.bigdog.value.TipoServico;
 
@@ -31,14 +32,13 @@ public class AgendaController {
 	private ListarServicoPorTipoDAO listarServicoPorTipoDAO;
 	private AgendamentosVerificarDAO agendamentosVerificarDAO;
 	private AgendamentoDAO agendamentoDAO;
-	private GenericDAO<Servico> servicoDAO;
+	private ServicoDAO servicoDAO;
 	DateFormat formatterDate;
 
 	// Construtor
 	@Autowired
 	public AgendaController(ListarServicoPorTipoDAO listarServicoPorTipoDAO,
-			AgendamentosVerificarDAO agendamentosVerificarDAO, AgendamentoDAO agendamentoDAO,
-			GenericDAO<Servico> servicoDAO) {
+			AgendamentosVerificarDAO agendamentosVerificarDAO, AgendamentoDAO agendamentoDAO, ServicoDAO servicoDAO) {
 		this.listarServicoPorTipoDAO = listarServicoPorTipoDAO;
 		this.agendamentoDAO = agendamentoDAO;
 		this.agendamentosVerificarDAO = agendamentosVerificarDAO;
@@ -146,5 +146,12 @@ public class AgendaController {
 		agendamentoDAO.inserir(agendamento);
 
 		return ResponseEntity.ok(agendamento);
+	}
+
+	// Listar agendamento mobile
+	@RequestMapping(value = "and/listagendamento", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Agendamento> logarAd(@RequestBody Cliente cliente) {
+		System.out.println(agendamentoDAO.listarAgendamentoCliente(cliente.getIdCliente()));
+		return agendamentoDAO.listarAgendamentoCliente(cliente.getIdCliente());
 	}
 }

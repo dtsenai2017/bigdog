@@ -14,7 +14,7 @@ import br.com.bigdog.dao.AgendamentoDAO;
 import br.com.bigdog.dao.ClienteDAO;
 import br.com.bigdog.dao.DAOJdbc;
 import br.com.bigdog.dao.DadosGeraisDAO;
-import br.com.bigdog.dao.GenericDAO;
+import br.com.bigdog.dao.ServicoDAO;
 import br.com.bigdog.model.DadosGerais;
 import br.com.bigdog.model.Servico;
 import br.com.bigdog.value.TipoServico;
@@ -25,13 +25,13 @@ public class AdmController {
 	// Atributos
 	private DadosGeraisDAO dadosGeraisDAO;
 	private ClienteDAO clienteDAO;
-	private GenericDAO<Servico> servicoDAO;
+	private ServicoDAO servicoDAO;
 	private AgendamentoDAO agendamentoDAO;
 	private DAOJdbc daoJDBC;
 
 	// Construtor
 	@Autowired
-	public AdmController(DadosGeraisDAO dadosGeraisDAO, ClienteDAO clienteDAO, GenericDAO<Servico> servicoDAO,
+	public AdmController(DadosGeraisDAO dadosGeraisDAO, ClienteDAO clienteDAO, ServicoDAO servicoDAO,
 			AgendamentoDAO agendamentoDAO, DAOJdbc daoJDBC) {
 		this.dadosGeraisDAO = dadosGeraisDAO;
 		this.clienteDAO = clienteDAO;

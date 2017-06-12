@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bigdog.dao.GenericDAO;
+import br.com.bigdog.dao.ServicoDAO;
 import br.com.bigdog.model.Servico;
 
 @RestController
 @RequestMapping(value = "adm/")
 public class AdmServicoController {
 	// Atributos
-	private GenericDAO<Servico> servicoDAO;
+	private ServicoDAO servicoDAO;
 
 	// Construtor
 	@Autowired
-	public AdmServicoController(GenericDAO<Servico> servicoDAO) {
+	public AdmServicoController(ServicoDAO servicoDAO) {
 		this.servicoDAO = servicoDAO;
 	}
 
@@ -85,6 +85,7 @@ public class AdmServicoController {
 			servicoAtual.setTempoEstimado(servico.getTempoEstimado());
 			servicoAtual.setValor(servico.getValor());
 			servicoAtual.setObservacao(servico.getObservacao());
+			servicoAtual.setStatus(servico.getStatus());
 
 			// Alterando
 			servicoDAO.alterar(servicoAtual);

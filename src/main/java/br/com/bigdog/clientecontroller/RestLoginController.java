@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.auth0.jwt.JWTSigner;
 
-import br.com.bigdog.admcontroller.AdmLogin;
 import br.com.bigdog.dao.ClienteDAO;
 import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.TokenCliente;

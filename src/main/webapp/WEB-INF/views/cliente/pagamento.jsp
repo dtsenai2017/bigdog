@@ -130,8 +130,13 @@
 								<p style="margin-top: -0.5em; font-size: 15px;">Pagseguro</p>
 						</button>
 
-						<a onclick="pagamentoBoleto()"
-							style="cursor: pointer; margin-top: 0.8em;" class="btn-flat">Boleto</a>
+						<a onclick="pagamentoBoleto()" style="cursor: pointer;">
+							<button class="waves-effect waves-light btn"
+								style="width: 12em; margin-left: 1em; margin-top: 1em; background-color: #005900;">
+								<img src="resources/loja/imagens/icones/icon-08.png">
+								<p style="margin-top: -0.5em; font-size: 15px;">Boleto</p>
+							</button>
+						</a>
 					</div>
 				</div>
 			</div>

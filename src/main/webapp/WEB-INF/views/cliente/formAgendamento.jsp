@@ -67,7 +67,7 @@
 		<form id="form" class="form">
 			<div class="input-field col s12" id="input-f">
 				<label class="active" for="f1" style="margin-left: -1em;">Tipo
-					de Serviço</label> <select id="selectTipoServico">
+					de Serviço</label> <select id="selectTipoServico" required>
 					<option value="0">Selecione uma opção</option>
 					<option value="1">Veterinário</option>
 					<option value="0">Estética</option>
@@ -94,7 +94,7 @@
 
 			<div class="input-field col s12" id="input-f">
 				<label class="active" for="first_name2" style="margin-left: -1em;">Horário</label>
-				<select id="selectHorario" disabled>
+				<select id="selectHorario" disabled required>
 					<option>Selecione um horario</option>
 				</select>
 			</div>
@@ -102,7 +102,7 @@
 			<div class="divp" style="margin-top: 5em;">
 				<div class="input-field col s12" id="input-f asd">
 					<label class="active" for="f3" style="margin-left: -1em;">Pet</label>
-					<select id="selectPet" disabled>
+					<select id="selectPet" disabled required>
 						<c:forEach var="pet" items="${clienteLogado.pets }">
 							<option value="${pet.idPet }">${pet.nome }</option>
 						</c:forEach>
@@ -161,13 +161,14 @@
 				// Função para agendar
 				$('#btnAgendar').click(
 						function agendar() {
-
+							// Data
 							var data = $('#selectHorario option:selected')
 									.val()
 									+ ' '
 									+ $('#selectHorario option:selected')
 											.text();
 
+							// Agendamento
 							var agendamento = {
 								servico : {
 									idServico : $('#selectServicos').val()
@@ -189,7 +190,11 @@
 								dataType : 'json',
 								data : JSON.stringify(agendamento),
 								success : function(data) {
+								},
+								error : function(e){
+									console.log('ERROR : ' + e);
 								}
+								
 							});
 						});
 
@@ -289,7 +294,7 @@
 
 				// Procura os servicos do tipo selecionado, assim que o select é selecionado
 				$('#selectTipoServico').on("change", function() {
-
+					// Habilita campos de select
 					if ($('#selectHorario').is(':enabled')) {
 						$('#selectHorario').prop("disabled", true);
 						$('#selectPet').prop("disabled", true);
@@ -297,8 +302,10 @@
 						$('#selectPet').material_select();
 					}
 
+					// Recebe valor do tipo de serviço selecionado
 					var valSelect = $("option:selected", this).val();
 
+					// Requisição para listar serviços do tipo selecionado
 					$.ajax({
 						headers : {
 							'Content-Type' : 'application/json'

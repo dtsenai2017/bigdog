@@ -1,20 +1,19 @@
 package br.com.bigdog.clientecontroller;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -35,7 +34,6 @@ import br.com.bigdog.model.EnderecoCliente;
 import br.com.bigdog.model.EnderecoCompra;
 import br.com.bigdog.model.ItemCompra;
 import br.com.bigdog.model.ProdutoCarrinho;
-import br.com.bigdog.util.ConverterPdf;
 import br.com.bigdog.util.GeradorPDF;
 
 @Controller
@@ -45,17 +43,15 @@ public class PagamentoController {
 	private static String emailVendedorPagSeguro = "eduardocslv@gmail.com";
 	private static String tokenVendedorPagSeguro = "F731EB2876254012AC244616A8CF9DB7";
 	private GeradorPDF geradorPdf;
-	private ConverterPdf converterPdf;
 	private EnderecoClienteDAO enderecoDAO;
 	private CarrinhoDoClienteDAO carrinhoDoClienteDAO;
 	private CompraDAO compraDAO;
 
 	// Construtor
 	@Autowired
-	public PagamentoController(GeradorPDF geradorPdf, ConverterPdf converterPdf, EnderecoClienteDAO enderecoDAO,
+	public PagamentoController(GeradorPDF geradorPdf, EnderecoClienteDAO enderecoDAO,
 			CarrinhoDoClienteDAO carrinhoDoClienteDAO, CompraDAO compraDAO) {
 		this.geradorPdf = geradorPdf;
-		this.converterPdf = converterPdf;
 		this.enderecoDAO = enderecoDAO;
 		this.carrinhoDoClienteDAO = carrinhoDoClienteDAO;
 		this.compraDAO = compraDAO;
@@ -65,27 +61,16 @@ public class PagamentoController {
 	@RequestMapping(value = "/gerarBoleto/{idEndereco}", method = RequestMethod.GET)
 	public void pagBoleto(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			@PathVariable long idEndereco) throws IOException {
+		// Atribuindo valores para compra
 		EnderecoCliente endCliente = enderecoDAO.listar(idEndereco);
 		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
 		Carrinho carrinho = carrinhoDoClienteDAO.listarCarrinhoDoCliente(cliente.getIdCliente());
-
-		ServletContext servletContext = request.getSession().getServletContext();
-		File tempDirectory = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
-		String temperotyFilePath = tempDirectory.getAbsolutePath();
-		String fileName = "boleto_bigdog.pdf";
-		response.setContentType("application/pdf");
-		response.setHeader("Content-disposition", "attachment; filename=" + fileName);
-
 		Compra compra = new Compra();
 		compra = addCompra(compra, carrinho, cliente, endCliente);
 
+		// Gerar boleto
 		try {
-			geradorPdf.gerarPdf(temperotyFilePath + "\\" + fileName);
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			baos = converterPdf.convertPDFToByteArrayOutputStream(temperotyFilePath + "\\" + fileName);
-			OutputStream os = response.getOutputStream();
-			baos.writeTo(os);
-			os.flush();
+			geradorPdf.gerarBoleto(compra, response);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -210,10 +195,19 @@ public class PagamentoController {
 
 	// Gerar XML
 	private String gerarxml(Cliente c, Carrinho carrinho, Compra compra) {
+		// Atributo para ip do host
+		String host = null;
+		try {
+			host = InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+
+		// Retornando...
 		return "<?xml version=\"1.0\"?><checkout><sender><name>" + c.getNome() + "</name>"
 				+ "<email>c71089443377372574576@sandbox.pagseguro.com.br</email><phone>"
 				+ "<areaCode>11</areaCode><number>" + c.getContato().getCelular().replace("-", "") + "</number>"
-				+ "</phone><ip>1.1.1.1</ip><documents><document><type>CPF</type><value>" + c.getCpf() + "</value>"
+				+ "</phone><ip>" + host + "</ip><documents><document><type>CPF</type><value>" + c.getCpf() + "</value>"
 				+ "</document></documents></sender><currency>BRL</currency>" + gerarItensXml(carrinho)
 				+ "<redirectURL>localhost:8080/BigDog/home</redirectURL>" + "<reference>" + compra.getIdCompra()
 				+ "</reference> <receiver> <email>" + emailVendedorPagSeguro + "</email></receiver></checkout>";

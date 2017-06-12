@@ -834,13 +834,13 @@
 					</h6>
 
 					<!-- Descrição de card -->
-					<p align="left">
+					<p align="left" style="font-size: 12px;">
 						Para alterar a imagem do produto, clique no <b>nome do produto</b>.
 						Para alterar outras informações, clique no <b>botão </b> ALTERAR.
 					</p>
 
 					<!-- Descrição de alteração -->
-					<p align="left">
+					<p align="left" style="font-size: 12px;">
 						Produtos alterados não afetam dados dos mesmos em compras <b>já
 							realizadas</b>.
 					</p>

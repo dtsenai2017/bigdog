@@ -50,12 +50,16 @@
 
 	<!-- Conteúdo main -->
 	<div class="row">
-		<!-- Botão de adicionar novo serviço -->
+		<!-- Botão de adicionar novo serviço e descrição de status de serviço -->
 		<div class="col s12 m2 l2 center">
 			<div class="row">
 				<a href="#modal-servico" class="waves-effect waves-light btn green"><i
 					class="material-icons center">add</i></a>
 			</div>
+
+			<p id="desc-status" class="left-align grey-text">
+				Serviços desativados <b>não</b> são visíveis para o cliente.
+			</p>
 		</div>
 
 		<!-- Título de lista de serviços -->
@@ -94,7 +98,8 @@
 							data-collapsible="accordion">
 							<c:forEach items="${servicoEstetica }" var="servicoEstetica">
 								<li>
-									<div class="collapsible-header waves-effect waves-orange">
+									<div
+										class="collapsible-header waves-effect waves-orange ${servicoEstetica.status == 'Desativado' ? 'red lighten-2 white-text':'' }">
 										<span>${servicoEstetica.nome }</span>
 									</div>
 									<div class="collapsible-body">
@@ -103,7 +108,9 @@
 										<span><b>Tempo estimado </b>: <fmt:formatDate
 												pattern="HH:mm" value="${servicoEstetica.tempoEstimado }" />hrs.
 										</span><br> <span><b>Observações </b>:
-											${servicoEstetica.observacao }</span>
+											${servicoEstetica.observacao != '' ? servicoEstetica.observacao : '<i>Sem observação</i>' }</span>
+										<br> <span><b>STATUS </b>:
+											${servicoEstetica.status }</span>
 
 										<p align="right">
 											<a href="#modal-servico"
@@ -148,17 +155,21 @@
 							<c:forEach items="${servicoVeterinario }"
 								var="servicoVeterinario">
 								<li>
-									<div class="collapsible-header waves-effect waves-red">
+									<div
+										class="collapsible-header waves-effect waves-red ${servicoVeterinario.status == 'Desativado' ? 'red lighten-2 white-text':'' }">
 										<span>${servicoVeterinario.nome }</span>
 									</div>
+
 									<div class="collapsible-body">
 										<span><b>Valor </b>: <fmt:formatNumber
 												value="${servicoVeterinario.valor }" type="currency" /></span><br>
 										<span><b>Tempo estimado </b>: <fmt:formatDate
 												pattern="HH:mm" value="${servicoVeterinario.tempoEstimado }" />hrs.
 										</span><br> <span><b>Observações </b>:
-											${servicoVeterinario.observacao }</span>
+											${servicoVeterinario.observacao != '' ? servicoVeterinario.observacao : '<i>Sem observação</i>' }</span><br>
+										<span><b>Status : </b> ${servicoVeterinario.status }</span>
 
+										<!-- Link para modal -->
 										<p align="right">
 											<a href="#modal-servico"
 												onclick="modalAlterarServico('${servicoVeterinario.idServico }')">Alterar</a>
@@ -198,6 +209,17 @@
 					<div class="divider"></div>
 
 					<form id="form-servico">
+						<!-- br -->
+						<br>
+
+						<div class="col s12 m12 l12">
+							<div class="switch center">
+								<label> Desativar <input id="status-servico"
+									type="checkbox"> <span class="lever"></span> Ativar
+								</label>
+							</div>
+						</div>
+
 						<div class="input-field col s12 m12 l12">
 							<input id="idServico" type="hidden"> <input
 								id="nome-servico" type="text" class="truncate" maxlength="255"
@@ -251,9 +273,12 @@
 
 		<!-- Modal footer -->
 		<div class="modal-footer">
-			<a id="btn-excluir-servico" href="#!"
-				class="modal-action modal-close waves-effect waves-red btn-flat left"><i
-				class="material-icons left red-text">delete</i>Excluir Serviço</a>
+			<!-- Status do serviço selecionado -->
+			<div class="container">
+				<p id="txt-servico-status" align="right">
+					Serviço : <span id="txt-servico-status-value"></span>
+				</p>
+			</div>
 		</div>
 	</div>
 	<!-- /#modal-servico -->

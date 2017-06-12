@@ -19,6 +19,7 @@ import br.com.bigdog.dao.ClienteDAO;
 import br.com.bigdog.dao.CompraDAO;
 import br.com.bigdog.dao.GenericDAO;
 import br.com.bigdog.dao.ProdutoDAO;
+import br.com.bigdog.dao.ServicoDAO;
 import br.com.bigdog.model.Agendamento;
 import br.com.bigdog.model.Categoria;
 import br.com.bigdog.model.Cliente;
@@ -34,14 +35,14 @@ public class TestController {
 	private CategoriaDAO categoriaDAO;
 	private GenericDAO<Fornecedor> fornecedorDAO;
 	private ProdutoDAO produtoDAO;
-	private GenericDAO<Servico> servicoDAO;
+	private ServicoDAO servicoDAO;
 	private AgendamentoDAO agendamentoDAO;
 	private CompraDAO compraDAO;
 
 	// Construtor
 	@Autowired
 	public TestController(ClienteDAO clienteDAO, CategoriaDAO categoriaDAO, GenericDAO<Fornecedor> fornecedorDAO,
-			ProdutoDAO produtoDAO, CompraDAO compraDAO, GenericDAO<Servico> servicoDAO, AgendamentoDAO agendamentoDAO) {
+			ProdutoDAO produtoDAO, CompraDAO compraDAO, ServicoDAO servicoDAO, AgendamentoDAO agendamentoDAO) {
 		this.clienteDAO = clienteDAO;
 		this.categoriaDAO = categoriaDAO;
 		this.fornecedorDAO = fornecedorDAO;
@@ -136,7 +137,7 @@ public class TestController {
 	}
 
 	// INSERÇÃO DE DADOS : Serviço
-	@RequestMapping(value = "dataTestServico", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "adm/dataTestServico", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> dataTestServico(@RequestBody List<Servico> servicos) {
 		// Inserindo lista
 		try {

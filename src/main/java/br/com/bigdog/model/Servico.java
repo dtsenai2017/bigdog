@@ -16,6 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.bigdog.value.StatusServico;
 import br.com.bigdog.value.TipoServico;
 
 @Entity
@@ -39,6 +40,9 @@ public class Servico {
 	private Date tempoEstimado;
 	@Column(nullable = true)
 	private String observacao;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status", columnDefinition = "enum ('Ativo','Desativado')", nullable = false)
+	private StatusServico status;
 
 	// Getters e Setters
 	public Long getIdServico() {
@@ -89,10 +93,18 @@ public class Servico {
 		this.observacao = observacao;
 	}
 
+	public StatusServico getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusServico status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "Servico [idServico=" + idServico + ", nome=" + nome + ", tipoServico=" + tipoServico + ", valor="
-				+ valor + ", tempoEstimado=" + tempoEstimado + ", observacao=" + observacao + "]";
+				+ valor + ", tempoEstimado=" + tempoEstimado + ", observacao=" + observacao + ", status=" + status
+				+ "]";
 	}
-
 }

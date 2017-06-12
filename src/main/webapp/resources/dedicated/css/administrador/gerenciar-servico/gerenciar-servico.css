@@ -18,3 +18,7 @@ main {
 	height: 90% !important;
 	max-height: 90% !important;
 }
+
+#desc-status {
+	font-size: 12px;
+}

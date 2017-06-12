@@ -61,7 +61,6 @@ public class ClienteDAO {
 		try {
 			return query.getSingleResult();
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 	}
@@ -74,7 +73,6 @@ public class ClienteDAO {
 		try {
 			return query.getSingleResult();
 		} catch (Exception e) {
-			System.out.println(e);
 			return null;
 		}
 	}
@@ -122,8 +120,11 @@ public class ClienteDAO {
 	public Cliente logar(Cliente cliente) {
 		TypedQuery<Cliente> query = manager
 				.createQuery("SELECT c FROM Cliente c WHERE c.email = :email AND c.senha = :senha", Cliente.class);
+
+		// Atribuindo parâmetros
 		query.setParameter("email", cliente.getEmail());
 		query.setParameter("senha", cliente.getSenha());
+
 		try {
 			return query.getSingleResult();
 		} catch (Exception e) {
