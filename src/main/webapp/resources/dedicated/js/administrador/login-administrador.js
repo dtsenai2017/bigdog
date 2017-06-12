@@ -12,22 +12,34 @@ $("#form-login-adm").submit(
 
 			// Requisição
 			$.ajax({
-				url : "adm/loginAdm",
+				url : "loginAdm",
 				type : "POST",
 				data : JSON.stringify(administrador),
 				async : false,
 				contentType : "application/json; charset=utf-8",
 				success : function(response) {
+					// Set token
 					localStorage.setItem("tokenBigDog", response.token);
+
+					// Requisição
 					var xhr = new XMLHttpRequest();
-					xhr.open('GET', "indexAdministrador", false);
+
+					// Tipo, url e async
+					xhr.open('GET', 'adm/indexAdministrador', true);
+
+					// Atribuindo token
 					xhr.setRequestHeader("Authorization", localStorage
 							.getItem("tokenBigDog"));
+
+					// Response
 					xhr.onreadystatechange = function() {
 						if (xhr.readyState == 4) {
+							// Replace html
 							$(document.body).html(xhr.response);
 						}
 					};
+
+					// Request send()
 					xhr.send();
 				},
 				error : function(e) {

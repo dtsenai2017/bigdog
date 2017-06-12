@@ -41,15 +41,16 @@
 <!-- Swiper min. -->
 <script type="text/javascript" src="resources/loja/js/swiper.min.js"></script>
 </head>
-<body>
+<main>
+<body style="background-color: white;">
 	<!-- Locale para fmt money -->
 	<f:setLocale value="pt-BR" />
 
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
-	<main> <!-- Swiper com 2 fotos -->
-	<div class="swiper-container" style="z-index: -1;">
+	<!-- Swiper com 2 fotos -->
+	<div class="swiper-container">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
 				<img src="resources/loja/imagens/img01.jpg">
@@ -67,14 +68,51 @@
 		<div class="swiper-button-prev"></div>
 	</div>
 
+	<!-- Título de serviços -->
+	<p class="produtos">Serviços</p>
+
+	<!-- Serviço de Estética -->
+	<div class="sv" id="textSv">
+		<img src="resources/loja/imagens/icones/iconEst.png"> <a
+			href="novo-agendamento">
+			<h2>Estética Animal</h2>
+			<p>Entregar seu Pet bonito e cheiroso é a nossa maior
+				preocupação. Para isso, dispomos de uma ótima estrutura para que
+				nossos pets possam ter o melhor conforto possível. Contamos com
+				profissionais qualificados que cuidarão com muito carinho do seu
+				bichinho. E agora você não precisa sair de casa para agendar um
+				serviço. Conheça nossa plataforma virtual, basta realizar o cadastro
+				e agendar um de nossos serviços. Então você já sabe, banho & tosa é
+				aqui.</p>
+		</a>
+	</div>
+
+	<!-- Serviço Veterinário -->
+	<div class="sv">
+		<!-- Ícone de serviço -->
+		<img src="resources/loja/imagens/icones/iconVet.png"> <a
+			href="novo-agendamento"> <!-- Título e descrição -->
+			<h2>Veterinário</h2>
+			<p>Todos nós precisamos estar em dia com a saúde, inclusive
+				nossos Pets. Para isso contamos com um Veterinário apto para atender
+				seu animal. Agende uma consulta e deixe seu Pet em dia com a saúde.
+				E agora você não precisa sair de casa para agendar uma consulta.
+				Conheça nossa plataforma virtual, basta realizar o cadastro e
+				agendar uma consulta. Então você já sabe, Veterinário é aqui.</p>
+		</a>
+	</div>
+
+	<!-- Linha hr -->
+	<div id="linha"></div>
+
 	<!-- Descrição de lista de produto -->
 	<p class="produtos">Produtos</p>
 
-	<!-- Lista de produtos para home --> <c:forEach
-		items="${listaProdutosHome }" var="produto">
+	<!-- Lista de produtos para home -->
+	<c:forEach items="${listaProdutosHome }" var="produto">
 		<!-- Link de produto -->
 		<a href="produto?idProduto=${produto.idProduto }">
-			<div class="p" id="pro">
+			<div id="pro" class="p">
 				<!-- Foto -->
 				<img src="${produto.fotoString }">
 
@@ -83,52 +121,44 @@
 				<h2>
 					<f:formatNumber type="currency" value="${produto.valor }" />
 				</h2>
-			</div>
+			</div> <!-- br mobile -->
 		</a>
 		<br>
-	</c:forEach> </main>
+	</c:forEach>
+</main>
 
-	<!-- Footer -->
-	<footer class="page-footer">
-	<div class="container">
-		<div class="footer-copyright">
-			<div class="container" style="text-align: center;">
-				© 2017 Copyright BIG Dog - SENAI Informática <a
-					class="grey-text text-lighten-4 right"
-					href="https://www.facebook.com/bigdogPETeVET/"><img
-					style="margin-top: -0.5em"
-					src="resources/loja/imagens/icones/icon-04.png"></a>
-			</div>
-		</div>
-	</footer>
+<!-- Footer -->
+<c:import url="component/footerLoja.jsp"></c:import>
 
-	<!-- Import JS -->
-	<script type="text/javascript" src="resources/jquery/jquery-3.2.1.js" /></script>
-	<script type="text/javascript"
-		src="resources/loja/js/materialize.min.js"></script>
+<!-- Import JS -->
+<script type="text/javascript" src="resources/jquery/jquery-3.2.1.js" /></script>
+<script type="text/javascript"
+	src="resources/loja/js/materialize.min.js"></script>
 
-	<!-- Script's -->
-	<!-- Swipe -->
-	<script>
-		var swiper = new Swiper('.swiper-container', {
-			pagination : '.swiper-pagination',
-			nextButton : '.swiper-button-next',
-			prevButton : '.swiper-button-prev',
-			slidesPerView : 1,
-			paginationClickable : true,
-			spaceBetween : 30,
-			loop : true,
-			autoplay : 2500,
-			autoplayDisableOnInteraction : false
+<!-- Script's -->
+<!-- Swipe -->
+<script>
+	var swiper = new Swiper('.swiper-container', {
+		pagination : '.swiper-pagination',
+		nextButton : '.swiper-button-next',
+		prevButton : '.swiper-button-prev',
+		slidesPerView : 1,
+		paginationClickable : true,
+		spaceBetween : 30,
+		loop : true,
+		autoplay : 3500,
+		autoplayDisableOnInteraction : false
+	});
+</script>
+
+<!-- Menu -->
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
 		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+	})
+</script>
 </body>
 </html>

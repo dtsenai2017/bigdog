@@ -24,6 +24,7 @@
 <!-- Import's JS -->
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
 </head>
+<main>
 <body>
 	<!-- Locale para fmt money -->
 	<f:setLocale value="pt-BR" />
@@ -31,37 +32,29 @@
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
-	<main>
 	<div class="totalP">
 		<!-- Imagem do produto -->
 		<div class="imgProduto">
-			<img src="resources/loja/imagens/semFoto.png" class="produto">
+			<img src="${produto.fotoString }" class="materialboxed">
 		</div>
 
 		<!-- Descrição do produto -->
 		<div class="descricaoProd">
 			<h2>${produto.nome }</h2>
-			<p>${produto.descricao == '' ? 'Sem descrição' : produto.descricao }</p>
+			<p id="desc">${produto.descricao == '' ? 'Sem descrição' : produto.descricao }</p>
 			<h3>
 				Valor:
 				<f:formatNumber type="currency" value="${produto.valor }" />
 			</h3>
-
-			<!-- Botão para adicionar produto no carrinho -->
-			<a href="addProduto?id=${produto.idProduto }"><button
-					class="waves-effect waves-light btn"
-					style="background-color: #770505;">
-					<img src="resources/loja/imagens/icones/icon-08.png">
-					<p style="margin-top: -0.5em;">Carrinho</p>
-				</button></a>
-
-			<!-- Botão para comprar já -->
-			<button class="waves-effect waves-light btn"
-				style="background-color: #005900;">
-				<a style="color: white;" href="comprarJa?id=${produto.idProduto }"><img
-					src="resources/loja/imagens/icones/icon-08.png">
-					<p style="margin-top: -0.5em;">Comprar Já</p></a>
-			</button>
+			<div class="btns">
+				<!-- Botão para adicionar produto no carrinho -->
+				<a href="addProduto?id=${produto.idProduto }"><button
+						class="waves-effect waves-light btn"
+						style="background-color: #770505;">
+						<img src="resources/loja/imagens/icones/icon-08.png">
+						<p style="margin-top: -0.5em;">Carrinho</p>
+					</button></a>
+			</div>
 		</div>
 
 		<!-- Descrição de outros produtos -->
@@ -71,34 +64,34 @@
 		<c:forEach items="${outrosProdutos }" var="produto2">
 			<a href="produto?idProduto=${produto2.idProduto }">
 				<div class="p" id="prodd">
-					<img src="resources/loja/imagens/semFoto.png">
+					<img src="${produto2.fotoString }" class="responsive-img">
 					<p>${produto2.nome }</p>
 					<h2>
-						<f:formatNumber type="currency" value="${produto.valor }" />
+						<f:formatNumber type="currency" value="${produto2.valor }" />
 					</h2>
 				</div>
 			</a>
 		</c:forEach>
 	</div>
-	</main>
+</main>
 
-	<!-- Import footer -->
-	<c:import url="component/footerLoja.jsp"></c:import>
+<!-- Import footer -->
+<c:import url="component/footerLoja.jsp"></c:import>
 
-	<!-- Import JS -->
-	<script type="text/javascript"
-		src="resources/jquery/jquery-2.2.2.min.js" /></script>
-	<script type="text/javascript"
-		src="resources/loja/js/materialize.min.js"></script>
+<!-- Import JS -->
+<script type="text/javascript"
+	src="resources/jquery/jquery-2.2.2.min.js" /></script>
+<script type="text/javascript"
+	src="resources/loja/js/materialize.min.js"></script>
 
-	<!-- Script para menu lateral -->
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+<!-- Script para menu lateral -->
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
+		});
+	})
+</script>
 </body>
 </html>

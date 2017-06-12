@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,11 +30,11 @@
 
 <!-- Import JS -->
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
+<main>
 <body>
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
-	<main>
 	<div class="cxAvatar">
 		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
 		<div class="cx08">
@@ -50,7 +51,7 @@
 				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png"> Meus Pets</a></li>
+						src="resources/loja/imagens/icones/icon-09.png"><p id="lip"> Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li class="id"><a href="listAgendamentos"><i
@@ -74,31 +75,26 @@
 								<th>Data</th>
 								<th>Hora</th>
 								<th>Tipo de Serviço</th>
-								<th>Observação</th>
+								<th>Status</th>
+								<th>Gerenciar</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td data-title="Pet">Bill Gates</td>
-								<td data-title="Data">10/04/1998</td>
-								<td data-title="Hora">24:00</td>
-								<td>Banho e Tosa</td>
-								<td data-title="Observacao"><i class="fa fa-file-pdf-o"
-									aria-hidden="true"
-									style="color: #770505; cursor: pointer; margin-left: 2em;"
-									title="Gerar PDF"></i></td>
-							</tr>
-							<tr>
-								<td data-title="Nome">Dalila</td>
-								<td data-title="Data">10/04/1999</td>
-								<td data-title="Hora">12:00</td>
-								<td>Banho e Tosa</td>
-								<td data-title="Observacao"><i class="fa fa-file-pdf-o"
-									aria-hidden="true"
-									style="color: #770505; cursor: pointer; margin-left: 2em;"
-									title="Gerar PDF"></i></td>
-							</tr>
-
+							<c:forEach items="${listarAgendamentos}" var="agenda">
+								<tr>
+									<td data-title="Pet">${agenda.pet.nome }</td>
+									<td data-title="Data"><f:formatDate pattern="dd/MM/yyyy"
+											value="${agenda.dataAgendada }"></f:formatDate></td>
+									<td data-title="Hora"><f:formatDate pattern="HH:mm"
+											value="${agenda.dataAgendada }"></f:formatDate></td>
+									<td>${agenda.servico.tipoServico }</td>
+									<td data-title="Observacao">Em Andamento</td>
+									<td><a
+										href="cancela-agendamento?id=${agenda.idAgendamento }"><i
+											class="fa fa-times" aria-hidden="true"
+											title="Remover Endeeço"></i></a></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
@@ -111,26 +107,26 @@
 		</div>
 		<br>
 	</div>
-	</main>
+</main>
 
-	<!-- Import footer -->
-	<c:import url="component/footerLoja.jsp"></c:import>
+<!-- Import footer -->
+<c:import url="component/footerLoja.jsp"></c:import>
 
-	<!-- Scripts -->
-	<script src="resources/loja/js/jquery.min.js"></script>
-	<script>
-		$(".menuu").click(function() {
+<!-- Scripts -->
+<script src="resources/loja/js/jquery.min.js"></script>
+<script>
+	$(".menuu").click(function() {
 
-			$("#ul").toggle();
+		$("#ul").toggle();
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
 		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+	})
+</script>
 </body>
 </html>

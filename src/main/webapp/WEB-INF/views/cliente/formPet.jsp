@@ -32,14 +32,18 @@
 
 <!-- Import JS -->
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
+<script type="text/javascript"
+	src="resources/jquery/jquery-2.2.2.min.js" /></script>
+<script type="text/javascript"
+	src="resources/loja/js/materialize.min.js"></script>
 <script src="resources/loja/js/vanilla-masker.min.js"></script>
 
 <!-- Script para máscaras -->
 <script type="text/javascript">
-	window.onload = function mask() {
+	$(document).ready(function() {
 		VMasker(document.querySelector(".dataN")).maskPattern("99/99/9999");
 		VMasker(document.querySelector(".peso")).maskPattern("99.99")
-	}
+	});
 </script>
 </head>
 <body>
@@ -62,7 +66,7 @@
 				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
 				<li class="id"><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png"> Meus Pets</a></li>
+						src="resources/loja/imagens/icones/icon-09.png"><p id="lip"> Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li><a href="listAgendamentos"><i class="fa fa-calendar"
@@ -201,13 +205,6 @@
 
 	<!-- Import footer -->
 	<c:import url="component/footerLoja.jsp"></c:import>
-
-	<!-- Import JS -->
-	<script type="text/javascript"
-		src="resources/jquery/jquery-2.2.2.min.js" /></script>
-	<script type="text/javascript"
-		src="resources/loja/js/materialize.min.js"></script>
-
 	<!-- Script's -->
 	<script type="text/javascript">
 		$(".button-collapse").sideNav();

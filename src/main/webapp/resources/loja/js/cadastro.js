@@ -1,4 +1,4 @@
-//função pra ler querystring
+var host = window.location.host;
 var variavel;
 var genero = 'Masculino';
 $(function() {
@@ -13,153 +13,90 @@ $(function() {
 	if (v == 0) {
 		ativaCampo();
 	} else {
-		getUser(v);
+		getUser();
 	}
 });
 
-function getUser(variavel) {
-	$.ajax({
-		type : "GET",
-		url : "http://localhost:8080/BigDog/rest/loginRedes/" + variavel,
-		success : function(data) {
-			var date = data.dataNascimento;
-			if (data.dataNascimento == null) {
-				localStorage.setItem("id_cliente", data.idCliente);
-				$('#nome').val(data.nome), $('#email').val(data.email),
-						$('#id').val(data.idCliente), $('#dataN').val(''), $(
-								'#dataN').focus()
-			} else {
-				localStorage.setItem("id_cliente", data.idCliente);
-				$('#nome').val(data.nome), $('#email').val(data.email),
-						$('#id').val(data.idCliente)
-				if (data.genero == 'Masculino') {
-					$('#test1').prop('checked', true)
-				} else {
-					$('#test2').prop('checked', true)
-				}
-				converteData(date);
-			}
-
-		},
-		error : function(e) {
-			alert("Erro: " + e);
+function getUser() {
+	if (localStorage.getItem("dataNascimento") == "") {
+		$('#dataN').val('')
+	} else {
+		$('#dataN').val(localStorage.getItem("dataNascimento"))
+		if ($('#dataF').val() == "") {
+			validaData();
 		}
-
-	});
+		if (localStorage.getItem("genero") == 'Masculino') {
+			document.getElementById("test1").checked = true;
+		} else {
+			document.getElementById("test2").checked = true;
+		}
+	}
+	$('#nome').val(localStorage.getItem("nome"));
+	$('#email').val(localStorage.getItem("email"));
 }
 
 function ativaCampo() {
-	document.getElementById("nome").readOnly = !document.getElementById("nome").readOnly;
-	document.getElementById("email").readOnly = !document
-			.getElementById("email").readOnly;
+	document.getElementById("nome").disabled = !document.getElementById("nome").disabled;
+	document.getElementById("email").disabled = !document
+			.getElementById("email").disabled;
 	$('#nome').val('');
 	$('#email').val('');
 	$('#dataN').val('');
 }
 
-function alterar() {
-	function confirmaSenha() {
-		if ($("#senha").val() == $("#Csenha").val()) {
-			$("#spse").html('')
-		} else {
-			$("#spse").html('Senhas Incopatíveis')
-			$("#senha").val("")
-			$("#Csenha").val("")
-		}
+function limparCampos() {
+	$("#nome").val("");
+	$("#dataN").val("");
+	$("#cpf").val("");
+	$("#telefone").val("");
+	$("#celular").val("");
+	$("#cep").val("");
+	$("#logradouro").val("");
+	$("#bairro").val("");
+	$("#cidade").val("");
+	$("#uf").val("");
+	$("#complemento").val("");
+	$("#numero").val("");
+	$("#email").val("");
+	$("#senha").val("");
+	$("#Csenha").val("");
+}
+function cadastrar() {
+
+	var dados = {
+		nome : $("#nome").val(),
+		email : $("#email").val(),
+		dataNascimento : $("#dataF").val(),
+		genero : genero,
+		id_redes : $("#id_redes").val(),
+		cpf : $("#cpf").val(),
+		senha : $("#Csenha").val(),
+		contato : {
+			telefone : $("#telefone").val(),
+			celular : $("#celular").val(),
+		},
+		enderecos : [ {
+			cep : $("#cep").val(),
+			logradouro : $("#logradouro").val(),
+			bairro : $("#bairro").val(),
+			cidade : $("#cidade").val(),
+			uf : $("#uf").val(),
+			complemento : $("#complemento").val(),
+			numero : $("#numero").val()
+		} ]
 	}
-	var campos = [ nome = $("#nome").val(), dataN = $("#dataN").val(),
-			cpf = $("#cpf").val(), telefone = $("#telefone").val(),
-			celular = $("#celular").val(), cep = $("#cep").val(),
-			logradouro = $("#logradouro").val(), bairro = $("#bairro").val(),
-			cidade = $("#cidade").val(), uf = $("#uf").val(),
-			complemento = $("#complemento").val(), numero = $("#numero").val(),
-			email = $("#email").val(), senha = $("#senha").val(),
-			Csenha = $("#Csenha").val() ];
 
-	if (campos.indexOf("") != -1) {
-		for (var int = 0; int < campos.length; int++) {
-			if (campos[int] == "") {
-				console.log(campos[int])
-				$("#nome").focus();
-				break;
-			}
+	$.ajax({
+		type : 'POST',
+		url : 'http://' + host + '/BigDog/rest/login',
+		data : JSON.stringify(dados),
+		contentType : 'application/json;charset=UTF-8',
+		dataType : 'json',
+		sucsess : function(data) {
 		}
-	} else {
-		if (variavel == 0) {
-			var dados = {
-				nome : $("#nome").val(),
-				email : $("#email").val(),
-				dataNascimento : $("#dataF").val(),
-				genero : genero,
-				cpf : $("#cpf").val(),
-				senha : $("#Csenha").val(),
-				contato : {
-					telefone : $("#telefone").val(),
-					celular : $("#celular").val(),
-				},
-				enderecos : [ {
-					cep : $("#cep").val(),
-					logradouro : $("#logradouro").val(),
-					bairro : $("#bairro").val(),
-					cidade : $("#cidade").val(),
-					uf : $("#uf").val(),
-					complemento : $("#complemento").val(),
-					numero : $("#numero").val()
-				} ]
-			}
-
-			$.ajax({
-				type : 'POST',
-				url : 'http://localhost:8080/BigDog/rest/login',
-				data : JSON.stringify(dados),
-				contentType : 'application/json;charset=UTF-8',
-				dataType : 'json',
-				sucsess : function(data) {
-					localStorage.setItem("id_cliente", data.idCliente);
-					var link = "indexCliente?id=" + localStorage.getItem("id_cliente");
-					window.location = link;
-				}
-			});
-		} else {
-			var dados = {
-				nome : $("#nome").val(),
-				email : $("#email").val(),
-				dataNascimento : $("#dataF").val(),
-				genero : genero,
-				id_redes : $("#id_redes").val(),
-				cpf : $("#cpf").val(),
-				senha : $("#Csenha").val(),
-				contato : {
-					telefone : $("#telefone").val(),
-					celular : $("#celular").val(),
-				},
-				enderecos : [ {
-					cep : $("#cep").val(),
-					logradouro : $("#logradouro").val(),
-					bairro : $("#bairro").val(),
-					cidade : $("#cidade").val(),
-					uf : $("#uf").val(),
-					complemento : $("#complemento").val(),
-					numero : $("#numero").val()
-				} ]
-			}
-
-			var id = $('#id').val();
-
-			$.ajax({
-				type : 'PUT',
-				url : 'http://localhost:8080/BigDog/rest/loginRedes/' + id,
-				data : JSON.stringify(dados),
-				contentType : 'application/json;charset=UTF-8',
-				dataType : 'json',
-				sucsess : function(data) {
-					signOut();
-					var link = "indexCliente?id=" + localStorage.getItem("id_cliente");
-					window.location = link;
-				}
-			});
-		}
-	}
+	});
+	localStorage.setItem("sucesso", "Cadastro Realizado com Sucesso!")
+	window.location.replace("entrar");
 }
 function converteData(date) {
 	var split = date.split('-');
@@ -175,7 +112,6 @@ function converteData(date) {
 		MM = '0' + MM
 	}
 	var dataF = dd + '/' + MM + '/' + yyyy;
-	console.log(dataF)
 	$("#dataN").val(dataF);
 	validaData();
 }
@@ -196,27 +132,13 @@ function validaData() {
 		MM = '0' + MM
 	}
 	var dataF = yyyy + '-' + MM + '-' + dd;
-	console.log(dataF)
 	$("#dataF").val(dataF);
 }
 
 function gender() {
 	if (document.getElementById("test2").checked == true) {
 		genero = 'Feminino';
-		console.log(genero)
 	} else {
 		genero = 'Masculino';
-		console.log(genero)
 	}
-
-	function redirect(data) {
-		console.log(data.idCliente)
-		localStorage.setItem("id_cliente", data.idCliente)
-		window.location = "indexCliente";
-	}
-}
-function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-    });
 }

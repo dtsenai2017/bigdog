@@ -23,13 +23,19 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<!-- Erro 404 -->
+	<!-- Erro 404 / Não Encontrado -->
 	<error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/other/not-found-page.jsp</location>
 	</error-page>
 
-	<!-- Erro 401 -->
+	<!-- Erro 403 / Não Permitido -->
+	<error-page>
+		<error-code>403</error-code>
+		<location>/WEB-INF/views/other/forbidden-page.jsp</location>
+	</error-page>
+
+	<!-- Erro 401 / Não Autorizado -->
 	<error-page>
 		<error-code>401</error-code>
 		<location>/WEB-INF/views/other/unauthorized-page.jsp</location>

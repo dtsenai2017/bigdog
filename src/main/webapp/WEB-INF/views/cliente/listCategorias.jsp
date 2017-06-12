@@ -30,6 +30,7 @@
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
 
 </head>
+<main>
 <body>
 	<!-- Locale para fmt money -->
 	<f:setLocale value="pt-BR" />
@@ -38,7 +39,6 @@
 	<c:import url="component/headerLoja.jsp" />
 
 	<!-- Div para lista de produtos -->
-	<main>
 	<div class="totalP">
 		<!-- Descrição para lista de categoria -->
 		<p class="produtos">Escolha uma Categoria:</p>
@@ -66,7 +66,7 @@
 				<br>
 				<a href="produto?idProduto=${produto.idProduto }"">
 					<div class="p">
-						<img src="resources/loja/imagens/semFoto.png">
+						<img src="${produto.fotoString }">
 						<p>${produto.nome }</p>
 						<h2>
 							<f:formatNumber type="currency" value="${produto.valor }" />
@@ -74,34 +74,35 @@
 					</div>
 				</a>
 				<br>
+
 			</c:forEach>
 		</div>
 	</div>
-	</main>
+</main>
 
-	<!-- Import Footer -->
-	<c:import url="component/footerLoja.jsp"></c:import>
+<!-- Import Footer -->
+<c:import url="component/footerLoja.jsp"></c:import>
 
-	<!-- Import JS -->
-	<script type="text/javascript"
-		src="resources/jquery/jquery-2.2.2.min.js" /></script>
-	<script type="text/javascript"
-		src="resources/loja/js/materialize.min.js"></script>
-	<script type="text/javascript" src="resources/loja/js/categoria.js"></script>
+<!-- Import JS -->
+<script type="text/javascript"
+	src="resources/jquery/jquery-2.2.2.min.js" /></script>
+<script type="text/javascript"
+	src="resources/loja/js/materialize.min.js"></script>
+<script type="text/javascript" src="resources/loja/js/categoria.js"></script>
 
-	<!-- Script's -->
-	<script>
-		$(".menuu").click(function() {
-			$("#ul").toggle();
+<!-- Script's -->
+<script>
+	$(".menuu").click(function() {
+		$("#ul").toggle();
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
 		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+	})
+</script>
 </body>
 </html>

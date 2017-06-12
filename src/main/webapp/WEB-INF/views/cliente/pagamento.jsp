@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,12 +40,14 @@
 	});
 </script>
 </head>
-
+<main>
 <body>
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
-	<main>
+	<!-- Locale para fmt money -->
+	<f:setLocale value="pt-BR" />
+
 	<div class="demo">
 		<div id="demo">
 			<div class="dvs">
@@ -54,31 +58,39 @@
 					<thead>
 						<tr>
 							<th>Foto</th>
-							<th>Produto</th>
+							<th>Nome do Produto</th>
 							<th>Quantidade</th>
-							<th>Preço</th>
+							<th>Preço (unid.)</th>
 						</tr>
 					</thead>
+
+					<!-- Lista de itens no carrinho -->
 					<c:forEach items="${carrinhos }" var="produto">
 						<tbody>
 							<tr>
 								<td data-title="Foto"><img class="imgdg"
-									src="resources/loja/imagens/semFoto.png"></td>
+									src="${produto.produto.fotoString }"></td>
 								<td data-title="Produto">${produto.produto.nome }</td>
 								<td data-title="Quantidade">${produto.quantidade }
 									</div>
 								</td>
-								<td data-title="Preço">R$ ${produto.produto.valor }</td>
+								<td data-title="Preço"><f:formatNumber type="currency"
+										value="${produto.produto.valor }"></f:formatNumber></td>
 							</tr>
 						</tbody>
 					</c:forEach>
 				</table>
 			</div>
+
+			<!-- Descrição -->
 			<div class="descricaoProd" style="margin-top: -2em;">
 				<div class="row">
 					<div class="input-field col s6">
+						<!-- Descrição de endereços -->
 						<h3 style="margin-left: auto; margin-top: auto;">Endereço de
 							Entrega:</h3>
+
+						<!-- Lista de endereço -->
 						<div class="input-field col s12" id="input-f">
 							<select id="selectEnderecos">
 								<c:forEach items="${clienteLogado.enderecos }" var="endereco">
@@ -86,6 +98,8 @@
 								</c:forEach>
 							</select>
 						</div>
+
+						<!-- Endereço selecionado -->
 						<p id="pLogradouro">${clienteLogado.enderecos[0].logradouro }
 						</p>
 						<p id="pNumero">Número: ${clienteLogado.enderecos[0].numero }
@@ -98,11 +112,17 @@
 
 					</div>
 				</div>
+
+				<!-- Total da compra e botões para forma de pagamento -->
 				<div class="desc">
+					<h5 align="right">
+						Total:
+						<f:formatNumber type="currency" value="${totalCarrinho }" />
+					</h5>
 
-					<h3>Total: R$ ${totalCarrinho }</h3>
+					<br>
 
-					<div class="row">
+					<div align="center">
 						<button class="waves-effect waves-light btn"
 							style="width: 12em; margin-left: 20%; margin-top: 1em; background-color: #005900;">
 							<a onclick="pagamentoPagSeguro()" style="color: white;"><img
@@ -110,72 +130,72 @@
 								<p style="margin-top: -0.5em; font-size: 15px;">Pagseguro</p>
 						</button>
 
-						<a onclick="pagamentoBoleto()" style="cursor: pointer;">Pagamento
-							com boleto</a> </a>
+						<a onclick="pagamentoBoleto()"
+							style="cursor: pointer; margin-top: 0.8em;" class="btn-flat">Boleto</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</main>
+</main>
 
-	<!-- Import footer -->
-	<c:import url="component/footerLoja.jsp"></c:import>
+<!-- Import footer -->
+<c:import url="component/footerLoja.jsp"></c:import>
 
-	<!-- Scripts -->
-	<script type="text/javascript">
-		function pagamentoBoleto() {
-			console.log("pagamentoBoleto");
-			redirecionar("pag/gerarBoleto");
+<!-- Scripts -->
+<script type="text/javascript">
+	// PagSeguro
+	function pagamentoPagSeguro() {
+		console.log("pagamento pagseguro");
+		redirecionar("pag/pagseguro");
+	}
 
-		}
+	// Boleto
+	function pagamentoBoleto() {
+		console.log("pagamentoBoleto");
+		redirecionar("pag/gerarBoleto");
+	}
 
-		function pagamentoPagSeguro() {
-			console.log("pagamento pagseguro");
-			redirecionar("pag/pagseguro");
-		}
+	// Redirecionar
+	function redirecionar(url) {
+		url += "/" + document.getElementById('selectEnderecos').value;
+		console.log(document.getElementById('selectEnderecos').value);
+		window.location.href = url;
+	}
+</script>
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
+		});
 
-		function redirecionar(url) {
+		// Select change
+		$('select').on("change", function() {
+			var valSelect = $("option:selected", this).val();
+			console.log(valSelect);
 
-			url += "/" + document.getElementById('selectEnderecos').value;
+			$.ajax({
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				type : 'GET',
+				url : 'rest/dinamic/endereco/' + valSelect,
+				dataType : 'json',
+				success : function(data) {
+					console.log(data);
 
-			console.log(url);
-
-			window.location.href = url;
-		}
-	</script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
+					$("#pLogradouro").html(data.logradouro);
+					$("#pNumero").html('Número: ' + data.numero);
+					$("#pBairro").html(data.bairro);
+					$("#pCidade").html(data.cidade);
+				},
+				error : function() {
+					console.log('só triteza');
+				}
 			});
-
-			$('select').on("change", function() {
-				var valSelect = $("option:selected", this).val();
-				console.log(valSelect);
-
-				$.ajax({
-					headers : {
-						'Content-Type' : 'application/json'
-					},
-					type : 'GET',
-					url : 'rest/dinamic/endereco/' + valSelect,
-					dataType : 'json',
-					success : function(data) {
-						console.log(data);
-
-						$("#pLogradouro").html(data.logradouro);
-						$("#pNumero").html('Número: ' + data.numero);
-						$("#pBairro").html(data.bairro);
-						$("#pCidade").html(data.cidade);
-					},
-					error : function() {
-						console.log('só triteza');
-					}
-				});
-			});
-		})
-	</script>
+		});
+	})
+</script>
 </body>
 </html>

@@ -22,14 +22,9 @@ public class AdmLogin {
 	public static final String EMISSOR = "BIGDOG";
 	public static final String SECRET = "BigDogDTSenai2017";
 
-	// Construtor
-	public AdmLogin() {
-		// ...
-	}
-
 	// Requisições
 	// Ir para formulário de login do administrador
-	@RequestMapping(value = "adm/admLogin")
+	@RequestMapping(value = "admLogin")
 	public ModelAndView formLoginAdm(ModelAndView mav) {
 		// Atribuindo view
 		mav.setViewName("administrador/login-administrador");
@@ -39,12 +34,10 @@ public class AdmLogin {
 	}
 
 	// Verificar Login
-	@RequestMapping(value = "adm/loginAdm", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "loginAdm", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<TokenADM> loginAdm(@RequestBody Administrador administrador) {
-		System.out.println(administrador.toString());
-
 		try {
-			// Verifica tipo de usuário
+			// Verifica usuário
 			if (administrador.getEmail().equals("admin_bigdog@gmail.com")
 					&& administrador.getSenha().equals("bigdog1234")) {
 				// HashMap para token
@@ -54,11 +47,17 @@ public class AdmLogin {
 				hash.put("iss", EMISSOR);
 				hash.put("adm", administrador.getEmail());
 
+				// Atribuindo valor de expiração por tempo
+				long hora_atual = System.currentTimeMillis() / 1000;
+				long hora_expiracao = hora_atual + 3600;
+				hash.put("iat", hora_atual);
+				hash.put("exp", hora_expiracao);
+
 				// Atribuindo secret
 				JWTSigner signer = new JWTSigner(SECRET);
 				TokenADM tokenAdm = new TokenADM();
 
-				// Atribuindo valor para token
+				// Atribuindo valor de hashmap para token
 				tokenAdm.setToken(signer.sign(hash));
 
 				// Retornando token...
@@ -69,6 +68,8 @@ public class AdmLogin {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+
+			// Retornando...
 			return new ResponseEntity<TokenADM>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

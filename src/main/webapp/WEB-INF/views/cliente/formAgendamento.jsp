@@ -28,97 +28,103 @@
 <!-- Import JS -->
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
 </head>
+<main>
 <body>
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
-	<main>
+	<!-- Menu do cliente -->
 	<div class="cxAvatar">
 		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
 		<div class="cx08">
-			<h2>Cliente da Silva</h2>
+			<h2>${clienteLogado.nome }</h2>
 		</div>
 		<div class="menuu">
 			<i class="fa fa-bars" aria-hidden></i> Menu
 		</div>
 		<div class="cx05">
 			<ul id="ul">
-				<li id="pf"><a href="indexCliente"><i class="fa fa-home"
+				<li id="pf"><a href="home-user"><i class="fa fa-home"
 						aria-hidden="true"></i> Inicio</a></li>
-				<li id="pf"><a href="formPerfil"><i class="fa fa-user"
+				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
-				<li><a href="listPets"><img
-						src="resources/loja/imagens/icones/icon-09.png"> Meus Pets</a></li>
+				<li><a href="lista-pet"><img
+						src="resources/loja/imagens/icones/icon-09.png">
+						<p id="lip">Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li class="id"><a href="listAgendamentos"><i
 						class="fa fa-calendar" aria-hidden="true"></i> Agendamentos</a></li>
-				<li><a href="login"><i class="fa fa-sign-in"
+				<li><a href="logout"><i class="fa fa-sign-in"
 						aria-hidden="true"></i> Logout</a></li>
 			</ul>
 		</div>
 		<div class="cx03">
 			<i class="fa fa-calendar" aria-hidden="true"></i> Novo Agendamento
 		</div>
+
+		<!-- Formulário de agendamento -->
 		<form id="form" class="form">
 			<div class="input-field col s12" id="input-f">
 				<label class="active" for="f1" style="margin-left: -1em;">Tipo
-					de Serviço</label> <select>
-					<option>Clinica</option>
-					<option>Banho e tosa</option>
+					de Serviço</label> <select id="selectTipoServico">
+					<option value="0">Selecione uma opção</option>
+					<option value="1">Veterinário</option>
+					<option value="0">Estética</option>
 				</select>
 			</div>
-
+			<input type="hidden" id="idCliente"
+				value="${clienteLogado.idCliente }">
 			<div class="input-field col s12" id="input-f">
 				<label class="active" for="f1" style="margin-left: -1em;">Serviço
-					a ser realizado</label> <select>
-					<option>Cirurgia</option>
-					<option>Banho e tosa</option>
+					a ser realizado</label> <select id="selectServicos" disabled>
+
 				</select>
 			</div>
 
 			<div class="input-field col s12" id="input-f">
-				<label class="active" for="first_name2" style="margin-left: -1em;">Data
-					Marcada</label> <select>
-					<option>20/04/1998</option>
-					<option>20/04/1998</option>
-				</select>
+				<label class="active" for="first_name2" style="margin-left: -1em;">Selecione
+					uma data</label> <input type="date" id="inputDataMarcada" disabled>
+			</div>
+
+			<div class="input-field col s12" id="input-f"
+				style="margin-top: 10px; margin-bottom: 50px;">
+				<a id="buscarHorario" style="cursor: pointer;"></a>
 			</div>
 
 			<div class="input-field col s12" id="input-f">
 				<label class="active" for="first_name2" style="margin-left: -1em;">Horário</label>
-				<select>
-					<option>20:20</option>
-					<option>21:00</option>
+				<select id="selectHorario" disabled>
+					<option>Selecione um horario</option>
 				</select>
 			</div>
 
-
-			<div class="row">
-				<div class="input-field col s6">
-					<input id="f02" type="text" class=""> <label class="active"
-						for="f02">Tempo Estimado</label>
-				</div>
-			</div>
-			<div class="divp">
+			<div class="divp" style="margin-top: 5em;">
 				<div class="input-field col s12" id="input-f asd">
 					<label class="active" for="f3" style="margin-left: -1em;">Pet</label>
-					<select>
-						<option>Dalila</option>
-						<option>Bill Gates</option>
+					<select id="selectPet" disabled>
+						<c:forEach var="pet" items="${clienteLogado.pets }">
+							<option value="${pet.idPet }">${pet.nome }</option>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="input-field col s6">
-					<input id="f04" type="text" class=""> <label class="active"
-						for="f04">Valor do Serviço</label>
-				</div>
+			<div style="width: 100%; height: auto;">
+				<p id="descricao">
+					<b>Descrição</b> :
+				</p>
+				<p id="tempoEstimado">
+					<b>Tempo estimado do serviço</b> :
+				</p>
+				<p id="preco">
+					<b>Preço</b> :
+				</p>
 			</div>
-			<a href="#">
-				<button type="button" class="buttonn buttonBlue">
-					Agendar
+
+			<a href="">
+				<button type="button" id="btnAgendar" class="btn brown">
+					Confirmar
 					<div class="ripples buttonRipples">
 						<span class="ripplesCircle"></span>
 					</div>
@@ -126,41 +132,214 @@
 			</a>
 		</form>
 	</div>
-	</main>
+</main>
 
-	<!-- Import footer -->
-	<c:import url="component/footerLoja.jsp"></c:import>
+<!-- Import footer -->
+<c:import url="component/footerLoja.jsp"></c:import>
 
-	<!-- Import JS -->
-	<script type="text/javascript"
-		src="resources/jquery/jquery-2.2.2.min.js" /></script>
-	<script type="text/javascript"
-		src="resources/loja/js/materialize.min.js"></script>
+<!-- Import JS -->
+<script type="text/javascript"
+	src="resources/jquery/jquery-2.2.2.min.js" /></script>
+<script type="text/javascript"
+	src="resources/loja/js/materialize.min.js"></script>
 
-	<!-- Script's -->
-	<script type="text/javascript">
-		$(".button-collapse").sideNav();
-		$(document).ready(function() {
-			Materialize.updateTextFields();
-		});
+<!-- Script's -->
+<script>
+	$(document).ready(
+			function() {
 
-		$(document).ready(function() {
-			$('select').material_select();
-		});
-	</script>
-	<script>
-		$(".menuu").click(function() {
+				$(".button-collapse").sideNav();
+				Materialize.updateTextFields();
+				$('select').material_select();
+				$("#ul").toggle();
 
-			$("#ul").toggle();
-		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
+				$('.menu-anchor').on('click touchstart', function(e) {
+					$('html').toggleClass('menu-active');
+					e.preventDefault();
+				});
+
+				// Função para agendar
+				$('#btnAgendar').click(
+						function agendar() {
+
+							var data = $('#selectHorario option:selected')
+									.val()
+									+ ' '
+									+ $('#selectHorario option:selected')
+											.text();
+
+							var agendamento = {
+								servico : {
+									idServico : $('#selectServicos').val()
+								},
+								cliente : {
+									idCliente : $('#idCliente').val()
+								},
+								pet : {
+									idPet : $('#selectPet').val()
+								}
+							}
+
+							$.ajax({
+								headers : {
+									'Content-Type' : 'application/json'
+								},
+								type : 'POST',
+								url : 'rest/agendar/' + data,
+								dataType : 'json',
+								data : JSON.stringify(agendamento),
+								success : function(data) {
+								}
+							});
+						});
+
+				// Horarios livres para o dia selecionado
+				$('#buscarHorario').click(
+						function buscarHorarios() {
+							var valData = $('#inputDataMarcada').val();
+							valData += ' 09:00:00';
+
+							$.ajax({
+								headers : {
+									'Content-Type' : 'application/json'
+								},
+								type : 'GET',
+								url : 'rest/agendar/' + valData + '/'
+										+ $('#selectTipoServico').val() + '/'
+										+ $('#selectServicos').val(),
+								dataType : 'json',
+								success : function(data) {
+									tratarInputsFinais(data);
+									$('#selectHorario').material_select();
+									$('#selectPet').material_select();
+								},
+								error : function(e) {
+									console.log('ERROR : '+ e);
+								}
+							});
+						});
+
+				// Popula os camos de horario e pet, e desbloqueia
+				function tratarInputsFinais(horarios) {
+
+					$('#selectHorario').find('option').remove().end();
+
+					for (var int = 0; int < horarios.length; int++) {
+						$('#selectHorario').append(
+								'<option value='+ horarios[int] +' >'
+										+ horarios[int].substring(10, 19)
+										+ '</option>');
+					}
+
+					$('#selectHorario').prop("disabled", false);
+					$('#selectPet').prop("disabled", false);
+
+				}
+
+				$('#selectServicos').on(
+						"change",
+						function() {
+
+							if ($('#selectHorario').is(':enabled')) {
+								$('#selectHorario').prop("disabled", true);
+								$('#selectPet').prop("disabled", true);
+								$('#selectHorario').material_select();
+								$('#selectPet').material_select();
+							}
+
+							var valSelect = $("option:selected", this).val();
+							$.ajax({
+								headers : {
+									'Content-Type' : 'application/json'
+								},
+								type : 'GET',
+								url : 'rest/dinamic/servico/' + valSelect,
+								dataType : 'json',
+								success : function(data) {
+									$('#descricao').empty();
+									$('#descricao').append(
+											'<p>Descrição: ' + data.observacao
+													+ '</p>');
+									$('#tempoEstimado').empty();
+									$('#tempoEstimado').append(
+											'<p>Tempo Estimado: '
+													+ data.tempoEstimado
+													+ '</p>');
+									$('#preco').empty();
+									$('#preco').append('Preco: ' + data.valor);
+
+								},
+								error : function(e) {
+									console.log('ERROR : ' + e);
+								}
+							});
+
+						});
+
+				$('#inputDataMarcada').on("change", function() {
+
+					if ($('#selectHorario').is(':enabled')) {
+						$('#selectHorario').prop("disabled", true);
+						$('#selectPet').prop("disabled", true);
+						$('#selectHorario').material_select();
+						$('#selectPet').material_select();
+					}
+
+				});
+
+				// Procura os servicos do tipo selecionado, assim que o select é selecionado
+				$('#selectTipoServico').on("change", function() {
+
+					if ($('#selectHorario').is(':enabled')) {
+						$('#selectHorario').prop("disabled", true);
+						$('#selectPet').prop("disabled", true);
+						$('#selectHorario').material_select();
+						$('#selectPet').material_select();
+					}
+
+					var valSelect = $("option:selected", this).val();
+
+					$.ajax({
+						headers : {
+							'Content-Type' : 'application/json'
+						},
+						type : 'GET',
+						url : 'rest/dinamic/agendar/servico/' + valSelect,
+						dataType : 'json',
+						success : function(data) {
+							tratarDadosInputs(data);
+							$('#selectServicos').material_select();
+							Materialize.updateTextFields();
+
+						},
+						error : function() {
+							console.log('ERROR : '+ e);
+						}
+					});
+
+				});
+
+				// Popula e remove os servicos
+				function tratarDadosInputs(dados) {
+
+					$('#selectServicos').find('option').remove().end();
+
+					for (var int = 0; int < dados.length; int++) {
+						$('#selectServicos').append(
+								'<option value='+ dados[int].idServico +' >'
+										+ dados[int].nome + '</option>');
+					}
+
+					$('#selectServicos').prop("disabled", false);
+					$('#inputDataMarcada').prop("disabled", false);
+					$('#buscarHorario').empty();
+					$('#buscarHorario').append('Horários disponíveis');
+					$('#buscarHorario').addClass('btn');
+					$('#buscarHorario').addClass('cyan');
+
+				}
+
 			});
-		})
-	</script>
+</script>
 </body>
 </html>

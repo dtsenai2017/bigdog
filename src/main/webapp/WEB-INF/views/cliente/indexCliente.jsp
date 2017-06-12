@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-
+	
 <!-- Ícone de aba -->
 <link rel="icon" href="resources/loja/imagens/logos/favicon.png">
 
@@ -29,11 +29,12 @@
 
 <!-- Import JS -->
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
+<main>
 <body>
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
-	<main> <!-- Avatar -->
+	<!-- Avatar -->
 	<div class="cxAvatar">
 		<!-- Avatar -->
 		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
@@ -56,7 +57,7 @@
 				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png"> Meus Pets</a></li>
+						src="resources/loja/imagens/icones/icon-09.png"><p id="lip"> Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li><a href="listAgendamentos"><i class="fa fa-calendar"

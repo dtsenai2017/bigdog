@@ -1,18 +1,19 @@
+var host = window.location.host;
 var googleUser = {};
 var profile;
 $(document).ready(function() {
 	 gapi.load('auth2', function() {
 	        auth2 = gapi.auth2.init({
-	            client_id: '125644047445-9j60sbkl1kssriskoolv4o946m18r8in.apps.googleusercontent.com',
+	            client_id: '461691358173-2ns4scm8m1k8hc1sm19vbqbeu85s5u2q.apps.googleusercontent.com',
 	            scope: 'profile'
-	        });
+	        });	        
 	        var elemento = document.getElementById("btnGoogle");
 	        loginGoogle(elemento)
 	    });
 });
 
 function loginGoogle(element) {
-    auth2.attachClickHandler(element, {}, function() {
+    auth2.attachClickHandler(element, {}, function() {    	
     	profile = auth2.currentUser.get().getBasicProfile();
     	sendGo();
     });
@@ -23,33 +24,32 @@ function sendGo() {
 	getGoogle(idL);
 }
 
-function redireciona(param, param2, param3) {
+function redireciona(param) {
 	var link;
 	var id;
 	var idR = profile.getId();
 	localStorage.setItem("id_redes", idR);
-	localStorage.setItem("id_cliente", param3);
+	localStorage.setItem("id_cliente", param);
 	var passaValor = function(url) {
 		window.location = link;
 	}
-	if (param == null && param2 == null) {
+	if (param == null) {
 		cadastrarGo(profile);
-		link = "faca-parte";
-	} else if (param == null) {
 		link = "faca-parte";
 	} else {
 		link = "indexCliente?id=" + localStorage.getItem("id_cliente");
+		localStorage.setItem("nome", null)
+		localStorage.setItem("email", null)
 	}
-	signOut();
 	passaValor(link);
 }
 
 function getGoogle(id) {
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/BigDog/rest/loginRedes/" + id,
+		url : "http://"+ host +"/BigDog/rest/loginRedes/" + id,
 		success : function(data) {
-			redireciona(data.cpf, data.email, data.idCliente);
+			redireciona(data.idCliente);
 		},
 		error : function(e) {
 			alert("Erro: " + e);
@@ -60,24 +60,7 @@ function getGoogle(id) {
 
 function cadastrarGo(profile) {
 	localStorage.setItem("id_redes", profile.getId());
-	var clienteAjax = {
-		nome : profile.getName(),
-		email : profile.getEmail(),
-		id_redes : profile.getId()
-	}
-
-	$.ajax({
-		type : 'POST',
-		url : 'http://localhost:8080/BigDog/rest/loginRedes',
-		data : JSON.stringify(clienteAjax),
-		contentType : "application/json;charset=UTF-8",
-		dataType : 'json',
-		success : function(data) {
-		}
-	});
-}
-function signOut() {
-	var auth2 = gapi.auth2.getAuthInstance();
-	auth2.signOut().then(function() {
-	});
+	localStorage.setItem("nome", profile.getName());
+	localStorage.setItem("email", profile.getEmail());
+	localStorage.setItem("dataNascimento", "")
 }

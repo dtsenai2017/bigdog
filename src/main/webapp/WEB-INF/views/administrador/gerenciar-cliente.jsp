@@ -60,8 +60,7 @@
 		<!-- Descrição de pesquisa -->
 		<p id="desc-nav-cliente" class="grey-text">
 			Para listar todos os clientes, clique na barra de pesquisa, <b>apague
-				tudo</b> que estiver nela e <b>pressione somente uma vez</b> a tecla de
-			espaço.
+				tudo</b> e pressione somente uma vez a <b>tecla de espaço</b>.
 		</p>
 	</div>
 

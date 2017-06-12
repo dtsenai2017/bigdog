@@ -52,8 +52,9 @@
 	</bean>
 
 	<!-- Interceptor -->
-	<!-- <mvc:interceptors> <bean class="br.com.bigdog.interceptor.Interceptor" 
-		/> </mvc:interceptors> -->
+	<mvc:interceptors>
+		<bean class="br.com.bigdog.interceptor.Interceptor" />
+	</mvc:interceptors>
 
 	<!-- Habilita a configuração do comportamento transacional baseado em anotações -->
 	<tx:annotation-driven />

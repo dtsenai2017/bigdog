@@ -158,8 +158,6 @@ function consumir() {
 					// Atribuindo valor para atributo de compras efetuadas nos
 					// seguintes meses
 					mesCompra = dadosGerais.mesCompra;
-
-					console.log(dadosGerais.mesCompra);
 				},
 				error : function(e) {
 					console.log('ERROR : ' + e);
@@ -257,7 +255,8 @@ function consumir() {
 		if (mesCompra[i] == null) {
 			// Atribuindo valores para TESTE
 			// --------------------------------------------------
-			mesCompra[i] = Math.floor((Math.random() * 25) + 1);
+			// mesCompra[i] = Math.floor((Math.random() * 25) + 1);
+			mesCompra[i] = 0;
 		}
 	}
 

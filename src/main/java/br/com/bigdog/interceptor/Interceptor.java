@@ -12,58 +12,165 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.auth0.jwt.JWTVerifier;
 
 import br.com.bigdog.admcontroller.AdmLogin;
+import br.com.bigdog.clientecontroller.RestLoginController;
 
 public class Interceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
+		// Saída teste da URI
+		System.out.println(request.getRequestURI());
+
+		// Verifica se contém recursos
 		if (request.getRequestURI().contains("resources")) {
 			return true;
 		}
 
-		// Verifica se handler é valido (Instânciado)
-		if (!(handler instanceof HandlerMethod)) {
-			return true;
-		}
+		// Métodos autorizados para login de cliente e administrador
+		if (handler instanceof HandlerMethod) {
+			System.out.println("Handler instânciado!");
 
-		// Handler
-		HandlerMethod method = (HandlerMethod) handler;
+			// Handler
+			HandlerMethod method = (HandlerMethod) handler;
 
-		// Teste
-		// System.out.println("Pacote : " +
-		// method.getBean().getClass().getName());
-		// System.out.println("Controller (Class) : " +
-		// method.getBean().getClass().getSimpleName());
-		// System.out.println("Método : " + method.getMethod().getName());
-		// System.out.println("URI : " + request.getRequestURI());
+			// Páginas autorizadas para cliente
+			if (request.getRequestURI().contains("home") || request.getRequestURI().contains("entrar")
+					|| request.getRequestURI().contains("faca-parte") || request.getRequestURI().contains("categoria")
+					|| request.getRequestURI().contains("produtos") || request.getRequestURI().contains("produto")
+					|| request.getRequestURI().contains("addProduto")
+					|| request.getRequestURI().contains("confirmarCompra")
+					|| request.getRequestURI().contains("novo-agendamento")
+					|| request.getRequestURI().contains("rest/login") || request.getRequestURI().contains("rest/logar")
+					|| request.getRequestURI().contains("rest/verificaCpf")
+					|| request.getRequestURI().contains("rest/verificaEmail")
+					|| request.getRequestURI().contains("indexCliente") || request.getRequestURI().contains("search")) {
 
-		// CLIENTE
-		// ...
-
-		// ADMINISTRADOR
-		// Formulário de login
-		if (method.getMethod().getName().equals("formLoginAdm") || method.getMethod().getName().equals("loginAdm")) {
-			return true;
-		} else {
-			String token = null;
-			try {
-				token = request.getHeader("Authorization");
-
-				JWTVerifier verifier = new JWTVerifier(AdmLogin.SECRET);
-
-				Map<String, Object> claims = verifier.verify(token);
-
+				// Retornando...
 				return true;
-			} catch (Exception e) {
-				e.printStackTrace();
-				if (token == null) {
-					response.sendError(HttpStatus.UNAUTHORIZED.value());
+			}
+
+			// Métodos autorizados de login para cliente mobile e administrador
+			if (method.getMethod().getName().equals("formLoginAdm") || method.getMethod().getName().equals("loginAdm")
+					|| method.getMethod().getName().equals("logaAd")) {
+
+				System.out.println("Handler method's autorizado!");
+
+				// Retornando...
+				return true;
+			}
+
+			// Verifica se há cliente na sessão
+			if (request.getSession().getAttribute("clienteLogado") != null) {
+				System.out.println("Cliente logado!");
+
+				// Verifica uri
+				if (request.getRequestURI().contains("adm")) {
+					// Response 404
+					response.sendError(HttpStatus.NOT_FOUND.value());
+
+					// Retornando...
+					return false;
 				} else {
-					response.sendError(HttpStatus.FORBIDDEN.value());
+					// Retornando...
+					return true;
 				}
-				return false;
+			}
+
+			// Verifica se há token
+			if (request.getHeader("Authorization") != null) {
+				// Verifica token de administrador
+				if (request.getRequestURI().contains("adm")) {
+					// Token
+					String token = null;
+
+					try {
+						// Capturando token de requisição
+						token = request.getHeader("Authorization");
+
+						// Verificando token
+						JWTVerifier verifier = new JWTVerifier(AdmLogin.SECRET);
+
+						// Map com token
+						Map<String, Object> claims = verifier.verify(token);
+
+						System.out.println("Token do administrador válido.");
+
+						// Retornando..
+						return true;
+					} catch (Exception e) {
+						// Throw exception
+						e.printStackTrace();
+
+						// Verifica se há um token
+						if (token == null) {
+							// Response 401
+							response.sendError(HttpStatus.UNAUTHORIZED.value());
+						} else {
+							// Response 403
+							response.sendError(HttpStatus.FORBIDDEN.value());
+						}
+
+						// Retornando..
+						return false;
+					}
+
+					// Verifica token de cliente
+				} else {
+					// Token
+					String token = null;
+
+					try {
+						// Capturando token de requisição
+						token = request.getHeader("Authorization");
+
+						// Verificando token
+						JWTVerifier verifier = new JWTVerifier(RestLoginController.SECRET);
+
+						// Map com token
+						Map<String, Object> claims = verifier.verify(token);
+
+						System.out.println("Token do cliente válido.");
+
+						// Retornando..
+						return true;
+					} catch (Exception e) {
+						// Throw exception
+						e.printStackTrace();
+
+						// Verifica se há um token
+						if (token == null) {
+							// Response 401
+							response.sendError(HttpStatus.UNAUTHORIZED.value());
+						} else {
+							// Response 403
+							response.sendError(HttpStatus.FORBIDDEN.value());
+						}
+
+						// Retornando..
+						return false;
+					}
+				}
 			}
 		}
+
+		// Verifica se handler é valido (Instânciado)
+		if (!(handler instanceof HandlerMethod)) {
+			System.out.println("Handler não instanciado.");
+
+			// Response 404
+			response.sendError(HttpStatus.NOT_FOUND.value());
+
+			// Retornando...
+			return false;
+		}
+
+		System.out.println("Interceptor não autorizado.");
+
+		// Response 404
+		response.sendError(HttpStatus.NOT_FOUND.value());
+
+		// Retornando...
+		return false;
 	}
 }

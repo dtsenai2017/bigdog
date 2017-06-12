@@ -53,7 +53,20 @@ public class ClienteDAO {
 		manager.remove(cliente);
 	}
 
-	// Listar (idRedes)
+	// Buscar cliente por id
+	public Cliente buscaCliente(Long id) {
+		TypedQuery<Cliente> query = manager.createQuery("select c from Cliente c where c.idCliente = :idCliente",
+				Cliente.class);
+		query.setParameter("idCliente", id);
+		try {
+			return query.getSingleResult();
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+
+	// Buscar cliente por idRedes
 	public Cliente busca(String id) {
 		TypedQuery<Cliente> query = manager.createQuery("select c from Cliente c where c.id_redes = :id_redes",
 				Cliente.class);
@@ -66,14 +79,35 @@ public class ClienteDAO {
 		}
 	}
 
-	// Listar
+	// Buscar CPF
 	public Cliente buscaCpf(String id) {
+		// Query
 		TypedQuery<Cliente> query = manager.createQuery("select c from Cliente c where c.cpf = :cpf", Cliente.class);
+
+		// Atribuindo parâmetro
 		query.setParameter("cpf", id);
+
+		// Retornando...
 		try {
 			return query.getSingleResult();
 		} catch (Exception e) {
-			System.out.println(e);
+			return null;
+		}
+	}
+
+	// Buscar Email
+	public Cliente buscaEmail(String email) {
+		// Query
+		TypedQuery<Cliente> query = manager.createQuery("select c from Cliente c where c.email = :email",
+				Cliente.class);
+
+		// Atribuindo parâmetro
+		query.setParameter("email", email);
+
+		// Retornando...
+		try {
+			return query.getSingleResult();
+		} catch (Exception e) {
 			return null;
 		}
 	}

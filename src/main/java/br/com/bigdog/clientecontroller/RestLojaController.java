@@ -1,8 +1,6 @@
 package br.com.bigdog.clientecontroller;
 
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,6 +16,7 @@ import br.com.bigdog.dao.CategoriaDAO;
 import br.com.bigdog.dao.EnderecoClienteDAO;
 import br.com.bigdog.dao.ProdutoCarrinhoDAO;
 import br.com.bigdog.dao.ProdutoDAO;
+import br.com.bigdog.model.Carrinho;
 import br.com.bigdog.model.Categoria;
 import br.com.bigdog.model.EnderecoCliente;
 import br.com.bigdog.model.Produto;
@@ -46,36 +45,47 @@ public class RestLojaController {
 	// Responsável pela listagem dinamica na pagina de produtos
 	@RequestMapping(value = "/rest/dinamic/produtos/{ultimoIndex}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Produto> listarProdutosSobDemanda(@PathVariable("ultimoIndex") long ultimoIndex) {
-
+		// Retornando...
 		return produtoDAO.listarComLimite(0, 8);
 	}
 
-	// Responsável pelo insert dinamico
-	@RequestMapping(value = "/rest/dinamic/alterarQtd", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Double> alterarQtdDinamicamente(@RequestBody ProdutoCarrinho carrinho) {
-		Long qtd = carrinho.getQuantidade();
-		carrinho = produtoCarrinhoDAO.listar(carrinho.getIdProdutoCarrinho());
+	// Responsável pelo insert dinâmico
+	@RequestMapping(value = "/rest/dinamic/alterarQtd/{idCliente}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Double> alterarQtdDinamicamente(@RequestBody ProdutoCarrinho produtoCarrinho,
+			@PathVariable long idCliente) {
+		// Atributos
+		double totalCarrinho = 0;
+		Long qtd = produtoCarrinho.getQuantidade();
+		produtoCarrinho = produtoCarrinhoDAO.listar(produtoCarrinho.getIdProdutoCarrinho());
+		Carrinho carrinho = carrinhoDoClienteDAO.listarCarrinhoDoCliente(idCliente);
 
-		carrinho.setQuantidade(qtd);
+		// Atribuindo valores
+		produtoCarrinho.setQuantidade(qtd);
+		produtoCarrinhoDAO.alterar(produtoCarrinho);
 
-		produtoCarrinhoDAO.alterar(carrinho);
+		for (ProdutoCarrinho produtoCarrinho2 : carrinho.getProdutosCarrinho()) {
+			totalCarrinho += produtoCarrinho2.getProduto().getValor() * produtoCarrinho2.getQuantidade();
+		}
 
-		Double totalCarrinho = (double) 0;
-
-		// for (ProdutoCarrinho produtoCarrinho : carrinhoDoClienteDAO
-		// .listarCarrinhoDoCliente(carrinho.getCliente().getIdCliente())) {
-		// totalCarrinho += produtoCarrinho.getProduto().getValor() *
-		// produtoCarrinho.getQuantidade();
-		// }
-
-		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-
-		String formatado = (nf.format(totalCarrinho)).replace("R", "").replace("$", "").replace(" ", "");
-		totalCarrinho = Double.parseDouble(formatado.replace(",", "."));
-
-		System.out.println(totalCarrinho);
+		// Retornando...
 		return ResponseEntity.ok(totalCarrinho);
+	}
 
+	// Excluir item do carrinho
+	@RequestMapping(value = "rest/dinamic/excluirItem/{id}/{idCliente}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Double> excluirItemCarrinho(@PathVariable long id, @PathVariable long idCliente) {
+		// Atributos
+		double totalCarrinho = 0;
+		produtoCarrinhoDAO.excluir(id);
+		Carrinho carrinho = carrinhoDoClienteDAO.listarCarrinhoDoCliente(idCliente);
+
+		for (ProdutoCarrinho produtoCarrinho2 : carrinho.getProdutosCarrinho()) {
+			System.out.println(produtoCarrinho2.getProduto().getNome());
+			totalCarrinho += produtoCarrinho2.getProduto().getValor() * produtoCarrinho2.getQuantidade();
+		}
+
+		// Retornando...
+		return ResponseEntity.ok(totalCarrinho);
 	}
 
 	// Responsável pela listagem de um endereço na página de compra

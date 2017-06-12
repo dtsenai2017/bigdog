@@ -1,9 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Didact+Gothic');
+
 #body {
 	overflow-x: hidden;
-	font-family: Century Gothic;
-	background-image: linear-gradient(to right, #5c4033, #7e5745);
+	font-family: 'Century Gothic', 'Didact Gothic';
+	/* 	background-image: linear-gradient(to right, #5c4033, #7e5745); */
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
 	margin: 0;
+	-webkit-background-size: cover;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
 }
+
+  main {
+    flex: 1 0 auto;
+  }
 
 .form {
 	width: 100%;
@@ -11,11 +23,22 @@
 	box-sizing: border-box;
 }
 
+#formm input {
+	color: white;
+}
+
+#formm label {
+	color: white;
+}
+
 #formm {
-	border: solid 3px #4f4f4f;
-	background-color: white;
 	border-top-right-radius: 2em;
 	border-bottom-left-radius: 2em;
+}
+
+span {
+	font-weight: bold;
+	color: #8ce4df;
 }
 
 #formm .row {
@@ -24,7 +47,7 @@
 
 .esq a {
 	text-decoration: none;
-	color: red;
+	color: #eeeeee;
 	font-weight: bold;
 }
 
@@ -34,7 +57,7 @@
 
 .img00 {
 	margin-left: 18%;
-	margin-top: 0.5em;
+	margin-top: 2em;
 	cursor: pointer;
 }
 
@@ -296,42 +319,31 @@ footer p {
 @media screen and (min-width: 915px) {
 }
 
-@media
-screen
-and
-(min-width:
-955px)
-{
-.form {
-	width: 50%;
+@media screen and (min-width: 955px) {
+	.form {
+		width: 50%;
+	}
+	.buttons {
+		margin-left: 10%;
+	}
+	.img00 img {
+		max-width: 60%;
+		margin-left: 10%;
+	}
+	.redes {
+		margin-left: 40%;
+	}
+	footer p {
+		margin-left: auto;
+	}
+	footer {
+		bottom: 0;
+	}
+	.buttonn {
+		width: 39%;
+	}
 }
 
-.buttons {
-	margin-left: 10%;
-}
-
-.img00 img {
-	max-width: 60%;
-	margin-left: 10%;
-}
-
-.redes {
-	margin-left: 40%;
-}
-
-footer p {
-	margin-left: auto;
-}
-
-footer {
-	bottom: 0;
-}
-
-.buttonn {
-	width: 39%;
-}
-
-}
 @media screen and (min-width: 1000px) {
 	.img00 img {
 		max-width: 40%;
@@ -339,14 +351,9 @@ footer {
 	}
 }
 
-@media
-screen
-and
-(min-width:
-1800px)
-{
-.form {
-	width: 50%;
-	padding: 3em 2em 2em;
-}
+@media screen and (min-width: 1800px) {
+	.form {
+		width: 50%;
+		padding: 3em 2em 2em;
+	}
 }

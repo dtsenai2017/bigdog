@@ -159,7 +159,7 @@ $("#btn-agenda-hoje").click(
 									+ 'icone-servico-estetica.png';
 						}
 
-						// Card
+						// Card para agendamento
 						var cardAgendamento = '<div class="card '
 								+ 'col s12 m12 l12 hoverable '
 								+ 'brown darken-1' + '">'
@@ -182,11 +182,11 @@ $("#btn-agenda-hoje").click(
 								+ 'right">'
 								+ 'keyboard_arrow_up</i></span>'
 								+ '<h6 class="'
-								+ 'white-text">'
+								+ 'white-text"><b>'
 								+ dataAgendada.getHours()
 								+ ':'
 								+ minutos
-								+ 'hrs.</h6></div>'
+								+ '</b>hrs.</h6></div>'
 								+ '<div class="card-reveal brown lighten-1 '
 								+ 'white-text'
 								+ '">'

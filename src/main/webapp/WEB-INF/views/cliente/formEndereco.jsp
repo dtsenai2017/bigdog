@@ -27,18 +27,20 @@
 
 <!-- Import JS -->
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
+<script src="resources/loja/js/jquery-3.2.1.min.js"></script>
 <script src="resources/loja/js/vanilla-masker.min.js"></script>
 <script type="text/javascript">
-	window.onload = function mask() {
+	$(document).ready(function() {
 		VMasker(document.querySelector(".cep")).maskPattern("99999-999");
-	}
+	});
 </script>
 </head>
+<main>
 <body>
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
-	<main> <!-- Dados do cliente -->
+	<!-- Dados do cliente -->
 	<div class="cxAvatar">
 		<!-- Imagem do avatar -->
 		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
@@ -61,7 +63,8 @@
 				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png"> Meus Pets</a></li>
+						src="resources/loja/imagens/icones/icon-09.png">
+					<p id="lip">Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li><a href="listAgendamentos"><i class="fa fa-calendar"
@@ -84,9 +87,10 @@
 					<input type="hidden" name="id" value="${clienteLogado.idCliente }"><input
 						type="hidden" name="idEnderecoCliente"
 						value="${alterarEndereco.idEnderecoCliente }"><input
-						id="cep" name="cep" type="text" value="${alterarEndereco.cep }"
-						required="required" class="cep"> <label class="active"
-						for="p07">CEP</label>
+						id="cep" name="cep" type="text" onkeypress="habilitaC()"
+						value="${alterarEndereco.cep }" required="required" class="cep">
+					<label class="active" for="p07">CEP</label> <span id="spcep"></span>
+
 				</div>
 			</div>
 
@@ -146,135 +150,174 @@
 			</button>
 		</form>
 	</div>
-	</main>
+</main>
 
-	<!-- Import footer -->
-	<c:import url="component/footerLoja.jsp"></c:import>
+<!-- Import footer -->
+<c:import url="component/footerLoja.jsp"></c:import>
 
-	<!-- Import JS -->
-	<script type="text/javascript"
-		src="resources/jquery/jquery-2.2.2.min.js" /></script>
-	<script type="text/javascript"
-		src="resources/loja/js/materialize.min.js"></script>
+<!-- Import JS -->
+<script type="text/javascript"
+	src="resources/loja/js/materialize.min.js"></script>
 
-	<!-- Script's -->
-	<script type="text/javascript">
-		$(".button-collapse").sideNav();
-		$(document).ready(function() {
-			Materialize.updateTextFields();
+<!-- Script's -->
+<script type="text/javascript">
+	function habilitaC() {
+		$('#logradouro').attr("disabled", false);
+		$('#bairro').attr("disabled", false);
+		$('#cidade').attr('disabled', false);
+		$('#uf').attr('disabled', false);
+
+	}
+</script>
+
+<script type="text/javascript">
+	$(".button-collapse").sideNav();
+	$(document).ready(function() {
+		Materialize.updateTextFields();
+	});
+
+	$(document).ready(function() {
+		$('select').material_select();
+	});
+</script>
+
+<script>
+	$(".menuu").click(function() {
+
+		$("#ul").toggle();
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
 		});
+	})
+</script>
 
-		$(document).ready(function() {
-			$('select').material_select();
-		});
-	</script>
-	<script>
-		$(".menuu").click(function() {
+<!-- Busca cep -->
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
 
-			$("#ul").toggle();
-		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+						function limpa_formulário_cep() {
+							// Limpa valores do formulário de cep.
+							$("#logradouro").val("");
+							$("#bairro").val("");
+							$("#cidade").val("");
+							$("#uf").val("");
+						}
 
-	<!-- Busca cep -->
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
+						// Quando o campo cep perde o foco.
+						$("#cep")
+								.blur(
+										function() {
 
-							function limpa_formulário_cep() {
-								// Limpa valores do formulário de cep.
-								$("#logradouro").val("");
-								$("#bairro").val("");
-								$("#cidade").val("");
-								$("#uf").val("");
-							}
+											// Nova variável "cep" 
+											// somente com dígitos.
+											var cep = $(this).val().replace(
+													/\D/g, '');
 
-							// Quando o campo cep perde o foco.
-							$("#cep")
-									.blur(
-											function() {
+											// Verifica se campo 
+											// cep possui valor informado.
+											if (cep != "") {
 
-												// Nova variável "cep" 
-												// somente com dígitos.
-												var cep = $(this).val()
-														.replace(/\D/g, '');
+												// Expressão regular para validar o CEP.
+												var validacep = /^[0-9]{8}$/;
 
-												// Verifica se campo 
-												// cep possui valor informado.
-												if (cep != "") {
+												// Valida o formato do CEP.
+												if (validacep.test(cep)) {
 
-													// Expressão regular para validar o CEP.
-													var validacep = /^[0-9]{8}$/;
+													// Preenche os 
+													// campos com "..." enquanto
+													// consulta webservice.
+													$("#logradouro").val("...");
+													$("#bairro").val("...");
+													$("#cidade").val("...");
+													$("#uf").val("...");
 
-													// Valida o formato do CEP.
-													if (validacep.test(cep)) {
+													// Consulta o webservice viacep.com.br/
+													$
+															.getJSON(
+																	"//viacep.com.br/ws/"
+																			+ cep
+																			+ "/json/?callback=?",
+																	function(
+																			dados) {
 
-														// Preenche os 
-														// campos com "..." enquanto
-														// consulta webservice.
-														$("#logradouro").val(
-																"...");
-														$("#bairro").val("...");
-														$("#cidade").val("...");
-														$("#uf").val("...");
+																		if (!("erro" in dados)) {
+																			// Atualiza os 
+																			// campos com os valores da
+																			// consulta.
+																			$(
+																					"#logradouro")
+																					.val(
+																							dados.logradouro);
+																			$(
+																					"#bairro")
+																					.val(
+																							dados.bairro);
+																			$(
+																					"#cidade")
+																					.val(
+																							dados.localidade);
+																			$(
+																					"#uf")
+																					.val(
+																							dados.uf);
+																			$(
+																					"#spcep")
+																					.text(
+																							"");
+																			$(
+																					"#complemento")
+																					.focus();
+																			$(
+																					'#logradouro')
+																					.attr(
+																							"disabled",
+																							true);
+																			$(
+																					'#bairro')
+																					.attr(
+																							"disabled",
+																							true);
+																			$(
+																					'#cidade')
+																					.attr(
+																							'disabled',
+																							true);
+																			$(
+																					'#uf')
+																					.attr(
+																							'disabled',
+																							true);
 
-														// Consulta o webservice viacep.com.br/
-														$
-																.getJSON(
-																		"//viacep.com.br/ws/"
-																				+ cep
-																				+ "/json/?callback=?",
-																		function(
-																				dados) {
-
-																			if (!("erro" in dados)) {
-																				// Atualiza os 
-																				// campos com os valores da
-																				// consulta.
-																				$(
-																						"#logradouro")
-																						.val(
-																								dados.logradouro);
-																				$(
-																						"#bairro")
-																						.val(
-																								dados.bairro);
-																				$(
-																						"#cidade")
-																						.val(
-																								dados.localidade);
-																				$(
-																						"#uf")
-																						.val(
-																								dados.uf);
-																			} // end if.
-																			else {
-																				// CEP pesquisado não foi encontrado.
-																				limpa_formulário_cep();
-																				alert("CEP não encontrado.");
-																			}
-																		});
-													} // end if.
-													else {
-														// cep é inválido.
-														limpa_formulário_cep();
-														alert("Formato de CEP inválido.");
-													}
+																		} // end if.
+																		else {
+																			// CEP pesquisado não foi encontrado.
+																			limpa_formulário_cep();
+																			$(
+																					"#spcep")
+																					.text(
+																							"CEP Não Encontrado");
+																		}
+																	});
 												} // end if.
 												else {
-													// cep sem valor, limpa formulário.
+													// cep é inválido.
 													limpa_formulário_cep();
+													alert("Formato de CEP inválido.");
 												}
-											});
-						});
-	</script>
+											} // end if.
+											else {
+												// cep sem valor, limpa formulário.
+												limpa_formulário_cep();
+											}
+										});
+					});
+</script>
 </body>
 </html>

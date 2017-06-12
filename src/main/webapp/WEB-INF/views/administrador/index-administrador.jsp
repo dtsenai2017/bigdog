@@ -26,7 +26,7 @@
 		<!-- Section -->
 		<div class="section">
 			<!-- Título -->
-			<h4 class="center-align">Administrador</h4>
+			<h4 class="center-align">Área do Administrador</h4>
 
 			<!-- Divider -->
 			<div class="divider"></div>

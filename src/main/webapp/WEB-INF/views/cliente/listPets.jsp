@@ -29,11 +29,13 @@
 <!-- Import JS -->
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
 </head>
+<main>
+
 <body>
 	<!-- Import footer -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
-	<main> <!-- Dados do cliente -->
+	<!-- Dados do cliente -->
 	<div class="cxAvatar">
 		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
 		<div class="cx08">
@@ -49,7 +51,7 @@
 				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
 				<li class="id"><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png"> Meus Pets</a></li>
+						src="resources/loja/imagens/icones/icon-09.png"><p id="lip"> Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li><a href="listAgendamentos"><i class="fa fa-calendar"
@@ -100,22 +102,22 @@
 		</div>
 		<br>
 	</div>
-	</main>
-	<c:import url="component/footerLoja.jsp"></c:import>
+</main>
+<c:import url="component/footerLoja.jsp"></c:import>
 
-	<script src="resources/loja/js/jquery.min.js"></script>
-	<script>
-		$(".menuu").click(function() {
+<script src="resources/loja/js/jquery.min.js"></script>
+<script>
+	$(".menuu").click(function() {
 
-			$("#ul").toggle();
+		$("#ul").toggle();
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
 		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+	})
+</script>
 </html>

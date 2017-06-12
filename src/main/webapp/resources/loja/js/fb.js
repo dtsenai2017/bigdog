@@ -1,3 +1,4 @@
+var host = window.location.host;
 // Função de Formatar a Data "toDate()"
 String.prototype.toDate = function(format, delimiter) {
 	var date = this;
@@ -99,9 +100,9 @@ function checkFacebook() {
 function getFb(response) {
 	$.ajax({
 		type : "GET",
-		url : "http://localhost:8080/BigDog/rest/loginRedes/" + response.id,
+		url : "http://" + host + "/BigDog/rest/loginRedes/" + response.id,
 		success : function(data) {
-			redirecionaFb(data.cpf, data.email, data.idCliente, response);
+			redirecionaFb(data.idCliente, response);
 		},
 		error : function(e) {
 			alert("Erro: " + e);
@@ -111,18 +112,16 @@ function getFb(response) {
 }
 
 // Função para redirecionar o cliente
-function redirecionaFb(param, param2, param3, response) {
+function redirecionaFb(param, response) {
 	var link;
 	var idL = response.id;
 	localStorage.setItem("id_redes", idL);
-	localStorage.setItem("id_cliente", param3)
+	localStorage.setItem("id_cliente", param)
 	var passaValor = function(url) {
 		window.location = link;
 	}
-	if (param == null && param2 == null) {
+	if (param == null) {
 		cadastrarFb(response);
-		link = "faca-parte";
-	} else if (param == null) {
 		link = "faca-parte";
 	} else {
 		link = "indexCliente?id=" + localStorage.getItem("id_cliente");
@@ -133,11 +132,9 @@ function redirecionaFb(param, param2, param3, response) {
 
 // Realiza o cadastro basico no Sistema
 function cadastrarFb(response) {
-
 	var dataN = response.birthday
 	var idL = response.id
 	var genero = response.gender
-
 	if (genero == 'male') {
 		genero = 'Masculino'
 	} else if (genero == 'female') {
@@ -145,30 +142,14 @@ function cadastrarFb(response) {
 	}
 
 	if (dataN == null) {
-		var clienteAjax = {
-			nome : response.name,
-			email : response.email,
-			genero : genero,
-			id_redes : response.id
-		}
+		localStorage.setItem("dataNascimento", "")
+		localStorage.setItem("nome", response.name)
+		localStorage.setItem("email", response.email)
+		localStorage.setItem("genero", genero)
 	} else {
-
-		var clienteAjax = {
-			nome : response.name,
-			email : response.email,
-			genero : genero,
-			dataNascimento : dataN.toDate("dd/MM/yyyy", "/"),
-			id_redes : response.id
-		}
+		localStorage.setItem("nome", response.name)
+		localStorage.setItem("email", response.email)
+		localStorage.setItem("genero", genero)
+		localStorage.setItem("dataNascimento", dataN)
 	}
-	$.ajax({
-		type : 'POST',
-		url : 'http://localhost:8080/BigDog/rest/loginRedes',
-		data : JSON.stringify(clienteAjax),
-		contentType : "application/json;charset=UTF-8",
-		dataType : 'json',
-		success : function(data) {
-			console.log('Deu certo Facebook');
-		}
-	});
 }

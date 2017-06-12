@@ -40,8 +40,18 @@ public class AdmController {
 		this.daoJDBC = daoJDBC;
 	}
 
+	// Index Administrador
+	@RequestMapping(value = "indexAdministrador")
+	public ModelAndView indexAdministrador(ModelAndView mav) {
+		// Adicionando view
+		mav.setViewName("administrador/index-administrador");
+
+		// Retornando
+		return mav;
+	}
+
 	// Requisições
-	// Ir para formulário de login do administrador
+	// Dados gerais para Dashboard
 	@RequestMapping(value = "dadosGerais", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public DadosGerais dadosGerais() {
 		// Atributo

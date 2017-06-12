@@ -1,3 +1,4 @@
+var host = window.location.host;
 var a;
 var li;
 var vector = [];
@@ -22,20 +23,21 @@ function teste(parametro) {
 	}
 };
 
-// Listando subcategorias
 function listaCategoria(parametro) {
 	$.ajax({
 		type : "GET",
-		url : "categoria/" + parametro,
+		url : "http://" + host + "/BigDog/categoria/" + parametro,
 		success : function(data) {
 			for (i = 0; i < data.subCategorias.length; i++) {
 				a = document.createElement("a");
 				a.setAttribute("type", "hidden");
 				li = document.createElement("li");
 				a.id = 'aSb' + parametro;
+				console.log(data.subCategorias[i].idSubCategoria);
 				a.href = 'produtos?idCategoria=' + data.idCategoria
 						+ "&idSubCategoria="
 						+ data.subCategorias[i].idSubCategoria;
+				console.log(a.href);
 				li.innerHTML = data.subCategorias[i].nome;
 				a.append(li)
 				$(".a" + parametro).append(a);

@@ -47,14 +47,13 @@
 <!-- Alterar quantidade de produto no carrinho -->
 <script type="text/javascript">
 	$(document).ready(function() {
+		// Inicializador do select materialize
 		$('select').material_select();
 
-		var valueTotalCarrinho = $
-		{
-			totalCarrinho
-		}
+		// Select on change
 		$('select').on("change", function() {
 			var valSelect = $("option:selected", this).val();
+			var valCliente = $('#idCliente').val();
 			valSelect = valSelect.split(",");
 
 			var data = {
@@ -67,19 +66,41 @@
 					'Content-Type' : 'application/json'
 				},
 				type : 'POST',
-				url : 'rest/dinamic/alterarQtd',
+				url : 'rest/dinamic/alterarQtd/' + valCliente,
 				data : JSON.stringify(data),
 				dataType : 'json',
 				success : function(data) {
-					$("#totalCarrinho").html("Total: R$ " + data);
+					$("#totalCarrinho").html("Total : R$ " + data.toFixed(2));
 				},
-				error : function() {
-					console.log('só triteza');
+				error : function(e) {
+					console.log('ERROR : ' + e);
 				}
 			});
 
 		});
+
 	});
+</script>
+
+<!-- Excluir produto -->
+<script type="text/javascript">
+	function excluirProduto(data) {
+		$('#' + data).remove();
+		var valCliente = $('#idCliente').val();
+
+		$.ajax({
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			type : 'DELETE',
+			url : 'rest/dinamic/excluirItem/' + data + '/' + valCliente,
+			data : JSON.stringify(data),
+			dataType : 'json',
+			success : function(data) {
+				$("#totalCarrinho").html("Total: R$ " + data.toFixed(2));
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -92,6 +113,9 @@
 	<main>
 	<div class="demo">
 		<div id="demo">
+			<div class="dvs">
+				<h2 id="pg">Carrinho</h2>
+			</div>
 			<!-- Tabela de produtos no carrinho -->
 			<div class="table-responsive-vertical shadow-z-1">
 				<table id="table" class="table table-hover table-mc-light-blue">
@@ -99,26 +123,30 @@
 					<thead>
 						<tr>
 							<th>Foto</th>
-							<th>Produto</th>
+							<th>Nome do Produto</th>
 							<th>Quantidade</th>
-							<th>Preço</th>
+							<th>Preço (unid.)</th>
 						</tr>
 					</thead>
 
 					<!-- Lista de itens no carrinho -->
-					<!-- Body -->
 					<c:forEach items="${carrinhos }" var="carrinho">
 						<tbody>
-							<tr>
+							<tr id="${carrinho.idProdutoCarrinho}">
+								<!-- Foto do produto -->
 								<td data-title="Foto"><img class="imgdg"
-									src="resources/loja/imagens/semFoto.png"></td>
+									src="${carrinho.produto.fotoString }"></td>
+
+								<!-- Nome do produto -->
 								<td data-title="Produto">${carrinho.produto.nome }</td>
+
+								<!-- Quantidade do produto -->
 								<td data-title="Quantidade">
 									<div class="input-field col s12"
 										style="max-width: 8em; margin-top: -1em; margin-right: -5em;">
 										<select class="selectQtd">
-											<option value="${carrinho.quantidade }">${carrinho.quantidade }
-											</option>
+											<option value="${carrinho.quantidade }"><b>${carrinho.quantidade == 1 ? '': carrinho.quantidade}
+												</b></option>
 											<option value="1,${carrinho.idProdutoCarrinho }">1</option>
 											<option value="2,${carrinho.idProdutoCarrinho }">2</option>
 											<option value="3,${carrinho.idProdutoCarrinho }">3</option>
@@ -127,10 +155,16 @@
 										</select>
 									</div>
 								</td>
-								<td data-title="Preço">R$ ${carrinho.produto.valor }</td>
-								<td><a href="#"><i class="fa fa-times"
-										aria-hidden="true" title="Remover Produto"
-										style="margin-left: 2em;"></i></a></td>
+
+								<!-- Preço -->
+								<td data-title="Preço"><f:formatNumber type="currency"
+										value="${carrinho.produto.valor }"></f:formatNumber></td>
+								<td>
+									<!-- Botão para excluir produto --> <a
+									onclick="excluirProduto('${carrinho.idProdutoCarrinho}')"><i
+										class="fa fa-times" aria-hidden="true" title="Remover Produto"
+										style="margin-left: 2em;"></i></a>
+								</td>
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -153,8 +187,10 @@
 
 				<!-- Valor total de carrinho -->
 				<div class="desc">
+					<input type="hidden" id="idCliente"
+						value="${clienteLogado.idCliente }">
 					<h3 id="totalCarrinho">
-						Total:
+						Total :
 						<f:formatNumber type="currency" value="${totalCarrinho }" />
 					</h3>
 				</div>

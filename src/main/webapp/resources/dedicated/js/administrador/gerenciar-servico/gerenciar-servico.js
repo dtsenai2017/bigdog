@@ -19,22 +19,24 @@ $('#btn-excluir-servico').hide();
 
 // Recarregar página
 function recarregarGerenciarServico() {
-	// Recarregando...
+	// Requisição
 	var xhr = new XMLHttpRequest();
-	
+
 	// Tipo, url e async
-	xhr.open('GET', "gerenciarServico", false);
-	
+	xhr.open('GET', "adm/gerenciarServico", false);
+
 	// Atribuindo token
-	xhr.setRequestHeader("Authorization", localStorage.getItem("tokenBigDog"));
-	
+	xhr.setRequestHeader("Authorization", localStorage
+			.getItem("tokenBigDog"));
+
 	// Response
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
+			// Replace html
 			$(document.body).html(xhr.response);
 		}
 	};
-	
+
 	// Request send()
 	xhr.send();
 }
@@ -51,7 +53,7 @@ function limparFormServico() {
 	
 	// Alterando botões de formulário
 	$('#btn-alterar-servico').hide();
-	$('#btn-inserir-servico').fadeIn(30);
+	$('#btn-inserir-servico').fadeIn(300);
 	$('#btn-excluir-servico').hide();
 }
 
@@ -61,14 +63,13 @@ $('#modal-servico').modal({
     	// Limpar form quando modal for fechado
     	limparFormServico();
     } // Callback for Modal close
-  }
-);
+});
 
 // Inserir serviço
 $("#form-servico").submit(function(e) {
 	// Cancela qualquer ação padrão do elemento
 	e.preventDefault();
-
+	
 	// Mensagem
 	var mensagem;
 	
@@ -98,8 +99,7 @@ $("#form-servico").submit(function(e) {
 		$.ajax({
 			url : "adm/servico",
 			headers : {
-				'Authorization' : localStorage
-						.getItem("tokenBigDog")
+				'Authorization' : localStorage.getItem("tokenBigDog")
 			},
 			type : "POST",
 			data : JSON.stringify(servico),

@@ -1,5 +1,7 @@
 package br.com.bigdog.clientecontroller;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,15 +17,37 @@ public class ClienteController {
 	// Atributos
 	private ClienteDAO dao;
 
+	// Construtor
 	@Autowired
 	public ClienteController(ClienteDAO dao) {
 		this.dao = dao;
 	}
 
+	// Verificar CPF
 	@RequestMapping(value = "rest/verificaCpf/{cpf}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Cliente verificaCpf(@PathVariable String cpf) {
+		// Replace
 		cpf = cpf.replace(" ", ".");
-		System.out.println(cpf);
-		return dao.buscaCpf(cpf);
+
+		// Retornando...
+		try {
+			return dao.buscaCpf(cpf);
+		} catch (EntityNotFoundException e) {
+			return null;
+		}
+	}
+
+	// Verifica Email
+	@RequestMapping(value = "rest/verificaEmail/{email}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Cliente verificaEmail(@PathVariable String email) {
+		// Replace
+		email = email.replace(" ", ".");
+
+		// Retornando...
+		try {
+			return dao.buscaEmail(email);
+		} catch (EntityNotFoundException e) {
+			return null;
+		}
 	}
 }

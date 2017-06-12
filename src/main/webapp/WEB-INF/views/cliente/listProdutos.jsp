@@ -28,14 +28,15 @@
 <!-- Import JS -->
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
 </head>
+<main>
 <body>
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp" />
 
-	<main>
+	<!-- Caixa para produtos -->
 	<div class="totalP">
 		<!-- Descrição de lista categoria -->
-		<p class="produtos">Categoria: ${cat.nome }</p>
+		<p class="produtos">Categoria : ${cat.nome }</p>
 
 		<!-- Menu -->
 		<div class="menuu">
@@ -50,7 +51,7 @@
 			<!-- divider -->
 			<div class="divider"></div>
 
-			<!-- Lista -->
+			<!-- Lista de categorias e subcategorias -->
 			<c:forEach items="${listaCategoria }" var="categoria">
 				<li class="sb" value="${categoria.idCategoria }"
 					onclick="teste(this.value)"><b>${categoria.nome }</b></li>
@@ -63,9 +64,9 @@
 		<div class="cx05">
 			<c:forEach items="${listaProduto }" var="produto">
 				<br>
-				<a href="produto?idProduto=${produto.idProduto }"">
+				<a href="produto?idProduto=${produto.idProduto }">
 					<div class="p">
-						<img src="resources/loja/imagens/semFoto.png">
+						<img src="${produto.fotoString }">
 						<p>${produto.nome }</p>
 						<h2>
 							<f:formatNumber type="currency" value="${produto.valor }" />
@@ -76,33 +77,35 @@
 			</c:forEach>
 		</div>
 	</div>
-	</main>
+</main>
 
-	<!-- Import footer -->
-	<c:import url="component/footerLoja.jsp"></c:import>
+<!-- Import footer -->
+<c:import url="component/footerLoja.jsp"></c:import>
 
-	<!-- Import JS -->
-	<script type="text/javascript"
-		src="resources/jquery/jquery-2.2.2.min.js" /></script>
-	<script type="text/javascript"
-		src="resources/loja/js/materialize.min.js"></script>
-	<script type="text/javascript" src="resources/loja/js/categoria.js"></script>
+<!-- Import JS -->
+<script type="text/javascript"
+	src="resources/jquery/jquery-2.2.2.min.js" /></script>
+<script type="text/javascript"
+	src="resources/loja/js/materialize.min.js"></script>
+<script type="text/javascript" src="resources/loja/js/categoria.js"></script>
 
-	<!-- Script's -->
-	<!-- Menu lateral -->
-	<script>
-		$(".menuu").click(function() {
+<!-- Script's -->
+<!-- Lista de categoria -->
+<script>
+	$(".menuu").click(function() {
 
-			$("#ul").toggle();
+		$("#ul").toggle();
+	});
+</script>
+
+<!-- Menu lateral -->
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
 		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+	})
+</script>
 </body>
 </html>

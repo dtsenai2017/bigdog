@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.bigdog.dao.AgendamentoDAO;
 import br.com.bigdog.dao.CategoriaDAO;
 import br.com.bigdog.dao.ClienteDAO;
+import br.com.bigdog.dao.CompraDAO;
 import br.com.bigdog.dao.EnderecoClienteDAO;
 import br.com.bigdog.dao.PetDAO;
 import br.com.bigdog.dao.ProdutoDAO;
@@ -26,18 +28,22 @@ public class LinkController {
 	private ProdutoDAO produtoDAO;
 	private CategoriaDAO categoriaDAO;
 	private ClienteDAO clienteDAO;
+	private CompraDAO compraDAO;
 	private EnderecoClienteDAO enderecoDAO;
 	private PetDAO petDAO;
+	private AgendamentoDAO agendamentoDAO;
 
 	// Construtor
 	@Autowired
-	public LinkController(ProdutoDAO produtoDAO, CategoriaDAO categoriaDAO, ClienteDAO clienteDAO,
-			EnderecoClienteDAO enderecoDAO, PetDAO petDAO) {
+	public LinkController(ProdutoDAO produtoDAO, CategoriaDAO categoriaDAO, ClienteDAO clienteDAO, CompraDAO compraDAO,
+			EnderecoClienteDAO enderecoDAO, PetDAO petDAO, AgendamentoDAO agendamentoDAO) {
 		this.produtoDAO = produtoDAO;
 		this.categoriaDAO = categoriaDAO;
 		this.clienteDAO = clienteDAO;
 		this.enderecoDAO = enderecoDAO;
 		this.petDAO = petDAO;
+		this.compraDAO = compraDAO;
+		this.agendamentoDAO = agendamentoDAO;
 	}
 
 	// Cadastrar endereço
@@ -113,6 +119,7 @@ public class LinkController {
 	// Formulário de login
 	@RequestMapping("entrar")
 	public String loginLoja(Model model) {
+		// Ir para view...
 		return "cliente/login";
 	}
 
@@ -154,7 +161,6 @@ public class LinkController {
 			model.addAttribute("alterarEndereco", enderecoDAO.listar(id));
 			return "cliente/formEndereco";
 		}
-
 	}
 
 	// Lista de pets de cliente
@@ -203,6 +209,34 @@ public class LinkController {
 			return "cliente/indexCliente";
 		} else {
 			return "redirect:entrar";
+		}
+	}
+
+	// Lista de pedidos
+	@RequestMapping("listPedidos")
+	public String pedidos(HttpSession session, Model model) {
+		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+		model.addAttribute("listarPedidos", compraDAO.listarCompraCliente(cliente.getIdCliente()));
+		return "cliente/listPedidos";
+	}
+
+	// Lista de agendamentos
+	@RequestMapping("listAgendamentos")
+	public String agendamentos(HttpSession session, Model model) {
+		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+		model.addAttribute("listarAgendamentos", agendamentoDAO.listarAgendamentoCliente(cliente.getIdCliente()));
+		return "cliente/listAgendamentos";
+	}
+
+	// Lista de agendamento
+	@RequestMapping("novo-agendamento")
+	public String agendamento(HttpSession session) {
+		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+
+		if (cliente == null) {
+			return "cliente/login";
+		} else {
+			return "cliente/formAgendamento";
 		}
 	}
 

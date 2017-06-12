@@ -34,7 +34,8 @@
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
-	<main> <!-- Caixa de produtos -->
+	<!-- Caixa de produtos -->
+	<main>
 	<div class="totalP">
 		<!-- Descrição de busca -->
 		<p class="produtos">Resultado da busca: ${buscaFeita }</p>
@@ -43,7 +44,7 @@
 		<c:forEach items="${listaBusca }" var="produto">
 			<a href="produto?idProduto=${produto.idProduto }">
 				<div class="p">
-					<img src="resources/loja/imagens/semFoto.png">
+					<img src="${produto.fotoString }">
 					<p>${produto.nome }</p>
 					<h2>
 						<f:formatNumber type="currency" value="${produto.valor }" />

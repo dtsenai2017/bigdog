@@ -11,7 +11,7 @@ function indexAdministrador() {
 	var xhr = new XMLHttpRequest();
 
 	// Tipo, url e async
-	xhr.open('GET', 'indexAdministrador', true);
+	xhr.open('GET', 'adm/indexAdministrador', false);
 
 	// Atribuindo token
 	xhr.setRequestHeader("Authorization", localStorage.getItem("tokenBigDog"));
@@ -233,3 +233,10 @@ $("#menu-mobile a").click(
 				xhr.send();
 			}
 		});
+
+// Deslogar
+$('#btn-logout').click(function() {
+	// Limpando local storage e reload
+	window.localStorage.removeItem('usuario');
+	location.reload();
+});

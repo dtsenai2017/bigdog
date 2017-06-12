@@ -46,11 +46,12 @@
 	}
 </script>
 </head>
+<main>
 <body>
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
-	<main> <!-- Dados do cliente -->
+	<!-- Dados do cliente -->
 	<div class="cxAvatar">
 		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
 
@@ -67,7 +68,7 @@
 				<li id="pf" class="id"><a href="lista-dados"><i
 						class="fa fa-user" aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png"> Meus Pets</a></li>
+						src="resources/loja/imagens/icones/icon-09.png"><p id="lip"> Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li><a href="listAgendamentos"><i class="fa fa-calendar"

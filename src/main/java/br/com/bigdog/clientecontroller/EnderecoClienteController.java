@@ -73,9 +73,6 @@ public class EnderecoClienteController {
 		// Endereço atual
 		EnderecoCliente enderecoAtual = enderecoDAO.listar(id);
 
-		System.out.println("Endereço atual: " + enderecoAtual.toString());
-		System.out.println("Endereço alterado: " + endereco.toString());
-
 		// Setando valores alterados
 		enderecoAtual.setCep(endereco.getCep());
 		enderecoAtual.setLogradouro(endereco.getLogradouro());

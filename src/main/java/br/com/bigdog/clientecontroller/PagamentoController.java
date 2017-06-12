@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.com.bigdog.dao.CarrinhoDoClienteDAO;
 import br.com.bigdog.dao.CompraDAO;
 import br.com.bigdog.dao.EnderecoClienteDAO;
+import br.com.bigdog.model.Carrinho;
 import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.Compra;
 import br.com.bigdog.model.EnderecoCliente;
@@ -37,8 +38,8 @@ import br.com.bigdog.model.ProdutoCarrinho;
 import br.com.bigdog.util.ConverterPdf;
 import br.com.bigdog.util.GeradorPDF;
 
-@RequestMapping("/pag")
 @Controller
+@RequestMapping("/pag")
 public class PagamentoController {
 	// Atributos
 	private static String emailVendedorPagSeguro = "eduardocslv@gmail.com";
@@ -49,10 +50,10 @@ public class PagamentoController {
 	private CarrinhoDoClienteDAO carrinhoDoClienteDAO;
 	private CompraDAO compraDAO;
 
+	// Construtor
 	@Autowired
 	public PagamentoController(GeradorPDF geradorPdf, ConverterPdf converterPdf, EnderecoClienteDAO enderecoDAO,
 			CarrinhoDoClienteDAO carrinhoDoClienteDAO, CompraDAO compraDAO) {
-		// TODO Auto-generated constructor stub
 		this.geradorPdf = geradorPdf;
 		this.converterPdf = converterPdf;
 		this.enderecoDAO = enderecoDAO;
@@ -60,18 +61,18 @@ public class PagamentoController {
 		this.compraDAO = compraDAO;
 	}
 
+	// Gerar Boleto
 	@RequestMapping(value = "/gerarBoleto/{idEndereco}", method = RequestMethod.GET)
 	public void pagBoleto(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			@PathVariable long idEndereco) throws IOException {
-
 		EnderecoCliente endCliente = enderecoDAO.listar(idEndereco);
 		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
-		List<ProdutoCarrinho> carrinho = carrinhoDoClienteDAO.listarCarrinhoDoCliente(cliente.getIdCliente());
+		Carrinho carrinho = carrinhoDoClienteDAO.listarCarrinhoDoCliente(cliente.getIdCliente());
 
 		ServletContext servletContext = request.getSession().getServletContext();
 		File tempDirectory = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
 		String temperotyFilePath = tempDirectory.getAbsolutePath();
-		String fileName = "JavaHonk.pdf";
+		String fileName = "boleto_bigdog.pdf";
 		response.setContentType("application/pdf");
 		response.setHeader("Content-disposition", "attachment; filename=" + fileName);
 
@@ -88,35 +89,41 @@ public class PagamentoController {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-
 	}
 
+	// PagSeguro
 	@RequestMapping("/pagseguro/{idEndereco}")
 	public String pagPagseguro(HttpSession session, @PathVariable long idEndereco) {
-
+		// Atributos
 		String retorno;
 		EnderecoCliente endCliente = enderecoDAO.listar(idEndereco);
 		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
-		List<ProdutoCarrinho> carrinho = carrinhoDoClienteDAO.listarCarrinhoDoCliente(cliente.getIdCliente());
+		Carrinho carrinho = carrinhoDoClienteDAO.listarCarrinhoDoCliente(cliente.getIdCliente());
 		Compra compra = new Compra();
+
+		// Atribuindo valores para compra
 		compra = addCompra(compra, carrinho, cliente, endCliente);
 
+		// Enviando valores para o pagseguro
 		try {
 			String code = sendXml(cliente, carrinho, compra);
 			retorno = "redirect:https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
 		} catch (Exception e) {
-			// TODO: handle exception
 			retorno = "redirect:home";
 		}
+
+		// Retornando...
 		return retorno;
 	}
 
-	public Compra addCompra(Compra compra, List<ProdutoCarrinho> carrinho, Cliente cliente,
-			EnderecoCliente endCliente) {
-
+	// Adicionar compra
+	public Compra addCompra(Compra compra, Carrinho carrinho, Cliente cliente, EnderecoCliente endCliente) {
+		// Atributos
 		double totalCarrinho = 0;
 		List<ItemCompra> listItemCompra = new ArrayList<ItemCompra>();
 		EnderecoCompra endCompra = new EnderecoCompra();
+
+		// Atribuindo endereço para compra
 		endCompra.setBairro(endCliente.getBairro());
 		endCompra.setCep(endCliente.getCep());
 		endCompra.setCidade(endCliente.getCidade());
@@ -125,16 +132,17 @@ public class PagamentoController {
 		endCompra.setNumero(endCliente.getNumero());
 		endCompra.setUf(endCliente.getUf());
 
-		for (ProdutoCarrinho produtoCarrinho : carrinho) {
+		// Atribuindo produtos em compra
+		for (ProdutoCarrinho produtoCarrinho : carrinho.getProdutosCarrinho()) {
 			ItemCompra itemCompra = new ItemCompra();
 			totalCarrinho += produtoCarrinho.getProduto().getValor() * produtoCarrinho.getQuantidade();
 			itemCompra.setNome(produtoCarrinho.getProduto().getNome());
 			itemCompra.setQuantidade(produtoCarrinho.getQuantidade());
 			itemCompra.setValor(produtoCarrinho.getProduto().getValor());
 			listItemCompra.add(itemCompra);
-
 		}
 
+		// Atribuindo valores para compra
 		compra.setEndereco(endCompra);
 		compra.setDataCompra(new Date());
 		compra.setFrete(0.00);
@@ -143,29 +151,27 @@ public class PagamentoController {
 		compra.setItensCompra(listItemCompra);
 		compra.setCliente(cliente);
 
+		// Inserindo compra e limpando carrinho
 		try {
 			compraDAO.inserir(compra);
-			System.out.println(cliente.getIdCliente());
-			carrinhoDoClienteDAO.limpaCarrinhoDoCliente(cliente.getIdCliente());
+			carrinhoDoClienteDAO.limpaCarrinhoDoCliente(carrinho.getIdCarrinho());
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 
-		System.out.println(compra.toString());
-
+		// Retornando...
 		return compra;
 	}
 
-	private String sendXml(Cliente c, List<ProdutoCarrinho> carrinho, Compra compra) {
+	// Enviar XML
+	private String sendXml(Cliente c, Carrinho carrinho, Compra compra) {
+		// Atributos
 		String code = null;
 		URL url;
 
 		try {
 			url = new URL("https://ws.sandbox.pagseguro.uol.com.br/v2/checkout/?email=" + emailVendedorPagSeguro
 					+ "&token=" + tokenVendedorPagSeguro);
-
-			System.out.println(url);
 
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
@@ -174,8 +180,6 @@ public class PagamentoController {
 
 			String requisicaoXml = gerarxml(c, carrinho, compra);
 
-			System.out.println(requisicaoXml);
-
 			OutputStream os = conn.getOutputStream();
 			os.write(requisicaoXml.getBytes());
 			os.flush();
@@ -183,28 +187,29 @@ public class PagamentoController {
 			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
 
 			String output;
-			System.out.println("Output from Server .... \n");
+
 			while ((output = br.readLine()) != null) {
 				output += output;
-				System.out.println(output);
 				code = output;
 			}
 
+			// Get codigo
 			code = code.substring(76, 108);
-			System.out.println(code);
+
+			// Disconnect
 			conn.disconnect();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		// Retornando...
 		return code;
 	}
 
-	private String gerarxml(Cliente c, List<ProdutoCarrinho> carrinho, Compra compra) {
-
+	// Gerar XML
+	private String gerarxml(Cliente c, Carrinho carrinho, Compra compra) {
 		return "<?xml version=\"1.0\"?><checkout><sender><name>" + c.getNome() + "</name>"
 				+ "<email>c71089443377372574576@sandbox.pagseguro.com.br</email><phone>"
 				+ "<areaCode>11</areaCode><number>" + c.getContato().getCelular().replace("-", "") + "</number>"
@@ -214,11 +219,12 @@ public class PagamentoController {
 				+ "</reference> <receiver> <email>" + emailVendedorPagSeguro + "</email></receiver></checkout>";
 	}
 
-	private String gerarItensXml(List<ProdutoCarrinho> carrinho) {
+	// Gerar itens XML
+	private String gerarItensXml(Carrinho carrinho) {
 		String produtosXml = "<items>";
 		DecimalFormat mascara = new DecimalFormat("#0.00");
 
-		for (ProdutoCarrinho produtoCarrinho : carrinho) {
+		for (ProdutoCarrinho produtoCarrinho : carrinho.getProdutosCarrinho()) {
 			produtosXml += "<item><id>" + produtoCarrinho.getProduto().getIdProduto() + "</id><description>"
 					+ produtoCarrinho.getProduto().getNome() + "</description><amount>"
 					+ mascara.format(produtoCarrinho.getProduto().getValor()).replace(",", ".") + "</amount>"
@@ -226,6 +232,8 @@ public class PagamentoController {
 		}
 
 		produtosXml += "</items>";
+
+		// Retornando...
 		return produtosXml;
 	}
 }

@@ -60,12 +60,16 @@
 				<ul id="nav-mobile" class="right">
 					<!-- Início -->
 					<li class="waves-effect"><a id="btn-index-administrador"><i
-							class="material-icons  center">home</i></a></li>
+							class="material-icons center">home</i></a></li>
 
 					<!-- Gerenciar -->
 					<li><a class="dropdown-button waves-effect"
 						data-activates="dropdown-gerenciar" data-constrainwidth="false"
 						data-beloworigin="true"><i class="material-icons right">arrow_drop_down</i>Gerenciar</a></li>
+
+					<!-- Logout -->
+					<li class="waves-effect"><a id="btn-logout"><i
+							class="material-icons center red-text text-accent-1">power_settings_new</i></a></li>
 				</ul>
 			</div>
 		</div>
@@ -119,6 +123,14 @@
 		<!-- Serviço -->
 		<li><a id="btn-gerenciar-servico" class="waves-effect"><i
 				class="material-icons  left grey-text text-grey">work</i>Serviço</a></li>
+
+		<!-- Divider -->
+		<li class="container"><div class="divider"></div></li>
+
+		<!-- Logout -->
+		<li><a id="btn-logout" class="waves-effect"><i
+				class="material-icons center red-text text-accent-1">power_settings_new</i>
+				Sair</a></li>
 	</ul>
 	</header>
 

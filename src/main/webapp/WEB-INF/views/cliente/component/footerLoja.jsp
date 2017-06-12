@@ -9,4 +9,5 @@
 					src="resources/loja/imagens/icones/icon-04.png"></a>
 			</div>
 		</div>
+		</div>
 </footer>
