@@ -165,6 +165,8 @@ public class PagamentoController {
 
 			String requisicaoXml = gerarxml(c, carrinho, compra);
 
+			System.out.println(requisicaoXml);
+
 			OutputStream os = conn.getOutputStream();
 			os.write(requisicaoXml.getBytes());
 			os.flush();

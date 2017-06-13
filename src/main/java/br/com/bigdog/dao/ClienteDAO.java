@@ -37,7 +37,11 @@ public class ClienteDAO {
 
 	// Listar (id)
 	public Cliente listar(Long id) {
-		return manager.find(Cliente.class, id);
+		try {
+			return manager.find(Cliente.class, id);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Alterar

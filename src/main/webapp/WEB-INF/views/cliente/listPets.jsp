@@ -30,7 +30,6 @@
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
 </head>
 <main>
-
 <body>
 	<!-- Import footer -->
 	<c:import url="component/headerLoja.jsp"></c:import>

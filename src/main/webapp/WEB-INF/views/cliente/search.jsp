@@ -27,6 +27,7 @@
 <script type="text/javascript" src="resources/loja/js/menu.js"></script>
 
 </head>
+<main>
 <body>
 	<!-- Locale para fmt money -->
 	<f:setLocale value="pt-BR" />
@@ -35,7 +36,6 @@
 	<c:import url="component/headerLoja.jsp"></c:import>
 
 	<!-- Caixa de produtos -->
-	<main>
 	<div class="totalP">
 		<!-- Descrição de busca -->
 		<p class="produtos">Resultado da busca: ${buscaFeita }</p>
@@ -54,21 +54,21 @@
 			<br>
 		</c:forEach>
 	</div>
-	</main>
+</main>
 
-	<!-- Import footer -->
-	<c:import url="component/footerLoja.jsp"></c:import>
-	<script type="text/javascript"
-		src="resources/jquery/jquery-2.2.2.min.js" /></script>
-	<script type="text/javascript"
-		src="resources/loja/js/materialize.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+<!-- Import footer -->
+<c:import url="component/footerLoja.jsp"></c:import>
+<script type="text/javascript"
+	src="resources/jquery/jquery-2.2.2.min.js" /></script>
+<script type="text/javascript"
+	src="resources/loja/js/materialize.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
+		});
+	})
+</script>
 </body>
 </html>

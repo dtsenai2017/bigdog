@@ -20,7 +20,7 @@ public class Interceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 
 		// Saída teste da URI
-		System.out.println(request.getRequestURI());
+		System.out.println("URI : " + request.getRequestURI());
 
 		// Verifica se contém recursos
 		if (request.getRequestURI().contains("resources")) {
@@ -38,23 +38,35 @@ public class Interceptor extends HandlerInterceptorAdapter {
 			if (request.getRequestURI().contains("home") || request.getRequestURI().contains("entrar")
 					|| request.getRequestURI().contains("faca-parte") || request.getRequestURI().contains("categoria")
 					|| request.getRequestURI().contains("produtos") || request.getRequestURI().contains("produto")
-					|| request.getRequestURI().contains("addProduto")
-					|| request.getRequestURI().contains("confirmarCompra")
 					|| request.getRequestURI().contains("novo-agendamento")
 					|| request.getRequestURI().contains("rest/login") || request.getRequestURI().contains("rest/logar")
 					|| request.getRequestURI().contains("rest/verificaCpf")
 					|| request.getRequestURI().contains("rest/verificaEmail")
 					|| request.getRequestURI().contains("indexCliente") || request.getRequestURI().contains("search")) {
 
-				// Retornando...
-				return true;
+				// Verifica se contem adm na requisição
+				if (!request.getRequestURI().contains("adm")) {
+					System.out.println("URI autorizada somente para cliente");
+
+					// Retornando...
+					return true;
+				}
 			}
 
 			// Métodos autorizados de login para cliente mobile e administrador
-			if (method.getMethod().getName().equals("formLoginAdm") || method.getMethod().getName().equals("loginAdm")
-					|| method.getMethod().getName().equals("logaAd")) {
+			if (method.getMethod().getName().equals("formLoginAdm")
+					|| method.getMethod().getName().equals("loginAdm")) {
+				// Limpando sessão de cliente
+				if (request.getSession().getAttribute("clienteLogado") != null) {
+					request.getSession().invalidate();
+				}
 
-				System.out.println("Handler method's autorizado!");
+				System.out.println("Handler method adm autorizado!");
+
+				// Retornando...
+				return true;
+			} else if (method.getMethod().getName().equals("logaAd")) {
+				System.out.println("Handler method cliente autorizado!");
 
 				// Retornando...
 				return true;
@@ -62,16 +74,18 @@ public class Interceptor extends HandlerInterceptorAdapter {
 
 			// Verifica se há cliente na sessão
 			if (request.getSession().getAttribute("clienteLogado") != null) {
-				System.out.println("Cliente logado!");
-
-				// Verifica uri
+				// Verifica uri se contém adm
 				if (request.getRequestURI().contains("adm")) {
 					// Response 404
 					response.sendError(HttpStatus.NOT_FOUND.value());
 
+					System.out.println("Cliente logado no adm");
+
 					// Retornando...
 					return false;
 				} else {
+					System.out.println("Cliente logado!");
+
 					// Retornando...
 					return true;
 				}

@@ -147,8 +147,14 @@ public class LinkController {
 	// Index cliente
 	@RequestMapping("indexCliente")
 	public String homeCliente(HttpSession session, Long id) {
-		session.setAttribute("clienteLogado", clienteDAO.listar(id));
-		return "redirect:home-user";
+		// Verifica cliente
+		if (clienteDAO.listar(id) != null) {
+			session.setAttribute("clienteLogado", clienteDAO.listar(id));
+
+			return "redirect:home-user";
+		} else {
+			return "redirect:entrar";
+		}
 	}
 
 	// Formulário de inserção ou alteração

@@ -90,141 +90,167 @@ function buscarCliente(idCliente) {
 			$('#dados-cliente').append(clienteDados);
 
 			// Endereços do cliente
-			$.each(cliente.enderecos, function(index, endereco) {
-				// Atribui valor para caso for nulo
-				var complemento = endereco.complemento;
+			if (cliente.enderecos.length != 0) {
+				$.each(cliente.enderecos, function(index, endereco) {
+					// Atribui valor para caso for nulo
+					var complemento = endereco.complemento;
 
-				// Atribuindo valor
-				if (complemento == '') {
-					complemento = '-';
-				}
+					// Atribuindo valor
+					if (complemento == '') {
+						complemento = '-';
+					}
 
-				// Atributo de lista de endereços do cliente
-				var enderecoList = "<h5 align='center'><b>"
-						+ endereco.logradouro + "</b></h5>"
-						+ "<span><b>CEP :</b> " + endereco.cep + "</span><br>"
-						+ "<span><b>Nº :</b> " + endereco.numero
-						+ "</span><br>" + "<span><b>Complemento :</b> "
-						+ complemento + "</span><br>"
-						+ "<span><b>Bairro :</b> " + endereco.bairro
-						+ "</span><br>" + "<span><b>Cidade :</b> "
-						+ endereco.cidade + "</span><br>"
-						+ "<span><b>UF :</b> " + endereco.uf
-						+ "</span><div class='divider'>" + "</div><br>";
+					// Atributo de lista de endereços do cliente
+					var enderecoList = "<h5 align='center'><b>"
+							+ endereco.logradouro + "</b></h5>"
+							+ "<span><b>CEP :</b> " + endereco.cep
+							+ "</span><br>" + "<span><b>Nº :</b> "
+							+ endereco.numero + "</span><br>"
+							+ "<span><b>Complemento :</b> " + complemento
+							+ "</span><br>" + "<span><b>Bairro :</b> "
+							+ endereco.bairro + "</span><br>"
+							+ "<span><b>Cidade :</b> " + endereco.cidade
+							+ "</span><br>" + "<span><b>UF :</b> "
+							+ endereco.uf + "</span><div class='divider'>"
+							+ "</div><br>";
 
-				// Adicionando para collection de endereços em
-				// modal
-				$('#lista-endereco').append(enderecoList);
-			});
+					// Adicionando para collection de endereços em
+					// modal e atribuindo qtd de endereços
+					$('#lista-endereco').append(enderecoList);
+					$('#qtd-endereco').html(cliente.enderecos.length);
+				});
+			} else {
+				// Caso não tenha endereços cadastrado
+				$('#qtd-endereco').html(0);
+			}
 
 			// Pets do cliente
-			$.each(cliente.pets, function(index, pet) {
-				// Atributos para valores nulos
-				var castrado;
-				var rga;
-				var carteiraVacina;
-				var peso;
-				var pedigree;
-				var pelagem;
-				var observacao;
-				var dataNascimento;
-				var raca;
+			// Verifica se há pet cadastrado
+			if (cliente.pets.length != 0) {
+				$.each(cliente.pets, function(index, pet) {
+					// Atributos para valores nulos
+					var castrado;
+					var rga;
+					var carteiraVacina;
+					var peso;
+					var pedigree;
+					var pelagem;
+					var observacao;
+					var dataNascimento;
+					var raca;
 
-				// Valor para exibição de valores null
-				// Castrado
-				if (pet.castrado == true) {
-					castrado = 'Sim.';
-				} else {
-					castrado = 'Não.';
-				}
+					// Valor para exibição de valores
+					// null
+					// Castrado
+					if (pet.castrado == true) {
+						castrado = 'Sim.';
+					} else {
+						castrado = 'Não.';
+					}
 
-				// Rga
-				if (pet.rga.lenght == 0) {
-					rga = "-"
-				} else {
-					rga = pet.rga;
-				}
+					// Rga
+					if (pet.rga.lenght == 0) {
+						rga = "-"
+					} else {
+						rga = pet.rga;
+					}
 
-				// Carteina de Vacina
-				if (pet.carteiraVacina.length == 0) {
-					carteiraVacina = "-"
-				} else {
-					carteiraVacina = pet.carteiraVacina;
-				}
+					// Carteina de Vacina
+					if (pet.carteiraVacina.length == 0) {
+						carteiraVacina = "-"
+					} else {
+						carteiraVacina = pet.carteiraVacina;
+					}
 
-				// Peso
-				if (pet.peso == null) {
-					peso = "-";
-				} else {
-					peso = pet.peso;
-				}
+					// Peso
+					if (pet.peso == null) {
+						peso = "-";
+					} else {
+						peso = pet.peso;
+					}
 
-				// Pedigree
-				if (pet.pedigree.length == 0) {
-					pedigree = "-";
-				} else {
-					pedigree = pet.pedigree;
-				}
+					// Pedigree
+					if (pet.pedigree.length == 0) {
+						pedigree = "-";
+					} else {
+						pedigree = pet.pedigree;
+					}
 
-				// Pelagem
-				if (pet.pelagem.length == 0) {
-					pelagem = "-";
-				} else {
-					pelagem = pet.pelagem;
-				}
+					// Pelagem
+					if (pet.pelagem.length == 0) {
+						pelagem = "-";
+					} else {
+						pelagem = pet.pelagem;
+					}
 
-				// Observações
-				if (pet.observacoes.length == 0) {
-					observacoes = "-";
-				} else {
-					observacoes = pet.observacoes;
-				}
+					// Observações
+					if (pet.observacoes.length == 0) {
+						observacoes = "-";
+					} else {
+						observacoes = pet.observacoes;
+					}
 
-				// Data de Nascimento
-				if (pet.dataNascimento.length == 0) {
-					dataNascimento = "-";
-				} else {
-					dataNascimento = new Date(pet.dataNascimento);
-					dataNascimento.setDate(dataNascimento.getDate() + 1);
-				}
+					// Data de Nascimento
+					if (pet.dataNascimento.length == 0) {
+						dataNascimento = "-";
+					} else {
+						dataNascimento = new Date(pet.dataNascimento);
+						dataNascimento.setDate(dataNascimento.getDate() + 1);
+					}
 
-				// Raça
-				if (pet.raca.length == 0) {
-					raca = "-";
-				} else {
-					raca = pet.raca;
-				}
+					// Raça
+					if (pet.raca.length == 0) {
+						raca = "-";
+					} else {
+						raca = pet.raca;
+					}
 
-				// Objeto de lista
-				var petList = "<h5 align='center' ><b>" + pet.nome
-						+ "</b></h5>" + "<span><b>Espécie :</b> " + pet.especie
-						+ "</span><br>" + "<span><b>Raça :</b> " + raca
-						+ "</span><br>" + "<span><b>RGA :</b> " + rga
-						+ "</span><br>" + "<span><b>Pedigree :</b> " + pedigree
-						+ "</span><br>" + "<span><b>Carteira Vacina :</b> "
-						+ carteiraVacina + "</span><br>"
-						+ "<span><b>Nascimento :</b> "
-						+ $.datepicker.formatDate("dd/mm/yy", dataNascimento)
-						+ "</span><br>" + "<span><b>Pelagem :</b> " + pelagem
-						+ "</span><br><span><b>Castrado :</b> " + castrado
-						+ "</span><br>" + "<span><b>Peso :</b> "
-						+ peso.toFixed(2) + " kg</span><br>"
-						+ "<span><b>Observações :</b> " + observacoes
-						+ "</span><br>"
-						+ "<a href='#modal-editar-pet' onclick='visualizarPet("
-						+ pet.idPet + ");' class='right'>"
-						+ "<i class='material-icons red-text'>mode_edit</i>"
-						+ "</a><br>" + "<div class='divider'>" + "<br>";
+					// Objeto de lista
+					var petList = "<h5 align='center' ><b>"
+							+ pet.nome
+							+ "</b></h5>"
+							+ "<span><b>Espécie :</b> "
+							+ pet.especie
+							+ "</span><br>"
+							+ "<span><b>Raça :</b> "
+							+ raca
+							+ "</span><br>"
+							+ "<span><b>RGA :</b> "
+							+ rga
+							+ "</span><br>"
+							+ "<span><b>Pedigree :</b> "
+							+ pedigree
+							+ "</span><br>"
+							+ "<span><b>Carteira Vacina :</b> "
+							+ carteiraVacina
+							+ "</span><br>"
+							+ "<span><b>Nascimento :</b> "
+							+ $.datepicker.formatDate("dd/mm/yy",
+									dataNascimento) + "</span><br>"
+							+ "<span><b>Pelagem :</b> " + pelagem
+							+ "</span><br><span><b>Castrado :</b> " + castrado
+							+ "</span><br>" + "<span><b>Peso :</b> "
+							+ peso.toFixed(2) + " kg</span><br>"
+							+ "<span><b>Observações :</b> " + observacoes
+							+ "</span><br>" + "<a href='#modal-editar-pet' "
+							+ "onclick='visualizarPet(" + pet.idPet
+							+ ");' class='right'>"
+							+ "<i class='material-icons "
+							+ "red-text'>mode_edit</i>" + "</a><br>"
+							+ "<div class='divider'>" + "<br>";
 
-				// Adicionando para collection de pets
-				// em modal
-				$('#lista-pet').append(petList);
-			});
-			// -each pets
+					// Adicionando para collection de
+					// pets
+					// em modal
+					$('#lista-pet').append(petList);
+				});
 
-			// Atribuindo outras informações
-			$('#qtd-endereco').html(cliente.enderecos.length);
-			$('#qtd-pet').html(cliente.pets.length);
+				// Atribuindo outras informações
+				$('#qtd-pet').html(cliente.pets.length);
+			} else {
+				// Caso não tenha pet cadastrado
+				$('#qtd-pet').html(0);
+			}
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
@@ -239,53 +265,61 @@ function buscarCliente(idCliente) {
 		},
 		type : "GET",
 		success : function(compras) {
-			// Compras realizadas do cliente
-			$.each(compras, function(index, compra) {
-				// Atribui 0 para minutos
-				function addZero(i) {
-					if (i < 10) {
-						i = "0" + i;
+			// Verifica se há compras
+			if (compras.length != 0) {
+				// Compras realizadas do cliente
+				$.each(compras, function(index, compra) {
+					// Atribui 0 para minutos
+					function addZero(i) {
+						if (i < 10) {
+							i = "0" + i;
+						}
+						return i;
 					}
-					return i;
-				}
 
-				// Atributo date
-				var dataCompra = new Date(compra.dataCompra);
-				var horas = addZero(dataCompra.getHours());
-				var minutos = addZero(dataCompra.getMinutes());
+					// Atributo date
+					var dataCompra = new Date(compra.dataCompra);
+					var horas = addZero(dataCompra.getHours());
+					var minutos = addZero(dataCompra.getMinutes());
 
-				// Atributo de lista de compras do
-				// cliente
-				var compraList = "<h5 align='center'><b>"
-						+ $.datepicker.formatDate("dd/mm/yy", dataCompra)
-						+ "</b></h5>" + "<span><b>Qtd de Itens : </b>"
-						+ compra.itensCompra.length + "</span><br>"
-						+ "<span><b>Horário : </b>" + horas + ":" + minutos
-						+ "hrs.</span><br>" + "<span><b>Valor : </b>R$ "
-						+ compra.valor.toFixed(2)
-						+ "</span><br><span><b>Endereço : </b>"
-						+ compra.endereco.logradouro + ", "
-						+ compra.endereco.numero + " / " + compra.endereco.cep
-						+ "</span><br>" + "<span><b>Status da Compra : </b><i>"
-						+ compra.status
-						+ "</i></span><br><a href='#modal-compra-cliente' "
-						+ "onclick='abrirCompraCliente(" + compra.idCompra
-						+ ")'" + ">" + "STATUS</a><div class='divider'>";
+					// Atributo de lista de compras do
+					// cliente
+					var compraList = "<h5 align='center'><b>"
+							+ $.datepicker.formatDate("dd/mm/yy", dataCompra)
+							+ "</b></h5>" + "<span><b>Qtd de Itens : </b>"
+							+ compra.itensCompra.length + "</span><br>"
+							+ "<span><b>Horário : </b>" + horas + ":" + minutos
+							+ "hrs.</span><br>" + "<span><b>Valor : </b>R$ "
+							+ compra.valor.toFixed(2)
+							+ "</span><br><span><b>Endereço : </b>"
+							+ compra.endereco.logradouro + ", "
+							+ compra.endereco.numero + " / "
+							+ compra.endereco.cep + "</span><br>"
+							+ "<span><b>Status da Compra : </b><i>"
+							+ compra.status + "</i></span><br><a "
+							+ "href='#modal-compra-cliente' "
+							+ "onclick='abrirCompraCliente(" + compra.idCompra
+							+ ")'" + ">" + "STATUS</a><div class='divider'>";
 
-				// Adicionando para collection de
-				// compras
-				$('#lista-compra').append(compraList);
-			});
+					// Adicionando para collection de
+					// compras
+					$('#lista-compra').append(compraList);
+				});
 
-			// Outras informações
-			// Atributos
-			var ultimaCompra = compras[compras.length - 1];
-			var dataUltimaCompra = new Date(ultimaCompra.dataCompra);
+				// Outras informações
+				// Atributos
+				var ultimaCompra = compras[compras.length - 1];
+				var dataUltimaCompra = new Date(ultimaCompra.dataCompra);
 
-			// Atribuindo valores
-			$('#qtd-compra').html(compras.length);
-			$('#ultima-compra').html(
-					$.datepicker.formatDate("dd/mm/yy", dataUltimaCompra));
+				// Atribuindo valores
+				$('#qtd-compra').html(compras.length);
+				$('#ultima-compra').html(
+						$.datepicker.formatDate("dd/mm/yy", dataUltimaCompra));
+			} else {
+				// Caso não tenha compras...
+				$('#qtd-compra').html(0);
+				$('#ultima-compra').html('Não há compra(s).');
+			}
 		},
 		error : function(e) {
 			// Error
@@ -294,68 +328,62 @@ function buscarCliente(idCliente) {
 	});
 
 	// Listando agendamentos de cliente
-	$
-			.getJSON({
-				url : "adm/agendamentoCliente/" + idCliente,
-				headers : {
-					'Authorization' : localStorage.getItem("tokenBigDog")
-				},
-				type : "GET",
-				success : function(agendamentos) {
-					// Agendamentos realizados do cliente
-					$
-							.each(
-									agendamentos,
-									function(index, agendamento) {
-										// Atributo date
-										var dataAgendamento = new Date(
-												agendamento.dataAgendada);
+	$.getJSON({
+		url : "adm/agendamentoCliente/" + idCliente,
+		headers : {
+			'Authorization' : localStorage.getItem("tokenBigDog")
+		},
+		type : "GET",
+		success : function(agendamentos) {
+			// Verifica se há agendamentos
+			if (agendamentos.length != 0) {
+				// Agendamentos realizados do cliente
+				$.each(agendamentos, function(index, agendamento) {
+					// Atributo date
+					var dataAgendamento = new Date(agendamento.dataAgendada);
 
-										// Atributo da lista de agendamento
-										var agendamentoList = "<h5 align='center'><b>"
-												+ $.datepicker.formatDate(
-														"dd/mm/yy",
-														dataAgendamento)
-												+ "</b></h5>"
-												+ "<span><b>Horário : </b>"
-												+ dataAgendamento.getHours()
-												+ ":"
-												+ dataAgendamento.getMinutes()
-												+ "hrs.</span><br>"
-												+ "<span><b>Tipo de Serviço : </b>"
-												+ agendamento.servico.tipoServico
-												+ "</span><br><span><b>Valor : R$ </b>"
-												+ agendamento.servico.valor
-														.toFixed(2)
-												+ "</span><br><span>"
-												+ "<b>Nome do Pet : </b>"
-												+ agendamento.pet.nome
-												+ "</span><br>"
-												+ "<div class='divider'>";
+					// Atributo da lista de agendamento
+					var agendamentoList = "<h5 align='center'><b>"
+							+ $.datepicker.formatDate("dd/mm/yy",
+									dataAgendamento) + "</b></h5>"
+							+ "<span><b>Horário : </b>"
+							+ dataAgendamento.getHours() + ":"
+							+ dataAgendamento.getMinutes() + "hrs.</span><br>"
+							+ "<span><b>Tipo de Serviço : </b>"
+							+ agendamento.servico.tipoServico
+							+ "</span><br><span><b>Valor : R$ </b>"
+							+ agendamento.servico.valor.toFixed(2)
+							+ "</span><br><span>" + "<b>Nome do Pet : </b>"
+							+ agendamento.pet.nome + "</span><br>"
+							+ "<div class='divider'>";
 
-										// Adicionando para collection de
-										// agendamentos
-										$('#lista-agendamento').append(
-												agendamentoList);
-									});
+					// Adicionando para collection de
+					// agendamentos
+					$('#lista-agendamento').append(agendamentoList);
+				});
 
-					// Outras informações
-					// Atributos
-					var ultimoAgendamento = agendamentos[agendamentos.length - 1];
-					var dataUltimoAgendamento = new Date(
-							ultimoAgendamento.dataAgendada);
+				// Outras informações
+				// Atributos
+				var ultimoAgendamento = agendamentos[agendamentos.length - 1];
+				var dataUltimoAgendamento = new Date(
+						ultimoAgendamento.dataAgendada);
 
-					// Atribuindo valores
-					$('#qtd-agendamento').html(agendamentos.length);
-					$('#ultimo-agendamento').html(
-							$.datepicker.formatDate("dd/mm/yy",
-									dataUltimoAgendamento));
-				},
-				error : function(e) {
-					// Error
-					console.log("ERROR : " + e);
-				}
-			});
+				// Atribuindo valores
+				$('#qtd-agendamento').html(agendamentos.length);
+				$('#ultimo-agendamento').html(
+						$.datepicker.formatDate("dd/mm/yy",
+								dataUltimoAgendamento));
+			} else {
+				// Caso não tenha compras...
+				$('#qtd-agendamento').html(0);
+				$('#ultimo-agendamento').html('Não há agendamento(s).');
+			}
+		},
+		error : function(e) {
+			// Error
+			console.log("ERROR : " + e);
+		}
+	});
 }
 
 // PET

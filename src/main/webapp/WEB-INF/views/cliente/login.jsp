@@ -33,6 +33,7 @@
 	});
 </script>
 </head>
+<main>
 <body id="body"
 	style="background-image: url('resources/loja/imagens/backlogin.png')">
 	<!-- header -->
@@ -43,7 +44,7 @@
 		</div>
 	</header>
 
-	<main> <!-- Formulário de login -->
+	<!-- Formulário de login -->
 	<form id="formm" class="form" action="javascript:logar();"
 		method="post">
 		<div class="cx02">
@@ -148,23 +149,23 @@
 			</script>
 		</div>
 	</form>
-	</main>
-	<c:import url="component/footerLoja.jsp"></c:import>
+</main>
+<c:import url="component/footerLoja.jsp"></c:import>
 
-	<script type="text/javascript"
-		src="resources/loja/js/materialize.min.js"></script>
-	<script type="text/javascript">
-		function cadastrese() {
-			localStorage.setItem("id_redes", 0);
-			window.location = "faca-parte";
-		}
-	</script>
+<script type="text/javascript"
+	src="resources/loja/js/materialize.min.js"></script>
+<script type="text/javascript">
+	function cadastrese() {
+		localStorage.setItem("id_redes", 0);
+		window.location = "faca-parte";
+	}
+</script>
 
-	<script type="text/javascript">
-		function apagaSpan() {
-			$("#msg").text("");
-		}
-	</script>
+<script type="text/javascript">
+	function apagaSpan() {
+		$("#msg").text("");
+	}
+</script>
 
 </body>
 </html>

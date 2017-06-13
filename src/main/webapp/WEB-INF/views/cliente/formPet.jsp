@@ -46,11 +46,11 @@
 	});
 </script>
 </head>
+<main>
 <body>
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 
-	<main>
 	<div class="cxAvatar">
 		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
 		<div class="cx08">
@@ -204,36 +204,36 @@
 			</button>
 		</form>
 	</div>
-	</main>
+</main>
 
-	<!-- Import footer -->
-	<c:import url="component/footerLoja.jsp"></c:import>
-	<!-- Script's -->
-	<script type="text/javascript">
-		$(".button-collapse").sideNav();
-		$(document).ready(function() {
-			Materialize.updateTextFields();
+<!-- Import footer -->
+<c:import url="component/footerLoja.jsp"></c:import>
+<!-- Script's -->
+<script type="text/javascript">
+	$(".button-collapse").sideNav();
+	$(document).ready(function() {
+		Materialize.updateTextFields();
+	});
+
+	$(document).ready(function() {
+		$('select').material_select();
+	});
+
+	$('#textarea1').trigger('autoresize');
+</script>
+<script>
+	$(".menuu").click(function() {
+
+		$("#ul").toggle();
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
 		});
-
-		$(document).ready(function() {
-			$('select').material_select();
-		});
-
-		$('#textarea1').trigger('autoresize');
-	</script>
-	<script>
-		$(".menuu").click(function() {
-
-			$("#ul").toggle();
-		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+	})
+</script>
 </body>
 </html>

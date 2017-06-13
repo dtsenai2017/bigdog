@@ -30,7 +30,6 @@ public class CarrinhoDoClienteDAO {
 		try {
 			return query.getSingleResult();
 		} catch (NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

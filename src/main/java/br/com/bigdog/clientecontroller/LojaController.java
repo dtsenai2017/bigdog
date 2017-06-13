@@ -91,20 +91,6 @@ public class LojaController {
 		return retorno;
 	}
 
-	// Calcular total do carrinho
-	private double calcularTotalCarrinho(List<ProdutoCarrinho> produtosCarrinho) {
-		// Atributo
-		double valor = 0;
-
-		// Atribuindo valor total
-		for (ProdutoCarrinho produtoCarrinho : produtosCarrinho) {
-			valor += produtoCarrinho.getProduto().getValor() * produtoCarrinho.getQuantidade();
-		}
-
-		// Retornando...
-		return valor;
-	}
-
 	// Confirmação de compra
 	@RequestMapping("confirmarCompra")
 	public String confirmarCompra(HttpSession session) {
@@ -115,8 +101,13 @@ public class LojaController {
 		// Verifica cliente
 		if (cliente != null) {
 			Carrinho carrinhoCliente = carrinhoDoClienteDAO.listarCarrinhoDoCliente(cliente.getIdCliente());
-			session.setAttribute("carrinhos", carrinhoCliente.getProdutosCarrinho());
-			session.setAttribute("totalCarrinho", calcularTotalCarrinho(carrinhoCliente.getProdutosCarrinho()));
+
+			// Verifica carrinho do cliente
+			if (carrinhoCliente != null) {
+				session.setAttribute("carrinhos", carrinhoCliente.getProdutosCarrinho());
+				session.setAttribute("totalCarrinho", calcularTotalCarrinho(carrinhoCliente.getProdutosCarrinho()));
+			}
+
 			retorno = "cliente/confirmaCompra";
 		} else {
 			retorno = "redirect:entrar";
@@ -137,20 +128,40 @@ public class LojaController {
 			double totalCarrinho = 0;
 			Carrinho carrinho = carrinhoDoClienteDAO.listarCarrinhoDoCliente(cliente.getIdCliente());
 
-			// Atribuindo valor total do carrinho
-			for (ProdutoCarrinho produtoCarrinho : carrinho.getProdutosCarrinho()) {
-				totalCarrinho += produtoCarrinho.getProduto().getValor() * produtoCarrinho.getQuantidade();
+			// Verifica carrinho
+			if (carrinho != null) {
+				// Atribuindo valor total do carrinho
+				for (ProdutoCarrinho produtoCarrinho : carrinho.getProdutosCarrinho()) {
+					totalCarrinho += produtoCarrinho.getProduto().getValor() * produtoCarrinho.getQuantidade();
+				}
+
+				// Atribuindo valor para sessão
+				session.setAttribute("carrinhos", carrinho.getProdutosCarrinho());
+				session.setAttribute("totalCarrinho", totalCarrinho);
+
+				// Retornando...
+				return "cliente/pagamento";
+			} else {
+				// Retornando...
+				return "cliente/listCategorias";
 			}
-
-			// Atribuindo valor para sessão
-			session.setAttribute("carrinhos", carrinho.getProdutosCarrinho());
-			session.setAttribute("totalCarrinho", totalCarrinho);
-
-			// Retornando...
-			return "cliente/pagamento";
 		} else {
 			// Retornando...
 			return "redirect:entrar";
 		}
+	}
+
+	// Calcular total do carrinho
+	private double calcularTotalCarrinho(List<ProdutoCarrinho> produtosCarrinho) {
+		// Atributo
+		double valor = 0;
+
+		// Atribuindo valor total
+		for (ProdutoCarrinho produtoCarrinho : produtosCarrinho) {
+			valor += produtoCarrinho.getProduto().getValor() * produtoCarrinho.getQuantidade();
+		}
+
+		// Retornando...
+		return valor;
 	}
 }

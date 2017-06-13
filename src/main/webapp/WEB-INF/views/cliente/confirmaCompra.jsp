@@ -103,6 +103,7 @@
 	}
 </script>
 </head>
+<main>
 <body>
 	<!-- Import Header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
@@ -110,7 +111,6 @@
 	<!-- Locale para fmt money -->
 	<f:setLocale value="pt-BR" />
 
-	<main>
 	<div class="demo">
 		<div id="demo">
 			<div class="dvs">
@@ -205,19 +205,19 @@
 			</div>
 		</div>
 	</div>
-	</main>
+</main>
 
-	<!-- Footer -->
-	<c:import url="component/footerLoja.jsp"></c:import>
+<!-- Footer -->
+<c:import url="component/footerLoja.jsp"></c:import>
 
-	<!-- Script para menu lateral -->
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+<!-- Script para menu lateral -->
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
+		});
+	})
+</script>
 </body>
 </html>
