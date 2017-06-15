@@ -42,6 +42,18 @@ public class AdmCompraController {
 		}
 	}
 
+	// Listar ordenado por datatime
+	@RequestMapping(value = "compraOrdenada", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Compra> listarCompraOrdenada() {
+		try {
+			// Retornando
+			return compraDAO.listarOrdenado();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	// Listar (id)
 	@RequestMapping(value = "compra/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Compra listar(@PathVariable("id") Long idCompra) {

@@ -48,50 +48,115 @@ public class LinkController {
 
 	// Cadastrar endereço
 	@RequestMapping("cadastra-endereco")
-	public String cadastrarEnderecos(Long id, EnderecoCliente enderecoCliente, HttpSession session) {
+	public String cadastrarEnderecos(EnderecoCliente enderecoCliente, HttpSession session) {
+		// Cliente logado
+		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+
+		System.out.println(enderecoCliente.toString());
+
+		// Verifica se endereço é existente
 		if (enderecoCliente.getIdEnderecoCliente() == null) {
-			Cliente cliente = new Cliente();
-			cliente.setIdCliente(id);
-			cliente = clienteDAO.listar(cliente.getIdCliente());
+			// Lista de endereços
 			List<EnderecoCliente> enderecos = cliente.getEnderecos();
+
+			// Adicionando endereço em lista de endereço
 			enderecos.add(enderecoCliente);
+
+			// Adicionando endereço em cliente
 			cliente.setEnderecos(enderecos);
+
+			// Alterando cliente
 			clienteDAO.alterar(cliente);
-			session.setAttribute("clienteLogado", clienteDAO.listar(id));
+
+			// Atualizando session
+			session.setAttribute("clienteLogado", clienteDAO.listar(cliente.getIdCliente()));
+
+			// Retornando...
 			return "redirect:home-user";
 		} else {
+			// Efetua alteração em endereço
 			enderecoDAO.alterar(enderecoCliente);
-			session.setAttribute("clienteLogado", clienteDAO.listar(id));
+
+			// Atualizando session
+			session.setAttribute("clienteLogado", clienteDAO.listar(cliente.getIdCliente()));
+
+			// Retornando...
 			return "redirect:home-user";
 		}
 	}
 
+	// Verificar input em branco de pet cadastrado ou alterado
+	public Pet verificarCamposPet(Pet pet) {
+		// Verifica campos...
+		// Carteira de vacina
+		if (pet.getCarteiraVacina().equals("")) {
+			pet.setCarteiraVacina(null);
+		}
+
+		// Pedigree
+		if (pet.getPedigree().equals("")) {
+			pet.setPedigree(null);
+		}
+
+		// RGA
+		if (pet.getRga().equals("")) {
+			pet.setRga(null);
+		}
+
+		// Retornando...
+		return pet;
+	}
+
 	// Cadastrar ou altera pet
 	@RequestMapping("cadastra-pet")
-	public String cadastrarPet(Long id, Pet pet, HttpSession session) {
-		// Verifica tipo de operação
+	public String cadastrarPet(Pet pet, HttpSession session) {
+		// Cliente logado
+		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+
+		// Verifica se endereço é existente
 		if (pet.getIdPet() == null) {
-			Cliente cliente = new Cliente();
-			cliente.setIdCliente(id);
-			cliente = clienteDAO.listar(cliente.getIdCliente());
+			// Verifica campos
+			pet = verificarCamposPet(pet);
+
+			// Listando pets
 			List<Pet> pets = cliente.getPets();
+
+			// Adicionando pet
 			pets.add(pet);
+
+			// Adicionando pet em lista de pet do cliente
 			cliente.setPets(pets);
+
+			// Alterando...
 			clienteDAO.alterar(cliente);
-			session.setAttribute("clienteLogado", clienteDAO.listar(id));
+
+			// Retornando...
 			return "redirect:lista-pet";
 		} else {
+			// Verificar campos
+			pet = verificarCamposPet(pet);
+
+			// Altera pet
 			petDAO.alterar(pet);
-			session.setAttribute("clienteLogado", clienteDAO.listar(id));
+
+			session.setAttribute("clienteLogado", clienteDAO.listar(cliente.getIdCliente()));
+
+			// Retornando...
 			return "redirect:lista-pet";
 		}
 	}
 
 	// Deleta Endereço de Cliente
 	@RequestMapping("deleta-endereco")
-	public String deletarEndereco(Long id, HttpSession session, Long idCliente) {
+	public String deletarEndereco(Long id, HttpSession session) {
+		// Cliente logado
+		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+
+		// Excluindo endereço
 		enderecoDAO.excluir(id);
-		session.setAttribute("clienteLogado", clienteDAO.listar(idCliente));
+
+		// Atualizando cliente logado
+		session.setAttribute("clienteLogado", clienteDAO.listar(cliente.getIdCliente()));
 
 		// Redireciona para ...
 		return "redirect:home-user";
@@ -99,9 +164,21 @@ public class LinkController {
 
 	// Deleta pet de Cliente
 	@RequestMapping("deleta-pet")
-	public String deletarPet(Long id, HttpSession session, Long idCliente) {
-		petDAO.excluir(id);
-		session.setAttribute("clienteLogado", clienteDAO.listar(idCliente));
+	public String deletarPet(Long idPet, HttpSession session) {
+		// Cliente logado
+		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+
+		// Excluindo...
+		try {
+			petDAO.excluir(idPet);
+		} catch (Exception e) {
+			// ...
+		}
+
+		// Listando cliente logado
+		session.setAttribute("clienteLogado", clienteDAO.listar(cliente.getIdCliente()));
+
+		// Retornando...
 		return "redirect:lista-pet";
 	}
 
@@ -119,7 +196,7 @@ public class LinkController {
 	// Formulário de login
 	@RequestMapping("entrar")
 	public String loginLoja(Model model) {
-		// Ir para view...
+		// Retornando...
 		return "cliente/login";
 	}
 
@@ -133,13 +210,12 @@ public class LinkController {
 			// Adicionando sessão
 			session.setAttribute("clienteLogado", cliente);
 
-			// Redirecionando
+			// Retornando...
 			return "redirect:../home-user";
 		} catch (NullPointerException e) {
-			// TODO: handle exception
 			e.printStackTrace();
 
-			// Recirecionando
+			// Retornando...
 			return "redirect:../entrar";
 		}
 	}
@@ -172,18 +248,27 @@ public class LinkController {
 	// Lista de pets de cliente
 	@RequestMapping("lista-pet")
 	public String pets(HttpSession session) {
-		// Ir para...
+		// Cliente logado
+		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+
+		// Atualizando cliente logado
+		session.setAttribute("clienteLogado", clienteDAO.listar(cliente.getIdCliente()));
+
+		// Retornando...
 		return "cliente/listPets";
 	}
 
 	// Formulário de inserção ou alteração
 	@RequestMapping("novo-pet")
-	public String pets(Model model, Long id) {
+	public String pets(Model model, Long idPet) {
 		// Verifica tipo de operação (Inserção ou alteração)
-		if (id == null) {
+		if (idPet == null) {
+			// Retornando...
 			return "cliente/formPet";
 		} else {
-			model.addAttribute("alterarPet", petDAO.listar(id));
+			model.addAttribute("alterarPet", petDAO.listar(idPet));
+
+			// Retornando...
 			return "cliente/formPet";
 		}
 	}
@@ -202,18 +287,25 @@ public class LinkController {
 	// Deslogar
 	@RequestMapping("logout")
 	public String sair(HttpSession session) {
+		// Limpando sessão
 		session.invalidate();
+
+		// Retornando...
 		return "cliente/login";
 	}
 
 	// Index Cliente
 	@RequestMapping("home-user")
 	public String clienteHome(HttpSession session) {
+		// Cliente logado
 		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
 
+		// Verifica cliente
 		if (cliente != null) {
+			// Retornando...
 			return "cliente/indexCliente";
 		} else {
+			// Retornando...
 			return "redirect:entrar";
 		}
 	}
@@ -221,29 +313,70 @@ public class LinkController {
 	// Lista de pedidos
 	@RequestMapping("listPedidos")
 	public String pedidos(HttpSession session, Model model) {
+		// Cliente logado
 		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+
+		// Pedidos
 		model.addAttribute("listarPedidos", compraDAO.listarCompraCliente(cliente.getIdCliente()));
+
+		// Retornando...
 		return "cliente/listPedidos";
 	}
 
 	// Lista de agendamentos
 	@RequestMapping("listAgendamentos")
 	public String agendamentos(HttpSession session, Model model) {
+		// Cliente logado
 		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+
+		// Agendamentos
 		model.addAttribute("listarAgendamentos", agendamentoDAO.listarAgendamentoCliente(cliente.getIdCliente()));
+
+		// Retornando...
 		return "cliente/listAgendamentos";
 	}
 
 	// Lista de agendamento
 	@RequestMapping("novo-agendamento")
-	public String agendamento(HttpSession session) {
+	public String agendamento(HttpSession session, Model model) {
+		// Cliente logado
 		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
 
+		// Verifica cliente
 		if (cliente == null) {
+			// Retornando..
 			return "cliente/login";
 		} else {
+			// Verifica se há pet
+			if (cliente.getPets().isEmpty()) {
+				model.addAttribute("existePet", false);
+			} else {
+				model.addAttribute("existePet", true);
+			}
+
+			// Retornando...
 			return "cliente/formAgendamento";
 		}
+	}
+
+	// Cancelar Agendamento
+	@RequestMapping("cancela-agendamento")
+	public String cancelarAgendamento(Long idAgendamento, HttpSession session, Model model) {
+		// Cliente logado
+		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+
+		try {
+			// Excluindo
+			agendamentoDAO.excluir(idAgendamento);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// Agendamentos
+		model.addAttribute("listarAgendamentos", agendamentoDAO.listarAgendamentoCliente(cliente.getIdCliente()));
+
+		// Retornando
+		return "cliente/listAgendamentos";
 	}
 
 	// Adicionar produto no carrinho
@@ -258,13 +391,14 @@ public class LinkController {
 		// Lista de produtos com limite
 		model.addAttribute("outrosProdutos", produtoDAO.listarComLimite(0, 10));
 
-		// Ir para...
+		// Retornando...
 		return "cliente/produto";
 	}
 
 	// Formulário de cadastro de cliente
 	@RequestMapping("faca-parte")
 	public String cadastro(Model model) {
+		// Retornando...
 		return "cliente/formCadastro";
 	}
 
@@ -308,7 +442,7 @@ public class LinkController {
 		// Lista de produtos encontrados
 		model.addAttribute("listaBusca", listaBusca);
 
-		// Ir para...
+		// Retornando...
 		return "cliente/search";
 	}
 }

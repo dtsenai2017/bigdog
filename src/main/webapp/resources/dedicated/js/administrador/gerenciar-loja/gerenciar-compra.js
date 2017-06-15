@@ -21,7 +21,7 @@ $('#search-compra').keypress(function(e) {
 function abrirCompras() {
 	// Populando lista de fornecedores
 	$.getJSON({
-		url : "adm/compra",
+		url : "adm/compraOrdenada",
 		headers : {
 			'Authorization' : localStorage
 					.getItem("tokenBigDog")

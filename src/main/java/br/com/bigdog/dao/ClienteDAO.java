@@ -26,13 +26,23 @@ public class ClienteDAO {
 	// Listar
 	public List<Cliente> listar() {
 		TypedQuery<Cliente> query = manager.createQuery("SELECT c FROM Cliente c", Cliente.class);
-		return query.getResultList();
+
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
-	// Listar ordenado por letra do nome
+	// Listar ordenado do nome
 	public List<Cliente> listarOrdenado() {
 		TypedQuery<Cliente> query = manager.createQuery("SELECT c FROM Cliente c ORDER BY c.nome", Cliente.class);
-		return query.getResultList();
+
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Listar (id)
@@ -74,6 +84,7 @@ public class ClienteDAO {
 		TypedQuery<Cliente> query = manager.createQuery("select c from Cliente c where c.id_redes = :id_redes",
 				Cliente.class);
 		query.setParameter("id_redes", id);
+
 		try {
 			return query.getSingleResult();
 		} catch (Exception e) {
@@ -129,6 +140,25 @@ public class ClienteDAO {
 		query.setParameter("email", cliente.getEmail());
 		query.setParameter("senha", cliente.getSenha());
 
+		try {
+			return query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	// Verificar email e cpf para recuperar senha
+	public Cliente buscaEmailCpf(String email, String cpf) {
+		// Query
+		TypedQuery<Cliente> query = manager
+				.createQuery("select c from Cliente c where c.email = :email AND c.cpf = :cpf", Cliente.class);
+
+		// Atribuindo parâmetro
+		query.setParameter("email", email);
+		query.setParameter("cpf", cpf);
+
+		// Retornando...
 		try {
 			return query.getSingleResult();
 		} catch (Exception e) {

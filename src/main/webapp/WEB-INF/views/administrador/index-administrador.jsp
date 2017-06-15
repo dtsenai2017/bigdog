@@ -245,7 +245,7 @@
 		<div id="swipe-gerenciar" class="col s12 m12 l12">
 
 			<!-- Descrição de gerenciamento -->
-			<h5 align="center">Opções de gerenciamento</h5>
+			<h6 align="center">Selecione uma opção</h6>
 
 			<!-- divider -->
 			<div class="divider"></div>
@@ -296,7 +296,7 @@
 								<br>
 								<div class="divider"></div>
 
-								<h6 class="red-text text-lighten-2">Gerencie seu pet shop.</h6>
+								<h6 class="red-text text-lighten-2">Gerencie a loja.</h6>
 							</div>
 						</div>
 					</div>
@@ -321,7 +321,7 @@
 								<br>
 								<div class="divider"></div>
 
-								<h6 class="red-text text-lighten-2">Consulte agenda.</h6>
+								<h6 class="red-text text-lighten-2">Gerencie agenda.</h6>
 							</div>
 						</div>
 					</div>
@@ -359,13 +359,15 @@
 		<div id="swipe-agenda" class="col s12 m12 l12">
 			<div class="row">
 				<!-- Descrição para agendamentos de hoje -->
-				<h5 align="center">Agendamentos de hoje</h5>
+				<h6 align="center">Agendamentos de hoje</h6>
 
-				<!-- Quantidade de agendamentos do dia -->
-				<p id="qtd-agendamentos-hoje" align="right"></p>
+
 
 				<!-- divider -->
 				<div class="divider"></div>
+
+				<!-- Quantidade de agendamentos do dia -->
+				<p id="qtd-agendamentos-hoje" align="right" style="font-size: 12px;"></p>
 
 				<!-- br -->
 				<br>

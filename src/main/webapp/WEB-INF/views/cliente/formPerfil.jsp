@@ -53,14 +53,22 @@
 
 	<!-- Dados do cliente -->
 	<div class="cxAvatar">
-		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
+		<!-- Ícone -->
+		<img
+			src="resources/loja/imagens/icones/${clienteLogado.genero == 'Masculino' ? 'man-icon':'female-icon' }.png"
+			class="avatar">
 
+		<!-- Nome do cliente -->
 		<div class="cx08">
 			<h2>${clienteLogado.nome }</h2>
 		</div>
+
+		<!-- Menu -->
 		<div class="menuu">
 			<i class="fa fa-bars" aria-hidden></i> Menu
 		</div>
+
+		<!-- Link de menu -->
 		<div class="cx05">
 			<ul id="ul">
 				<li id="pf"><a href="home-user"><i class="fa fa-home"
@@ -68,7 +76,8 @@
 				<li id="pf" class="id"><a href="lista-dados"><i
 						class="fa fa-user" aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png"><p id="lip"> Meus Pets</p></a></li>
+						src="resources/loja/imagens/icones/icon-09.png">
+					<p id="lip">Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li><a href="listAgendamentos"><i class="fa fa-calendar"
@@ -165,53 +174,53 @@
 			</div>
 		</form>
 	</div>
-	</main>
+</main>
 
-	<!-- Footer -->
-	<footer class="page-footer">
-		<div class="container">
-			<div class="footer-copyright">
-				<div class="container" style="text-align: center;">
-					© 2017 Copyright BIG Dog - SENAI Informática <a
-						class="grey-text text-lighten-4 right"
-						href="https://www.facebook.com/bigdogPETeVET/"><img
-						style="margin-top: -0.5em"
-						src="resources/loja/imagens/icones/icon-04.png"></a>
-				</div>
+<!-- Footer -->
+<footer class="page-footer">
+	<div class="container">
+		<div class="footer-copyright">
+			<div class="container" style="text-align: center;">
+				© 2017 Copyright BIG Dog - SENAI Informática <a
+					class="grey-text text-lighten-4 right"
+					href="https://www.facebook.com/bigdogPETeVET/"><img
+					style="margin-top: -0.5em"
+					src="resources/loja/imagens/icones/icon-04.png"></a>
 			</div>
 		</div>
-	</footer>
+	</div>
+</footer>
 
-	<!-- Import JS -->
-	<script type="text/javascript"
-		src="resources/jquery/jquery-2.2.2.min.js" /></script>
-	<script type="text/javascript"
-		src="resources/loja/js/materialize.min.js"></script>
+<!-- Import JS -->
+<script type="text/javascript"
+	src="resources/jquery/jquery-2.2.2.min.js" /></script>
+<script type="text/javascript"
+	src="resources/loja/js/materialize.min.js"></script>
 
-	<!-- Script's -->
-	<script type="text/javascript">
-		$(".button-collapse").sideNav();
-		$(document).ready(function() {
-			Materialize.updateTextFields();
+<!-- Script's -->
+<script type="text/javascript">
+	$(".button-collapse").sideNav();
+	$(document).ready(function() {
+		Materialize.updateTextFields();
+	});
+
+	$(document).ready(function() {
+		$('select').material_select();
+	});
+</script>
+<script>
+	$(".menuu").click(function() {
+
+		$("#ul").toggle();
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
 		});
-
-		$(document).ready(function() {
-			$('select').material_select();
-		});
-	</script>
-	<script>
-		$(".menuu").click(function() {
-
-			$("#ul").toggle();
-		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+	})
+</script>
 </body>
 </html>

@@ -26,12 +26,33 @@ public class CompraDAO {
 	// Listar
 	public List<Compra> listar() {
 		TypedQuery<Compra> query = manager.createQuery("SELECT c FROM Compra c", Compra.class);
-		return query.getResultList();
+
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	// Listar ordenado por data
+	public List<Compra> listarOrdenado() {
+		TypedQuery<Compra> query = manager.createQuery("SELECT c FROM Compra c ORDER BY DATE(c.dataCompra)",
+				Compra.class);
+
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Listar (id)
 	public Compra listar(Long id) {
-		return manager.find(Compra.class, id);
+		try {
+			return manager.find(Compra.class, id);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Listar (idCliente
@@ -43,8 +64,11 @@ public class CompraDAO {
 		// Atribuindo parâmetros
 		query.setParameter("idCliente", id);
 
-		// Retornando
-		return query.getResultList();
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Alterar

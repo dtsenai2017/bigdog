@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	
+
 <!-- Ícone de aba -->
 <link rel="icon" href="resources/loja/imagens/logos/favicon.png">
 
@@ -36,20 +36,22 @@
 
 	<!-- Avatar -->
 	<div class="cxAvatar">
-		<!-- Avatar -->
-		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
+		<!-- Ícone -->
+		<img
+			src="resources/loja/imagens/icones/${clienteLogado.genero == 'Masculino' ? 'man-icon':'female-icon' }.png"
+			class="avatar">
 
 		<!-- Nome do cliente -->
 		<div class="cx08">
 			<h2>${clienteLogado.nome }</h2>
 		</div>
 
-		<!-- ??? -->
+		<!-- Menu -->
 		<div class="menuu">
 			<i class="fa fa-bars" aria-hidden></i> Menu
 		</div>
 
-		<!-- Opções do menu -->
+		<!-- Link de menu -->
 		<div class="cx05">
 			<ul id="ul">
 				<li id="pf" class="id"><a href="home-user"><i
@@ -57,7 +59,8 @@
 				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png"><p id="lip"> Meus Pets</p></a></li>
+						src="resources/loja/imagens/icones/icon-09.png">
+						<p id="lip">Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li><a href="listAgendamentos"><i class="fa fa-calendar"
@@ -97,7 +100,7 @@
 										href="novo-endereco?id=${endereco.idEnderecoCliente }"><i
 											class="fa fa-pencil-square-o" aria-hidden="true"
 											title="Alterar Endereço"></i></a> <a>/</a> <a
-										href="deleta-endereco?id=${endereco.idEnderecoCliente }&idCliente=${clienteLogado.idCliente}"><i
+										href="deleta-endereco?id=${endereco.idEnderecoCliente }"><i
 											class="fa fa-times" aria-hidden="true"
 											title="Remover Endeeço"></i></a></td>
 								</tr>
@@ -115,24 +118,26 @@
 		</div>
 		<br>
 	</div>
-	</main>
-	<c:import url="component/footerLoja.jsp"></c:import>
+</main>
+<c:import url="component/footerLoja.jsp"></c:import>
 
+<!-- Import JS -->
+<script src="resources/loja/js/jquery.min.js"></script>
 
-	<script src="resources/loja/js/jquery.min.js"></script>
-	<script>
-		$(".menuu").click(function() {
+<!-- Script's -->
+<script>
+	$(".menuu").click(function() {
 
-			$("#ul").toggle();
+		$("#ul").toggle();
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$('.menu-anchor').on('click touchstart', function(e) {
+			$('html').toggleClass('menu-active');
+			e.preventDefault();
 		});
-	</script>
-	<script>
-		$(document).ready(function() {
-			$('.menu-anchor').on('click touchstart', function(e) {
-				$('html').toggleClass('menu-active');
-				e.preventDefault();
-			});
-		})
-	</script>
+	})
+</script>
 </body>
 </html>

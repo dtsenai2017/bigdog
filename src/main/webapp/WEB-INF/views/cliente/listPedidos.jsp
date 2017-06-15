@@ -37,14 +37,22 @@
 	<!-- Import header -->
 	<c:import url="component/headerLoja.jsp"></c:import>
 	<div class="cxAvatar">
-		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
+		<!-- Ícone -->
+		<img
+			src="resources/loja/imagens/icones/${clienteLogado.genero == 'Masculino' ? 'man-icon':'female-icon' }.png"
+			class="avatar">
+
+		<!-- Nome do cliente -->
 		<div class="cx08">
 			<h2>${clienteLogado.nome }</h2>
 		</div>
+
+		<!-- Menu -->
 		<div class="menuu">
 			<i class="fa fa-bars" aria-hidden></i> Menu
 		</div>
 
+		<!-- Link de menu -->
 		<div class="cx05">
 			<ul id="ul">
 				<li id="pf"><a href="home-user"><i class="fa fa-home"
@@ -52,7 +60,8 @@
 				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png"><p id="lip"> Meus Pets</p></a></li>
+						src="resources/loja/imagens/icones/icon-09.png">
+						<p id="lip">Meus Pets</p></a></li>
 				<li class="id"><a href="listPedidos"><i
 						class="fa fa-shopping-cart" aria-hidden="true"></i> Pedidos</a></li>
 				<li><a href="listAgendamentos"><i class="fa fa-calendar"

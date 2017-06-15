@@ -69,7 +69,7 @@
 
 		<span id="msg"></span>
 		<div class="esq">
-			<a href="#"><p>Esqueci minha senha</p></a>
+			<a href="javascript:forget()"><p>Esqueci minha senha</p></a>
 		</div>
 		<br>
 		<div class="buttons">
@@ -146,10 +146,36 @@
 						$(this).css('background-color', 'brown');
 					});
 				});
+
+				// Modal para recuperação de senha
+				function forget() {
+					var width = 700;
+					var height = 400;
+
+					var left = 99;
+					var top = 99;
+
+					window
+							.open(
+									'esqueciSenha',
+									'janela',
+									'width='
+											+ width
+											+ ', height='
+											+ height
+											+ ', top='
+											+ top
+											+ ', left='
+											+ left
+											+ ', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
+
+				}
 			</script>
 		</div>
 	</form>
 </main>
+
+<!-- Footer -->
 <c:import url="component/footerLoja.jsp"></c:import>
 
 <script type="text/javascript"

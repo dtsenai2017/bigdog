@@ -91,7 +91,7 @@
 							Entrega:</h3>
 
 						<!-- Lista de endereço -->
-						<div class="input-field col s12" id="input-f">
+						<div class="input-field col s12 m12 l12" id="input-f">
 							<select id="selectEnderecos">
 								<c:forEach items="${clienteLogado.enderecos }" var="endereco">
 									<option value="${endereco.idEnderecoCliente }">${endereco.logradouro }</option>
@@ -100,14 +100,15 @@
 						</div>
 
 						<!-- Endereço selecionado -->
-						<p id="pLogradouro">${clienteLogado.enderecos[0].logradouro }
+						<p id="pNumero">
+							<b>Número</b> : ${clienteLogado.enderecos[0].numero }
 						</p>
-						<p id="pNumero">Número: ${clienteLogado.enderecos[0].numero }
-						</p>
-						<p id="pBairro">${clienteLogado.enderecos[0].bairro }</p>
-						<p id="pCidade">${clienteLogado.enderecos[0].cidade }</p>
-						<p>
-							<b>Frete Grátis</b>
+						<p id="pBairro">
+							<b>Bairro : </b>${clienteLogado.enderecos[0].bairro }</p>
+						<p id="pCidade">
+							<b>Cidade : </b>${clienteLogado.enderecos[0].cidade }</p>
+						<p class="green-text text-lighten-2">
+							<i>Frete Grátis</i>
 						</p>
 
 					</div>
@@ -123,20 +124,31 @@
 					<br>
 
 					<div align="center">
-						<button class="waves-effect waves-light btn"
-							style="width: 12em; margin-left: 20%; margin-top: 1em; background-color: #005900;">
-							<a onclick="pagamentoPagSeguro()" style="color: white;"><img
-								src="resources/loja/imagens/icones/icon-08.png">
-								<p style="margin-top: -0.5em; font-size: 15px;">Pagseguro</p>
-						</button>
-
-						<a onclick="pagamentoBoleto()" style="cursor: pointer;">
+						<!-- Verifica se há endereço -->
+						<c:if test="${!empty clienteLogado.enderecos}">
 							<button class="waves-effect waves-light btn"
-								style="width: 12em; margin-left: 1em; margin-top: 1em; background-color: #005900;">
-								<img src="resources/loja/imagens/icones/icon-08.png">
-								<p style="margin-top: -0.5em; font-size: 15px;">Boleto</p>
+								style="width: 12em; margin-left: 20%; margin-top: 1em; background-color: #005900;">
+								<a onclick="pagamentoPagSeguro()" style="color: white;"><img
+									src="resources/loja/imagens/icones/icon-08.png">
+									<p style="margin-top: -0.5em; font-size: 15px;">Pagseguro</p>
 							</button>
-						</a>
+
+							<a onclick="pagamentoBoleto()" style="cursor: pointer;">
+								<button class="waves-effect waves-light btn"
+									style="width: 12em; margin-left: 1em; margin-top: 1em; background-color: #005900;">
+									<img src="resources/loja/imagens/icones/icon-08.png">
+									<p style="margin-top: -0.5em; font-size: 15px;">Boleto</p>
+								</button>
+							</a>
+						</c:if>
+
+						<c:if test="${empty clienteLogado.enderecos }">
+							<p class="red-text text-lighten-2" align="center">
+								Necessário endereço para finalizar compra! Clique <a
+									href="novo-endereco"><b>aqui</b></a> para cadastrar um
+								endereço.
+							</p>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -177,9 +189,10 @@
 
 		// Select change
 		$('select').on("change", function() {
+			// Atributo selecionado
 			var valSelect = $("option:selected", this).val();
-			console.log(valSelect);
 
+			// Busca de endereço
 			$.ajax({
 				headers : {
 					'Content-Type' : 'application/json'
@@ -188,15 +201,13 @@
 				url : 'rest/dinamic/endereco/' + valSelect,
 				dataType : 'json',
 				success : function(data) {
-					console.log(data);
-
-					$("#pLogradouro").html(data.logradouro);
-					$("#pNumero").html('Número: ' + data.numero);
-					$("#pBairro").html(data.bairro);
-					$("#pCidade").html(data.cidade);
+					// Atribuindo valores para descrição de endereço
+					$("#pNumero").html('<b>Número</b> : ' + data.numero);
+					$("#pBairro").html('<b>Bairro</b> : ' + data.bairro);
+					$("#pCidade").html('<b>Cidade</b> : ' + data.cidade);
 				},
-				error : function() {
-					console.log('só triteza');
+				error : function(e) {
+					console.log('ERROR : ' + e);
 				}
 			});
 		});

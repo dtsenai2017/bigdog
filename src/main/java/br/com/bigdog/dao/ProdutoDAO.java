@@ -26,18 +26,43 @@ public class ProdutoDAO {
 	// Listar
 	public List<Produto> listarOrdenado() {
 		TypedQuery<Produto> query = manager.createQuery("SELECT p FROM Produto p", Produto.class);
-		return query.getResultList();
+
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	// Listar ordenado por nome
+	public List<Produto> listarNome() {
+		TypedQuery<Produto> query = manager.createQuery("SELECT p FROM Produto p ORDER BY p.nome", Produto.class);
+
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Listar ORDER
 	public List<Produto> listar() {
 		TypedQuery<Produto> query = manager.createQuery("SELECT p FROM Produto p ORDER BY RAND()", Produto.class);
-		return query.getResultList();
+
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Listar (id)
 	public Produto listar(Long id) {
-		return manager.find(Produto.class, id);
+		try {
+			return manager.find(Produto.class, id);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Alterar
@@ -58,6 +83,7 @@ public class ProdutoDAO {
 		TypedQuery<Produto> query = manager.createQuery(
 				"SELECT p FROM Produto p WHERE p.subCategoria.idSubCategoria = :idSubCategoria", Produto.class);
 		query.setParameter("idSubCategoria", id);
+
 		try {
 			return query.getResultList();
 		} catch (Exception e) {
@@ -70,6 +96,11 @@ public class ProdutoDAO {
 		TypedQuery<Produto> query = manager.createQuery("SELECT p FROM Produto p ORDER BY RAND()", Produto.class);
 		query.setFirstResult(primeiroIndex);
 		query.setMaxResults(ultimoIndex);
-		return query.getResultList();
+
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

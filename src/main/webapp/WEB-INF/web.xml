@@ -6,6 +6,11 @@
 
 	<display-name>Archetype Created Web Application</display-name>
 
+	<!-- Index -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
 	<!-- Spring servlet -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>

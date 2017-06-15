@@ -71,10 +71,8 @@ public class RestLoginController {
 		try {
 			cliente = clienteDAO.logar(cliente);
 			if (cliente != null) {
-				System.out.println("Existe" + cliente);
 				return ResponseEntity.ok(cliente);
 			} else {
-				System.out.println("Errouuuuu");
 				return new ResponseEntity<Cliente>(HttpStatus.UNAUTHORIZED);
 			}
 		} catch (Exception e) {
@@ -83,7 +81,7 @@ public class RestLoginController {
 		}
 	}
 
-	// Logar Android com token
+	// Logar no Android com token
 	@RequestMapping(value = "and/logaAd", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<TokenCliente> logaAd(@RequestBody Cliente cliente) {
 		try {

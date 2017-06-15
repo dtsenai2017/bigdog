@@ -88,8 +88,7 @@
 
 	<!-- Modal's -->
 	<!-- Modal de informações de cliente -->
-	<div id="modal-cliente-info"
-		class="modal modal-fixed-footer bottom-sheet">
+	<div id="modal-cliente-info" class="modal bottom-sheet">
 		<!-- Modal content -->
 		<div class="modal-content">
 			<div class="container">
@@ -256,13 +255,7 @@
 		<!-- /.modal-content -->
 
 		<!-- Modal footer -->
-		<div class="modal-footer">
-			<!-- Botão para excluir cliente -->
-			<button id="btn-excluir-cliente"
-				class="btn-flat waves-effect waves-red left">
-				<i class="material-icons left red-text">delete</i> Excluir Cliente
-			</button>
-		</div>
+		<div class="modal-footer"></div>
 	</div>
 	<!-- /#modal-cliente-info -->
 

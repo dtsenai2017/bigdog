@@ -46,6 +46,18 @@ $('#search-produto').keypress(function(e) {
 	}
 });
 
+// Input search categoria (Captura a tecla enter)
+$('#search-categoria').keypress(function(e) {
+	// Verifica se ENTER foi pressionado
+	if (e.which == 13) {
+		// Cancela qualquer ação padrão do elemento
+		e.preventDefault();
+
+		// Toast
+		Materialize.toast("Apenas digite sua busca!", 2500);
+	}
+});
+
 // Escondendo link para lista de categorias
 $('#btn-esconder-categorias').hide();
 
@@ -483,7 +495,7 @@ function abrirPrincipalProduto() {
 
 	// Populando lista de produtos
 	$.getJSON({
-		url : "adm/produto",
+		url : "adm/produtoOrdenadoNome",
 		headers : {
 			'Authorization' : localStorage
 					.getItem("tokenBigDog")

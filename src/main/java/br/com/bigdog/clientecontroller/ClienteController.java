@@ -50,4 +50,21 @@ public class ClienteController {
 			return null;
 		}
 	}
+
+	// Recuperar senha
+	@RequestMapping(value = "rest/esqueceuSenhaCpf/{email}&{cpf}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Cliente recuperaSenha(@PathVariable String email, @PathVariable String cpf) {
+		// Replace
+		cpf = cpf.replace(" ", ".");
+		System.out.println(cpf);
+		email = email.replace(" ", ".");
+
+		// Retornando...
+		try {
+			return dao.buscaEmailCpf(email, cpf);
+		} catch (EntityNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

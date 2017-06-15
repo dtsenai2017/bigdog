@@ -42,20 +42,22 @@
 
 	<!-- Dados do cliente -->
 	<div class="cxAvatar">
-		<!-- Imagem do avatar -->
-		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
+		<!-- Ícone -->
+		<img
+			src="resources/loja/imagens/icones/${clienteLogado.genero == 'Masculino' ? 'man-icon':'female-icon' }.png"
+			class="avatar">
 
 		<!-- Nome do cliente -->
 		<div class="cx08">
 			<h2>${clienteLogado.nome }</h2>
 		</div>
 
-		<!-- Menu lateral -->
+		<!-- Menu -->
 		<div class="menuu">
 			<i class="fa fa-bars" aria-hidden></i> Menu
 		</div>
 
-		<!-- Opções do menu -->
+		<!-- Link de menu -->
 		<div class="cx05">
 			<ul id="ul">
 				<li id="pf" class="id"><a href="home-user"><i
@@ -64,7 +66,7 @@
 						aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
 						src="resources/loja/imagens/icones/icon-09.png">
-					<p id="lip">Meus Pets</p></a></li>
+						<p id="lip">Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li><a href="listAgendamentos"><i class="fa fa-calendar"
@@ -84,45 +86,44 @@
 		<form id="form" action="cadastra-endereco" class="form" method="post">
 			<div class="row roww">
 				<div class="input-field col s6">
-					<input type="hidden" name="id" value="${clienteLogado.idCliente }"><input
-						type="hidden" name="idEnderecoCliente"
+					<input type="hidden" name="idEnderecoCliente"
 						value="${alterarEndereco.idEnderecoCliente }"><input
-						id="cep" name="cep" type="text" onkeypress="habilitaC()"
-						value="${alterarEndereco.cep }" required="required" class="cep">
-					<label class="active" for="p07">CEP</label> <span id="spcep"></span>
-
+						id="cep" name="cep" type="text" value="${alterarEndereco.cep }"
+						class="cep" maxlength="9" required> <label class="active"
+						for="cep">* CEP</label>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s6">
 					<input id="logradouro" value="${alterarEndereco.logradouro }"
-						name="logradouro" required="required" type="text" class="">
-					<label class="active" for="p08">Logradouro</label>
+						name="logradouro" type="text" maxlength="255" required> <label
+						id="lbl-logradouro" class="active" for="logradouro">*
+						Logradouro</label>
 				</div>
 			</div>
 
 			<div class="row rwo">
 				<div class="input-field col s6">
 					<input id="bairro" value="${alterarEndereco.bairro }" type="text"
-						required="required" name="bairro" class=""> <label
-						class="active" for="p09">Bairro</label>
+						name="bairro" maxlength="100" required> <label
+						id="lbl-bairro" class="active" for="bairro">* Bairro</label>
 				</div>
 			</div>
 
 			<div class="row rwoo">
 				<div class="input-field col s6">
 					<input id="cidade" type="text" value="${alterarEndereco.cidade }"
-						required="required" name="cidade" class=""> <label
-						class="active" for="p10">Cidade</label>
+						name="cidade" maxlength="100" required> <label
+						id="lbl-cidade" class="active" for="cidade">* Cidade</label>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s6">
-					<input id="uf" type="text" maxlength="2" required="required"
-						name="uf" value="${alterarEndereco.uf }" class=""> <label
-						class="active" for="p11">UF</label>
+					<input id="uf" type="text" maxlength="2" name="uf"
+						value="${alterarEndereco.uf }" required> <label
+						id="lbl-uf" class="active" for="uf">* UF</label>
 				</div>
 			</div>
 
@@ -130,20 +131,21 @@
 				<div class="input-field col s6">
 					<input id="complemento" type="text"
 						value="${alterarEndereco.complemento }" name="complemento"
-						class=""> <label class="active" for="p12">Complemento</label>
+						maxlength="50"> <label id="lbl-complemento" class="active"
+						for="complemento">Complemento</label>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s6">
 					<input id="numero" type="text" value="${alterarEndereco.numero }"
-						required="required" name="numero" class=""> <label
-						class="active" for="p13">Numero</label>
+						name="numero" maxlength="10" required> <label
+						id="lbl-numero" class="active" for="numero">* Numero</label>
 				</div>
 			</div>
 
 			<button type="submit" class="buttonn buttonBlue">
-				Cadastrar
+				${alterarEndereco != null ? 'Alterar':'Cadastrar' }
 				<div class="ripples buttonRipples">
 					<span class="ripplesCircle"></span>
 				</div>
@@ -158,17 +160,6 @@
 <!-- Import JS -->
 <script type="text/javascript"
 	src="resources/loja/js/materialize.min.js"></script>
-
-<!-- Script's -->
-<script type="text/javascript">
-	function habilitaC() {
-		$('#logradouro').attr("disabled", false);
-		$('#bairro').attr("disabled", false);
-		$('#cidade').attr('disabled', false);
-		$('#uf').attr('disabled', false);
-
-	}
-</script>
 
 <script type="text/javascript">
 	$(".button-collapse").sideNav();
@@ -201,13 +192,19 @@
 	$(document)
 			.ready(
 					function() {
-
+						// Limpar formulário
 						function limpa_formulário_cep() {
-							// Limpa valores do formulário de cep.
+							// Limpa formulário
 							$("#logradouro").val("");
 							$("#bairro").val("");
 							$("#cidade").val("");
 							$("#uf").val("");
+
+							// Ativa labels
+							$("#lbl-logradouro").removeClass('active');
+							$("#lbl-bairro").removeClass('active');
+							$("#lbl-cidade").removeClass('active');
+							$("#lbl-uf").removeClass('active');
 						}
 
 						// Quando o campo cep perde o foco.
@@ -224,7 +221,7 @@
 											// cep possui valor informado.
 											if (cep != "") {
 
-												// Expressão regular para validar o CEP.
+												// Validar o CEP.
 												var validacep = /^[0-9]{8}$/;
 
 												// Valida o formato do CEP.
@@ -238,7 +235,7 @@
 													$("#cidade").val("...");
 													$("#uf").val("...");
 
-													// Consulta o webservice viacep.com.br/
+													// Consulta viacep.com.br/
 													$
 															.getJSON(
 																	"//viacep.com.br/ws/"
@@ -248,9 +245,26 @@
 																			dados) {
 
 																		if (!("erro" in dados)) {
-																			// Atualiza os 
-																			// campos com os valores da
-																			// consulta.
+																			// Atualiza campos de endereço
+																			// Ativa labels
+																			$(
+																					'#lbl-logradouro')
+																					.addClass(
+																							'active');
+																			$(
+																					'#lbl-bairro')
+																					.addClass(
+																							'active');
+																			$(
+																					'#lbl-cidade')
+																					.addClass(
+																							'active');
+																			$(
+																					'#lbl-uf')
+																					.addClass(
+																							'active');
+
+																			// Atribui valores para campos
 																			$(
 																					"#logradouro")
 																					.val(
@@ -267,49 +281,33 @@
 																					"#uf")
 																					.val(
 																							dados.uf);
-																			$(
-																					"#spcep")
-																					.text(
-																							"");
+
+																			// Focus em complemento
 																			$(
 																					"#complemento")
 																					.focus();
-																			$(
-																					'#logradouro')
-																					.attr(
-																							"disabled",
-																							true);
-																			$(
-																					'#bairro')
-																					.attr(
-																							"disabled",
-																							true);
-																			$(
-																					'#cidade')
-																					.attr(
-																							'disabled',
-																							true);
-																			$(
-																					'#uf')
-																					.attr(
-																							'disabled',
-																							true);
-
 																		} // end if.
 																		else {
 																			// CEP pesquisado não foi encontrado.
 																			limpa_formulário_cep();
-																			$(
-																					"#spcep")
-																					.text(
-																							"CEP Não Encontrado");
+
+																			// Toast
+																			Materialize
+																					.toast(
+																							'CEP não encontrado.',
+																							2000);
 																		}
 																	});
 												} // end if.
 												else {
 													// cep é inválido.
 													limpa_formulário_cep();
-													alert("Formato de CEP inválido.");
+
+													// Toast
+													Materialize
+															.toast(
+																	'Formato de CEP inválido.',
+																	2000);
 												}
 											} // end if.
 											else {

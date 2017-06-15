@@ -26,13 +26,13 @@ public class Agendamento {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "pt-BR", timezone = "America/Sao_Paulo")
 	private Date dataAgendada;
 	@OneToOne(orphanRemoval = false)
-	@JoinColumn(name = "id_cliente")
+	@JoinColumn(name = "id_cliente", nullable = false)
 	private Cliente cliente;
 	@OneToOne(orphanRemoval = false)
-	@JoinColumn(name = "id_servico")
+	@JoinColumn(name = "id_servico", nullable = false)
 	private Servico servico;
 	@OneToOne(orphanRemoval = false)
-	@JoinColumn(name = "id_pet")
+	@JoinColumn(name = "id_pet", nullable = false)
 	private Pet pet;
 
 	// Getters e Setters

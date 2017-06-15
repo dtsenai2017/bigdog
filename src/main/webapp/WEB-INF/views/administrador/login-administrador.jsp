@@ -67,15 +67,14 @@
 								<form id="form-login-adm">
 									<div class="input-field col s12 m12 l12">
 										<i class="material-icons prefix red-text text-lighten-2">email</i>
-										<input id="adm-email" type="email" class="validate" required
-											value="admin_bigdog@gmail.com"> <label
-											for="adm-email" data-error="inválido" data-success="ok">Email</label>
+										<input id="adm-email" type="email" class="validate" required>
+										<label for="adm-email" data-error="inválido" data-success="ok">Email</label>
 									</div>
 
 									<div class="input-field col s12 m12 l12">
 										<i class="material-icons prefix red-text text-lighten-2">lock</i>
-										<input id="adm-senha" type="password" required
-											value="bigdog1234"> <label for="adm-senha">Senha</label>
+										<input id="adm-senha" type="password" required>
+										<label for="adm-senha">Senha</label>
 									</div>
 
 									<!-- Botão voltar e submit -->

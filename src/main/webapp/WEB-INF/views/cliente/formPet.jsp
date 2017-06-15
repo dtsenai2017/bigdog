@@ -52,13 +52,22 @@
 	<c:import url="component/headerLoja.jsp"></c:import>
 
 	<div class="cxAvatar">
-		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
+		<!-- Ícone -->
+		<img
+			src="resources/loja/imagens/icones/${clienteLogado.genero == 'Masculino' ? 'man-icon':'female-icon' }.png"
+			class="avatar">
+
+		<!-- Nome do cliente -->
 		<div class="cx08">
 			<h2>${clienteLogado.nome }</h2>
 		</div>
+
+		<!-- Menu -->
 		<div class="menuu">
 			<i class="fa fa-bars" aria-hidden></i> Menu
 		</div>
+
+		<!-- Link de menu -->
 		<div class="cx05">
 			<ul id="ul">
 				<li id="pf"><a href="home-user"><i class="fa fa-home"
@@ -76,23 +85,25 @@
 						aria-hidden="true"></i> Logout</a></li>
 			</ul>
 		</div>
+
 		<div class="cx03">
 			<img src="resources/loja/imagens/icones/icon-10.png"> Novo Pet
 		</div>
+
+		<!-- Formulário de pete -->
 		<form id="form" method="post" action="cadastra-pet" class="form">
 			<div class="row roww">
 				<div class="input-field col s6">
-					<input type="hidden" name="id" value="${clienteLogado.idCliente }"><input
-						type="hidden" name="idPet" value="${alterarPet.idPet }"><input
+					<input type="hidden" name="idPet" value="${alterarPet.idPet }"><input
 						id="p" name="nome" value="${alterarPet.nome }" required="required"
-						type="text"> <label class="active" for="p">Nome do
-						Pet</label>
+						type="text" maxlength="255"> <label class="active" for="p">*
+						Nome do Pet</label>
 				</div>
 			</div>
 
 			<div class="input-field col s12" id="input-f">
-				<label class="active" for="first_name2" style="margin-left: -1em;">Especie</label>
-				<select name="especie">
+				<label class="active" for="first_name2" style="margin-left: -1em;">*
+					Especie</label> <select name="especie">
 					<c:set var="especie" value="<%=Especie.values()%>" />
 					<c:forEach items="${especie}" var="especie">
 						<option value="${especie }"
@@ -102,7 +113,7 @@
 			</div>
 
 			<div class="row" id="rows">
-				<label class="gen">Sexo</label>
+				<label class="gen">* Sexo</label>
 				<p>
 					<input name="sexo" type="radio" id="test1" value="${Sexo.Macho }"
 						checked="checked"
@@ -118,7 +129,7 @@
 			</div>
 
 			<div class="row" id="rowww">
-				<label class="gen">Castrado</label>
+				<label class="gen">* Castrado</label>
 				<p>
 					<input name="castrado" type="radio" id="test3" value="1"
 						checked="checked"
@@ -135,8 +146,8 @@
 
 			<div class="row roww">
 				<div class="input-field col s6">
-					<input id="p01" name="raca" value="${alterarPet.raca}" type="text">
-					<label class="active" for="p01">Raça *</label>
+					<input id="p01" name="raca" value="${alterarPet.raca}" type="text"
+						maxlength="50"> <label class="active" for="p01">Raça</label>
 				</div>
 			</div>
 
@@ -144,40 +155,40 @@
 				<div class="input-field col s6">
 					<input id="p02"
 						value='<fmt:formatDate value="${alterarPet.dataNascimento }" pattern="dd/MM/yyyy"/>'
-						name="dataNascimento" type="text" class="dataN"> <label
-						class="active" for="p02">Data de Nascimento *</label>
+						name="dataNascimento" type="text" class="dataN" required>
+					<label class="active" for="p02">* Data de Nascimento</label>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s6">
 					<input value="${alterarPet.pedigree }" name="pedigree" id="p03"
-						type="text"> <label class="active" for="p03">Pedigree
-						*</label>
+						type="text" maxlength="20"> <label class="active"
+						for="p03">Pedigree </label>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s6">
 					<input value="${alterarPet.rga }" name="rga" id="p04" type="text"
-						class=""> <label class="active" for="p04">RGA *</label>
+						maxlength="20"> <label class="active" for="p04">RGA</label>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s6">
 					<input value="${alterarPet.carteiraVacina }" name="carteiraVacina"
-						id="p05" type="text" class=""> <label class="active"
-						for="p05">Carteira de Vacina *</label>
+						id="p05" type="text" maxlength="20"> <label class="active"
+						for="p05">Carteira de Vacina</label>
 				</div>
 			</div>
 
 			<div class="row" style="width: 50%; margin-left: 0;">
 				<div class="row">
 					<div class="input-field col s12">
-						<textarea name="observacoes" id="textarea1"
+						<textarea name="observacoes" id="textarea1" maxlength="255"
 							class="materialize-textarea">${alterarPet.observacoes }</textarea>
-						<label for="textarea1">Observação *</label>
+						<label for="textarea1">Observação</label>
 					</div>
 				</div>
 			</div>
@@ -185,19 +196,19 @@
 				<div class="input-field col s6">
 					<input value="${alterarPet.peso }" name="peso" id="p06" type="text"
 						class="peso"> <label class="active" for="p06">Peso
-						*</label>
+					</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
 					<input value="${alterarPet.pelagem }" name="pelagem" id="p07"
-						type="text" class=""> <label class="active" for="p07">Pelagem
-						*</label>
+						type="text" maxlength="50"> <label class="active"
+						for="p07">Pelagem </label>
 				</div>
 			</div>
 
 			<button type="submit" class="buttonn buttonBlue">
-				Cadastrar
+				${alterarPet != null ? 'Alterar' : 'Cadastrar'}
 				<div class="ripples buttonRipples">
 					<span class="ripplesCircle"></span>
 				</div>

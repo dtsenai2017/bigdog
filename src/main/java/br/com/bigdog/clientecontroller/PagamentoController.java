@@ -27,12 +27,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import br.com.bigdog.dao.CarrinhoDoClienteDAO;
 import br.com.bigdog.dao.CompraDAO;
 import br.com.bigdog.dao.EnderecoClienteDAO;
+import br.com.bigdog.dao.ProdutoDAO;
 import br.com.bigdog.model.Carrinho;
 import br.com.bigdog.model.Cliente;
 import br.com.bigdog.model.Compra;
 import br.com.bigdog.model.EnderecoCliente;
 import br.com.bigdog.model.EnderecoCompra;
 import br.com.bigdog.model.ItemCompra;
+import br.com.bigdog.model.Produto;
 import br.com.bigdog.model.ProdutoCarrinho;
 import br.com.bigdog.util.GeradorPDF;
 
@@ -46,15 +48,17 @@ public class PagamentoController {
 	private EnderecoClienteDAO enderecoDAO;
 	private CarrinhoDoClienteDAO carrinhoDoClienteDAO;
 	private CompraDAO compraDAO;
+	private ProdutoDAO produtoDAO;
 
 	// Construtor
 	@Autowired
 	public PagamentoController(GeradorPDF geradorPdf, EnderecoClienteDAO enderecoDAO,
-			CarrinhoDoClienteDAO carrinhoDoClienteDAO, CompraDAO compraDAO) {
+			CarrinhoDoClienteDAO carrinhoDoClienteDAO, CompraDAO compraDAO, ProdutoDAO produtoDAO) {
 		this.geradorPdf = geradorPdf;
 		this.enderecoDAO = enderecoDAO;
 		this.carrinhoDoClienteDAO = carrinhoDoClienteDAO;
 		this.compraDAO = compraDAO;
+		this.produtoDAO = produtoDAO;
 	}
 
 	// Gerar Boleto
@@ -78,23 +82,34 @@ public class PagamentoController {
 
 	// PagSeguro
 	@RequestMapping("/pagseguro/{idEndereco}")
-	public String pagPagseguro(HttpSession session, @PathVariable long idEndereco) {
-		// Atributos
+	public String pagPagseguro(HttpSession session, @PathVariable Long idEndereco) {
+		// Atributo de retorno
 		String retorno;
-		EnderecoCliente endCliente = enderecoDAO.listar(idEndereco);
-		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
-		Carrinho carrinho = carrinhoDoClienteDAO.listarCarrinhoDoCliente(cliente.getIdCliente());
-		Compra compra = new Compra();
 
-		// Atribuindo valores para compra
-		compra = addCompra(compra, carrinho, cliente, endCliente);
+		// Verifica se há endereço
+		if (idEndereco != null) {
+			// Atributos
+			EnderecoCliente endCliente = enderecoDAO.listar(idEndereco);
+			Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+			Carrinho carrinho = carrinhoDoClienteDAO.listarCarrinhoDoCliente(cliente.getIdCliente());
+			Compra compra = new Compra();
 
-		// Enviando valores para o pagseguro
-		try {
-			String code = sendXml(cliente, carrinho, compra);
-			retorno = "redirect:https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
-		} catch (Exception e) {
-			retorno = "redirect:home";
+			// Atribuindo valores para compra
+			compra = addCompra(compra, carrinho, cliente, endCliente);
+
+			// Enviando valores para o pagseguro
+			try {
+				String code = sendXml(cliente, carrinho, compra);
+				retorno = "redirect:https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=" + code;
+			} catch (Exception e) {
+				retorno = "redirect:home";
+			}
+
+			// Retornando...
+			return retorno;
+		} else {
+			// Caso endereço seja null, redireciona para formulário de endereço
+			retorno = "cliente/formEndereco";
 		}
 
 		// Retornando...
@@ -139,6 +154,7 @@ public class PagamentoController {
 		// Inserindo compra e limpando carrinho
 		try {
 			compraDAO.inserir(compra);
+			alterarQtdProduto(carrinho.getProdutosCarrinho());
 			carrinhoDoClienteDAO.limpaCarrinhoDoCliente(carrinho.getIdCarrinho());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -146,6 +162,15 @@ public class PagamentoController {
 
 		// Retornando...
 		return compra;
+	}
+
+	// Alterar quantidade
+	private void alterarQtdProduto(List<ProdutoCarrinho> listaProduto) {
+		for (ProdutoCarrinho produtoCarrinho : listaProduto) {
+			Produto produto = produtoCarrinho.getProduto();
+			produto.setQtdEstoque(produto.getQtdEstoque() - produtoCarrinho.getQuantidade());
+			produtoDAO.alterar(produto);
+		}
 	}
 
 	// Enviar XML
@@ -199,6 +224,7 @@ public class PagamentoController {
 	private String gerarxml(Cliente c, Carrinho carrinho, Compra compra) {
 		// Atributo para ip do host
 		String host = null;
+
 		try {
 			host = InetAddress.getLocalHost().getHostAddress();
 		} catch (UnknownHostException e) {
@@ -207,10 +233,9 @@ public class PagamentoController {
 
 		// Retornando...
 		return "<?xml version=\"1.0\"?><checkout><sender><name>" + c.getNome() + "</name>"
-				+ "<email>c71089443377372574576@sandbox.pagseguro.com.br</email><phone>"
-				+ "<areaCode>11</areaCode><number>" + c.getContato().getCelular().replace("-", "") + "</number>"
-				+ "</phone><ip>" + host + "</ip><documents><document><type>CPF</type><value>" + c.getCpf() + "</value>"
-				+ "</document></documents></sender><currency>BRL</currency>" + gerarItensXml(carrinho)
+				+ "<email>c71089443377372574576@sandbox.pagseguro.com.br</email><ip>" + host
+				+ "</ip><documents><document><type>CPF</type><value>" + c.getCpf().replace(".", "").replace("-", "")
+				+ "</value>" + "</document></documents></sender><currency>BRL</currency>" + gerarItensXml(carrinho)
 				+ "<redirectURL>localhost:8080/BigDog/home</redirectURL>" + "<reference>" + compra.getIdCompra()
 				+ "</reference> <receiver> <email>" + emailVendedorPagSeguro + "</email></receiver></checkout>";
 	}

@@ -4,7 +4,7 @@ function recarregarGerenciarCliente() {
 	var xhr = new XMLHttpRequest();
 
 	// Tipo, url e async
-	xhr.open('GET', "gerenciarCliente", false);
+	xhr.open('GET', "adm/gerenciarCliente", false);
 
 	// Atribuindo token
 	xhr.setRequestHeader("Authorization", localStorage.getItem("tokenBigDog"));
@@ -170,7 +170,7 @@ function buscarCliente(idCliente) {
 					}
 
 					// Pedigree
-					if (pet.pedigree.length == 0) {
+					if (pet.pedigree == null) {
 						pedigree = "-";
 					} else {
 						pedigree = pet.pedigree;

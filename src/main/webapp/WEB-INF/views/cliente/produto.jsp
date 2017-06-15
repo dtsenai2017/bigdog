@@ -35,7 +35,7 @@
 	<div class="totalP">
 		<!-- Imagem do produto -->
 		<div class="imgProduto">
-			<img src="${produto.fotoString }" class="materialboxed">
+			<img src="${produto.fotoString }">
 		</div>
 
 		<!-- Descrição do produto -->

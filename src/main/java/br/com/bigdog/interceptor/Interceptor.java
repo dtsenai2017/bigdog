@@ -36,12 +36,14 @@ public class Interceptor extends HandlerInterceptorAdapter {
 
 			// Páginas autorizadas para cliente
 			if (request.getRequestURI().contains("home") || request.getRequestURI().contains("entrar")
+					|| request.getRequestURI().contains("esqueciSenha")
 					|| request.getRequestURI().contains("faca-parte") || request.getRequestURI().contains("categoria")
 					|| request.getRequestURI().contains("produtos") || request.getRequestURI().contains("produto")
 					|| request.getRequestURI().contains("novo-agendamento")
 					|| request.getRequestURI().contains("rest/login") || request.getRequestURI().contains("rest/logar")
 					|| request.getRequestURI().contains("rest/verificaCpf")
 					|| request.getRequestURI().contains("rest/verificaEmail")
+					|| request.getRequestURI().contains("rest/esqueceuSenhaCpf")
 					|| request.getRequestURI().contains("indexCliente") || request.getRequestURI().contains("search")) {
 
 				// Verifica se contem adm na requisição

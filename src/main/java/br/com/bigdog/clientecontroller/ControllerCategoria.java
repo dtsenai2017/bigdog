@@ -15,9 +15,9 @@ public class ControllerCategoria {
 	// Atributos
 	private CategoriaDAO categoriaDAO;
 
+	// Construtor
 	@Autowired
 	public ControllerCategoria(CategoriaDAO categoriaDAO) {
-		// TODO Auto-generated constructor stub
 		this.categoriaDAO = categoriaDAO;
 	}
 
@@ -25,8 +25,10 @@ public class ControllerCategoria {
 	@RequestMapping(value = "/categoria/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Categoria listar(@PathVariable("id") Long id) {
 		try {
+			// Retornando...
 			return categoriaDAO.listar(id);
 		} catch (NullPointerException e) {
+			// Retornando...
 			return null;
 		}
 	}

@@ -36,14 +36,22 @@
 	<c:import url="component/headerLoja.jsp"></c:import>
 
 	<div class="cxAvatar">
-		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
+		<!-- Ícone -->
+		<img
+			src="resources/loja/imagens/icones/${clienteLogado.genero == 'Masculino' ? 'man-icon':'female-icon' }.png"
+			class="avatar">
+
+		<!-- Nome do cliente -->
 		<div class="cx08">
 			<h2>${clienteLogado.nome }</h2>
 		</div>
+
+		<!-- Menu -->
 		<div class="menuu">
 			<i class="fa fa-bars" aria-hidden></i> Menu
 		</div>
 
+		<!-- Link de menu -->
 		<div class="cx05">
 			<ul id="ul">
 				<li id="pf"><a href="home-user"><i class="fa fa-home"
@@ -51,7 +59,8 @@
 				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png"><p id="lip"> Meus Pets</p></a></li>
+						src="resources/loja/imagens/icones/icon-09.png">
+						<p id="lip">Meus Pets</p></a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li class="id"><a href="listAgendamentos"><i
@@ -60,11 +69,15 @@
 						aria-hidden="true"></i> Logout</a></li>
 			</ul>
 		</div>
+
 		<div class="cx03">
 			<i class="fa fa-calendar" aria-hidden="true"></i> Agendamentos
 		</div>
 
+		<!-- Descrição de agendamentos -->
 		<h3 class="hh3">Lista de Agendamentos</h3>
+
+		<!-- Caixa para table de agendamentos -->
 		<div class="demo">
 			<div id="demo">
 				<div class="table-responsive-vertical shadow-z-1">
@@ -74,9 +87,8 @@
 								<th>Pet</th>
 								<th>Data</th>
 								<th>Hora</th>
-								<th>Tipo de Serviço</th>
-								<th>Status</th>
-								<th>Gerenciar</th>
+								<th>Serviço</th>
+								<th>Cancelar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -87,12 +99,11 @@
 											value="${agenda.dataAgendada }"></f:formatDate></td>
 									<td data-title="Hora"><f:formatDate pattern="HH:mm"
 											value="${agenda.dataAgendada }"></f:formatDate></td>
-									<td>${agenda.servico.tipoServico }</td>
-									<td data-title="Observacao">Em Andamento</td>
+									<td>${agenda.servico.nome }</td>
 									<td><a
-										href="cancela-agendamento?id=${agenda.idAgendamento }"><i
+										href="cancela-agendamento?idAgendamento=${agenda.idAgendamento }"><i
 											class="fa fa-times" aria-hidden="true"
-											title="Remover Endeeço"></i></a></td>
+											title="Cancelar Agendamento"></i></a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

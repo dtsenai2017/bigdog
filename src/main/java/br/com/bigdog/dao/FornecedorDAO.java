@@ -25,7 +25,8 @@ public class FornecedorDAO implements GenericDAO<Fornecedor> {
 
 	// Listar
 	public List<Fornecedor> listar() {
-		TypedQuery<Fornecedor> query = manager.createQuery("SELECT f FROM Fornecedor f", Fornecedor.class);
+		TypedQuery<Fornecedor> query = manager.createQuery("SELECT f FROM Fornecedor f ORDER BY f.nomeFantasia",
+				Fornecedor.class);
 		return query.getResultList();
 	}
 

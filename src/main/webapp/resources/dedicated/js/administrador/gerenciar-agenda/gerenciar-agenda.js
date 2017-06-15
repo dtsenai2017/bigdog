@@ -35,6 +35,9 @@ function abrirModalAgendamento(idAgendamento) {
 	$
 			.getJSON({
 				url : "adm/agendamento/" + idAgendamento,
+				headers : {
+					'Authorization' : localStorage.getItem("tokenBigDog")
+				},
 				type : "GET",
 				success : function(agendamento) {
 					// Atribui 0 para tempo

@@ -130,6 +130,18 @@ public class AdmProdutoController {
 		}
 	}
 
+	// Listar ordenado por nome
+	@RequestMapping(value = "produtoOrdenadoNome", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public List<Produto> listarOrdenadoNome() {
+		try {
+			// Retornando
+			return produtoDAO.listarNome();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	// Excluir
 	@RequestMapping(value = "produto/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> excluir(@PathVariable("id") Long idProduto) {

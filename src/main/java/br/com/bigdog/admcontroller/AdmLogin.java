@@ -39,7 +39,7 @@ public class AdmLogin {
 		try {
 			// Verifica usuário
 			if (administrador.getEmail().equals("admin_bigdog@gmail.com")
-					&& administrador.getSenha().equals("bigdog1234")) {
+					&& administrador.getSenha().equals("bigdog54321")) {
 				// HashMap para token
 				HashMap<String, Object> hash = new HashMap<String, Object>();
 

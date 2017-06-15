@@ -255,8 +255,8 @@ function consumir() {
 		if (mesCompra[i] == null) {
 			// Atribuindo valores para TESTE
 			// --------------------------------------------------
-			// mesCompra[i] = Math.floor((Math.random() * 25) + 1);
-			mesCompra[i] = 0;
+			mesCompra[i] = Math.floor((Math.random() * 25) + 1);
+			// mesCompra[i] = 0;
 		}
 	}
 

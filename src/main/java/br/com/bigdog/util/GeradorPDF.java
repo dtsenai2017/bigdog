@@ -60,6 +60,8 @@ public class GeradorPDF {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 15);
 
+		System.out.println(compra.getValor());
+
 		titulo.setCedente(cedente);
 		titulo.setSacadorAvalista(sacadorAvalista);
 		titulo.setValor(BigDecimal.valueOf(compra.getValor()));

@@ -74,37 +74,36 @@ public class AgendaController {
 	@RequestMapping(value = "rest/agendar/{date}/{valor}/{idServico}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<String> listarServicoPorTipo(@PathVariable("date") String sDate, @PathVariable("valor") int valor,
 			@PathVariable long idServico) throws ParseException {
-		// 9h até 18h, o sistema foi restrigindo para a minimo agendamento de 30
-		// min
-		// em dias de semana normais, são 18 campos de reserva tanto para a
-		// estética
-		// como para o veterinario
-
 		List<String> datasDispo = new ArrayList<String>();
 		Date dateVerificada = new Date(formatterDate.parse(sDate).getTime());
 		Calendar c = Calendar.getInstance();
-		Date dataAntes = new Date();
-		Date dataDepois = new Date();
-		System.err.println(idServico);
+		Date dateNow = new Date();
+		Date dataInicial = new Date();
+		Date dataTerminal = new Date();
 		Servico servico = servicoDAO.listar(idServico);
 
-		// Setando dados para busca no banco
-		c.setTime(dateVerificada);
-		dataAntes = c.getTime();
-		c.add(Calendar.HOUR, 9);
-		dataDepois = c.getTime();
-		c = null;
-		c = Calendar.getInstance();
-		c.setTime(dateVerificada);
-		List<Agendamento> agendamentos = agendamentosVerificarDAO.listarAgenda(dataAntes, dataDepois, valor);
+		// Verifica se data é após a de hoje...
+		if (dateVerificada.after(dateNow)) {
+			// Setando dados para busca no banco
+			c.setTime(dateVerificada);
+			dataInicial = c.getTime();
+			c.add(Calendar.HOUR, 9);
+			dataTerminal = c.getTime();
+			c = null;
+			c = Calendar.getInstance();
+			c.setTime(dateVerificada);
+			List<Agendamento> agendamentos = agendamentosVerificarDAO.listarAgenda(dataInicial, dataTerminal, valor);
 
-		for (int i = 0; i < 19; i++) {
-			datasDispo.add(formatterDate.format(c.getTime()));
-			c.add(Calendar.MINUTE, 30);
+			for (int i = 0; i < 19; i++) {
+				datasDispo.add(formatterDate.format(c.getTime()));
+				c.add(Calendar.MINUTE, 30);
+			}
+
+			datasDispo = removerIndexOcupados(datasDispo, agendamentos, servico);
+		} else {
+			datasDispo.clear();
 		}
-
-		datasDispo = removerIndexOcupados(datasDispo, agendamentos, servico);
-
+		// Retornando...
 		return datasDispo;
 	}
 
@@ -131,7 +130,7 @@ public class AgendaController {
 				}
 			}
 		}
-
+		// Retornando...
 		return datasDipo;
 	}
 
@@ -139,19 +138,21 @@ public class AgendaController {
 	@RequestMapping(value = "rest/agendar/{sDate}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Agendamento> agendar(@RequestBody Agendamento agendamento, @PathVariable String sDate)
 			throws ParseException {
-
+		// Atributos
 		Date date = formatterDate.parse(sDate);
 		agendamento.setDataAgendada(date);
 
+		// Inserindo
 		agendamentoDAO.inserir(agendamento);
 
+		// Retornando...
 		return ResponseEntity.ok(agendamento);
 	}
 
 	// Listar agendamento mobile
 	@RequestMapping(value = "and/listagendamento", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Agendamento> logarAd(@RequestBody Cliente cliente) {
-		System.out.println(agendamentoDAO.listarAgendamentoCliente(cliente.getIdCliente()));
+		// Retornando...
 		return agendamentoDAO.listarAgendamentoCliente(cliente.getIdCliente());
 	}
 }

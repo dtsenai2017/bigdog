@@ -154,13 +154,6 @@
 				<!-- br -->
 				<br>
 
-				<!-- Título de janela -->
-				<h5 align="center" class="grey-text text-grey">Cadastrar um
-					novo produto</h5>
-
-				<!-- divider -->
-				<div class="divider"></div>
-
 				<!-- br -->
 				<br>
 
@@ -217,7 +210,7 @@
 							<div class="row">
 								<div class="input-field col s12">
 									<input id="nome" name="nome" type="text" maxlength="100"
-										required> <label for="nome">Nome do produto</label>
+										required> <label for="nome">* Nome do produto</label>
 								</div>
 							</div>
 
@@ -225,7 +218,8 @@
 							<div class="row">
 								<div class="input-field col s12 m12 l12">
 									<input id="marca" name="marca" type="text" class="truncate"
-										maxlength="100" required> <label for="marca">Marca</label>
+										maxlength="100" required> <label for="marca">*
+										Marca</label>
 								</div>
 							</div>
 
@@ -233,12 +227,12 @@
 							<div class="row">
 								<div class="input-field col s12 m5 l5">
 									<select id="select-categoria" name="categoria" required>
-									</select> <label>Categoria:</label>
+									</select> <label>* Categoria :</label>
 								</div>
 
 								<div class="input-field col s12 m5 l5">
 									<select id="select-subcategoria" name="subcategoria">
-									</select> <label>* Subcategoria:</label>
+									</select> <label>Subcategoria :</label>
 								</div>
 
 								<div class="col s12 m2 l2 center">
@@ -252,13 +246,13 @@
 							<div class="row">
 								<div class="input-field col s12 m8 l8">
 									<select id="select-fornecedor" name="fornecedor" required>
-									</select> <label>Fornecedor:</label>
+									</select> <label>* Fornecedor :</label>
 								</div>
 
 								<div class="col s12 m4 l4">
 									<div class="input-field">
 										<input id="cor" name="cor" type="text" class="truncate"
-											maxlength="100"> <label for="cor">* Cor</label>
+											maxlength="100"> <label for="cor">Cor</label>
 									</div>
 								</div>
 							</div>
@@ -267,13 +261,13 @@
 							<div class="row">
 								<div class="input-field  col s5 l5 m5">
 									<input id="tamanho" name="tamanho" type="text" class="truncate"
-										maxlength="100"> <label for="tamanho">* Tam.</label>
+										maxlength="100"> <label for="tamanho">Tam.</label>
 								</div>
 
 								<div class="input-field  col s7 l7 m7">
 									<input id="quantidade" name="quantidade" type="text"
 										class="truncate" maxlength="100" required> <label
-										for="quantidade">Qtde. do produto</label>
+										for="quantidade">* Qtde. do produto(uni)</label>
 								</div>
 							</div>
 
@@ -281,17 +275,17 @@
 							<div class="row">
 								<div class="input-field  col s4 l4 m4">
 									<input id="valor" name="valor" type="text" class="truncate">
-									<label for="valor">Valor (R$)</label>
+									<label for="valor">* Valor (R$)</label>
 								</div>
 
 								<div class="input-field  col s4 l4 m4 ">
 									<input id="qtdEstoque" name="qtdEstoque" pattern="[0-9.]+"
-										type="number"> <label for="qtdEstoque">Qtd.
+										type="number"> <label for="qtdEstoque">* Qtd.
 										Estoque</label>
 								</div>
 
 								<div class="input-field col s4 m4 l4">
-									<label for="dataVigencia">Dt. vigência</label> <input
+									<label for="dataVigencia">* Dt. vigência</label> <input
 										id="dataVigencia" type="date" class="datepicker"
 										name="dataVigencia" required>
 								</div>
@@ -422,7 +416,7 @@
 						<div class="row">
 							<div class="input-field col s12 m12 l12">
 								<input id="nomeFantasia" type="text" maxlength="255" required>
-								<label for="nomeFantasia">Nome Fantasia</label>
+								<label for="nomeFantasia">* Nome Fantasia</label>
 							</div>
 						</div>
 
@@ -430,7 +424,7 @@
 						<div class="row">
 							<div class="input-field col s12 m12 l12">
 								<input id="razaoSocial" type="text" maxlength="255" required>
-								<label for="razaoSocial">Razão Social</label>
+								<label for="razaoSocial">* Razão Social</label>
 							</div>
 						</div>
 
@@ -438,12 +432,12 @@
 						<div class="row">
 							<div class="input-field col s12 m5 l5">
 								<input id="cnpj" minlength="14" type="text" maxlength="18"
-									required> <label for="cnpj">CNPJ</label>
+									required> <label for="cnpj">* CNPJ</label>
 							</div>
 
 							<div class="input-field col s12 m7 l7">
 								<input id="email" type="email" class="validate" required>
-								<label id="label-email" for="email">Email</label>
+								<label id="label-email" for="email">* Email</label>
 							</div>
 						</div>
 
@@ -451,12 +445,13 @@
 						<div class="row">
 							<div class="input-field col s6 m6 l6">
 								<i class="material-icons prefix">stay_current_portrait</i> <input
-									id="celular" type="tel" required> <label for="celular">Celular</label>
+									id="celular" type="tel" required> <label for="celular">*
+									Celular</label>
 							</div>
 
 							<div class="input-field col s6 m6 l6">
 								<i class="material-icons prefix">phone</i> <input id="telefone"
-									type="tel"> <label for="telefone">* Telefone</label>
+									type="tel"> <label for="telefone">Telefone</label>
 							</div>
 						</div>
 
@@ -476,12 +471,14 @@
 						<div class="row">
 							<div class="input-field col s12 m4 l4">
 								<input id="cep" type="text" maxlength="9" onblur="buscarCep();"
-									required> <label id="label-cep-fornecedor" for="cep">CEP</label>
+									required> <label id="label-cep-fornecedor" for="cep">*
+									CEP</label>
 							</div>
 
 							<div class="input-field col s12 m8 l8">
 								<input id="logradouro" type="text" maxlength="255"> <label
-									id="label-logradouro-fornecedor" for="logradouro">Logradouro</label>
+									id="label-logradouro-fornecedor" for="logradouro">*
+									Logradouro</label>
 							</div>
 						</div>
 
@@ -489,17 +486,18 @@
 						<div class="row">
 							<div class="input-field col s5 m3 l3">
 								<input id="numero" type="number" maxlength="10" step="1"
-									required> <label for="numero">Nº</label>
+									required> <label for="numero">* Nº</label>
 							</div>
 
 							<div class="input-field col s7 m4 l4">
 								<input id="complemento" type="text" maxlength="50"> <label
-									for="complemento">*Complemento</label>
+									for="complemento">Complemento</label>
 							</div>
 
 							<div class="input-field col s12 m5 l5">
 								<input id="bairro" type="text" maxlength="100" required>
-								<label id="label-bairro-fornecedor" for="bairro">Bairro</label>
+								<label id="label-bairro-fornecedor" for="bairro">*
+									Bairro</label>
 							</div>
 						</div>
 
@@ -507,7 +505,8 @@
 						<div class="row">
 							<div class="input-field col s7 m9 l9">
 								<input id="cidade" type="text" maxlength="100" required>
-								<label id="label-cidade-fornecedor" for="cidade">Cidade</label>
+								<label id="label-cidade-fornecedor" for="cidade">*
+									Cidade</label>
 							</div>
 
 							<div class="input-field col s5 m3 l3">
@@ -581,7 +580,7 @@
 								<input id="search-compra" type="search" class="truncate"
 									data-list="#lista-compra" onkeyup="buscar(this.id);"
 									placeholder="Data, Cliente, Valor ou Status"> <label
-									class="label-icon" for="search-cmpra"><i
+									class="label-icon" for="search-compra"><i
 									class="material-icons">search</i></label><i class="material-icons">close</i>
 							</div>
 						</form>
@@ -841,7 +840,7 @@
 
 					<!-- Descrição de alteração -->
 					<p align="left" style="font-size: 12px;">
-						Produtos alterados não afetam dados dos mesmos em compras <b>já
+						Produtos alterados não afetam dados em compras <b>já
 							realizadas</b>.
 					</p>
 				</div>
@@ -1227,16 +1226,6 @@
 			</div>
 			<!-- /.row -->
 
-			<!-- Observação sobre exclusão de categoria -->
-			<div class="row">
-				<div class="col s12 m12 l12">
-					<p>
-						Só é possível excluir categoria(s) ou sub-categoria(s) se a mesma
-						não estiver vinculada a <b>nenhum</b> produto.
-					</p>
-				</div>
-			</div>
-
 			<!-- Ícones para esconder ou mostrar lista de categorias -->
 			<div class="row">
 				<!-- Mostrar e esconder lista de categorias -->
@@ -1327,6 +1316,9 @@
 			<a id="btn-excluir-categoria" href="#!"
 				class="waves-effect waves-red btn-flat left"><i
 				class="material-icons left red-text">delete</i>Excluir Categoria</a>
+
+			<p style="font-size: 12px;">Só é possível excluir categoria(s) ou
+				sub-categoria(s) se a mesma não estiver vinculada a nenhum produto.</p>
 		</div>
 	</div>
 	<!-- /#modal-categoria -->
@@ -1752,9 +1744,9 @@
 					<div class="col s12 m3 l3">
 						<div class="input-field col s12 m12 l12">
 							<form>
-								<input id="input-status-selecionada" type="text" required>
-								<label id="label-status-selecionada"
-									for="input-status-selecionada">Status</label>
+								<input id="input-status-selecionada" type="text"
+									class="truncate" required> <label
+									id="label-status-selecionada" for="input-status-selecionada">Status</label>
 							</form>
 						</div>
 					</div>

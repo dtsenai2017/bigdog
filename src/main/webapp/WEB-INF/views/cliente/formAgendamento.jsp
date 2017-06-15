@@ -35,13 +35,22 @@
 
 	<!-- Menu do cliente -->
 	<div class="cxAvatar">
-		<img src="resources/loja/imagens/icones/avatarMasc.png" class="avatar">
+		<!-- Ícone -->
+		<img
+			src="resources/loja/imagens/icones/${clienteLogado.genero == 'Masculino' ? 'man-icon':'female-icon' }.png"
+			class="avatar">
+
+		<!-- Nome do cliente -->
 		<div class="cx08">
 			<h2>${clienteLogado.nome }</h2>
 		</div>
+
+		<!-- Menu -->
 		<div class="menuu">
 			<i class="fa fa-bars" aria-hidden></i> Menu
 		</div>
+
+		<!-- Link de menu -->
 		<div class="cx05">
 			<ul id="ul">
 				<li id="pf"><a href="home-user"><i class="fa fa-home"
@@ -65,14 +74,31 @@
 
 		<!-- Formulário de agendamento -->
 		<form id="form" class="form">
-			<div class="input-field col s12" id="input-f">
-				<label class="active" for="f1" style="margin-left: -1em;">Tipo
-					de Serviço</label> <select id="selectTipoServico" required>
-					<option value="0">Selecione uma opção</option>
-					<option value="1">Veterinário</option>
-					<option value="0">Estética</option>
-				</select>
-			</div>
+
+			<c:if test="${existePet == true }">
+				<div class="input-field col s12" id="input-f">
+					<label class="active" for="f1" style="margin-left: -1em;">Tipo
+						de Serviço</label> <select id="selectTipoServico" required>
+						<option value="0">Selecione uma opção</option>
+						<option value="1">Veterinário</option>
+						<option value="0">Estética</option>
+					</select>
+				</div>
+			</c:if>
+			<c:if test="${existePet == false }">
+				<p>
+					<a href="novo-pet">Para fazer um agendamento você precisa de um
+						pet!, Clique aqui para cadastrar.</a>
+				</p>
+				<div class="input-field col s12" id="input-f">
+					<label class="active" for="f1" style="margin-left: -1em;">Tipo
+						de Serviço</label> <select id="selectTipoServico" disabled required>
+						<option value="0">Selecione uma opção</option>
+						<option value="1">Veterinário</option>
+						<option value="0">Estética</option>
+					</select>
+				</div>
+			</c:if>
 			<input type="hidden" id="idCliente"
 				value="${clienteLogado.idCliente }">
 			<div class="input-field col s12" id="input-f">
@@ -123,7 +149,7 @@
 			</div>
 
 			<a href="">
-				<button type="button" id="btnAgendar" class="btn brown">
+				<button type="button" id="btnAgendar" class="btn brown" disabled>
 					Confirmar
 					<div class="ripples buttonRipples">
 						<span class="ripplesCircle"></span>
@@ -202,6 +228,7 @@
 				$('#buscarHorario').click(
 						function buscarHorarios() {
 							var valData = $('#inputDataMarcada').val();
+							
 							valData += ' 09:00:00';
 
 							$.ajax({
@@ -214,19 +241,48 @@
 										+ $('#selectServicos').val(),
 								dataType : 'json',
 								success : function(data) {
-									tratarInputsFinais(data);
-									$('#selectHorario').material_select();
-									$('#selectPet').material_select();
+									// Verifica data
+									if (data.length > 0) {
+										tratarInputsFinais(data);
+										$('#selectHorario').material_select();
+										$('#selectPet').material_select();
+										
+										$.ajax({
+											headers : {
+												'Content-Type' : 'application/json'
+											},
+											type : 'GET',
+											url : 'rest/dinamic/servico/' + valSelect,
+											dataType : 'json',
+											success : function(data) {
+												// Atribui valor para descrições								
+												$('#descricao').empty();
+												$('#descricao').append(
+														'<b>Descrição</b> : ' + data.observacao);
+												$('#tempoEstimado').empty();
+												$('#tempoEstimado').append(
+														'<b>Tempo Estimado</b> : '
+																+ data.tempoEstimado);
+												$('#preco').empty();
+												$('#preco').append('<b>Preco</b> : R$' + data.valor.toFixed(2));
+											},
+											error : function(e) {
+												console.log('ERROR : ' + e);
+											}
+										});
+									} else {
+										Materialize.toast("Selecione uma data válida!", 2000);
+									}	
+									
 								},
 								error : function(e) {
 									console.log('ERROR : '+ e);
 								}
 							});
 						});
-
+				
 				// Popula os camos de horario e pet, e desbloqueia
 				function tratarInputsFinais(horarios) {
-
 					$('#selectHorario').find('option').remove().end();
 
 					for (var int = 0; int < horarios.length; int++) {
@@ -238,7 +294,7 @@
 
 					$('#selectHorario').prop("disabled", false);
 					$('#selectPet').prop("disabled", false);
-
+					$('#btnAgendar').prop("disabled", false);
 				}
 
 				$('#selectServicos').on(
@@ -281,15 +337,15 @@
 
 						});
 
+				// Input data marcada change
 				$('#inputDataMarcada').on("change", function() {
-
 					if ($('#selectHorario').is(':enabled')) {
 						$('#selectHorario').prop("disabled", true);
 						$('#selectPet').prop("disabled", true);
 						$('#selectHorario').material_select();
 						$('#selectPet').material_select();
+						$('#btnAgendar').prop("disabled", true);
 					}
-
 				});
 
 				// Procura os servicos do tipo selecionado, assim que o select é selecionado
@@ -300,6 +356,7 @@
 						$('#selectPet').prop("disabled", true);
 						$('#selectHorario').material_select();
 						$('#selectPet').material_select();
+						$('#btnAgendar').prop("disabled", true);
 					}
 
 					// Recebe valor do tipo de serviço selecionado

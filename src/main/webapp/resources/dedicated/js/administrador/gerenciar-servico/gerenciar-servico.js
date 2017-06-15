@@ -19,6 +19,9 @@ $('#txt-servico-status').hide();
 
 // Recarregar página
 function recarregarGerenciarServico() {
+	// Fechando modal (importante)
+	$('#modal-servico').modal('close');
+	
 	// Requisição
 	var xhr = new XMLHttpRequest();
 

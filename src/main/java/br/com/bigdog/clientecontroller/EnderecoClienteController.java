@@ -63,7 +63,7 @@ public class EnderecoClienteController {
 	// Listar (id)
 	@RequestMapping(value = "/enderecoCliente/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public EnderecoCliente listar(@PathVariable("id") Long id) {
-		// Listando endereço e retornando...
+		// Retornando...
 		return enderecoDAO.listar(id);
 	}
 

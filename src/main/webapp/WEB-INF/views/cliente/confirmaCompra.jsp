@@ -76,9 +76,7 @@
 					console.log('ERROR : ' + e);
 				}
 			});
-
 		});
-
 	});
 </script>
 
@@ -88,6 +86,7 @@
 		$('#' + data).remove();
 		var valCliente = $('#idCliente').val();
 
+		// Excluindo...
 		$.ajax({
 			headers : {
 				'Content-Type' : 'application/json'
@@ -123,9 +122,10 @@
 					<thead>
 						<tr>
 							<th>Foto</th>
-							<th>Nome do Produto</th>
+							<th>Produto</th>
 							<th>Quantidade</th>
 							<th>Preço (unid.)</th>
+							<th>Excluir</th>
 						</tr>
 					</thead>
 
@@ -173,18 +173,6 @@
 
 			<!-- Descrição de produto -->
 			<div class="descricaoProd" style="margin-top: -2em;">
-				<!-- Calcular frete -->
-				<div class="row">
-					<div class="input-field col s6">
-						<input id="first_name2" type="text" class="cep"
-							style="width: 30%;"> <label class="active"
-							for="first_name2">Calcular o Frete </label> <a
-							class="waves-effect waves-light btn"
-							style="background-color: black; width: 2.3em; margin-top: 0.5em; height: auto; padding: 0; font-size: 1em">
-							OK</a>
-					</div>
-				</div>
-
 				<!-- Valor total de carrinho -->
 				<div class="desc">
 					<input type="hidden" id="idCliente"
@@ -200,7 +188,7 @@
 					style="margin-left: 40%; margin-top: 1em; background-color: #005900;">
 					<a href="pagamento" style="color: white;"><img
 						src="resources/loja/imagens/icones/icon-08.png">
-						<p style="margin-top: -0.5em; font-size: 15px;">Comprar</p> </a>
+						<p style="margin-top: -0.5em; font-size: 15px;">Pagamento</p> </a>
 				</button>
 			</div>
 		</div>
