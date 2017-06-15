@@ -68,7 +68,7 @@
 						data-beloworigin="true"><i class="material-icons right">arrow_drop_down</i>Gerenciar</a></li>
 
 					<!-- Logout -->
-					<li class="waves-effect"><a id="btn-logout"><i
+					<li class="waves-effect"><a onclick="logout();"><i
 							class="material-icons center red-text text-accent-1">power_settings_new</i></a></li>
 				</ul>
 			</div>
@@ -128,7 +128,7 @@
 		<li class="container"><div class="divider"></div></li>
 
 		<!-- Logout -->
-		<li><a id="btn-logout" class="waves-effect"><i
+		<li><a onclick="logout();" class="waves-effect"><i
 				class="material-icons center red-text text-accent-1">power_settings_new</i>
 				Sair</a></li>
 	</ul>

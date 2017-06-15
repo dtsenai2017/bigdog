@@ -10,6 +10,20 @@ main {
 	flex: 1 0 auto;
 }
 
+/* Pre loader */
+.preloader-background {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #eee;
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
 /* Swipe's (Dashboard, Gerenciar e Agenda) */
 swipe-dashboard {
 	height: 1000px;

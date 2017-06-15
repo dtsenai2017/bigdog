@@ -235,8 +235,10 @@ $("#menu-mobile a").click(
 		});
 
 // Deslogar
-$('#btn-logout').click(function() {
+function logout() {
 	// Limpando local storage e reload
 	window.localStorage.removeItem('tokenBigDog');
+
+	// Reload
 	location.reload();
-});
+}
