@@ -152,7 +152,7 @@ public class ClienteDAO {
 	public Cliente buscaEmailCpf(String email, String cpf) {
 		// Query
 		TypedQuery<Cliente> query = manager
-				.createQuery("select c from Cliente c where c.email = :email AND c.cpf = :cpf", Cliente.class);
+				.createQuery("SELECT c FROM Cliente c WHERE c.email = :email AND c.cpf = :cpf", Cliente.class);
 
 		// Atribuindo parâmetro
 		query.setParameter("email", email);

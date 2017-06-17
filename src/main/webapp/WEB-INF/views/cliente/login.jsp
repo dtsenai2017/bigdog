@@ -100,10 +100,15 @@
 					<span class="ripplesCircle"></span>
 				</div>
 			</button>
+
+			<!-- Import's JS -->
 			<script type="text/javascript" src="resources/loja/js/platform.js"></script>
 			<script src="resources/loja/js/google.js"></script>
+
+			<!-- Logar -->
 			<script type="text/javascript">
 				function logar() {
+					// Atribuindo valores de inputs
 					var email = $('#email').val();
 					var senha = $('#password').val();
 
@@ -112,6 +117,7 @@
 						senha : senha
 					}
 
+					// Requisição para logar
 					$
 							.ajax({
 								type : 'POST',
@@ -141,33 +147,28 @@
 							});
 				}
 
+				// Action button
 				$(document).ready(function() {
 					$(".abcRioButtonBlue").each(function() {
 						$(this).css('background-color', 'brown');
 					});
 				});
 
-				// Modal para recuperação de senha
+				// Abrir popup
 				function forget() {
+					// Atributos de janela
 					var width = 700;
 					var height = 400;
-
 					var left = 99;
 					var top = 99;
 
-					window
-							.open(
-									'esqueciSenha',
-									'janela',
-									'width='
-											+ width
-											+ ', height='
-											+ height
-											+ ', top='
-											+ top
-											+ ', left='
-											+ left
-											+ ', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
+					// Abrir popup
+					window.open('esqueciSenha', 'janela', 'width=' + width
+							+ ', height=' + height + ', top=' + top + ', left='
+							+ left + ', scrollbars=yes, ' + 'status=no, '
+							+ 'toolbar=no, ' + 'location=no, '
+							+ 'directories=no, ' + 'menubar=no, '
+							+ 'resizable=no, ' + 'fullscreen=no');
 
 				}
 			</script>
@@ -175,11 +176,14 @@
 	</form>
 </main>
 
-<!-- Footer -->
+<!-- import footer -->
 <c:import url="component/footerLoja.jsp"></c:import>
 
+<!-- Import's JS -->
 <script type="text/javascript"
 	src="resources/loja/js/materialize.min.js"></script>
+
+<!-- Script -->
 <script type="text/javascript">
 	function cadastrese() {
 		localStorage.setItem("id_redes", 0);

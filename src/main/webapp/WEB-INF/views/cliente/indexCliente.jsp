@@ -39,7 +39,7 @@
 		<!-- Ícone -->
 		<img
 			src="resources/loja/imagens/icones/${clienteLogado.genero == 'Masculino' ? 'man-icon':'female-icon' }.png"
-			class="avatar">
+			class="avatar" title="${clienteLogado.nome }">
 
 		<!-- Nome do cliente -->
 		<div class="cx08">

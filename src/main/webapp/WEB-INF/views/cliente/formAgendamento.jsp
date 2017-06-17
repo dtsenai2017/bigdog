@@ -38,7 +38,7 @@
 		<!-- Ícone -->
 		<img
 			src="resources/loja/imagens/icones/${clienteLogado.genero == 'Masculino' ? 'man-icon':'female-icon' }.png"
-			class="avatar">
+			class="avatar" title="${clienteLogado.nome }">
 
 		<!-- Nome do cliente -->
 		<div class="cx08">
@@ -136,18 +136,30 @@
 				</div>
 			</div>
 
+			<!-- br -->
+			<br>
+
+			<!-- Serviço selecionado -->
 			<div style="width: 100%; height: auto;">
-				<p id="descricao">
-					<b>Descrição</b> :
+				<h6>Descrição de Serviço</h6>
+
+				<div class="divider"></div>
+
+				<p id="tempoEstimado" style="font-size: 12px;">
+					<b>Tempo Estimado</b> :
 				</p>
-				<p id="tempoEstimado">
-					<b>Tempo estimado do serviço</b> :
-				</p>
-				<p id="preco">
+				<p id="preco" style="font-size: 12px;">
 					<b>Preço</b> :
+				</p>
+				<p id="descricao" style="font-size: 12px;">
+					<b>Descrição</b> :
 				</p>
 			</div>
 
+			<!-- br -->
+			<br>
+
+			<!-- Botão para agendar -->
 			<a href="">
 				<button type="button" id="btnAgendar" class="btn brown" disabled>
 					Confirmar
@@ -256,15 +268,13 @@
 											dataType : 'json',
 											success : function(data) {
 												// Atribui valor para descrições								
+												$('#tempoEstimado').empty();
+												$('#tempoEstimado').append('<b>Tempo estimado</b> : ' + data.tempoEstimado);
+												$('#preco').empty();
+												$('#preco').append('<b>Preço</b> : R$' + data.valor.toFixed(2));
 												$('#descricao').empty();
 												$('#descricao').append(
-														'<b>Descrição</b> : ' + data.observacao);
-												$('#tempoEstimado').empty();
-												$('#tempoEstimado').append(
-														'<b>Tempo Estimado</b> : '
-																+ data.tempoEstimado);
-												$('#preco').empty();
-												$('#preco').append('<b>Preco</b> : R$' + data.valor.toFixed(2));
+														'<b>Descrição</b>  : ' + data.observacao);
 											},
 											error : function(e) {
 												console.log('ERROR : ' + e);
@@ -317,18 +327,14 @@
 								url : 'rest/dinamic/servico/' + valSelect,
 								dataType : 'json',
 								success : function(data) {
+									// Atribuindo valores para descrição de serviço
+									$('#tempoEstimado').empty();
+									$('#tempoEstimado').append('<b>Tempo estimado</b> : ' + data.tempoEstimado);
+									$('#preco').empty();
+									$('#preco').append('<b>Preço</b> : R$' + data.valor.toFixed(2));
 									$('#descricao').empty();
 									$('#descricao').append(
-											'<p>Descrição: ' + data.observacao
-													+ '</p>');
-									$('#tempoEstimado').empty();
-									$('#tempoEstimado').append(
-											'<p>Tempo Estimado: '
-													+ data.tempoEstimado
-													+ '</p>');
-									$('#preco').empty();
-									$('#preco').append('Preco: ' + data.valor);
-
+											'<b>Descrição</b>  : ' + data.observacao);
 								},
 								error : function(e) {
 									console.log('ERROR : ' + e);
@@ -400,7 +406,6 @@
 					$('#buscarHorario').append('Horários disponíveis');
 					$('#buscarHorario').addClass('btn');
 					$('#buscarHorario').addClass('cyan');
-
 				}
 
 			});

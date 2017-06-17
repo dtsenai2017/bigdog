@@ -56,7 +56,6 @@ public class ClienteController {
 	public Cliente recuperaSenha(@PathVariable String email, @PathVariable String cpf) {
 		// Replace
 		cpf = cpf.replace(" ", ".");
-		System.out.println(cpf);
 		email = email.replace(" ", ".");
 
 		// Retornando...

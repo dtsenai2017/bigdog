@@ -9,51 +9,57 @@
 		<li><a href="home">Home</a></li>
 		<li><a href="categoria">Produtos</a></li>
 		<li><a href="servico">Serviços</a></li>
-		<li><a href="sobre">Sobre</a></li>
-		<li><a href="contato">Contato</a></li>
+		<li><a href="sobreNos">Sobre Nós</a></li>
 	</ul>
 </menu>
-<div class="total">
 
+<!-- Navbar -->
+<div class="total">
+	<!-- Header -->
 	<header>
+		<!-- Logo -->
 		<span class="menu-anchor menum"></span> <a href="home"><img
 			class="img" src="resources/loja/imagens/logos/logo02.png"
 			style="display: block;"></a>
-		<c:if test="${clienteLogado == null }">
-			<a href="entrar">
-		</c:if>
-		<c:if test="${clienteLogado != null }">
-			<a href="home-user">
-		</c:if>
+
+		<!-- Links de cliente -->
 		<div class="dc">
-			<img class="icon01" src="resources/loja/imagens/icones/icon-01.png">
-		</a>
+			<!-- Entrar ou Home -->
+			<a href="${clienteLogado != null ? 'home-user':'entrar' }"> <img
+				class="icon01" src="resources/loja/imagens/icones/icon-01.png">
+			</a>
 
-		<c:if test="${clienteLogado != null }">
-			<a href="confirmarCompra"><img class="icon03"
-				src="resources/loja/imagens/icones/icon-03.png"></a>
-		</c:if>
-</div>
-<form action="search" method="post">
-	<input type="search" name="busca" class="search"
-		placeholder="Busque um produto"> <a><button class="button"
-			type="submit">
-			<img src="resources/loja/imagens/icones/icon-02.png">
-		</button></a>
-</form>
-<h3 id="nomeClienteHeader"></h3>
-</header>
+			<!-- Carrinho de compra -->
+			<c:if test="${clienteLogado != null }">
+				<a href="confirmarCompra"><img class="icon03"
+					src="resources/loja/imagens/icones/icon-03.png"></a>
+			</c:if>
+		</div>
 
-<script type="text/javascript">
-	window.onload = function headerNome() {
-		var nomeCompleto = "${clienteLogado.nome }";
-		var primeiro = nomeCompleto.split(" ")[0];
+		<!-- Barra de pesquisa -->
+		<form action="search" method="post">
+			<input type="search" name="busca" class="search"
+				placeholder="Busque um produto"> <a><button
+					class="button" type="submit">
+					<img src="resources/loja/imagens/icones/icon-02.png">
+				</button></a>
+		</form>
 
-		var vector = [ nomeCompleto.split(" ") ];
-		var ultimo = vector[0][vector[0].length - 1];
+		<!-- Nome do cliente -->
+		<h3 id="nomeClienteHeader"></h3>
+	</header>
 
-		var completo = primeiro + " " + ultimo;
+	<!-- Script -->
+	<script type="text/javascript">
+		window.onload = function headerNome() {
+			var nomeCompleto = "${clienteLogado.nome }";
+			var primeiro = nomeCompleto.split(" ")[0];
 
-		document.getElementById("nomeClienteHeader").innerHTML = completo;
-	}
-</script>
+			var vector = [ nomeCompleto.split(" ") ];
+			var ultimo = vector[0][vector[0].length - 1];
+
+			var completo = primeiro + " " + ultimo;
+
+			document.getElementById("nomeClienteHeader").innerHTML = completo;
+		}
+	</script>

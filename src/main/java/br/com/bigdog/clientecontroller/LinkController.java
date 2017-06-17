@@ -46,13 +46,25 @@ public class LinkController {
 		this.agendamentoDAO = agendamentoDAO;
 	}
 
+	// Sobre Nós
+	@RequestMapping(value = "sobreNos")
+	public String sobreNos() {
+		// Retornando..
+		return "cliente/sobre-nos";
+	}
+
+	// Esqueci Senha
+	@RequestMapping("esqueciSenha")
+	public String esqueciSenha(Model model) {
+		// Retornando...
+		return "cliente/recuperarSenha";
+	}
+
 	// Cadastrar endereço
 	@RequestMapping("cadastra-endereco")
 	public String cadastrarEnderecos(EnderecoCliente enderecoCliente, HttpSession session) {
 		// Cliente logado
 		Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
-
-		System.out.println(enderecoCliente.toString());
 
 		// Verifica se endereço é existente
 		if (enderecoCliente.getIdEnderecoCliente() == null) {

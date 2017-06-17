@@ -35,8 +35,8 @@ public class Interceptor extends HandlerInterceptorAdapter {
 			HandlerMethod method = (HandlerMethod) handler;
 
 			// Páginas autorizadas para cliente
-			if (request.getRequestURI().contains("home") || request.getRequestURI().contains("entrar")
-					|| request.getRequestURI().contains("esqueciSenha")
+			if (request.getRequestURI().contains("sobreNos") || request.getRequestURI().contains("home")
+					|| request.getRequestURI().contains("entrar") || request.getRequestURI().contains("esqueciSenha")
 					|| request.getRequestURI().contains("faca-parte") || request.getRequestURI().contains("categoria")
 					|| request.getRequestURI().contains("produtos") || request.getRequestURI().contains("produto")
 					|| request.getRequestURI().contains("novo-agendamento")

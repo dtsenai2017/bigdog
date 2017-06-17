@@ -22,6 +22,8 @@
 <!-- Import JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="resources/loja/js/vanilla-masker.min.js"></script>
+
+<!-- Script para mask de cpf -->
 <script type="text/javascript">
 	$(document).ready(function() {
 		VMasker(document.querySelector(".cpf")).maskPattern("999.999.999-99");
@@ -66,7 +68,6 @@
 					id="spse"></span>
 			</div>
 		</div>
-		<span id="msgE"></span> <br>
 		<div class="buttons">
 			<button type="button" onclick="esqueceuSenha()"
 				class="buttonn buttonBlue">
@@ -77,12 +78,18 @@
 			</button>
 			<script type="text/javascript" src="resources/loja/js/platform.js"></script>
 			<script src="resources/loja/js/google.js"></script>
+
+			<!-- Script -->
 			<script type="text/javascript">
+				// Esqueceu Senha?
 				function esqueceuSenha() {
+					// Atributos
 					var email = $('#email').val();
 					var cpf = $('#cpf').val();
 					email = email.replace(/\./g, ' ');
 					cpf = cpf.replace(/\./g, ' ');
+
+					// Requisição
 					$
 							.ajax({
 								type : 'GET',
@@ -90,15 +97,17 @@
 										+ cpf,
 								dataType : 'json',
 								success : function(data) {
-									document.getElementById("email").hidden = !document
-											.getElementById("hidden").hidden;
-									document.getElementById("cpf").hidden = !document
-											.getElementById("cpf").hidden;
+									// Toast
+									Materialize.toast(
+											'Usuário alterado com sucesso!',
+											2000);
 								},
 								error : function(data) {
-									$("#msgE")
-											.text(
-													"Email e/ou Cpf Inválidos, Tente Novamente!");
+									// Toast
+									Materialize
+											.toast(
+													"Email e/ou Cpf Inválidos, Tente Novamente!",
+													2500);
 									$("#email").val('');
 									$("#cpf").val('');
 									$("#email").focus();
@@ -106,8 +115,13 @@
 								}
 							});
 				}
+
+				// Verifica senha
 				function vSenha(confirma) {
+					// Atributo
 					var senha = $("#senha").val();
+
+					// Se
 					if (confirma != senha) {
 						$("#spse").html("Senhas Diferentes, tente novamente.");
 						$("#senha").val("");

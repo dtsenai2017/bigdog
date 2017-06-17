@@ -26,9 +26,6 @@
 <!-- Swiper min.  -->
 <link rel="stylesheet" href="resources/loja/css/swiper.min.css">
 
-<!-- Swiper min. -->
-<script type="text/javascript" src="resources/loja/js/swiper.min.js"></script>
-
 <!-- Materialize modificado -->
 <link type="text/css" rel="stylesheet"
 	href="resources/loja/css/materializeModificado.min.css"

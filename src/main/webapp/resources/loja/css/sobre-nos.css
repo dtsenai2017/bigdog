@@ -1,0 +1,51 @@
+@CHARSET "ISO-8859-1";
+
+/* Parallax Height */
+#banner-sobre-nos {
+	width: auto;
+	max-width: 100%;
+}
+
+/* Link google maps */
+#link-google-maps {
+	font-size: 12px;
+}
+
+/* Mapa */
+#mapa {
+	width: 100%;
+	height: 400px;
+	background-color: grey;
+}
+
+/* Valores de empresa */
+#r-missao {
+	opacity: 0.6;
+	transition: 0.6s;
+}
+
+#r-visao {
+	opacity: 0.6;
+	transition: 0.6s;
+}
+
+#r-valores {
+	opacity: 0.6;
+	transition: 0.6s;
+}
+
+/* Hover */
+#r-missao:hover {
+	opacity: 1.0;
+	transition: 0.8s;
+}
+
+#r-visao:hover {
+	opacity: 1.0;
+	transition: 0.8s;
+}
+
+#r-valores:hover {
+	opacity: 1.0;
+	transition: 0.8s;
+}
