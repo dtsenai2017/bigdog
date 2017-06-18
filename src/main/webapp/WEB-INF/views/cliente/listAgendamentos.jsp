@@ -59,8 +59,7 @@
 				<li id="pf"><a href="lista-dados"><i class="fa fa-user"
 						aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png">
-						<p id="lip">Meus Pets</p></a></li>
+						src="resources/loja/imagens/icones/icon-09.png"> Meus Pets</a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li class="id"><a href="listAgendamentos"><i

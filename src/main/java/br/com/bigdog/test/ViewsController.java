@@ -1,7 +1,6 @@
 package br.com.bigdog.test;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ViewsController {
@@ -17,8 +16,8 @@ public class ViewsController {
 	// return "administrador/component/footer";
 	// }
 
-	@RequestMapping("/indexAdm")
-	public String footer() {
-		return "administrador/index-administrador";
-	}
+	// @RequestMapping("/indexAdm")
+	// public String footer() {
+	// return "administrador/index-administrador";
+	// }
 }

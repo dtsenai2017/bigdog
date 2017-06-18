@@ -288,7 +288,8 @@
 								<br>
 								<div class="divider"></div>
 
-								<h6 class="red-text text-lighten-2">Consulte clientes.</h6>
+								<h6 class="red-text text-lighten-2 truncate">Consulte
+									clientes.</h6>
 							</div>
 						</div>
 					</div>
@@ -313,7 +314,8 @@
 								<br>
 								<div class="divider"></div>
 
-								<h6 class="red-text text-lighten-2">Gerencie a loja.</h6>
+								<h6 class="red-text text-lighten-2 truncate">Gerencie a
+									loja.</h6>
 							</div>
 						</div>
 					</div>
@@ -338,7 +340,8 @@
 								<br>
 								<div class="divider"></div>
 
-								<h6 class="red-text text-lighten-2">Gerencie agenda.</h6>
+								<h6 class="red-text text-lighten-2 truncate">Gerencie
+									agenda.</h6>
 							</div>
 						</div>
 					</div>
@@ -363,7 +366,8 @@
 								<br>
 								<div class="divider"></div>
 
-								<h6 class="red-text text-lighten-2">Gerencie serviços.</h6>
+								<h6 class="red-text text-lighten-2 truncate">Gerencie
+									serviços.</h6>
 							</div>
 						</div>
 					</div>

@@ -76,8 +76,7 @@
 				<li id="pf" class="id"><a href="lista-dados"><i
 						class="fa fa-user" aria-hidden="true"></i> Perfil</a></li>
 				<li><a href="lista-pet"><img
-						src="resources/loja/imagens/icones/icon-09.png">
-						<p id="lip">Meus Pets</p></a></li>
+						src="resources/loja/imagens/icones/icon-09.png"> Meus Pets</a></li>
 				<li><a href="listPedidos"><i class="fa fa-shopping-cart"
 						aria-hidden="true"></i> Pedidos</a></li>
 				<li><a href="listAgendamentos"><i class="fa fa-calendar"
@@ -172,6 +171,12 @@
 					<label class="active" for="p07">Email</label>
 				</div>
 			</div>
+
+			<!-- Link de ajuda -->
+			<p align="center" style="font-size: 12px;">
+				Caso algum dado estiver incorreto ou estiver tendo problemas, <a
+					href="sobreNos" class="brown-text">CONTATE-NOS.</a>
+			</p>
 		</form>
 	</div>
 </main>
