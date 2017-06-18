@@ -49,7 +49,7 @@
 			<div class="col s12 m12 l12">
 				<h4 align="center">
 					<i class="material-icons red-text text-accent-1 left">pets</i> <b>Sobre
-						Nós</b> <i class="material-icons red-text text-accent-1 right">pets</i>
+						nós</b> <i class="material-icons red-text text-accent-1 right">pets</i>
 				</h4>
 			</div>
 		</div>
@@ -110,11 +110,11 @@
 				<div class="divider white"></div>
 
 				<p>
-					<b>Telefone </b>:
+					<b>Telefone </b>
 				<p>
-					<b>Email </b>:
+					<b>Email </b>
 				<p>
-					<b>Horário </b>:
+					<b>Horário </b>
 				</p>
 			</div>
 
@@ -180,15 +180,22 @@
 	<script type="text/javascript">
 		// Atributo para map
 		var map;
+		var myLatLng = {
+			lat : -23.5340306,
+			lng : -46.8906668
+		};
 
 		// Atribuir mapa
 		function myMap() {
 			map = new google.maps.Map(document.getElementById('mapa'), {
-				center : {
-					lat : -23.5340306,
-					lng : -46.8906668
-				},
+				center : myLatLng,
 				zoom : 18
+			});
+
+			var marker = new google.maps.Marker({
+				position : myLatLng,
+				map : map,
+				title : 'BIG DOG!'
 			});
 		}
 	</script>

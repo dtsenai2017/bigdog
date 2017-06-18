@@ -1,5 +1,10 @@
 @CHARSET "ISO-8859-1";
 
+/* Body hidden */
+body {
+	display: none;
+}
+
 /* Parallax Height */
 #banner-sobre-nos {
 	width: auto;

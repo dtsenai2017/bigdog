@@ -13,9 +13,17 @@
 	flex-direction: column;
 }
 
-  main {
-    flex: 1 0 auto;
-  }
+main {
+	flex: 1 0 auto;
+}
+
+/* Modal de 'Esqueceu a Senha' */
+#modal-esqueci-senha {
+	width: 100% !important;
+	heigth: 100% !important;
+	max-width: 100% !important;
+	max-height: 100% !important;
+}
 
 .form {
 	width: 100%;
@@ -46,12 +54,18 @@ span {
 }
 
 .esq a {
-	text-decoration: none;
-	color: #eeeeee;
+	transition: 0.8s;
+	font-size: 12px;
 	font-weight: bold;
 }
 
+.esq a:hover {
+	transition: 1.0s;
+	font-size: 14px;
+}
+
 .esq {
+	padding: 4px;
 	width: 11em;
 }
 
@@ -59,10 +73,17 @@ span {
 	margin-left: 18%;
 	margin-top: 2em;
 	cursor: pointer;
+	opacity: 1.0;
+	transition: 0.4s;
 }
 
 .img00 img {
 	max-width: 80%;
+}
+
+.img00:hover {
+	opacity: 0.6;
+	transition: 1.0s;
 }
 
 .group {

@@ -143,7 +143,6 @@ public class ClienteDAO {
 		try {
 			return query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -162,7 +161,6 @@ public class ClienteDAO {
 		try {
 			return query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

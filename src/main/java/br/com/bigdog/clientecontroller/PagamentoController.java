@@ -63,7 +63,7 @@ public class PagamentoController {
 
 	// Gerar Boleto
 	@RequestMapping(value = "/gerarBoleto/{idEndereco}", method = RequestMethod.GET)
-	public void pagBoleto(HttpSession session, HttpServletRequest request, HttpServletResponse response,
+	public String pagBoleto(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			@PathVariable long idEndereco) throws IOException {
 		// Atribuindo valores para compra
 		EnderecoCliente endCliente = enderecoDAO.listar(idEndereco);
@@ -75,8 +75,14 @@ public class PagamentoController {
 		// Gerar boleto
 		try {
 			geradorPdf.gerarBoleto(compra, response);
+
+			// Retornando...
+			return "cliente/listPedidos";
 		} catch (Exception e1) {
 			e1.printStackTrace();
+
+			// Retornando...
+			return "cliente/indexCliente";
 		}
 	}
 
@@ -189,8 +195,6 @@ public class PagamentoController {
 			conn.setRequestProperty("Content-Type", "application/xml");
 
 			String requisicaoXml = gerarxml(c, carrinho, compra);
-
-			System.out.println(requisicaoXml);
 
 			OutputStream os = conn.getOutputStream();
 			os.write(requisicaoXml.getBytes());

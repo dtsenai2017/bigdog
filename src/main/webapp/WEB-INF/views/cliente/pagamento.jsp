@@ -169,14 +169,12 @@
 
 	// Boleto
 	function pagamentoBoleto() {
-		console.log("pagamentoBoleto");
 		redirecionar("pag/gerarBoleto");
 	}
 
 	// Redirecionar
 	function redirecionar(url) {
 		url += "/" + document.getElementById('selectEnderecos').value;
-		console.log(document.getElementById('selectEnderecos').value);
 		window.location.href = url;
 	}
 </script>
