@@ -48,6 +48,8 @@ function abrirModalAgendamento(idAgendamento) {
 						return i;
 					}
 
+					Materialize.toast(agendamento.idAgendamento, 500);
+
 					// Atributos
 					var dataAgendada = new Date(agendamento.dataAgendada);
 					var tempoEstimado = agendamento.servico.tempoEstimado
@@ -60,9 +62,10 @@ function abrirModalAgendamento(idAgendamento) {
 					$('#agendamento-cliente-nome').text(
 							agendamento.cliente.nome);
 					$('#agendamento-cliente-cpf').text(agendamento.cliente.cpf);
-					$('#agendamento-cliente-telefone').text(
-							agendamento.cliente.contato.telefone != null) ? agendamento.cliente.contato.telefone
-							: '-';
+					$('#agendamento-cliente-telefone')
+							.text(
+									agendamento.cliente.contato.telefone != null ? agendamento.cliente.contato.telefone
+											: '-');
 					$('#agendamento-cliente-celular').text(
 							agendamento.cliente.contato.celular);
 					$('#agendamento-cliente-email')
@@ -95,49 +98,55 @@ function abrirModalAgendamento(idAgendamento) {
 }
 
 // Excluir agendamento
-$('#btn-excluir-agendamento').click(function() {
-	// Recebendo valor de input id
-	var idAgendamento = $('#idAgendamento-selecionado').val();
+$('#btn-excluir-agendamento').click(
+		function() {
+			// Recebendo valor de input id
+			var idAgendamento = $('#idAgendamento-selecionado').val();
 
-	// Verifica alteração
-	$.confirm({
-		title : 'Exclusão de agendamento',
-		animation : 'top',
-		useBootstrap : false,
-		theme : 'material',
-		boxWidth : '50%',
-		content : 'Deseja realmente excluir ?',
-		buttons : {
-			// CONFIRMAR
-			confirm : {
-				text : 'Confirmar',
-				btnClass : 'btn-green',
-				action : function() {
-					// Deletando agendamento
-					$.ajax({
-						type : "DELETE",
-						url : "adm/agendamento/" + idAgendamento,
-						success : function(s) {
-							// Reload
-							recarregarAgendamentos();
-						},
-						error : function(e) {
-							// Toast
-							Materialize.toast('Ops, houve um problema!', 2000);
+			// Verifica alteração
+			$.confirm({
+				title : 'Exclusão de agendamento',
+				animation : 'top',
+				useBootstrap : false,
+				theme : 'material',
+				boxWidth : '50%',
+				content : 'Deseja realmente excluir ?',
+				buttons : {
+					// CONFIRMAR
+					confirm : {
+						text : 'Confirmar',
+						btnClass : 'btn-green',
+						action : function() {
+							// Deletando agendamento
+							$.ajax({
+								url : "adm/agendamento/" + idAgendamento,
+								headers : {
+									'Authorization' : localStorage
+											.getItem("tokenBigDog")
+								},
+								type : "DELETE",
+								success : function(s) {
+									// Reload
+									recarregarAgendamentos();
+								},
+								error : function(e) {
+									// Toast
+									Materialize.toast(
+											'Ops, houve um problema!', 2000);
+								}
+							});
 						}
-					});
+					// Opção Confirmar
+					},
+					cancel : {
+						// CANCELAR
+						text : 'Cancelar',
+						action : function() {
+							// ...
+						}
+					}
+				// Opção Cancelar
 				}
-			// Opção Confirmar
-			},
-			cancel : {
-				// CANCELAR
-				text : 'Cancelar',
-				action : function() {
-					// ...
-				}
-			}
-		// Opção Cancelar
-		}
-	// Botões (Confirmar e Cancelar)
-	});
-});
+			// Botões (Confirmar e Cancelar)
+			});
+		});

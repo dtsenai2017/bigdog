@@ -42,6 +42,12 @@ public class RestLojaController {
 		this.categoriaDAO = categoriaDAO;
 	}
 
+	// Ultilizado para verificar produto que está no carrinho
+	@RequestMapping(value = "rest/produtoQtdEstoque", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Produto listarProdutoDoCarrinho(@PathVariable("id") Long idProdutoCarrinho) {
+		return null;
+	}
+
 	// Responsável pela listagem dinamica na pagina de produtos
 	@RequestMapping(value = "/rest/dinamic/produtos/{ultimoIndex}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Produto> listarProdutosSobDemanda(@PathVariable("ultimoIndex") long ultimoIndex) {

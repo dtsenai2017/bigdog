@@ -419,7 +419,7 @@ public class LinkController {
 	public String categoria(Model model) {
 		// Adicionando lista de categoria e produto para view
 		model.addAttribute("listaCategoria", categoriaDAO.listar());
-		model.addAttribute("listaProduto", produtoDAO.listar());
+		model.addAttribute("listaProduto", produtoDAO.listarDisp());
 
 		// Ir para...
 		return "cliente/listCategorias";
@@ -441,7 +441,7 @@ public class LinkController {
 		List<Produto> listaBusca = new ArrayList<Produto>();
 
 		// Adicionando produtos encontrados na lista
-		for (Produto produto : produtoDAO.listar()) {
+		for (Produto produto : produtoDAO.listarDisp()) {
 			if (produto.getNome().toLowerCase().contains(busca.toLowerCase())
 					|| produto.getDescricao().toLowerCase().contains(busca.toLowerCase())) {
 				listaBusca.add(produto);

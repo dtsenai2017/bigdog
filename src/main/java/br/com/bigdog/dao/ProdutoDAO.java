@@ -81,7 +81,8 @@ public class ProdutoDAO {
 	// Listar por subcategoria
 	public List<Produto> buscar(Long id) {
 		TypedQuery<Produto> query = manager.createQuery(
-				"SELECT p FROM Produto p WHERE p.subCategoria.idSubCategoria = :idSubCategoria", Produto.class);
+				"SELECT p FROM Produto p WHERE p.subCategoria.idSubCategoria = :idSubCategoria and p.qtdEstoque > 0",
+				Produto.class);
 		query.setParameter("idSubCategoria", id);
 
 		try {
@@ -93,10 +94,22 @@ public class ProdutoDAO {
 
 	// Listar com Limite
 	public List<Produto> listarComLimite(int primeiroIndex, int ultimoIndex) {
-		TypedQuery<Produto> query = manager.createQuery("SELECT p FROM Produto p ORDER BY RAND()", Produto.class);
+		TypedQuery<Produto> query = manager
+				.createQuery("SELECT p FROM Produto p WHERE p.qtdEstoque > 0 ORDER BY RAND()", Produto.class);
 		query.setFirstResult(primeiroIndex);
 		query.setMaxResults(ultimoIndex);
 
+		try {
+			return query.getResultList();
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	// Listar apenas produtos que tem em estoque
+	public List<Produto> listarDisp() {
+		TypedQuery<Produto> query = manager.createQuery("SELECT p FROM Produto p WHERE p.qtdEstoque > 0",
+				Produto.class);
 		try {
 			return query.getResultList();
 		} catch (Exception e) {

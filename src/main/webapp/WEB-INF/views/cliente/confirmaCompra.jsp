@@ -125,7 +125,7 @@
 							<th>Produto</th>
 							<th>Quantidade</th>
 							<th>Preço (unid.)</th>
-							<th>Excluir</th>
+							<th>Remover</th>
 						</tr>
 					</thead>
 
@@ -140,18 +140,24 @@
 								<!-- Nome do produto -->
 								<td data-title="Produto">${carrinho.produto.nome }</td>
 
-								<!-- Quantidade do produto -->
+								<!-- Quantidade do produto para compra -->
 								<td data-title="Quantidade">
 									<div class="input-field col s12"
 										style="max-width: 8em; margin-top: -1em; margin-right: -5em;">
-										<select class="selectQtd">
-											<option value="${carrinho.quantidade }"><b>${carrinho.quantidade == 1 ? '': carrinho.quantidade}
-												</b></option>
-											<option value="1,${carrinho.idProdutoCarrinho }">1</option>
-											<option value="2,${carrinho.idProdutoCarrinho }">2</option>
-											<option value="3,${carrinho.idProdutoCarrinho }">3</option>
-											<option value="4,${carrinho.idProdutoCarrinho }">4</option>
-											<option value="5,${carrinho.idProdutoCarrinho }">5</option>
+										<select id="selectQtdPCarrinho" class="selectQtd">
+											<option
+												value="${carrinho.quantidade },${carrinho.idProdutoCarrinho },${carrinho.produto.qtdEstoque }"><i>${carrinho.quantidade == 1 ? 1 :
+												carrinho.quantidade }</i></option>
+											<option
+												value="1,${carrinho.idProdutoCarrinho },${carrinho.produto.qtdEstoque }">1</option>
+											<option
+												value="2,${carrinho.idProdutoCarrinho },${carrinho.produto.qtdEstoque }">2</option>
+											<option
+												value="3,${carrinho.idProdutoCarrinho },${carrinho.produto.qtdEstoque }">3</option>
+											<option
+												value="4,${carrinho.idProdutoCarrinho },${carrinho.produto.qtdEstoque }">4</option>
+											<option
+												value="5,${carrinho.idProdutoCarrinho },${carrinho.produto.qtdEstoque }">5</option>
 										</select>
 									</div>
 								</td>
@@ -206,6 +212,40 @@
 			e.preventDefault();
 		});
 	})
+</script>
+
+<!-- Script para verificar se quantidade é valida -->
+<script type="text/javascript">
+	// Verifica quantidade pelo select...
+	$("#selectQtdPCarrinho").change(
+			function() {
+				// Atributos
+				var valSelect = $("#selectQtdPCarrinho").val().split(',');
+				var qtdSelecionada = valSelect[0];
+				var qtdDisponivel = valSelect[2];
+
+				// Verifica possibilidade de selecionar determinada quantidade
+				if (qtdSelecionada > 0 && qtdSelecionada <= qtdDisponivel) {
+					// ...
+					// "Quantidade aceita"
+				} else if (qtdSelecionada > qtdDisponivel) {
+					// "Quantidade não aceita. Maior..."
+					// Seleciona valor 1 em quantidade de itens no carrinho
+					$('#selectQtdPCarrinho').val('1').attr('select', true);
+
+					// Atualizando select
+					$("select").material_select('update');
+
+					// Toast
+					Materialize.toast(
+							"Não foi possível selecionar esta quantidade!",
+							3000);
+					setTimeout(function() {
+						Materialize.toast("Há apenas " + qtdDisponivel
+								+ " produto(s) disponível(is).", 3000);
+					}, 3100);
+				}
+			});
 </script>
 </body>
 </html>

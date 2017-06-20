@@ -29,7 +29,7 @@ import br.com.bigdog.model.Compra;
 
 @Component
 public class GeradorPDF {
-
+	// Gerar boleto
 	public void gerarBoleto(Compra compra, HttpServletResponse response) {
 		ContaBancaria contaBancaria = new ContaBancaria();
 		contaBancaria.setBanco(BancosSuportados.BANCO_BRADESCO.create());
@@ -60,8 +60,6 @@ public class GeradorPDF {
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_MONTH, 15);
 
-		System.out.println(compra.getValor());
-
 		titulo.setCedente(cedente);
 		titulo.setSacadorAvalista(sacadorAvalista);
 		titulo.setValor(BigDecimal.valueOf(compra.getValor()));
@@ -84,24 +82,26 @@ public class GeradorPDF {
 		boleto.setInstrucao6(null);
 		boleto.setInstrucao7(null);
 		boleto.setInstrucao8(null);
-		boleto.setLocalPagamento("Pagamento Poderá Ser Realizada Na Agência Bancária ou Lotétricas");
+		boleto.setLocalPagamento("Pagamento Poderá Ser Realizada Na Agência Bancária ou Lotéricas");
 
 		BoletoViewer viewer = new BoletoViewer(boleto);
 		byte[] pdfAsBytes = viewer.getPdfAsByteArray();
 		mostreBoletoNaTela(pdfAsBytes, response);
 	}
 
+	// Mostra boleto na tela
 	final static void mostreBoletoNaTela(byte[] pdf, HttpServletResponse response) {
 		Gerador gerador = new Gerador();
 		response.setContentType("application/pdf");
-		response.setHeader("Content-Disposition", "attachment; filename=Pagamento" + gerador.gerarIdLogin() + ".pdf");
+		response.setHeader("Content-Disposition",
+				"attachment; filename=bigdog_boleto" + gerador.gerarIdLogin() + ".pdf");
 		OutputStream output;
+
 		try {
 			output = response.getOutputStream();
 			output.write(pdf);
-			response.flushBuffer();
+			output.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

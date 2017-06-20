@@ -60,10 +60,10 @@ function buscarCliente(idCliente) {
 				telefone = cliente.contato.telefone;
 			}
 
-			if (cliente.contato.email == null) {
+			if (cliente.email == null) {
 				email = "-"
 			} else {
-				email = cliente.contato.email;
+				email = cliente.email;
 			}
 
 			// Dados do cliente
@@ -72,8 +72,8 @@ function buscarCliente(idCliente) {
 					+ "</span><br>" + "<span><b>Gênero : </b>" + cliente.genero
 					+ "</span><br>" + "<span><b>Data de Nascimento : </b>"
 					+ $.datepicker.formatDate("dd/mm/yy", nascimento)
-					+ "</span><br>" + "<span><b>Email de Contato : </b>"
-					+ email + "</span><br>" + "<span><b>Celular : </b>"
+					+ "</span><br>" + "<span><b>Email : </b>" + email
+					+ "</span><br>" + "<span><b>Celular : </b>"
 					+ cliente.contato.celular + "</span><br>"
 					+ "<span><b>Telefone : </b>" + telefone + "</span><br>";
 
@@ -149,14 +149,14 @@ function buscarCliente(idCliente) {
 					}
 
 					// Rga
-					if (pet.rga.lenght == 0) {
+					if (pet.rga == null) {
 						rga = "-"
 					} else {
 						rga = pet.rga;
 					}
 
 					// Carteina de Vacina
-					if (pet.carteiraVacina.length == 0) {
+					if (pet.carteiraVacina == null) {
 						carteiraVacina = "-"
 					} else {
 						carteiraVacina = pet.carteiraVacina;
@@ -229,10 +229,10 @@ function buscarCliente(idCliente) {
 									dataNascimento) + "</span><br>"
 							+ "<span><b>Pelagem :</b> " + pelagem
 							+ "</span><br><span><b>Castrado :</b> " + castrado
-							+ "</span><br>" + "<span><b>Peso :</b> "
-							+ peso.toFixed(2) + " kg</span><br>"
-							+ "<span><b>Observações :</b> " + observacoes
-							+ "</span><br>" + "<a href='#modal-editar-pet' "
+							+ "</span><br>" + "<span><b>Peso :</b> " + peso
+							+ " kg</span><br>" + "<span><b>Observações :</b> "
+							+ observacoes + "</span><br>"
+							+ "<a href='#modal-editar-pet' "
 							+ "onclick='visualizarPet(" + pet.idPet
 							+ ");' class='right'>"
 							+ "<i class='material-icons "
@@ -339,16 +339,25 @@ function buscarCliente(idCliente) {
 			if (agendamentos.length != 0) {
 				// Agendamentos realizados do cliente
 				$.each(agendamentos, function(index, agendamento) {
+					// Adiciona zero para horário
+					function addZero(i) {
+						if (i < 10) {
+							i = "0" + i;
+						}
+						return i;
+					}
+
 					// Atributo date
 					var dataAgendamento = new Date(agendamento.dataAgendada);
+					var hora = addZero(dataAgendamento.getHours());
+					var minutos = addZero(dataAgendamento.getMinutes());
 
 					// Atributo da lista de agendamento
 					var agendamentoList = "<h5 align='center'><b>"
 							+ $.datepicker.formatDate("dd/mm/yy",
 									dataAgendamento) + "</b></h5>"
-							+ "<span><b>Horário : </b>"
-							+ dataAgendamento.getHours() + ":"
-							+ dataAgendamento.getMinutes() + "hrs.</span><br>"
+							+ "<span><b>Horário : </b>" + hora + ":" + minutos
+							+ "hrs.</span><br>"
 							+ "<span><b>Tipo de Serviço : </b>"
 							+ agendamento.servico.tipoServico
 							+ "</span><br><span><b>Valor : R$ </b>"

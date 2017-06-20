@@ -8,7 +8,6 @@
 	<ul>
 		<li><a href="home">Home</a></li>
 		<li><a href="categoria">Produtos</a></li>
-		<li><a href="servico">Serviços</a></li>
 		<li><a href="sobreNos">Sobre Nós</a></li>
 	</ul>
 </menu>

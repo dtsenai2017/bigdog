@@ -261,7 +261,7 @@
 							<div class="row">
 								<div class="input-field  col s5 l5 m5">
 									<input id="tamanho" name="tamanho" type="text" class="truncate"
-										maxlength="100"> <label for="tamanho">Tam.</label>
+										maxlength="100"> <label for="tamanho">* Tam.</label>
 								</div>
 
 								<div class="input-field  col s7 l7 m7">
@@ -978,7 +978,7 @@
 								<input id="tamanho-p-selecionado" name="tamanho" type="text"
 									class="truncate" maxlength="100" disabled> <label
 									id="label-tamanho-p-selecionado" for="tamanho-p-selecionado">*
-									Tam.</label>
+									* Tam.</label>
 							</div>
 
 							<div class="input-field  col s6 l3 m3">
@@ -1524,8 +1524,7 @@
 						<div class="input-field col s6 m6 l6">
 							<i class="material-icons prefix">phone</i> <input
 								id="telefone-f-selecionado" type="tel"> <label
-								id="label-telefone-f-selecionado" for="telefone-f-selecionado">*
-								Telefone</label>
+								id="label-telefone-f-selecionado" for="telefone-f-selecionado">Telefone</label>
 						</div>
 					</div>
 
@@ -1602,7 +1601,7 @@
 						<div class="input-field col s7 m3 l3">
 							<input id="complemento-f-selecionado" type="text" maxlength="50">
 							<label id="label-complemento-f-selecionado"
-								for="complemento-f-selecionado">* Complemento</label>
+								for="complemento-f-selecionado">Complemento</label>
 						</div>
 
 						<div class="input-field col s12 m7 l7">

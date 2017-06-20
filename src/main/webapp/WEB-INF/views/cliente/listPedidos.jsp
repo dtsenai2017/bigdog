@@ -83,9 +83,10 @@
 							<thead>
 								<tr>
 									<th>Produto</th>
-									<th>Quantidade</th>
+									<th>Qtd.</th>
 									<th>Preço</th>
-									<th>Data da Compra</th>
+									<th>Data</th>
+									<th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -98,6 +99,7 @@
 													value="${itensCompra.valor }"></f:formatNumber></td>
 											<td data-title="Data da Compra"><f:formatDate
 													pattern="dd/MM/yyyy" value="${compra.dataCompra }"></f:formatDate></td>
+											<td data-title="Status">${compra.status }</td>
 										</tr>
 									</c:forEach>
 								</c:forEach>

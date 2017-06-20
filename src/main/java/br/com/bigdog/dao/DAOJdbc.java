@@ -27,7 +27,7 @@ public class DAOJdbc {
 	// Requisição
 	public Integer[] mesCompra() {
 		// Query
-		String query = "SELECT month(data_compra) as mes, count(*) as qtd_compra from compra group by mes order by month(data_compra) asc";
+		String query = "SELECT month(data_compra) as mes, count(*) as qtd_compra from Compra group by mes order by month(data_compra) asc";
 		Integer[] mesCompra = new Integer[12];
 
 		try {
@@ -48,16 +48,6 @@ public class DAOJdbc {
 			return mesCompra;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		} 
-		// finally {
-		// // Verifica conexão, caso não null, é fechada
-		// if (conexao != null) {
-		// try {
-		// conexao.close();
-		// } catch (SQLException e) {
-		// throw new RuntimeException(e);
-		// }
-		// }
-		// }
+		}
 	}
 }

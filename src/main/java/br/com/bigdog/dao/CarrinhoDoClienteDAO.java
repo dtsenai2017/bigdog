@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.bigdog.model.Carrinho;
+import br.com.bigdog.model.ProdutoCarrinho;
 
 @Repository
 public class CarrinhoDoClienteDAO {
@@ -43,5 +44,23 @@ public class CarrinhoDoClienteDAO {
 
 		// Executando query
 		query.executeUpdate();
+	}
+
+	// Listar produto do carrinho
+	public ProdutoCarrinho listarProdutoCarrinho(Long idProdutoCarrinho) {
+		// Query
+		TypedQuery<ProdutoCarrinho> query = manager.createQuery(
+				"SELECT p FROM produto_carrinho p WHERE p.idProdutoCarrinho =:idProdutoCarrinho ",
+				ProdutoCarrinho.class);
+
+		// Atribuindo parâmetros
+		query.setParameter("idProdutoCarrinho", idProdutoCarrinho);
+
+		// Retornando...
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 }

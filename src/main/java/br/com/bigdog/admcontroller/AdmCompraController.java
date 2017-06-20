@@ -37,7 +37,6 @@ public class AdmCompraController {
 			// Retornando
 			return compraDAO.listar();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -49,7 +48,6 @@ public class AdmCompraController {
 			// Retornando
 			return compraDAO.listarOrdenado();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -61,7 +59,6 @@ public class AdmCompraController {
 			// Retornando
 			return compraDAO.listar(idCompra);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -73,7 +70,6 @@ public class AdmCompraController {
 			// Retornando
 			return compraDAO.listarCompraCliente(idCliente);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
@@ -94,10 +90,8 @@ public class AdmCompraController {
 			// Retornando
 			return ResponseEntity.ok().build();
 		} catch (ConstraintViolationException e) {
-			e.printStackTrace();
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

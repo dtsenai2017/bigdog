@@ -75,12 +75,10 @@ public class PagamentoController {
 		// Gerar boleto
 		try {
 			geradorPdf.gerarBoleto(compra, response);
-
 			// Retornando...
 			return "cliente/listPedidos";
 		} catch (Exception e1) {
 			e1.printStackTrace();
-
 			// Retornando...
 			return "cliente/indexCliente";
 		}
